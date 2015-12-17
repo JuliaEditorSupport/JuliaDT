@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension
+            point="org.eclipse.core.runtime.preferences">
+        <initializer
+                class="com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaEditorPreferencesInitializer">
+        </initializer>
+    </extension>
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+                class="com.juliacomputing.jldt.eclipse.ui.editor.JuliaEditor"
+                contributorClass="org.eclipse.dltk.internal.ui.editor.SourceModuleEditorActionContributor"
+                default="true"
+                extensions="jl"
+                icon="$nl$/icons/julia-obj.png"
+                id="com.juliacomputing.jldt.eclipse.ui.editor.JuliaEditor"
+                name="Julia Editor">
+            <contentTypeBinding
+                    contentTypeId="com.juliacomputing.jldt.eclipse.core.juliaContentType">
+            </contentTypeBinding>
+        </editor>
+    </extension>
+</plugin>
+
+

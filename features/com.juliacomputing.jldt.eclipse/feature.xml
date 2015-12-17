@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+        id="com.juliacomputing.jldt.eclipse"
+        label="%name"
+        version="0.0.1.qualifier"
+        provider-name="%provider"
+        image="eclipse_update_120.jpg">
+
+    <description>
+        %description
+    </description>
+
+    <copyright>
+        Copyright (c) 2105, Julia Computing Inc. All rights reserved.
+    </copyright>
+
+    <license>
+        %license
+    </license>
+
+    <requires>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import plugin="org.eclipse.core.runtime"/>
+        <import plugin="org.eclipse.debug.core"/>
+        <import plugin="org.eclipse.ui"/>
+        <import plugin="org.eclipse.dltk.core" version="5.3.0" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.dltk.ui" version="5.3.0" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.core.resources" version="3.10.1" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.ui.editors" version="3.9.0" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.ui.ide" version="3.11.0" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.dltk.launching" version="5.3.0" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.dltk.debug" version="5.3.0" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.dltk.debug.ui" version="5.3.0" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.debug.core" version="3.10.0" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.debug.ui" version="3.11.100" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.dltk.console"/>
+        <import plugin="org.eclipse.jdt.launching"/>
+        <import plugin="org.eclipse.jdt.core"/>
+        <import plugin="org.eclipse.jdt.debug.ui"/>
+        <import plugin="org.eclipse.ui.console"/>
+        <import plugin="org.eclipse.jface"/>
+        <import plugin="com.juliacomputing.jldt.eclipse.core" version="0.0.1" match="greaterOrEqual"/>
+    </requires>
+
+    <plugin
+            id="com.juliacomputing.jldt.eclipse.core"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+    <plugin
+            id="com.juliacomputing.jldt.eclipse.ui"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+    <plugin
+            id="com.juliacomputing.jldt.eclipse.launch"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+    <plugin
+            id="com.juliacomputing.jldt.eclipse.ui.launch"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+    <plugin
+            id="com.juliacomputing.jldt.eclipse.ui.editor"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+</feature>

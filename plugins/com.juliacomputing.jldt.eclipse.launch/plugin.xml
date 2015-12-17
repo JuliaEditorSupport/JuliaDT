@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+
+    <!-- Julia interpreter-->
+    <extension
+            point="org.eclipse.dltk.launching.interpreterInstallTypes">
+        <interpreterInstallType
+                class="com.juliacomputing.jldt.eclipse.internal.launch.JuliaInterpreterInstallationType"
+                id="org.eclipse.dltk.internal.debug.ui.launcher.JuliaInterpreterInstallationType"/>
+    </extension>
+
+    <extension
+            point="org.eclipse.debug.core.launchConfigurationTypes">
+        <launchConfigurationType
+                delegate="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate"
+                id="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate"
+                modes="run,debug"
+                name="Julia"
+                public="true"
+                sourceLocatorId="juliaSourceLocator"
+                sourcePathComputerId="juliaSourcePathComputer"/>
+    </extension>
+
+    <extension
+            point="org.eclipse.debug.core.sourceLocators">
+        <sourceLocator
+                class="org.eclipse.dltk.launching.sourcelookup.ScriptSourceLookupDirector"
+                id="juliaSourceLocator"
+                name="Julia uri-based file locator"/>
+    </extension>
+
+    <extension
+            point="org.eclipse.debug.core.sourcePathComputers">
+        <sourcePathComputer
+                class="org.eclipse.dltk.launching.sourcelookup.ScriptSourcePathComputer"
+                id="juliaSourcePathComputer"/>
+    </extension>
+
+</plugin>

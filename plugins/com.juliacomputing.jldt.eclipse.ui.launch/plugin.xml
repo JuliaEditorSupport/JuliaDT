@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension point="org.eclipse.ui.preferencePages">
+        <page
+                category="com.juliacomputing.jldt.eclipse.ui.preferences"
+                class="com.juliacomputing.jldt.eclipse.ui.launch.interpreter.JuliaInterpreterPreferencePage"
+                id="com.juliacomputing.jldt.eclipse.ui.preferences.interpreters"
+                name="Interpreters"/>
+    </extension>
+
+    <extension
+            point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+        <launchConfigurationTypeImage icon="icons/julia.png"
+                                      configTypeID="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate"
+                                      id="com.juliacomputing.jldt.eclipse.ui.launch.launchConfigurationTypeImage">
+        </launchConfigurationTypeImage>
+        <!--<launchConfigurationTypeImage icon="icons/obj16/julia_obj.gif"-->
+        <!--configTypeID="org.eclipse.dltk.julia.launch.JuliaRemoteLaunchConfigurationType"-->
+        <!--id="com.juliacomputing.jldt.eclipse.ui.launch.remoteLaunchConfigurationTypeImage">-->
+        <!--</launchConfigurationTypeImage>-->
+    </extension>
+
+    <extension
+            point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+        <launchConfigurationTabGroup
+                class="com.juliacomputing.jldt.eclipse.ui.launch.configuration.JuliaTabGroup"
+                id="com.juliacomputing.jldt.eclipse.ui.launch.JuliaTabGroup"
+                type="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate">
+        </launchConfigurationTabGroup>
+        <!--<launchConfigurationTabGroup-->
+        <!--class="org.eclipse.dltk.julia.internal.debug.ui.launchConfigurations.JuliaRemoteTabGroup"-->
+        <!--id="com.juliacomputing.jldt.eclipse.ui.launch.JuliaRemoteTabGroup"-->
+        <!--type="org.eclipse.dltk.julia.launch.JuliaRemoteLaunchConfigurationType">-->
+        <!--</launchConfigurationTabGroup>-->
+    </extension>
+
+    <extension point="org.eclipse.debug.ui.launchShortcuts">
+        <shortcut
+                class="com.juliacomputing.jldt.eclipse.ui.launch.launcher.JuliaLaunchShortcut"
+                description="%JuliaLaunchShortcut.description"
+                icon="icons/julia.png"
+                id="com.juliacomputing.jldt.eclipse.ui.launch.launchShortcut"
+                label="%JuliaLaunchShortcut.name" modes="run, debug">
+            <description
+                    description="%JuliaLaunchShortcut.runDescription" mode="run">
+            </description>
+            <description
+                    description="%JuliaLaunchShortcut.debugDescription" mode="debug">
+            </description>
+            <contextualLaunch>
+                <enablement>
+                    <with variable="selection">
+                        <count value="1"/>
+                        <iterate>
+                            <or>
+                                <test
+                                        args="org.eclipse.dltk.julia.core.nature"
+                                        property="org.eclipse.dltk.launching.hasProjectNature"/>
+                            </or>
+                        </iterate>
+                    </with>
+                </enablement>
+                <contextLabel label="%JuliaLaunchShortcut.runName"
+                              mode="run">
+                </contextLabel>
+                <contextLabel label="%JuliaLaunchShortcut.debugName"
+                              mode="debug">
+                </contextLabel>
+            </contextualLaunch>
+        </shortcut>
+    </extension>
+
+</plugin>

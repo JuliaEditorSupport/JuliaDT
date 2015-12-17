@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+    <!--DLTK UI-Language Toolkit-->
+    <extension
+            point="org.eclipse.dltk.ui.language">
+        <language
+                class="com.juliacomputing.jldt.eclipse.internal.ui.JuliaUILanguageToolkit"
+                nature="com.juliacomputing.jldt.eclipse.core.nature"
+                priority="0"/>
+    </extension>
+
+
+    <extension point="org.eclipse.ui.newWizards">
+        <!-- Project wizard -->
+        <wizard
+                category="com.juliacomputing.jldt.eclipse.ui"
+                class="org.eclipse.dltk.ui.wizards.GenericDLTKProjectWizard:com.juliacomputing.jldt.eclipse.core.nature"
+                icon="icons/new-proj-wiz.png"
+                id="com.juliacomputing.jldt.eclipse.newProjectWizard"
+                name="Julia Project"
+                preferredPerspectives="com.juliacomputing.jldt.eclipse.ui.JuliaPerspective"
+                project="true">
+        </wizard>
+        <wizard
+                category="com.juliacomputing.jldt.eclipse.ui"
+                class="com.juliacomputing.jldt.eclipse.internal.ui.wizard.JuliaNewFileWizard"
+                icon="icons/new-proj-wiz.png"
+                id="com.juliacomputing.jldt.eclipse.newFileWizard"
+                name="Julia File"
+                preferredPerspectives="com.juliacomputing.jldt.eclipse.ui.JuliaPerspective"
+                project="false">
+        </wizard>
+        <category
+                id="com.juliacomputing.jldt.eclipse.ui"
+                name="Julia">
+        </category>
+    </extension>
+
+
+    <extension point="org.eclipse.core.runtime.preferences">
+        <initializer class="com.juliacomputing.jldt.eclipse.internal.ui.JuliaUIPreferenceInitializer"/>
+    </extension>
+
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+                class="com.juliacomputing.jldt.eclipse.internal.ui.preferences.JuliaPreferences"
+                id="com.juliacomputing.jldt.eclipse.ui.preferences"
+                name="Julia"/>
+        <page
+                category="com.juliacomputing.jldt.eclipse.ui.preferences"
+                class="com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaEditorPreferencesPage"
+                id="com.juliacomputing.jldt.eclipse.ui.preferences.editor"
+                name="Editor"/>
+    </extension>
+
+    <extension
+            point="org.eclipse.ui.perspectives">
+        <perspective
+                class="com.juliacomputing.jldt.eclipse.internal.ui.JuliaPerspective"
+                icon="icons/perspective.png"
+                id="com.juliacomputing.jldt.eclipse.ui.JuliaPerspective"
+                name="Julia"/>
+    </extension>
+
+</plugin>
