@@ -29,6 +29,7 @@ public class JuliaCodeScanner extends AbstractScriptScanner {
         return JuliaCodeScanner.TOKEN_PROPERTIES;
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     protected List createRules() {
         List<IRule> rules = new ArrayList<>();
         IToken keyword = getToken(JuliaColourConstants.KEYWORD);

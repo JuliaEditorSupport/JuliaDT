@@ -15,10 +15,6 @@
                                       configTypeID="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate"
                                       id="com.juliacomputing.jldt.eclipse.ui.launch.launchConfigurationTypeImage">
         </launchConfigurationTypeImage>
-        <!--<launchConfigurationTypeImage icon="icons/obj16/julia_obj.gif"-->
-        <!--configTypeID="org.eclipse.dltk.julia.launch.JuliaRemoteLaunchConfigurationType"-->
-        <!--id="com.juliacomputing.jldt.eclipse.ui.launch.remoteLaunchConfigurationTypeImage">-->
-        <!--</launchConfigurationTypeImage>-->
     </extension>
 
     <extension

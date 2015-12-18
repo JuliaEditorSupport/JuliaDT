@@ -8,7 +8,7 @@
         <artifactId>julia.eclipse.parent</artifactId>
         <groupId>com.juliacomputing</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../../julia.eclipse.parent</relativePath>
+        <relativePath>../julia.eclipse.parent</relativePath>
     </parent>
     <artifactId>com.juliacomputing.jldt.eclipse.repository</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -32,6 +32,10 @@
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-p2-repository-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>target-platform-configuration</artifactId>
             </plugin>
         </plugins>
     </build>

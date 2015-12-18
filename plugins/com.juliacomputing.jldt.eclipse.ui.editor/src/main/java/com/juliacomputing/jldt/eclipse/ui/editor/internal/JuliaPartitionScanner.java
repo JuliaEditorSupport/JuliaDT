@@ -20,6 +20,6 @@ public class JuliaPartitionScanner extends RuleBasedPartitionScanner {
 
         IPredicateRule[] result = new IPredicateRule[rules.size()];
         rules.toArray(result);
-        this.setPredicateRules(result);
+        setPredicateRules(result);
     }
 }

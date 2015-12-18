@@ -18,14 +18,11 @@
         %license
     </license>
 
-    <includes
-            id="org.eclipse.dltk.core"
-            version="0.0.0"/>
-
     <requires>
         <import plugin="org.eclipse.core.runtime"/>
         <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
         <import plugin="org.eclipse.debug.core"/>
+        <import plugin="org.eclipse.compare"/>
         <import plugin="org.eclipse.core.resources" version="3.10.1" match="greaterOrEqual"/>
         <import plugin="org.eclipse.dltk.console"/>
         <import plugin="org.eclipse.dltk.debug" version="5.3.0" match="greaterOrEqual"/>
@@ -36,16 +33,16 @@
         <import plugin="org.eclipse.jdt.debug.ui"/>
         <import plugin="org.eclipse.jdt.launching"/>
         <import plugin="org.eclipse.jface"/>
+        <import plugin="org.eclipse.jface.text"/>
+        <import plugin="org.eclipse.search"/>
         <import plugin="org.eclipse.ui.console"/>
         <import plugin="org.eclipse.ui.editors" version="3.9.0" match="greaterOrEqual"/>
         <import plugin="org.eclipse.ui.ide" version="3.11.0" match="greaterOrEqual"/>
-        <import plugin="org.eclipse.ui"/>
-        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
-        <import plugin="org.eclipse.compare"/>
-        <import plugin="org.eclipse.jface.text"/>
-        <import plugin="org.eclipse.search"/>
         <import plugin="org.eclipse.ui.workbench.texteditor"/>
+        <import plugin="org.eclipse.ui"/>
         <import plugin="org.eclipse.debug.ui"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
     </requires>
 
     <plugin
