@@ -13,4 +13,26 @@
     <artifactId>com.juliacomputing.jldt.eclipse.repository</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>eclipse-repository</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-p2-director-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>create-product-distributions</id>
+                        <goals>
+                            <goal>materialize-products</goal>
+                            <goal>archive-products</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-p2-repository-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

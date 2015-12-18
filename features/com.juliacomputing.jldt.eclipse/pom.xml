@@ -14,5 +14,4 @@
     <artifactId>com.juliacomputing.jldt.eclipse</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>eclipse-feature</packaging>
-
 </project>

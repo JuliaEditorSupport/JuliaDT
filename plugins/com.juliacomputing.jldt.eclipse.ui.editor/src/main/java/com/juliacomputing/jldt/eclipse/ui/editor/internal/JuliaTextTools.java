@@ -17,18 +17,18 @@ public class JuliaTextTools extends ScriptTextTools {
 
     public JuliaTextTools(boolean autoDisposeOnDisplayDispose) {
         super(JuliaPartition.JULIA_PARTITIONING,
-                JuliaTextTools.LEGAL_CONTENT_TYPES, autoDisposeOnDisplayDispose);
-        this.partitionScanner = new JuliaPartitionScanner();
+                LEGAL_CONTENT_TYPES, autoDisposeOnDisplayDispose);
+        partitionScanner = new JuliaPartitionScanner();
     }
 
     public ScriptSourceViewerConfiguration createSourceViewerConfiguraton(
             IPreferenceStore preferenceStore, ITextEditor editor,
             String partitioning) {
-        return new JuliaSourceViewerConfiguration(this.getColorManager(),
+        return new JuliaSourceViewerConfiguration(getColorManager(),
                 preferenceStore, editor, partitioning);
     }
 
     public IPartitionTokenScanner getPartitionScanner() {
-        return this.partitionScanner;
+        return partitionScanner;
     }
 }

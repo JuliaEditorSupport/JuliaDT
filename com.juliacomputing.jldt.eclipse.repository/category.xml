@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-    <feature id="com.juliacomputing.jldt.eclipse">
-        <category name="com.juliacomputing.jldt"/>
-    </feature>
-    <category-def name="com.juliacomputing.jldt" label="JuliaDT">
-        <description>
-            Julia Language Developer Toolkit
-        </description>
-    </category-def>
+   <feature id="com.juliacomputing.jldt.eclipse">
+      <category name="com.juliacomputing.jldt"/>
+   </feature>
+   <bundle id="com.juliacomputing.jldt.eclipse.core" version="0.0.1.qualifier">
+      <category name="com.juliacomputing.jldt"/>
+   </bundle>
+   <bundle id="com.juliacomputing.jldt.eclipse.launch" version="0.0.1.qualifier">
+      <category name="com.juliacomputing.jldt"/>
+   </bundle>
+   <bundle id="com.juliacomputing.jldt.eclipse.ui" version="0.0.1.qualifier">
+      <category name="com.juliacomputing.jldt"/>
+   </bundle>
+   <bundle id="com.juliacomputing.jldt.eclipse.ui.editor" version="0.0.1.qualifier">
+      <category name="com.juliacomputing.jldt"/>
+   </bundle>
+   <bundle id="com.juliacomputing.jldt.eclipse.ui.launch" version="0.0.1.qualifier">
+      <category name="com.juliacomputing.jldt"/>
+   </bundle>
+   <category-def name="com.juliacomputing.jldt" label="JuliaDT">
+      <description>
+         Julia Language Developer Toolkit
+      </description>
+   </category-def>
 </site>
