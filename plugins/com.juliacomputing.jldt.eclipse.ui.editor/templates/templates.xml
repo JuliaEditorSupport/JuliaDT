@@ -4,10 +4,19 @@
             context="juliaUniversalTemplateContextType"
             description="%forTemplate1.description"
             id="com.juliacomputing.jldt.eclipse.ui.templates.for1"
-            name="for">for ${index} in ${range}
+            name="for">for ${index} in [${range}]
         ${cursor}
         end
     </template>
+    <template
+            context="juliaUniversalTemplateContextType"
+            description="%forTemplate2.description"
+            id="com.juliacomputing.jldt.eclipse.ui.templates.for2"
+            name="for">for ${index} = ${from} : ${to}
+        ${cursor}
+        end
+    </template>
+
     <template
             context="juliaUniversalTemplateContextType"
             description="%compound.description"
@@ -24,7 +33,6 @@
         ${cursor}
         end
     </template>
-
     <template
             context="juliaUniversalTemplateContextType"
             description="%conditional2.description"
@@ -39,7 +47,6 @@
             name="elseif">elseif ${condition}
         ${body}
     </template>
-
     <template
             context="juliaUniversalTemplateContextType"
             description="%function1.description"
