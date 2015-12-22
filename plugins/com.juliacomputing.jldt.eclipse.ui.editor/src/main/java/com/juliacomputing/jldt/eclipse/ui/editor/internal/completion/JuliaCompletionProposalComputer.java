@@ -11,13 +11,11 @@ public class JuliaCompletionProposalComputer extends ScriptCompletionProposalCom
     public JuliaCompletionProposalComputer() {
     }
 
-    protected ScriptCompletionProposalCollector createCollector(
-            ScriptContentAssistInvocationContext context) {
+    protected ScriptCompletionProposalCollector createCollector(ScriptContentAssistInvocationContext context) {
         return new JuliaCompletionProposalCollector(context.getSourceModule());
     }
 
-    protected TemplateCompletionProcessor createTemplateProposalComputer(
-            ScriptContentAssistInvocationContext context) {
+    protected TemplateCompletionProcessor createTemplateProposalComputer(ScriptContentAssistInvocationContext context) {
         return new JuliaTemplateCompletionProcessor(context);
     }
 }

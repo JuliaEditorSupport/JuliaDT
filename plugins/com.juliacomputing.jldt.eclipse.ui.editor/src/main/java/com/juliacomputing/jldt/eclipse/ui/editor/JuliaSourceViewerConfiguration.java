@@ -102,12 +102,6 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
         return null;
     }
 
-//    public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
-//        if (fConfigureFormatter)
-//            return super.getContentFormatter(sourceViewer);
-//        else
-//            return null;
-//    }
 
     public IInformationControlCreator getInformationControlCreator(ISourceViewer sourceViewer) {
         return null;

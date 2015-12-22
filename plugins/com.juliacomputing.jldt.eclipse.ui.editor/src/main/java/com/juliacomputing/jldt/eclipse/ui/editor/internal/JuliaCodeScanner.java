@@ -1,5 +1,6 @@
 package com.juliacomputing.jldt.eclipse.ui.editor.internal;
 
+import com.juliacomputing.jldt.eclipse.core.Julia;
 import org.eclipse.dltk.ui.text.AbstractScriptScanner;
 import org.eclipse.dltk.ui.text.IColorManager;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -9,10 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JuliaCodeScanner extends AbstractScriptScanner {
-    public static final String[] KEYWORDS = {"begin", "new", "while", "if", "else", "elseif", "for", "try", "catch", "finally",
-            "return", "break", "continue", "function", "macro", "quote", "let", "local", "global", "const", "abstract",
-            "typealias", "type", "bitstype", "immutable", "ccall", "do", "module", "baremodule", "using", "import",
-            "export", "importall", "end", "in"};
 
     private static final String TOKEN_PROPERTIES[] = {
             JuliaColourConstants.COMMENT,
@@ -26,21 +23,20 @@ public class JuliaCodeScanner extends AbstractScriptScanner {
     }
 
     protected String[] getTokenProperties() {
-        return JuliaCodeScanner.TOKEN_PROPERTIES;
+        return TOKEN_PROPERTIES;
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     protected List createRules() {
-        List<IRule> rules = new ArrayList<>();
-        IToken keyword = getToken(JuliaColourConstants.KEYWORD);
-        IToken comment = getToken(JuliaColourConstants.COMMENT);
-        IToken other = getToken(JuliaColourConstants.DEFAULT);
+        final List<IRule> rules = new ArrayList<>();
+        final IToken keyword = getToken(JuliaColourConstants.KEYWORD);
+        final IToken comment = getToken(JuliaColourConstants.COMMENT);
+        final IToken other = getToken(JuliaColourConstants.DEFAULT);
         rules.add(new EndOfLineRule("#", comment));
         rules.add(new WhitespaceRule(new JuliaWhitespaceDetector()));
-        WordRule wordRule = new WordRule(new JuliaWordDetector(), other);
-        for (int i = 0; i < KEYWORDS.length; i++) {
-            wordRule.addWord(KEYWORDS[i], keyword);
-        }
+        final WordRule wordRule = new WordRule(new JuliaWordDetector(), other);
+        for (final String entry : Julia.keywords())
+            wordRule.addWord(entry, keyword);
         rules.add(wordRule);
         setDefaultReturnToken(other);
         return rules;

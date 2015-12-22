@@ -4,8 +4,7 @@ import org.eclipse.dltk.ui.templates.ScriptTemplateAccess;
 import org.eclipse.dltk.ui.templates.ScriptTemplateCompletionProcessor;
 import org.eclipse.dltk.ui.text.completion.ScriptContentAssistInvocationContext;
 
-public class JuliaTemplateCompletionProcessor extends
-        ScriptTemplateCompletionProcessor {
+public class JuliaTemplateCompletionProcessor extends ScriptTemplateCompletionProcessor {
 
     private static char[] IGNORE = new char[]{'.'};
 

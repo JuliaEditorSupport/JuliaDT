@@ -26,8 +26,7 @@ public class JuliaCompletionProposalCollector extends ScriptCompletionProposalCo
     protected ScriptCompletionProposal createScriptCompletionProposal(
             String completion, int replaceStart, int length, Image image,
             String displayString, int i) {
-        return new JuliaCompletionProposal(completion, replaceStart, length,
-                image, displayString, i);
+        return new JuliaCompletionProposal(completion, replaceStart, length, image, displayString, i);
     }
 
     protected ScriptCompletionProposal createScriptCompletionProposal(

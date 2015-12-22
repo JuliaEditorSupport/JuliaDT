@@ -5,8 +5,7 @@ import org.eclipse.dltk.ui.templates.ScriptTemplateContext;
 import org.eclipse.dltk.ui.templates.ScriptTemplateContextType;
 import org.eclipse.jface.text.IDocument;
 
-public class JuliaUniversalTemplateContextType extends
-        ScriptTemplateContextType {
+public class JuliaUniversalTemplateContextType extends ScriptTemplateContextType {
 
     public static final String CONTEXT_TYPE_ID = "juliaUniversalTemplateContextType";
 

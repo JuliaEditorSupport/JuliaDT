@@ -10,7 +10,7 @@ import org.eclipse.ui.editors.text.EditorsUI;
 public class JuliaUIPreferenceInitializer extends AbstractPreferenceInitializer {
 
     public void initializeDefaultPreferences() {
-        IPreferenceStore store = JuliaUI.getDefault().getPreferenceStore();
+        final IPreferenceStore store = JuliaUI.getDefault().getPreferenceStore();
         EditorsUI.useAnnotationsPreferencePage(store);
         EditorsUI.useQuickDiffPreferencePage(store);
     }

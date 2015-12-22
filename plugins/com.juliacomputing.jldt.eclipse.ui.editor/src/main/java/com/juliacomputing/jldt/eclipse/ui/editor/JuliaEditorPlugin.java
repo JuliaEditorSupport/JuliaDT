@@ -15,39 +15,39 @@ public class JuliaEditorPlugin extends AbstractUIPlugin {
     private JuliaTextTools textTools;
 
     public static JuliaEditorPlugin getDefault() {
-        return JuliaEditorPlugin.instance;
+        return instance;
     }
 
     public static String getUniqueIdentifier() {
-        return JuliaEditorPlugin.ID;
+        return ID;
     }
 
     public static void log(IStatus status) {
-        JuliaEditorPlugin.getDefault().getLog().log(status);
+        getDefault().getLog().log(status);
     }
 
     public static void log(String message) {
-        JuliaEditorPlugin.log(new Status(IStatus.ERROR, JuliaEditorPlugin.getUniqueIdentifier(), IStatus.ERROR, message, null));
+        log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, message, null));
     }
 
     public static void log(Throwable e) {
-        JuliaEditorPlugin.log(new Status(IStatus.ERROR, JuliaEditorPlugin.getUniqueIdentifier(), IStatus.ERROR, e.getMessage(), e));
+        log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, e.getMessage(), e));
     }
 
     public void start(BundleContext context) throws Exception {
         super.start(context);
-        JuliaEditorPlugin.instance = this;
+        instance = this;
     }
 
     public void stop(BundleContext context) throws Exception {
-        JuliaEditorPlugin.instance = null;
+        instance = null;
         super.stop(context);
     }
 
     public synchronized JuliaTextTools getTextTools() {
-        if (this.textTools == null)
-            this.textTools = new JuliaTextTools(true);
-        return this.textTools;
+        if (textTools == null)
+            textTools = new JuliaTextTools(true);
+        return textTools;
     }
 
 
