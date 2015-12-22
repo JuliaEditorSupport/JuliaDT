@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Julia Development Toolkit - Parser
+Bundle-SymbolicName: com.juliacomputing.jldt.eclipse.parser;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: com.juliacomputing.jldt.eclipse.parser.JuliaParserPlugin
+Bundle-Vendor: Julia Computing Inc.
+Require-Bundle:  org.eclipse.core.runtime,
+ org.eclipse.dltk.core,
+ org.eclipse.debug.core,
+ org.antlr.antlr4-runtime-osgi;bundle-version="4.5.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy

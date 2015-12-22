@@ -37,3 +37,9 @@ load_path
 Pkg.generate(<pkg name>)
 generates skeleton inside julia (~ dir)
 
+#Grammar Conflicts
+
+##:
+    1:n 
+    :n
+    

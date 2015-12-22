@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension
+            point="org.eclipse.dltk.core.sourceParsers">
+        <parserContribution
+                natureId="com.juliacomputing.jldt.eclipse.core.nature">
+            <parser
+                    class="com.juliacomputing.jldt.eclipse.internal.parser.JuliaSourceParserFactory"
+                    description="Julia Source parser"
+                    id="com.juliacomputing.jldt.eclipse.sourceParser"
+                    name="sourceParser.name"
+                    priority="0"/>
+        </parserContribution>
+    </extension>
+
+    <!--<extension-->
+    <!--point="org.eclipse.dltk.core.buildParticipant">-->
+    <!--<buildParticipant-->
+    <!--class="org.eclipse.dltk.core.builder.ParserBuildParticipantFactory"-->
+    <!--id="com.juliacomputing.jldt.eclipse.sourceParser"-->
+    <!--name="Julia Parser"-->
+    <!--nature="com.juliacomputing.jldt.eclipse.core.nature">-->
+    <!--</buildParticipant>-->
+    <!--</extension>-->
+</plugin>
+
+

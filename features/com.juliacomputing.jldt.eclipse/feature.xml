@@ -43,6 +43,8 @@
         <import plugin="org.eclipse.debug.ui"/>
         <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
         <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <!--<import plugin="org.antlr.antlr4-runtime-osgi"/>-->
     </requires>
 
     <plugin
@@ -75,6 +77,13 @@
 
     <plugin
             id="com.juliacomputing.jldt.eclipse.ui.editor"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+    <plugin
+            id="com.juliacomputing.jldt.eclipse.parser"
             download-size="0"
             install-size="0"
             version="0.0.0"

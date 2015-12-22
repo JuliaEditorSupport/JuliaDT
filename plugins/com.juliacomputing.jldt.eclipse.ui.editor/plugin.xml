@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+
     <extension
             point="org.eclipse.core.runtime.preferences">
         <initializer
                 class="com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaEditorPreferencesInitializer">
         </initializer>
     </extension>
+
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+                category="com.juliacomputing.jldt.eclipse.ui.preferences"
+                class="com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.templates.JuliaTemplatesPreferencePage"
+                id="com.juliacomputing.jldt.eclipse.ui.preferences.templates"
+                name="Templates"/>
+    </extension>
+
+    <extension
+            point="org.eclipse.ui.editors.templates">
+        <contextType
+                class="com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.templates.JuliaUniversalTemplateContextType"
+                id="juliaUniversalTemplateContextType"
+                name="Julia Statement">
+        </contextType>
+        <include
+                file="templates/templates.xml"
+                translations="templates/templates.properties">
+        </include>
+    </extension>
+
 
     <extension
             point="org.eclipse.ui.editors">
@@ -23,6 +47,26 @@
             </contentTypeBinding>
         </editor>
     </extension>
+
+    <extension point="org.eclipse.dltk.core.completionEngine">
+        <completionEngine
+                class="com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.JuliaCompletionEngine"
+                nature="com.juliacomputing.jldt.eclipse.core.nature"
+                priority="0">
+        </completionEngine>
+    </extension>
+
+    <extension
+            point="org.eclipse.dltk.ui.scriptCompletionProposalComputer"
+            id="JuliaCompletionProposalComputer">
+        <scriptCompletionProposalComputer
+                class="com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.JuliaCompletionProposalComputer"
+                categoryId="org.eclipse.dltk.ui.scriptTypeProposalCategory"
+                toolkitId="com.juliacomputing.jldt.eclipse.core.nature">
+            <partition type="__dftl_partition_content_type"/>
+        </scriptCompletionProposalComputer>
+    </extension>
+
 </plugin>
 
 

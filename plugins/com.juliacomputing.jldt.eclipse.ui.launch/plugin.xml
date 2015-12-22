@@ -24,11 +24,6 @@
                 id="com.juliacomputing.jldt.eclipse.ui.launch.JuliaTabGroup"
                 type="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate">
         </launchConfigurationTabGroup>
-        <!--<launchConfigurationTabGroup-->
-        <!--class="org.eclipse.dltk.julia.internal.debug.ui.launchConfigurations.JuliaRemoteTabGroup"-->
-        <!--id="com.juliacomputing.jldt.eclipse.ui.launch.JuliaRemoteTabGroup"-->
-        <!--type="org.eclipse.dltk.julia.launch.JuliaRemoteLaunchConfigurationType">-->
-        <!--</launchConfigurationTabGroup>-->
     </extension>
 
     <extension point="org.eclipse.debug.ui.launchShortcuts">

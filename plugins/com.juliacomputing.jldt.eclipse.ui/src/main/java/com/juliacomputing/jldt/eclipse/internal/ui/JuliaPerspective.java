@@ -63,8 +63,7 @@ public class JuliaPerspective implements IPerspectiveFactory {
         layout.addShowViewShortcut(IPageLayout.ID_TASK_LIST);
         layout.addShowViewShortcut(IProgressConstants.PROGRESS_VIEW_ID);
         layout.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW);
-        layout
-                .addShowViewShortcut("org.eclipse.dltk.ruby.ui.RubyDocumentationView"); //$NON-NLS-1$
+//        layout.addShowViewShortcut("org.eclipse.dltk.ruby.ui.RubyDocumentationView"); //$NON-NLS-1$
 //		layout.addShowViewShortcut(NewSearchUI.SEARCH_VIEW_ID);
         layout.addShowViewShortcut("org.eclipse.dltk.ui.TypeHierarchy"); //$NON-NLS-1$
         layout.addShowViewShortcut("org.eclipse.dltk.callhierarchy.view"); //$NON-NLS-1$

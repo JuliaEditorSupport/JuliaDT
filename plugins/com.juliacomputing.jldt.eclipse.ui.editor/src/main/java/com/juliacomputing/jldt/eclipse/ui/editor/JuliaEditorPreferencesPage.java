@@ -1,6 +1,5 @@
-package com.juliacomputing.jldt.eclipse.ui.editor.internal;
+package com.juliacomputing.jldt.eclipse.ui.editor;
 
-import com.juliacomputing.jldt.eclipse.ui.editor.JuliaEditorPlugin;
 import org.eclipse.dltk.ui.preferences.AbstractConfigurationBlockPreferencePage;
 import org.eclipse.dltk.ui.preferences.EditorConfigurationBlock;
 import org.eclipse.dltk.ui.preferences.IPreferenceConfigurationBlock;

@@ -51,7 +51,7 @@
                 name="Julia"/>
         <page
                 category="com.juliacomputing.jldt.eclipse.ui.preferences"
-                class="com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaEditorPreferencesPage"
+                class="com.juliacomputing.jldt.eclipse.ui.editor.JuliaEditorPreferencesPage"
                 id="com.juliacomputing.jldt.eclipse.ui.preferences.editor"
                 name="Editor"/>
     </extension>

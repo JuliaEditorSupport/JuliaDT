@@ -10,9 +10,9 @@ public class JuliaContentAssistPreference extends ContentAssistPreference {
 
     public static ContentAssistPreference getDefault() {
         if (instance == null) {
-            JuliaContentAssistPreference.instance = new JuliaContentAssistPreference();
+            instance = new JuliaContentAssistPreference();
         }
-        return JuliaContentAssistPreference.instance;
+        return instance;
     }
 
     protected ScriptTextTools getTextTools() {

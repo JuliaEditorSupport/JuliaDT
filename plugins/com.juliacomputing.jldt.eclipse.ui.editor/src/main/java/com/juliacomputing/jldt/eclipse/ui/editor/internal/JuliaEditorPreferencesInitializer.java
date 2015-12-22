@@ -20,9 +20,9 @@ public class JuliaEditorPreferencesInitializer extends AbstractPreferenceInitial
         EditorsUI.useAnnotationsPreferencePage(store);
         EditorsUI.useQuickDiffPreferencePage(store);
         PreferenceConstants.initializeDefaultValues(store);
-        PreferenceConverter.setDefault(store, JuliaColourConstants.COMMENT, JuliaEditorPreferencesInitializer.COMMENT_COLOUR);
-        PreferenceConverter.setDefault(store, JuliaColourConstants.KEYWORD, JuliaEditorPreferencesInitializer.KEYWORD_COLOUR);
-        PreferenceConverter.setDefault(store, JuliaColourConstants.STRING, JuliaEditorPreferencesInitializer.STRING_COLOUR);
+        PreferenceConverter.setDefault(store, JuliaColourConstants.COMMENT, COMMENT_COLOUR);
+        PreferenceConverter.setDefault(store, JuliaColourConstants.KEYWORD, KEYWORD_COLOUR);
+        PreferenceConverter.setDefault(store, JuliaColourConstants.STRING, STRING_COLOUR);
 
         store.setDefault(JuliaColourConstants.COMMENT + PreferenceConstants.EDITOR_BOLD_SUFFIX, false);
         store.setDefault(JuliaColourConstants.COMMENT + PreferenceConstants.EDITOR_ITALIC_SUFFIX, false);
