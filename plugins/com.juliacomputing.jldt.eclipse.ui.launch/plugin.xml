@@ -12,7 +12,7 @@
     <extension
             point="org.eclipse.debug.ui.launchConfigurationTypeImages">
         <launchConfigurationTypeImage icon="icons/julia.png"
-                                      configTypeID="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate"
+                                      configTypeID="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationType"
                                       id="com.juliacomputing.jldt.eclipse.ui.launch.launchConfigurationTypeImage">
         </launchConfigurationTypeImage>
     </extension>
@@ -22,7 +22,8 @@
         <launchConfigurationTabGroup
                 class="com.juliacomputing.jldt.eclipse.ui.launch.configuration.JuliaTabGroup"
                 id="com.juliacomputing.jldt.eclipse.ui.launch.JuliaTabGroup"
-                type="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate">
+                type="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationType">
+            <!--type="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate">-->
         </launchConfigurationTabGroup>
     </extension>
 
@@ -46,7 +47,7 @@
                         <iterate>
                             <or>
                                 <test
-                                        args="org.eclipse.dltk.julia.core.nature"
+                                        args="com.juliacomputing.jldt.eclipse.core.nature"
                                         property="org.eclipse.dltk.launching.hasProjectNature"/>
                             </or>
                         </iterate>
@@ -61,5 +62,4 @@
             </contextualLaunch>
         </shortcut>
     </extension>
-
 </plugin>

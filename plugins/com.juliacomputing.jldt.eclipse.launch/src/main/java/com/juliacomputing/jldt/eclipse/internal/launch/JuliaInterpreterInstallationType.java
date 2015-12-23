@@ -35,7 +35,7 @@ public class JuliaInterpreterInstallationType extends AbstractInterpreterInstall
     }
 
     protected String[] getPossibleInterpreterNames() {
-        return JuliaInterpreterInstallationType.EXECUTABLES;
+        return EXECUTABLES;
     }
 
     protected IInterpreterInstall doCreateInterpreterInstall(String id) {

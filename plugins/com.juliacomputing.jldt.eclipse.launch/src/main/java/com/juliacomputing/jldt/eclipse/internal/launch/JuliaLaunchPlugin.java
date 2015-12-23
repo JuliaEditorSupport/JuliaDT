@@ -10,16 +10,16 @@ public class JuliaLaunchPlugin extends Plugin {
     private static JuliaLaunchPlugin instance;
 
     public static JuliaLaunchPlugin getDefault() {
-        return JuliaLaunchPlugin.instance;
+        return instance;
     }
 
     public void start(BundleContext context) throws Exception {
         super.start(context);
-        JuliaLaunchPlugin.instance = this;
+        instance = this;
     }
 
     public void stop(BundleContext context) throws Exception {
-        JuliaLaunchPlugin.instance = null;
+        instance = null;
         super.stop(context);
     }
 }

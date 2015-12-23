@@ -41,10 +41,18 @@
         <import plugin="org.eclipse.ui.workbench.texteditor"/>
         <import plugin="org.eclipse.ui"/>
         <import plugin="org.eclipse.debug.ui"/>
+        <import plugin="org.antlr.antlr4-runtime-osgi" version="4.5.1" match="greaterOrEqual"/>
+        <import plugin="org.eclipse.osgi"/>
         <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
         <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
         <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
-        <!--<import plugin="org.antlr.antlr4-runtime-osgi"/>-->
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+        <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
     </requires>
 
     <plugin
@@ -84,6 +92,27 @@
 
     <plugin
             id="com.juliacomputing.jldt.eclipse.parser"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+    <plugin
+            id="org.eclipse.equinox.ds"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+    <plugin
+            id="org.eclipse.equinox.util"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+    <plugin
+            id="org.antlr.antlr4-runtime-osgi"
             download-size="0"
             install-size="0"
             version="0.0.0"

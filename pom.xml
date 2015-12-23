@@ -9,6 +9,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>julia.eclipse.parent</module>
+        <module>com.juliacomputing.jldt.kernel</module>
+        <module>com.juliacomputing.jldt.kernel.api</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.core</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.launch</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.ui</module>

@@ -18,6 +18,7 @@
 ## Background
 
 1. [DLTK wiki](https://wiki.eclipse.org/DLTK)
+2. [declarative services](http://www.vogella.com/tutorials/OSGiServices/article.html#tutorial_ds)
 
 #TODOs
 
@@ -42,4 +43,6 @@ generates skeleton inside julia (~ dir)
 ##:
     1:n 
     :n
+
+    
     

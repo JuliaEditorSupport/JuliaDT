@@ -12,17 +12,6 @@
     <artifactId>com.juliacomputing.jldt.eclipse.parser</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>eclipse-plugin</packaging>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.eclipse.tycho</groupId>
-                <artifactId>target-platform-configuration</artifactId>
-                <configuration>
-                    <pomDependencies>consider</pomDependencies>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <dependencies>
         <dependency>
             <groupId>org.antlr</groupId>

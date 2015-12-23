@@ -15,7 +15,7 @@
             point="org.eclipse.debug.core.launchConfigurationTypes">
         <launchConfigurationType
                 delegate="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate"
-                id="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate"
+                id="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationType"
                 modes="run,debug"
                 name="Julia"
                 public="true"
