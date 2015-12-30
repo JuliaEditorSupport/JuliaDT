@@ -10,6 +10,8 @@ import org.eclipse.dltk.ui.text.ScriptTextTools;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension3;
+import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.ui.IEditorInput;
 
 public class JuliaEditor extends ScriptEditor {
@@ -19,12 +21,12 @@ public class JuliaEditor extends ScriptEditor {
 
     protected void initializeEditor() {
         super.initializeEditor();
-        this.setEditorContextMenuId(JuliaEditor.EDITOR_CONTEXT);
+        setEditorContextMenuId(EDITOR_CONTEXT);
     }
 
     @Override
     public String getEditorId() {
-        return JuliaEditor.ID;
+        return ID;
     }
 
     @Override
@@ -50,5 +52,11 @@ public class JuliaEditor extends ScriptEditor {
             }
         }
     }
+
+    @Override
+    protected ICharacterPairMatcher createBracketMatcher() {
+        return new DefaultCharacterPairMatcher("{}[]()".toCharArray(), JuliaPartition.JULIA_PARTITIONING);
+    }
+
 
 }

@@ -8,7 +8,7 @@ import org.zeromq.ZMQ.Socket;
 
 import java.io.IOException;
 
-public class ZMQKernelProxy {
+public class KernelZMQProxy {
 
     private final String host;
     private final int port;
@@ -16,7 +16,7 @@ public class ZMQKernelProxy {
     private Context context;
     private ObjectMapper mapper = new ObjectMapper();
 
-    public ZMQKernelProxy(String host, int port) {
+    public KernelZMQProxy(String host, int port) {
         this.host = host;
         this.port = port;
     }
@@ -34,6 +34,7 @@ public class ZMQKernelProxy {
 
     public void send(Object message) {
         try {
+            System.out.println(mapper.writeValueAsString(message));
             requester.send(mapper.writeValueAsBytes(message));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
@@ -49,6 +50,8 @@ public class ZMQKernelProxy {
             throw new RuntimeException(e);
         }
     }
+
+
 }
 
 

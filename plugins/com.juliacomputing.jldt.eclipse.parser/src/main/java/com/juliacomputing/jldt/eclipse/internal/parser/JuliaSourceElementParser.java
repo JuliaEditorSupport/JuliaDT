@@ -1,28 +1,21 @@
 package com.juliacomputing.jldt.eclipse.internal.parser;
 
-import org.eclipse.dltk.compiler.ISourceElementRequestor;
-import org.eclipse.dltk.compiler.env.IModuleSource;
-import org.eclipse.dltk.compiler.problem.IProblemReporter;
-import org.eclipse.dltk.core.ISourceElementParser;
+import com.juliacomputing.jldt.eclipse.core.JuliaNature;
+import org.eclipse.dltk.compiler.SourceElementRequestVisitor;
+import org.eclipse.dltk.core.AbstractSourceElementParser;
 
-public class JuliaSourceElementParser implements ISourceElementParser {
+public class JuliaSourceElementParser extends AbstractSourceElementParser {
 
-    @Override
-    public void parseSourceModule(IModuleSource arg0) {
-        // TODO Auto-generated method stub
 
+    protected SourceElementRequestVisitor createVisitor() {
+        return new JuliaSourceElementRequestor(getRequestor());
     }
 
-    @Override
-    public void setReporter(IProblemReporter arg0) {
-        // TODO Auto-generated method stub
-
-    }
 
     @Override
-    public void setRequestor(ISourceElementRequestor arg0) {
-        // TODO Auto-generated method stub
-
+    protected String getNatureId() {
+        return JuliaNature.ID;
     }
+
 
 }

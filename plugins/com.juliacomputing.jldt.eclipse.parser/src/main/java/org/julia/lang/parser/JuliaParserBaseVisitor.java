@@ -1,6 +1,6 @@
 // Generated from /Users/snefru/JuliaDT/plugins/com.juliacomputing.jldt.eclipse.parser/src/antlr4/org/julia/lang/JuliaParser.g4 by ANTLR 4.5.1
 
-package org.julia.lang;
+package org.julia.lang.parser;
 
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -86,7 +86,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitConditional(JuliaParser.ConditionalContext ctx) {
+    public T visitConstant(JuliaParser.ConstantContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -97,7 +97,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitType(JuliaParser.TypeContext ctx) {
+    public T visitConditional(JuliaParser.ConditionalContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -120,17 +120,6 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      */
     @Override
     public T visitLSRAssign(JuliaParser.LSRAssignContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    /**
-     * {@inheritDoc}
-     * <p>
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    @Override
-    public T visitCoeffient(JuliaParser.CoeffientContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -175,6 +164,17 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      */
     @Override
     public T visitHex(JuliaParser.HexContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitFfloat32(JuliaParser.Ffloat32Context ctx) {
         return visitChildren(ctx);
     }
 
@@ -416,17 +416,6 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitFloat64(JuliaParser.Float64Context ctx) {
-        return visitChildren(ctx);
-    }
-
-    /**
-     * {@inheritDoc}
-     * <p>
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    @Override
     public T visitMinusAssign(JuliaParser.MinusAssignContext ctx) {
         return visitChildren(ctx);
     }
@@ -570,17 +559,6 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitFloat32(JuliaParser.Float32Context ctx) {
-        return visitChildren(ctx);
-    }
-
-    /**
-     * {@inheritDoc}
-     * <p>
-     * <p>The default implementation returns the result of calling
-     * {@link #visitChildren} on {@code ctx}.</p>
-     */
-    @Override
     public T visitInf16Type(JuliaParser.Inf16TypeContext ctx) {
         return visitChildren(ctx);
     }
@@ -659,6 +637,17 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      */
     @Override
     public T visitArrayIndex(JuliaParser.ArrayIndexContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitFfloat64(JuliaParser.Ffloat64Context ctx) {
         return visitChildren(ctx);
     }
 
@@ -757,7 +746,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitFunctionDeclaration(JuliaParser.FunctionDeclarationContext ctx) {
+    public T visitCompactFunctionDeclaration(JuliaParser.CompactFunctionDeclarationContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -768,7 +757,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitParameters(JuliaParser.ParametersContext ctx) {
+    public T visitGeneralFunctionDeclaration(JuliaParser.GeneralFunctionDeclarationContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -779,7 +768,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitParameter(JuliaParser.ParameterContext ctx) {
+    public T visitPparameters(JuliaParser.PparametersContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -790,7 +779,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitTypeExpression(JuliaParser.TypeExpressionContext ctx) {
+    public T visitNamedTypedParam(JuliaParser.NamedTypedParamContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -801,7 +790,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitFieldDeclaration(JuliaParser.FieldDeclarationContext ctx) {
+    public T visitAnonymousTypedParam(JuliaParser.AnonymousTypedParamContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -812,7 +801,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitTypeParameters(JuliaParser.TypeParametersContext ctx) {
+    public T visitNamedParam(JuliaParser.NamedParamContext ctx) {
         return visitChildren(ctx);
     }
 
@@ -823,7 +812,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitTypeParameter(JuliaParser.TypeParameterContext ctx) {
+    public T visitInt8(JuliaParser.Int8Context ctx) {
         return visitChildren(ctx);
     }
 
@@ -834,7 +823,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitTypeAlias(JuliaParser.TypeAliasContext ctx) {
+    public T visitUint8(JuliaParser.Uint8Context ctx) {
         return visitChildren(ctx);
     }
 
@@ -845,7 +834,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitForStatement(JuliaParser.ForStatementContext ctx) {
+    public T visitInt16(JuliaParser.Int16Context ctx) {
         return visitChildren(ctx);
     }
 
@@ -856,7 +845,370 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
      * {@link #visitChildren} on {@code ctx}.</p>
      */
     @Override
-    public T visitIfStatement(JuliaParser.IfStatementContext ctx) {
+    public T visitUint16(JuliaParser.Uint16Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitInt32(JuliaParser.Int32Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitUint32(JuliaParser.Uint32Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitInt64(JuliaParser.Int64Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitUint64(JuliaParser.Uint64Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitInt128(JuliaParser.Int128Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitUint128(JuliaParser.Uint128Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitBool(JuliaParser.BoolContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitChar(JuliaParser.CharContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitFloat16(JuliaParser.Float16Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitFloat32(JuliaParser.Float32Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitFloat64(JuliaParser.Float64Context ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitAbstractSubtype(JuliaParser.AbstractSubtypeContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitAbstractType(JuliaParser.AbstractTypeContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitBitsSubtype(JuliaParser.BitsSubtypeContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitBitsTtype(JuliaParser.BitsTtypeContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitParameterisedTypeDeclaration(JuliaParser.ParameterisedTypeDeclarationContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitTypeDeclaration(JuliaParser.TypeDeclarationContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitImmutableTypeDeclaration(JuliaParser.ImmutableTypeDeclarationContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitUnionType(JuliaParser.UnionTypeContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitParametricType(JuliaParser.ParametricTypeContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitTypeReference(JuliaParser.TypeReferenceContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitTypedFieldDeclaration(JuliaParser.TypedFieldDeclarationContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitUntypedFieldDeclaration(JuliaParser.UntypedFieldDeclarationContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitTtypeParameters(JuliaParser.TtypeParametersContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitNamedSubtype(JuliaParser.NamedSubtypeContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitInstance(JuliaParser.InstanceContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitUntyped(JuliaParser.UntypedContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitNumber(JuliaParser.NumberContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitTtypeAlias(JuliaParser.TtypeAliasContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitForEq(JuliaParser.ForEqContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitForEqStep(JuliaParser.ForEqStepContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitForIn(JuliaParser.ForInContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * <p>The default implementation returns the result of calling
+     * {@link #visitChildren} on {@code ctx}.</p>
+     */
+    @Override
+    public T visitConditionalStatement(JuliaParser.ConditionalStatementContext ctx) {
         return visitChildren(ctx);
     }
 }

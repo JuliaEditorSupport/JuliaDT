@@ -2,6 +2,7 @@ package com.juliacomputing.jldt.eclipse.core;
 
 
 //import com.juliacomputing.jldt.kernel.api.Kernel;
+
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 //import org.osgi.framework.ServiceReference;

@@ -3,8 +3,6 @@ package org.julia.lang.parser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.julia.lang.JuliaLexer;
-import org.julia.lang.JuliaParser;
 
 import java.io.File;
 import java.io.FileInputStream;

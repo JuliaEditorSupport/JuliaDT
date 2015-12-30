@@ -10,16 +10,11 @@ import org.eclipse.dltk.ui.text.completion.ContentAssistPreference;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IInformationControlCreator;
-import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
-import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
-import org.eclipse.jface.text.information.IInformationPresenter;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
-import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.texteditor.ITextEditor;
@@ -80,47 +75,6 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
 
     public boolean affectsTextPresentation(PropertyChangeEvent event) {
         return codeScanner.affectsBehavior(event) || stringScanner.affectsBehavior(event);
-    }
-
-    public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
-        return null;
-    }
-
-    public IAnnotationHover getOverviewRulerAnnotationHover(ISourceViewer sourceViewer) {
-        return null;
-    }
-
-    public int[] getConfiguredTextHoverStateMasks(ISourceViewer sourceViewer, String contentType) {
-        return null;
-    }
-
-    public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType, int stateMask) {
-        return null;
-    }
-
-    public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
-        return null;
-    }
-
-
-    public IInformationControlCreator getInformationControlCreator(ISourceViewer sourceViewer) {
-        return null;
-    }
-
-    public IInformationPresenter getInformationPresenter(ISourceViewer sourceViewer) {
-        return null;
-    }
-
-    public IInformationPresenter getOutlinePresenter(ISourceViewer sourceViewer, boolean doCodeResolve) {
-        return null;
-    }
-
-    public IInformationPresenter getHierarchyPresenter(ISourceViewer sourceViewer, boolean doCodeResolve) {
-        return null;
-    }
-
-    public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
-        return null;
     }
 
     protected void alterContentAssistant(ContentAssistant assistant) {

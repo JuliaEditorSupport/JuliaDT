@@ -14,6 +14,13 @@
         </parserContribution>
     </extension>
 
+    <extension point="org.eclipse.dltk.core.sourceElementParsers">
+        <parser
+                class="com.juliacomputing.jldt.eclipse.internal.parser.JuliaSourceElementParser"
+                nature="com.juliacomputing.jldt.eclipse.core.nature"
+                priority="1">
+        </parser>
+    </extension>
     <!--<extension-->
     <!--point="org.eclipse.dltk.core.buildParticipant">-->
     <!--<buildParticipant-->

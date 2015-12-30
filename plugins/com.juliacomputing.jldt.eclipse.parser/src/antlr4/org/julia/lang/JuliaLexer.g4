@@ -1,6 +1,6 @@
 lexer grammar JuliaLexer;
 @header {
-package org.julia.lang;
+package org.julia.lang.parser;
     }
 EQ                  : '=';
 ADD_ASGN            : '+=';

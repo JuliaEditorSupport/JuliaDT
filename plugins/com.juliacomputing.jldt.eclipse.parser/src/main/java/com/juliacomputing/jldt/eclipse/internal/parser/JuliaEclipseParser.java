@@ -7,15 +7,10 @@ import org.eclipse.dltk.ast.declarations.ModuleDeclaration;
 import org.eclipse.dltk.ast.parser.AbstractSourceParser;
 import org.eclipse.dltk.compiler.env.IModuleSource;
 import org.eclipse.dltk.compiler.problem.IProblemReporter;
-import org.julia.lang.JuliaLexer;
-import org.julia.lang.JuliaParser;
-import org.julia.lang.JuliaParser.UnitContext;
+import org.julia.lang.parser.JuliaLexer;
+import org.julia.lang.parser.JuliaParser;
+import org.julia.lang.parser.JuliaParser.UnitContext;
 
-/**
- * JuliaEclipseParser
- *
- * @author snefru
- */
 public class JuliaEclipseParser extends AbstractSourceParser {
 
 
@@ -25,7 +20,12 @@ public class JuliaEclipseParser extends AbstractSourceParser {
         final JuliaLexer lexer = new JuliaLexer(stream);
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
         final JuliaParser parser = new JuliaParser(tokens);
+        parser.setErrorHandler(new ErrorHandler(reporter));
         final UnitContext unit = parser.unit();
-        return new ModuleDeclaration(content.length());
+        final JuliaModuleFactory factory = new JuliaModuleFactory();
+//        reporter.reportProblem(new DefaultProblem("a","message",JuliaProblemIdentifier.SYNTAX_ERROR,new String[0], ProblemSeverity.ERROR,0,10,1,1));
+        return factory.create(unit);
     }
+
+
 }

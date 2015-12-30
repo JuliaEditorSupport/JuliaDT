@@ -1,6 +1,6 @@
 // Generated from /Users/snefru/JuliaDT/plugins/com.juliacomputing.jldt.eclipse.parser/src/antlr4/org/julia/lang/JuliaLexer.g4 by ANTLR 4.5.1
 
-package org.julia.lang;
+package org.julia.lang.parser;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.ATN;
@@ -8,7 +8,6 @@ import org.antlr.v4.runtime.atn.ATNDeserializer;
 import org.antlr.v4.runtime.atn.LexerATNSimulator;
 import org.antlr.v4.runtime.atn.PredictionContextCache;
 import org.antlr.v4.runtime.dfa.DFA;
-
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class JuliaLexer extends Lexer {

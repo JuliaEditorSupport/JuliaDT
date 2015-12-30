@@ -1,6 +1,6 @@
 // Generated from /Users/snefru/JuliaDT/plugins/com.juliacomputing.jldt.eclipse.parser/src/antlr4/org/julia/lang/JuliaParser.g4 by ANTLR 4.5.1
 
-package org.julia.lang;
+package org.julia.lang.parser;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -65,6 +65,15 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
     T visitSymbol(JuliaParser.SymbolContext ctx);
 
     /**
+     * Visit a parse tree produced by the {@code constant}
+     * labeled alternative in {@link JuliaParser#exp}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitConstant(JuliaParser.ConstantContext ctx);
+
+    /**
      * Visit a parse tree produced by the {@code conditional}
      * labeled alternative in {@link JuliaParser#exp}.
      *
@@ -72,15 +81,6 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
      * @return the visitor result
      */
     T visitConditional(JuliaParser.ConditionalContext ctx);
-
-    /**
-     * Visit a parse tree produced by the {@code type}
-     * labeled alternative in {@link JuliaParser#exp}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitType(JuliaParser.TypeContext ctx);
 
     /**
      * Visit a parse tree produced by the {@code bitwiseXorAssign}
@@ -99,15 +99,6 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
      * @return the visitor result
      */
     T visitLSRAssign(JuliaParser.LSRAssignContext ctx);
-
-    /**
-     * Visit a parse tree produced by the {@code coeffient}
-     * labeled alternative in {@link JuliaParser#exp}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitCoeffient(JuliaParser.CoeffientContext ctx);
 
     /**
      * Visit a parse tree produced by the {@code invDivexpeAssign}
@@ -144,6 +135,15 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
      * @return the visitor result
      */
     T visitHex(JuliaParser.HexContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code ffloat32}
+     * labeled alternative in {@link JuliaParser#exp}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitFfloat32(JuliaParser.Ffloat32Context ctx);
 
     /**
      * Visit a parse tree produced by the {@code greaterThan}
@@ -335,15 +335,6 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
     T visitTimesAssign(JuliaParser.TimesAssignContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code float64}
-     * labeled alternative in {@link JuliaParser#exp}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitFloat64(JuliaParser.Float64Context ctx);
-
-    /**
      * Visit a parse tree produced by the {@code minusAssign}
      * labeled alternative in {@link JuliaParser#exp}.
      *
@@ -461,15 +452,6 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
     T visitApply(JuliaParser.ApplyContext ctx);
 
     /**
-     * Visit a parse tree produced by the {@code float32}
-     * labeled alternative in {@link JuliaParser#exp}.
-     *
-     * @param ctx the parse tree
-     * @return the visitor result
-     */
-    T visitFloat32(JuliaParser.Float32Context ctx);
-
-    /**
      * Visit a parse tree produced by the {@code inf16Type}
      * labeled alternative in {@link JuliaParser#exp}.
      *
@@ -540,6 +522,15 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
      * @return the visitor result
      */
     T visitArrayIndex(JuliaParser.ArrayIndexContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code ffloat64}
+     * labeled alternative in {@link JuliaParser#exp}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitFfloat64(JuliaParser.Ffloat64Context ctx);
 
     /**
      * Visit a parse tree produced by the {@code assign}
@@ -614,82 +605,389 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
     T visitBareModuleDeclaration(JuliaParser.BareModuleDeclarationContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#functionDeclaration}.
+     * Visit a parse tree produced by the {@code compactFunctionDeclaration}
+     * labeled alternative in {@link JuliaParser#functionDeclaration}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitFunctionDeclaration(JuliaParser.FunctionDeclarationContext ctx);
+    T visitCompactFunctionDeclaration(JuliaParser.CompactFunctionDeclarationContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#parameters}.
+     * Visit a parse tree produced by the {@code generalFunctionDeclaration}
+     * labeled alternative in {@link JuliaParser#functionDeclaration}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitParameters(JuliaParser.ParametersContext ctx);
+    T visitGeneralFunctionDeclaration(JuliaParser.GeneralFunctionDeclarationContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#parameter}.
+     * Visit a parse tree produced by the {@code pparameters}
+     * labeled alternative in {@link JuliaParser#parameters}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitParameter(JuliaParser.ParameterContext ctx);
+    T visitPparameters(JuliaParser.PparametersContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#typeExpression}.
+     * Visit a parse tree produced by the {@code namedTypedParam}
+     * labeled alternative in {@link JuliaParser#parameter}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitTypeExpression(JuliaParser.TypeExpressionContext ctx);
+    T visitNamedTypedParam(JuliaParser.NamedTypedParamContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#fieldDeclaration}.
+     * Visit a parse tree produced by the {@code anonymousTypedParam}
+     * labeled alternative in {@link JuliaParser#parameter}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitFieldDeclaration(JuliaParser.FieldDeclarationContext ctx);
+    T visitAnonymousTypedParam(JuliaParser.AnonymousTypedParamContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#typeParameters}.
+     * Visit a parse tree produced by the {@code namedParam}
+     * labeled alternative in {@link JuliaParser#parameter}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitTypeParameters(JuliaParser.TypeParametersContext ctx);
+    T visitNamedParam(JuliaParser.NamedParamContext ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#typeParameter}.
+     * Visit a parse tree produced by the {@code int8}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitTypeParameter(JuliaParser.TypeParameterContext ctx);
+    T visitInt8(JuliaParser.Int8Context ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#typeAlias}.
+     * Visit a parse tree produced by the {@code uint8}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitTypeAlias(JuliaParser.TypeAliasContext ctx);
+    T visitUint8(JuliaParser.Uint8Context ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#forStatement}.
+     * Visit a parse tree produced by the {@code int16}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitForStatement(JuliaParser.ForStatementContext ctx);
+    T visitInt16(JuliaParser.Int16Context ctx);
 
     /**
-     * Visit a parse tree produced by {@link JuliaParser#ifStatement}.
+     * Visit a parse tree produced by the {@code uint16}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
      *
      * @param ctx the parse tree
      * @return the visitor result
      */
-    T visitIfStatement(JuliaParser.IfStatementContext ctx);
+    T visitUint16(JuliaParser.Uint16Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code int32}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInt32(JuliaParser.Int32Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code uint32}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitUint32(JuliaParser.Uint32Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code int64}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInt64(JuliaParser.Int64Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code uint64}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitUint64(JuliaParser.Uint64Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code int128}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInt128(JuliaParser.Int128Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code uint128}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitUint128(JuliaParser.Uint128Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code bool}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitBool(JuliaParser.BoolContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code char}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitChar(JuliaParser.CharContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code float16}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitFloat16(JuliaParser.Float16Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code float32}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitFloat32(JuliaParser.Float32Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code float64}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitFloat64(JuliaParser.Float64Context ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code abstractSubtype}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitAbstractSubtype(JuliaParser.AbstractSubtypeContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code abstractType}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitAbstractType(JuliaParser.AbstractTypeContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code bitsSubtype}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitBitsSubtype(JuliaParser.BitsSubtypeContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code bitsTtype}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitBitsTtype(JuliaParser.BitsTtypeContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code parameterisedTypeDeclaration}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitParameterisedTypeDeclaration(JuliaParser.ParameterisedTypeDeclarationContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code typeDeclaration}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitTypeDeclaration(JuliaParser.TypeDeclarationContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code immutableTypeDeclaration}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitImmutableTypeDeclaration(JuliaParser.ImmutableTypeDeclarationContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code unionType}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitUnionType(JuliaParser.UnionTypeContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code parametricType}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitParametricType(JuliaParser.ParametricTypeContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code typeReference}
+     * labeled alternative in {@link JuliaParser#typeExpression}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitTypeReference(JuliaParser.TypeReferenceContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code typedFieldDeclaration}
+     * labeled alternative in {@link JuliaParser#fieldDeclaration}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitTypedFieldDeclaration(JuliaParser.TypedFieldDeclarationContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code untypedFieldDeclaration}
+     * labeled alternative in {@link JuliaParser#fieldDeclaration}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitUntypedFieldDeclaration(JuliaParser.UntypedFieldDeclarationContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code ttypeParameters}
+     * labeled alternative in {@link JuliaParser#typeParameters}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitTtypeParameters(JuliaParser.TtypeParametersContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code namedSubtype}
+     * labeled alternative in {@link JuliaParser#typeParameter}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitNamedSubtype(JuliaParser.NamedSubtypeContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code instance}
+     * labeled alternative in {@link JuliaParser#typeParameter}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitInstance(JuliaParser.InstanceContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code untyped}
+     * labeled alternative in {@link JuliaParser#typeParameter}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitUntyped(JuliaParser.UntypedContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code number}
+     * labeled alternative in {@link JuliaParser#typeParameter}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitNumber(JuliaParser.NumberContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code ttypeAlias}
+     * labeled alternative in {@link JuliaParser#typeAlias}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitTtypeAlias(JuliaParser.TtypeAliasContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code forEq}
+     * labeled alternative in {@link JuliaParser#forStatement}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitForEq(JuliaParser.ForEqContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code forEqStep}
+     * labeled alternative in {@link JuliaParser#forStatement}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitForEqStep(JuliaParser.ForEqStepContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code forIn}
+     * labeled alternative in {@link JuliaParser#forStatement}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitForIn(JuliaParser.ForInContext ctx);
+
+    /**
+     * Visit a parse tree produced by the {@code conditionalStatement}
+     * labeled alternative in {@link JuliaParser#ifStatement}.
+     *
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    T visitConditionalStatement(JuliaParser.ConditionalStatementContext ctx);
 }
