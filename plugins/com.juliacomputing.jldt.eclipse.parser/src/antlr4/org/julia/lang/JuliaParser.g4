@@ -122,9 +122,10 @@ typeExpression              :   INT8                                            
                             |   ABSTRACT ID                                                             #abstractType
                             |   BITS_TYPE SIZE ID SUB_TYPE ID                                           #bitsSubtype
                             |   BITS_TYPE SIZE ID                                                       #bitsTtype
-                            |   TYPE ID typeParameters fieldDeclaration* functionDeclaration* END       #parameterisedTypeDeclaration
-                            |   TYPE ID fieldDeclaration* functionDeclaration* END                      #typeDeclaration
+                            |   TYPE ID typeParameters? SUB_TYPE ID fieldDeclaration* functionDeclaration* END      #subTypeDeclaration
+                            |   TYPE ID typeParameters? fieldDeclaration* functionDeclaration* END      #typeDeclaration
                             |   IMMUTABLE ID fieldDeclaration* functionDeclaration* END                 #immutableTypeDeclaration
+                            |   IMMUTABLE ID SUB_TYPE ID fieldDeclaration* functionDeclaration* END      #immutableSubTypeDeclaration
                             |   UNION LEFT_CURLY (typeExpression|INT) ( COMMA (typeExpression|INT))+ RIGHT_CURLY #unionType
                             |   ID LEFT_CURLY (typeExpression|INT) ( COMMA (typeExpression|INT))* RIGHT_CURLY #parametricType
                             |   ID                                                                      #typeReference

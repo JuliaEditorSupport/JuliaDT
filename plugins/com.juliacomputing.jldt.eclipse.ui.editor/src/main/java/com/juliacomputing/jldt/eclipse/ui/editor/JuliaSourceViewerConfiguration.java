@@ -1,22 +1,26 @@
 package com.juliacomputing.jldt.eclipse.ui.editor;
 
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaCodeScanner;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaColourConstants;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaContentAssistPreference;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaPartition;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.*;
 import com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.JuliaScriptCompletionProcessor;
+import org.eclipse.dltk.internal.ui.editor.EditorUtility;
+import org.eclipse.dltk.internal.ui.editor.ScriptSourceViewer;
+import org.eclipse.dltk.internal.ui.text.ScriptElementProvider;
 import org.eclipse.dltk.ui.text.*;
 import org.eclipse.dltk.ui.text.completion.ContentAssistPreference;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.text.IAutoEditStrategy;
-import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.*;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.text.information.IInformationPresenter;
+import org.eclipse.jface.text.information.IInformationProvider;
+import org.eclipse.jface.text.information.InformationPresenter;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.ITextEditor;
 
 public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfiguration {
@@ -83,8 +87,43 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
     }
 
     public IAutoEditStrategy[] getAutoEditStrategies(final ISourceViewer sourceViewer, String contentType) {
-        return new IAutoEditStrategy[]{new ScriptDefaultIndentLineAutoEditStrategy(JuliaEditorPlugin.getDefault().getPreferenceStore())};
+        return new IAutoEditStrategy[]{new JuliaAutoIndent()};
     }
 
+
+    public IInformationPresenter getHierarchyPresenter(
+            ScriptSourceViewer sourceViewer, boolean doCodeResolve) {
+        // Do not create hierarchy presenter if there's no CU.
+        if (getEditor() != null
+                && getEditor().getEditorInput() != null
+                && EditorUtility.getEditorInputModelElement(getEditor(), true) == null)
+            return null;
+
+        InformationPresenter presenter = new InformationPresenter(
+                getHierarchyPresenterControlCreator(sourceViewer));
+        presenter
+                .setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
+        presenter.setAnchor(AbstractInformationControlManager.ANCHOR_GLOBAL);
+        IInformationProvider provider = new ScriptElementProvider(getEditor(),
+                doCodeResolve);
+        presenter.setInformationProvider(provider,
+                IDocument.DEFAULT_CONTENT_TYPE);
+
+        presenter.setSizeConstraints(50, 20, true, false);
+        return presenter;
+    }
+
+
+    private IInformationControlCreator getHierarchyPresenterControlCreator(
+            ISourceViewer sourceViewer) {
+        return new IInformationControlCreator() {
+            public IInformationControl createInformationControl(Shell parent) {
+                int shellStyle = SWT.RESIZE;
+                int treeStyle = SWT.V_SCROLL | SWT.H_SCROLL;
+                return new JuliaHierarchyInformationControl(parent, shellStyle,
+                        treeStyle);
+            }
+        };
+    }
 
 }

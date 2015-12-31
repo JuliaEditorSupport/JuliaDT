@@ -14,6 +14,7 @@ import org.eclipse.dltk.ast.expressions.Expression;
 import org.eclipse.dltk.ast.references.SimpleReference;
 import org.eclipse.dltk.ast.references.TypeReference;
 import org.eclipse.dltk.ast.references.VariableReference;
+import org.eclipse.dltk.ast.statements.Block;
 import org.julia.lang.parser.JuliaParser.*;
 import org.julia.lang.parser.JuliaParserBaseVisitor;
 
@@ -45,7 +46,14 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     public ASTNode visitAssign(AssignContext ctx) {
         final Expression lhs = (Expression) visit(ctx.exp(0));
         final Expression rhs = (Expression) visit(ctx.exp(1));
-        return new Operator("=", start(ctx), stop(ctx), lhs, rhs);
+        return new Operator("<-", start(ctx), stop(ctx), lhs, rhs);
+    }
+
+    @Override
+    public ASTNode visitPlus(PlusContext ctx) {
+        final Expression lhs = (Expression) visit(ctx.exp(0));
+        final Expression rhs = (Expression) visit(ctx.exp(1));
+        return new Operator("+", start(ctx), stop(ctx), lhs, rhs);
     }
 
     @Override
@@ -57,13 +65,90 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitAbstractType(AbstractTypeContext ctx) {
         final Token type = ctx.ID().getSymbol();
-        return new TypeDeclaration(ctx.ID().getText(), start(type), stop(type), start(ctx), stop(ctx));
+        final TypeDeclaration typeDeclaration = new TypeDeclaration(ctx.ID().getText(), start(type), stop(type), start(ctx), stop(ctx));
+        typeDeclaration.setModifier(Modifiers.AccAbstract);
+        return typeDeclaration;
     }
+
+
+    @Override
+    public ASTNode visitTypedFieldDeclaration(TypedFieldDeclarationContext ctx) {
+        final Token type = ctx.ID().getSymbol();
+        return new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+    }
+
+    @Override
+    public ASTNode visitUntypedFieldDeclaration(UntypedFieldDeclarationContext ctx) {
+        final Token type = ctx.ID().getSymbol();
+        return new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+    }
+
+
+    @Override
+    public ASTNode visitImmutableTypeDeclaration(ImmutableTypeDeclarationContext ctx) {
+        final Token type = ctx.ID().getSymbol();
+        final TypeDeclaration typeDeclaration = new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+        final Block block = new Block();
+        final List<FieldDeclarationContext> fields = ctx.fieldDeclaration();
+        for (FieldDeclarationContext field : fields) {
+            block.addStatement(visit(field));
+        }
+        typeDeclaration.setBody(block);
+        return typeDeclaration;
+    }
+
+    @Override
+    public ASTNode visitImmutableSubTypeDeclaration(ImmutableSubTypeDeclarationContext ctx) {
+        final Token type = ctx.ID(0).getSymbol();
+        final TypeDeclaration typeDeclaration = new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+        final Token superType = ctx.ID(1).getSymbol();
+        final TypeReference typeReference = new TypeReference(start(superType), stop(superType), superType.getText());
+        typeDeclaration.addSuperClass(typeReference);
+        final Block block = new Block();
+        final List<FieldDeclarationContext> fields = ctx.fieldDeclaration();
+        for (FieldDeclarationContext field : fields) {
+            block.addStatement(visit(field));
+        }
+        typeDeclaration.setBody(block);
+        return typeDeclaration;
+    }
+
+    @Override
+    public ASTNode visitSubTypeDeclaration(SubTypeDeclarationContext ctx) {
+        final Token type = ctx.ID(0).getSymbol();
+        final TypeDeclaration typeDeclaration = new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+        final Token superType = ctx.ID(1).getSymbol();
+        final TypeReference typeReference = new TypeReference(start(superType), stop(superType), superType.getText());
+        typeDeclaration.addSuperClass(typeReference);
+        final Block block = new Block();
+        final List<FieldDeclarationContext> fields = ctx.fieldDeclaration();
+        for (FieldDeclarationContext field : fields) {
+            block.addStatement(visit(field));
+        }
+        typeDeclaration.setBody(block);
+        return typeDeclaration;
+    }
+
+    @Override
+    public ASTNode visitTypeDeclaration(TypeDeclarationContext ctx) {
+        final Token type = ctx.ID().getSymbol();
+        final TypeDeclaration typeDeclaration = new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+        final Block block = new Block();
+        final List<FieldDeclarationContext> fields = ctx.fieldDeclaration();
+        for (FieldDeclarationContext field : fields) {
+            block.addStatement(visit(field));
+        }
+        typeDeclaration.setBody(block);
+        return typeDeclaration;
+    }
+
+
 
     @Override
     public ASTNode visitAbstractSubtype(AbstractSubtypeContext ctx) {
         final Token type = ctx.ID(0).getSymbol();
         final TypeDeclaration typeDeclaration = new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+        typeDeclaration.setModifier(Modifiers.AccAbstract);
         final Token superType = ctx.ID(1).getSymbol();
         final TypeReference typeReference = new TypeReference(start(superType), stop(superType), superType.getText());
         typeDeclaration.addSuperClass(typeReference);
@@ -93,6 +178,14 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
         return methodDeclaration;
     }
 
+    @Override
+    public ASTNode visitGeneralFunctionDeclaration(GeneralFunctionDeclarationContext ctx) {
+        final Token name = ctx.ID().getSymbol();
+        final MethodDeclaration methodDeclaration = new MethodDeclaration(name.getText(), start(name), stop(name), start(ctx), stop(ctx));
+        final ASTNode arguments = visit(ctx.parameters());
+        methodDeclaration.acceptArguments(arguments.getChilds());
+        return methodDeclaration;
+    }
 
     @Override
     public ASTListNode visitPparameters(PparametersContext ctx) {
