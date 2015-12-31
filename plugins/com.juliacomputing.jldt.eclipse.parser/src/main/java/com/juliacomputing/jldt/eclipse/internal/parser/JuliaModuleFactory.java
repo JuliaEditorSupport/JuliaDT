@@ -46,6 +46,17 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     }
 
     @Override
+    public ASTNode visitModuleDeclaration(ModuleDeclarationContext ctx) {
+        ASTListNode statements = new ASTListNode();
+        final List<StatementContext> statementContexts = ctx.statement();
+        for (StatementContext statementContext : statementContexts) {
+            final ASTNode statement = visit(statementContext);
+            statements.addNode(statement);
+        }
+        return statements;
+    }
+
+    @Override
     public ASTNode visitAssign(AssignContext ctx) {
         final Expression lhs = (Expression) visit(ctx.exp(0));
         final Expression rhs = (Expression) visit(ctx.exp(1));
