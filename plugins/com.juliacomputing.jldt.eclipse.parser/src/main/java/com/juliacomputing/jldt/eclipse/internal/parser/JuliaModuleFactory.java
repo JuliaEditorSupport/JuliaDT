@@ -1,8 +1,10 @@
 package com.juliacomputing.jldt.eclipse.internal.parser;
 
 import com.juliacomputing.jldt.eclipse.ast.Operator;
+import com.juliacomputing.jldt.eclipse.ast.QualifiedName;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import org.eclipse.dltk.ast.ASTListNode;
 import org.eclipse.dltk.ast.ASTNode;
 import org.eclipse.dltk.ast.Modifiers;
@@ -18,6 +20,7 @@ import org.eclipse.dltk.ast.statements.Block;
 import org.julia.lang.parser.JuliaParser.*;
 import org.julia.lang.parser.JuliaParserBaseVisitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -61,6 +64,7 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
         final Token identifier = ctx.ID().getSymbol();
         return new VariableReference(start(identifier), stop(identifier), identifier.getText());
     }
+
 
     @Override
     public ASTNode visitAbstractType(AbstractTypeContext ctx) {
@@ -143,7 +147,6 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     }
 
 
-
     @Override
     public ASTNode visitAbstractSubtype(AbstractSubtypeContext ctx) {
         final Token type = ctx.ID(0).getSymbol();
@@ -161,6 +164,82 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     }
 
     @Override
+    public ASTNode visitUint8(Uint8Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitInt16(Int16Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitInt32(Int32Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitUint16(Uint16Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+
+    }
+
+    @Override
+    public ASTNode visitUint32(Uint32Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitInt64(Int64Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitUint64(Uint64Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitInt128(Int128Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitUint128(Uint128Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitBool(BoolContext ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitChar(CharContext ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitFloat16(Float16Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitFloat32(Float32Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitFloat64(Float64Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitFfloat32(Ffloat32Context ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+    @Override
     public ASTNode visitTtypeAlias(TtypeAliasContext ctx) {
         final Token alias = ctx.ID().getSymbol();
         final ASTNode type = visit(ctx.typeExpression());
@@ -171,17 +250,28 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitCompactFunctionDeclaration(CompactFunctionDeclarationContext ctx) {
-        final Token name = ctx.ID().getSymbol();
-        final MethodDeclaration methodDeclaration = new MethodDeclaration(name.getText(), start(name), stop(name), start(ctx), stop(ctx));
+        final QualifiedName qualifiedName = (QualifiedName) visit(ctx.name());
+        final MethodDeclaration methodDeclaration = new MethodDeclaration(qualifiedName.getText(), start(qualifiedName), stop(qualifiedName), start(ctx), stop(ctx));
         final ASTNode arguments = visit(ctx.parameters());
         methodDeclaration.acceptArguments(arguments.getChilds());
         return methodDeclaration;
     }
 
+
+    @Override
+    public ASTNode visitNname(NnameContext ctx) {
+        final List<String> entries = new ArrayList<>();
+        final List<TerminalNode> nodes = ctx.ID();
+        for (TerminalNode node : nodes) {
+            entries.add(node.getText());
+        }
+        return new QualifiedName(entries, start(ctx), stop(ctx));
+    }
+
     @Override
     public ASTNode visitGeneralFunctionDeclaration(GeneralFunctionDeclarationContext ctx) {
-        final Token name = ctx.ID().getSymbol();
-        final MethodDeclaration methodDeclaration = new MethodDeclaration(name.getText(), start(name), stop(name), start(ctx), stop(ctx));
+        final QualifiedName qualifiedName = (QualifiedName) visit(ctx.name());
+        final MethodDeclaration methodDeclaration = new MethodDeclaration(qualifiedName.getText(), start(qualifiedName), stop(qualifiedName), start(ctx), stop(ctx));
         final ASTNode arguments = visit(ctx.parameters());
         methodDeclaration.acceptArguments(arguments.getChilds());
         return methodDeclaration;
@@ -197,6 +287,7 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
         return arguments;
     }
 
+    //    todo reference type rather than name
     @Override
     public ASTNode visitNamedTypedParam(NamedTypedParamContext ctx) {
         final Token name = ctx.ID().getSymbol();
@@ -204,13 +295,20 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
         return new Argument(reference, start(ctx), stop(ctx), null, Modifiers.AccPublic);
     }
 
+    //    todo reference type rather than name
     @Override
     public ASTNode visitNamedParam(NamedParamContext ctx) {
         final Token name = ctx.ID().getSymbol();
         final SimpleReference reference = new SimpleReference(start(name), stop(name), name.getText());
-        final Argument argument = new Argument(reference, start(ctx), stop(ctx), null, Modifiers.AccPublic);
-        return argument;
+        return new Argument(reference, start(ctx), stop(ctx), null, Modifiers.AccPublic);
     }
+
+    @Override
+    public ASTNode visitAnonymousTypedParam(AnonymousTypedParamContext ctx) {
+        final ASTNode reference = visit(ctx.typeExpression());
+        return new Argument((SimpleReference) reference, start(ctx), stop(ctx), null, Modifiers.AccPublic);
+    }
+
 
     private int start(ASTNode node) {
         return node.start();

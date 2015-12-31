@@ -2,7 +2,9 @@ lexer grammar JuliaLexer;
 @header {
 package org.julia.lang.parser;
     }
+DOT                 : '.';
 EQ                  : '=';
+DOUBLE_ARROW        : '=>';
 ADD_ASGN            : '+=';
 SUB_ASGN            : '-=';
 TIMES_ASGN          : '*=';
@@ -90,6 +92,7 @@ CHAR                : 'Char';
 FLOAT16             : 'Float16';
 FLOAT32             : 'Float32';
 FLOAT64             : 'Float64';
+REGEX               : 'r' STRING;
 INT                 : DEC_DGT+;
 BINARY              : '0b'BIN_DGT+;
 OCTAL               : '0o'OCT_DGT+;

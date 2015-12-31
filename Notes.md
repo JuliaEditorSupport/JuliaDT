@@ -22,12 +22,10 @@
 
 #TODOs
 
-            <!--<launchConfigurationTypeImage icon="icons/obj16/julia_obj.gif"-->
-            <!--configTypeID="org.eclipse.dltk.julia.launch.JuliaRemoteLaunchConfigurationType"-->
-            <!--id="com.juliacomputing.jldt.eclipse.ui.launch.remoteLaunchConfigurationTypeImage">-->
-            <!--</launchConfigurationTypeImage>-->
 
 
+
+##
 julia workspace
 
 ~/julia
@@ -38,11 +36,3 @@ load_path
 Pkg.generate(<pkg name>)
 generates skeleton inside julia (~ dir)
 
-#Grammar Conflicts
-
-##:
-    1:n 
-    :n
-
-    
-    
