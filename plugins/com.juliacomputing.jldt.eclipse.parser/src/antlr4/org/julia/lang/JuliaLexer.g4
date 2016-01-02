@@ -2,7 +2,10 @@ lexer grammar JuliaLexer;
 @header {
 package org.julia.lang.parser;
     }
+AT                  : '@';
 DOT                 : '.';
+SEMI_COLON          : ';';
+EQUALS              : '==';
 EQ                  : '=';
 DOUBLE_ARROW        : '=>';
 ADD_ASGN            : '+=';
@@ -11,6 +14,7 @@ TIMES_ASGN          : '*=';
 DIVIDE_ASGN         : '/=';
 INV_DIVIDE_ASGN     :'\\=';
 REMAINDER_ASGN      : '%=';
+REM                 : '%';
 POWER_ASGN          : '^=';
 BITWISE_AND_ASGN    : '&=';
 BITWISE_OR_ASGN     : '|=';
@@ -20,6 +24,9 @@ ASR_ASGN            : '>>=';
 ELLIPSE             : '...';
 ASL_ASGN            : '<<=';
 QUESTION_MARK       : '?';
+WHILE               : 'while';
+BEGIN               : 'begin';
+RETURN              : 'return';
 IN                  : 'in';
 IF                  : 'if';
 ELSE_IF             : 'elseif';
@@ -56,8 +63,7 @@ NOT_EQUAL           : ('!='|'≠');
 GREATER_THAN        : '>';
 LESS_THAN           : '<';
 GREATER_THAN_OR_EQ  : '>=';
-LESS_THAN_OR_EQ     : '<=';
-EQUALS              : '==';
+LESS_THAN_OR_EQ     : '<='|'≤';
 NOT                 : '!';
 AND                 : '&&';
 OR                  : '||';
@@ -108,11 +114,18 @@ FLOAT64_LITERAL     : DEC_DGT+ [\.] DEC_DGT* EXP64?
 EXP64               : [e] [+\-]? DEC_DGT+;
 
 ID                  :   ('_'|UNi) ('_'|UNi|DEC_DGT)* '!'?;
-STRING              :   '"' ('""'|~'"')* '"' ; // quote-quote is an escaped quote
-WS                  :   [ \r\t\n]+ ->skip;
-//EOL_COMMENT     :   '#' .*? '\r'? '\n' -> skip ; // Match "//" stuff '\n'
-//COMMENT         :   '/*' .*? '*/' -> skip ; // Match "/*" stuff "*/"
 
+
+CHARACTER_LITERAL   :   '\'' (~'\'') '\'' ;
+
+STRING              :   '"' ('""'|~'"')* '"' ; // quote-quote is an escaped quote
+//EOL                 :   '\r\n'|'\r'|'\n';
+//WS                  :   [ \t]+ ->skip;
+
+WS                  :   [ \r\t\n]+ ->skip;
+//EOL                 :   '\r\n'|'\r'|'\n';
+
+COMMENT             :   '#=' .*? '=#' -> skip ;
 LINE_COMMENT        :   '#' ~[\r\n]* -> skip;
 
 fragment DEC_DGT    :   [0-9];

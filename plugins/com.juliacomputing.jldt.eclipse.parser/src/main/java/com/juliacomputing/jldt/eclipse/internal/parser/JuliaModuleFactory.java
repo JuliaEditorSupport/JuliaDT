@@ -56,12 +56,12 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
         return statements;
     }
 
-    @Override
-    public ASTNode visitAssign(AssignContext ctx) {
-        final Expression lhs = (Expression) visit(ctx.exp(0));
-        final Expression rhs = (Expression) visit(ctx.exp(1));
-        return new Operator("<-", start(ctx), stop(ctx), lhs, rhs);
-    }
+//    @Override
+//    public ASTNode visitAssign(AssignContext ctx) {
+//        final Expression lhs = (Expression) visit(ctx.exp(0));
+//        final Expression rhs = (Expression) visit(ctx.exp(1));
+//        return new Operator("<-", start(ctx), stop(ctx), lhs, rhs);
+//    }
 
     @Override
     public ASTNode visitPlus(PlusContext ctx) {
@@ -157,7 +157,6 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
         return typeDeclaration;
     }
 
-
     @Override
     public ASTNode visitAbstractSubtype(AbstractSubtypeContext ctx) {
         final Token type = ctx.ID(0).getSymbol();
@@ -251,9 +250,9 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     }
 
     @Override
-    public ASTNode visitTtypeAlias(TtypeAliasContext ctx) {
+    public ASTNode visitTypeAlias(TypeAliasContext ctx) {
         final Token alias = ctx.ID().getSymbol();
-        final ASTNode type = visit(ctx.typeExpression());
+        final ASTNode type = visit(ctx.exp());
         final TypeDeclaration typeDeclaration = new TypeDeclaration(ctx.ID().getText(), start(alias), stop(alias), start(ctx), stop(ctx));
         typeDeclaration.addSuperClass(type);
         return typeDeclaration;
@@ -270,6 +269,15 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
 
 
     @Override
+    public ASTNode visitGeneralFunctionDeclaration(GeneralFunctionDeclarationContext ctx) {
+        final QualifiedName qualifiedName = (QualifiedName) visit(ctx.name());
+        final MethodDeclaration methodDeclaration = new MethodDeclaration(qualifiedName.getText(), start(qualifiedName), stop(qualifiedName), start(ctx), stop(ctx));
+        final ASTNode arguments = visit(ctx.parameters());
+        methodDeclaration.acceptArguments(arguments.getChilds());
+        return methodDeclaration;
+    }
+
+    @Override
     public ASTNode visitNname(NnameContext ctx) {
         final List<String> entries = new ArrayList<>();
         final List<TerminalNode> nodes = ctx.ID();
@@ -277,15 +285,6 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
             entries.add(node.getText());
         }
         return new QualifiedName(entries, start(ctx), stop(ctx));
-    }
-
-    @Override
-    public ASTNode visitGeneralFunctionDeclaration(GeneralFunctionDeclarationContext ctx) {
-        final QualifiedName qualifiedName = (QualifiedName) visit(ctx.name());
-        final MethodDeclaration methodDeclaration = new MethodDeclaration(qualifiedName.getText(), start(qualifiedName), stop(qualifiedName), start(ctx), stop(ctx));
-        final ASTNode arguments = visit(ctx.parameters());
-        methodDeclaration.acceptArguments(arguments.getChilds());
-        return methodDeclaration;
     }
 
     @Override
@@ -316,8 +315,7 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitAnonymousTypedParam(AnonymousTypedParamContext ctx) {
-        final ASTNode reference = visit(ctx.typeExpression());
-        return new Argument((SimpleReference) reference, start(ctx), stop(ctx), null, Modifiers.AccPublic);
+        return new Argument(new SimpleReference(start(ctx), stop(ctx), ctx.exp().getText()), start(ctx), stop(ctx), null, Modifiers.AccPublic);
     }
 
 

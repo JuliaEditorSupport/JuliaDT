@@ -30,6 +30,6 @@ public class QualifiedName extends Expression {
     }
 
     public String getText() {
-        return entries.stream().collect(Collectors.joining(", "));
+        return entries.stream().collect(Collectors.joining("."));
     }
 }
