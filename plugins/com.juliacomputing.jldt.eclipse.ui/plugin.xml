@@ -19,7 +19,7 @@
                 class="org.eclipse.dltk.ui.wizards.GenericDLTKProjectWizard:com.juliacomputing.jldt.eclipse.core.nature"
                 icon="icons/new-proj-wiz.png"
                 id="com.juliacomputing.jldt.eclipse.newProjectWizard"
-                name="Julia Project"
+                name="Empty Julia Project"
                 preferredPerspectives="com.juliacomputing.jldt.eclipse.ui.JuliaPerspective"
                 project="true">
         </wizard>
