@@ -20,6 +20,17 @@ Julia Development Toolkit for Eclipse
     cd <installation directory>
     unzip jldt.product-<platform>.zip
     launch
+
+#To Install
+
+## As Eclipse plugin
+    
+    Update Site/Repository (url tbc)
+
+## As Standalone Application    
+    
+    url tbc
+  
   
 #To Do    
     
@@ -27,14 +38,5 @@ Julia Development Toolkit for Eclipse
 2. Julia Project/Package wizard (.git source and test drectories)
 3. Syntax colouring extension (operators ...brackets?)
 
-#To Install
-
-## As Eclipse pluginhange 
-    
-    Update Site/Repository (url tbc)
-
-## As Standalone Application    
-    
-    url tbc
  
  
