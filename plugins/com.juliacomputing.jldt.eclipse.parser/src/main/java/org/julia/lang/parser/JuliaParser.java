@@ -2,17 +2,14 @@
 
 package org.julia.lang.parser;
 
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.ParserATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.tree.ParseTreeListener;
-import org.antlr.v4.runtime.tree.ParseTreeVisitor;
-import org.antlr.v4.runtime.tree.TerminalNode;
-
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
+import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class JuliaParser extends Parser {
@@ -422,7 +419,7 @@ public class JuliaParser extends Parser {
 				_la = _input.LA(1);
 				do {
 					{
-						setState(30);
+				setState(30);
 						switch (_input.LA(1)) {
 							case INCLUDE:
 							case USING:
@@ -430,10 +427,11 @@ public class JuliaParser extends Parser {
 							case IMPORT_ALL:
 							case EXPORT:
 							case MODULE:
-							case BAREMODULE: {
-								setState(28);
-								moduleDirective();
-							}
+							case BAREMODULE:
+					{
+						setState(28);
+						moduleDirective();
+					}
 							break;
 							case WHILE:
 							case BEGIN:
@@ -496,7 +494,7 @@ public class JuliaParser extends Parser {
 							break;
 							default:
 								throw new NoViableAltException(this);
-						}
+				}
 					}
 					setState(32);
 					_errHandler.sync(this);
@@ -619,13 +617,13 @@ public class JuliaParser extends Parser {
 								setState(51);
 								match(COMMA);
 								setState(52);
-								match(ID);
+					match(ID);
 							}
 						}
 						setState(57);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					}
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 				}
 				break;
 				case IMPORT_ALL:
@@ -655,13 +653,13 @@ public class JuliaParser extends Parser {
 								setState(62);
 								match(COMMA);
 								setState(63);
-								match(ID);
+					match(ID);
 							}
 						}
 						setState(68);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					}
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 				}
 				break;
 				case MODULE:
@@ -681,7 +679,7 @@ public class JuliaParser extends Parser {
 								{
 									setState(71);
 									statement();
-								}
+						}
 							}
 							break;
 							default:
@@ -712,7 +710,7 @@ public class JuliaParser extends Parser {
 								{
 									setState(80);
 									statement();
-								}
+						}
 							}
 							break;
 							default:
@@ -816,31 +814,31 @@ public class JuliaParser extends Parser {
 										setState(100);
 										match(LEFT_SQUARE);
 										setState(106);
-										_errHandler.sync(this);
+						_errHandler.sync(this);
 										_alt = getInterpreter().adaptivePredict(_input, 8, _ctx);
 										while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
 											if (_alt == 1) {
-												{
-													{
-														setState(101);
-														exp(0);
-														setState(102);
-														match(COMMA);
-													}
-												}
-											}
+								{
+								{
+									setState(101);
+									exp(0);
+									setState(102);
+									match(COMMA);
+								}
+								}
+							}
 											setState(108);
-											_errHandler.sync(this);
+							_errHandler.sync(this);
 											_alt = getInterpreter().adaptivePredict(_input, 8, _ctx);
-										}
+						}
 										setState(110);
-										_la = _input.LA(1);
+						_la = _input.LA(1);
 										if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BEGIN) | (1L << RETURN) | (1L << IF) | (1L << CONST) | (1L << COLON) | (1L << END) | (1L << INF16) | (1L << INF32) | (1L << INF) | (1L << MINUS_INF16) | (1L << MINUS_INF32) | (1L << MINUS_INF) | (1L << NAN16) | (1L << NAN32) | (1L << NAN) | (1L << MINUS) | (1L << NOT))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (LEFT_BRACKET - 66)) | (1L << (TRUE - 66)) | (1L << (FALSE - 66)) | (1L << (UNION - 66)) | (1L << (LEFT_SQUARE - 66)) | (1L << (INT8 - 66)) | (1L << (UINT8 - 66)) | (1L << (INT16 - 66)) | (1L << (UINT16 - 66)) | (1L << (INT32 - 66)) | (1L << (UINT32 - 66)) | (1L << (INT64 - 66)) | (1L << (UINT64 - 66)) | (1L << (INT128 - 66)) | (1L << (UINT128 - 66)) | (1L << (BOOL - 66)) | (1L << (CHAR - 66)) | (1L << (FLOAT16 - 66)) | (1L << (FLOAT32 - 66)) | (1L << (FLOAT64 - 66)) | (1L << (REGEX - 66)) | (1L << (INT - 66)) | (1L << (BINARY - 66)) | (1L << (OCTAL - 66)) | (1L << (HEX - 66)) | (1L << (FLOAT32_LITERAL - 66)) | (1L << (FLOAT64_LITERAL - 66)) | (1L << (ID - 66)) | (1L << (CHARACTER_LITERAL - 66)) | (1L << (STRING - 66)))) != 0)) {
-											{
-												setState(109);
-												exp(0);
-											}
-										}
+							{
+								setState(109);
+								exp(0);
+							}
+						}
 
 										setState(112);
 										match(RIGHT_SQUARE);
@@ -849,7 +847,7 @@ public class JuliaParser extends Parser {
 								break;
 								default:
 									throw new NoViableAltException(this);
-							}
+					}
 							setState(115);
 							_errHandler.sync(this);
 							_alt = getInterpreter().adaptivePredict(_input, 10, _ctx);
@@ -873,7 +871,7 @@ public class JuliaParser extends Parser {
 								setState(118);
 								match(ID);
 							}
-							break;
+					break;
 							case LEFT_BRACKET: {
 								setState(119);
 								match(LEFT_BRACKET);
@@ -881,8 +879,8 @@ public class JuliaParser extends Parser {
 								exp(0);
 								setState(121);
 								match(RIGHT_BRACKET);
-							}
-							break;
+					}
+					break;
 							default:
 								throw new NoViableAltException(this);
 						}
@@ -935,13 +933,13 @@ public class JuliaParser extends Parser {
 									_alt = getInterpreter().adaptivePredict(_input, 13, _ctx);
 									while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
 										if (_alt == 1) {
-											{
-												{
-													setState(136);
-													statement();
-												}
-											}
-										}
+							{
+								{
+									setState(136);
+									statement();
+							}
+							}
+						}
 										setState(141);
 										_errHandler.sync(this);
 										_alt = getInterpreter().adaptivePredict(_input, 13, _ctx);
@@ -963,13 +961,13 @@ public class JuliaParser extends Parser {
 								_alt = getInterpreter().adaptivePredict(_input, 15, _ctx);
 								while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
 									if (_alt == 1) {
-										{
-											{
-												setState(148);
-												statement();
-											}
-										}
-									}
+							{
+								{
+									setState(148);
+									statement();
+							}
+							}
+						}
 									setState(153);
 									_errHandler.sync(this);
 									_alt = getInterpreter().adaptivePredict(_input, 15, _ctx);
@@ -1005,7 +1003,7 @@ public class JuliaParser extends Parser {
 							{
 								setState(163);
 								typeParameters();
-							}
+					}
 						}
 
 						setState(166);
@@ -1025,16 +1023,16 @@ public class JuliaParser extends Parser {
 												exp(0);
 												setState(168);
 												match(COMMA);
-											}
-										}
+							}
+							}
 									}
 									setState(174);
 									_errHandler.sync(this);
 									_alt = getInterpreter().adaptivePredict(_input, 18, _ctx);
-								}
+					}
 								setState(175);
 								exp(0);
-							}
+					}
 						}
 
 						setState(178);
@@ -1057,31 +1055,31 @@ public class JuliaParser extends Parser {
 										setState(181);
 										match(LEFT_SQUARE);
 										setState(187);
-										_errHandler.sync(this);
+						_errHandler.sync(this);
 										_alt = getInterpreter().adaptivePredict(_input, 20, _ctx);
 										while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
 											if (_alt == 1) {
-												{
-													{
-														setState(182);
-														exp(0);
-														setState(183);
-														match(COMMA);
-													}
-												}
-											}
+								{
+									{
+										setState(182);
+										exp(0);
+										setState(183);
+										match(COMMA);
+								}
+								}
+							}
 											setState(189);
-											_errHandler.sync(this);
+							_errHandler.sync(this);
 											_alt = getInterpreter().adaptivePredict(_input, 20, _ctx);
-										}
+						}
 										setState(191);
-										_la = _input.LA(1);
+						_la = _input.LA(1);
 										if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BEGIN) | (1L << RETURN) | (1L << IF) | (1L << CONST) | (1L << COLON) | (1L << END) | (1L << INF16) | (1L << INF32) | (1L << INF) | (1L << MINUS_INF16) | (1L << MINUS_INF32) | (1L << MINUS_INF) | (1L << NAN16) | (1L << NAN32) | (1L << NAN) | (1L << MINUS) | (1L << NOT))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (LEFT_BRACKET - 66)) | (1L << (TRUE - 66)) | (1L << (FALSE - 66)) | (1L << (UNION - 66)) | (1L << (LEFT_SQUARE - 66)) | (1L << (INT8 - 66)) | (1L << (UINT8 - 66)) | (1L << (INT16 - 66)) | (1L << (UINT16 - 66)) | (1L << (INT32 - 66)) | (1L << (UINT32 - 66)) | (1L << (INT64 - 66)) | (1L << (UINT64 - 66)) | (1L << (INT128 - 66)) | (1L << (UINT128 - 66)) | (1L << (BOOL - 66)) | (1L << (CHAR - 66)) | (1L << (FLOAT16 - 66)) | (1L << (FLOAT32 - 66)) | (1L << (FLOAT64 - 66)) | (1L << (REGEX - 66)) | (1L << (INT - 66)) | (1L << (BINARY - 66)) | (1L << (OCTAL - 66)) | (1L << (HEX - 66)) | (1L << (FLOAT32_LITERAL - 66)) | (1L << (FLOAT64_LITERAL - 66)) | (1L << (ID - 66)) | (1L << (CHARACTER_LITERAL - 66)) | (1L << (STRING - 66)))) != 0)) {
-											{
-												setState(190);
-												exp(0);
-											}
-										}
+							{
+								setState(190);
+								exp(0);
+							}
+						}
 
 										setState(193);
 										match(RIGHT_SQUARE);
@@ -1090,7 +1088,7 @@ public class JuliaParser extends Parser {
 								break;
 								default:
 									throw new NoViableAltException(this);
-							}
+					}
 							setState(196);
 							_errHandler.sync(this);
 							_alt = getInterpreter().adaptivePredict(_input, 22, _ctx);
@@ -1131,7 +1129,7 @@ public class JuliaParser extends Parser {
 								break;
 								default:
 									throw new NoViableAltException(this);
-							}
+					}
 							setState(208);
 							_errHandler.sync(this);
 							_alt = getInterpreter().adaptivePredict(_input, 23, _ctx);
@@ -1282,8 +1280,8 @@ public class JuliaParser extends Parser {
 									match(COMMA);
 									setState(232);
 									exp(0);
-								}
-							}
+					}
+					}
 							setState(237);
 							_errHandler.sync(this);
 							_la = _input.LA(1);
@@ -1312,12 +1310,12 @@ public class JuliaParser extends Parser {
 									match(COMMA);
 									setState(244);
 									exp(0);
-								}
-							}
+					}
+					}
 							setState(249);
 							_errHandler.sync(this);
 							_la = _input.LA(1);
-						}
+				}
 						setState(250);
 						match(RIGHT_CURLY);
 					}
@@ -1528,17 +1526,17 @@ public class JuliaParser extends Parser {
 						{
 							setState(392);
 							switch (getInterpreter().adaptivePredict(_input, 27, _ctx)) {
-								case 1: {
-									_localctx = new TypedExpressionContext(new ExpContext(_parentctx, _parentState));
-									pushNewRecursionContext(_localctx, _startState, RULE_exp);
-									setState(279);
-									if (!(precpred(_ctx, 88)))
-										throw new FailedPredicateException(this, "precpred(_ctx, 88)");
-									setState(280);
-									match(INSTANCE_OF);
-									setState(281);
-									exp(89);
-								}
+								case 1:
+						{
+							_localctx = new TypedExpressionContext(new ExpContext(_parentctx, _parentState));
+							pushNewRecursionContext(_localctx, _startState, RULE_exp);
+							setState(279);
+							if (!(precpred(_ctx, 88))) throw new FailedPredicateException(this, "precpred(_ctx, 88)");
+							setState(280);
+							match(INSTANCE_OF);
+							setState(281);
+							exp(89);
+						}
 								break;
 								case 2: {
 									_localctx = new ExponentContext(new ExpContext(_parentctx, _parentState));
@@ -1974,13 +1972,13 @@ public class JuliaParser extends Parser {
 									match(ELLIPSE);
 								}
 								break;
-							}
-						}
 					}
+						}
+				}
 					setState(396);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input, 28, _ctx);
-				}
+			}
 			}
 		} catch (RecognitionException re) {
 			_localctx.exception = re;
@@ -2012,7 +2010,7 @@ public class JuliaParser extends Parser {
 						{
 							setState(398);
 							typeParameters();
-						}
+					}
 					}
 
 					setState(401);
@@ -2047,18 +2045,19 @@ public class JuliaParser extends Parser {
 					_alt = 1;
 					do {
 						switch (_alt) {
-							case 1: {
-								{
-									setState(411);
-									statement();
-								}
-							}
+							case 1:
+						{
+							{
+								setState(411);
+								statement();
+						}
+						}
 							break;
 							default:
 								throw new NoViableAltException(this);
-						}
+					}
 						setState(414);
-						_errHandler.sync(this);
+					_errHandler.sync(this);
 						_alt = getInterpreter().adaptivePredict(_input, 31, _ctx);
 					} while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER);
 					setState(416);
@@ -2096,20 +2095,20 @@ public class JuliaParser extends Parser {
 						parameter();
 						setState(426);
 						_errHandler.sync(this);
-						_la = _input.LA(1);
+				_la = _input.LA(1);
 						while (_la == COMMA) {
-							{
-								{
-									setState(422);
-									match(COMMA);
-									setState(423);
-									parameter();
-								}
-							}
+					{
+						{
+							setState(422);
+							match(COMMA);
+							setState(423);
+							parameter();
+					}
+					}
 							setState(428);
 							_errHandler.sync(this);
 							_la = _input.LA(1);
-						}
+				}
 					}
 				}
 
@@ -2119,7 +2118,7 @@ public class JuliaParser extends Parser {
 					{
 						setState(431);
 						match(ELLIPSE);
-					}
+				}
 				}
 
 				setState(434);
@@ -2204,7 +2203,7 @@ public class JuliaParser extends Parser {
 						{
 							setState(446);
 							typeParameters();
-						}
+					}
 					}
 
 					setState(449);
@@ -2277,7 +2276,7 @@ public class JuliaParser extends Parser {
 						{
 							setState(466);
 							typeParameters();
-						}
+					}
 					}
 
 					setState(469);
@@ -2298,15 +2297,15 @@ public class JuliaParser extends Parser {
 					_alt = getInterpreter().adaptivePredict(_input, 40, _ctx);
 					while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
 						if (_alt == 1) {
+						{
 							{
-								{
-									setState(474);
-									fieldDeclaration();
-								}
-							}
+								setState(474);
+								fieldDeclaration();
 						}
+						}
+					}
 						setState(479);
-						_errHandler.sync(this);
+					_errHandler.sync(this);
 						_alt = getInterpreter().adaptivePredict(_input, 40, _ctx);
 					}
 					setState(483);
@@ -2317,12 +2316,12 @@ public class JuliaParser extends Parser {
 							{
 								setState(480);
 								functionDeclaration();
-							}
+					}
 						}
 						setState(485);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					}
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 					setState(486);
 					match(END);
 				}
@@ -2349,15 +2348,15 @@ public class JuliaParser extends Parser {
 					_alt = getInterpreter().adaptivePredict(_input, 43, _ctx);
 					while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
 						if (_alt == 1) {
+						{
 							{
-								{
-									setState(492);
-									fieldDeclaration();
-								}
-							}
+								setState(492);
+								fieldDeclaration();
 						}
+						}
+					}
 						setState(497);
-						_errHandler.sync(this);
+					_errHandler.sync(this);
 						_alt = getInterpreter().adaptivePredict(_input, 43, _ctx);
 					}
 					setState(501);
@@ -2368,12 +2367,12 @@ public class JuliaParser extends Parser {
 							{
 								setState(498);
 								functionDeclaration();
-							}
+					}
 						}
 						setState(503);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					}
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 					setState(504);
 					match(END);
 				}
@@ -2400,15 +2399,15 @@ public class JuliaParser extends Parser {
 					_alt = getInterpreter().adaptivePredict(_input, 46, _ctx);
 					while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
 						if (_alt == 1) {
+						{
 							{
-								{
-									setState(510);
-									fieldDeclaration();
-								}
-							}
+								setState(510);
+								fieldDeclaration();
 						}
+						}
+					}
 						setState(515);
-						_errHandler.sync(this);
+					_errHandler.sync(this);
 						_alt = getInterpreter().adaptivePredict(_input, 46, _ctx);
 					}
 					setState(519);
@@ -2419,12 +2418,12 @@ public class JuliaParser extends Parser {
 							{
 								setState(516);
 								functionDeclaration();
-							}
+					}
 						}
 						setState(521);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					}
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 					setState(522);
 					match(END);
 				}
@@ -2443,7 +2442,7 @@ public class JuliaParser extends Parser {
 						{
 							setState(525);
 							typeParameters();
-						}
+					}
 					}
 
 					setState(528);
@@ -2464,15 +2463,15 @@ public class JuliaParser extends Parser {
 					_alt = getInterpreter().adaptivePredict(_input, 50, _ctx);
 					while (_alt != 2 && _alt != org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER) {
 						if (_alt == 1) {
+						{
 							{
-								{
-									setState(533);
-									fieldDeclaration();
-								}
-							}
+								setState(533);
+								fieldDeclaration();
 						}
+						}
+					}
 						setState(538);
-						_errHandler.sync(this);
+					_errHandler.sync(this);
 						_alt = getInterpreter().adaptivePredict(_input, 50, _ctx);
 					}
 					setState(542);
@@ -2483,12 +2482,12 @@ public class JuliaParser extends Parser {
 							{
 								setState(539);
 								functionDeclaration();
-							}
+					}
 						}
 						setState(544);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					}
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 					setState(545);
 					match(END);
 				}
@@ -2562,13 +2561,13 @@ public class JuliaParser extends Parser {
 							setState(556);
 							match(COMMA);
 							setState(557);
-							typeParameter();
+				typeParameter();
 						}
 					}
 					setState(562);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 				setState(563);
 				match(RIGHT_CURLY);
 			}
@@ -2661,7 +2660,7 @@ public class JuliaParser extends Parser {
 								{
 									setState(579);
 									statement();
-								}
+						}
 							}
 							break;
 							default:
@@ -2704,7 +2703,7 @@ public class JuliaParser extends Parser {
 								{
 									setState(594);
 									statement();
-								}
+						}
 							}
 							break;
 							default:
@@ -2739,7 +2738,7 @@ public class JuliaParser extends Parser {
 								{
 									setState(605);
 									statement();
-								}
+						}
 							}
 							break;
 							default:
@@ -2784,7 +2783,7 @@ public class JuliaParser extends Parser {
 							{
 								setState(616);
 								statement();
-							}
+					}
 						}
 						break;
 						default:
@@ -2828,13 +2827,13 @@ public class JuliaParser extends Parser {
 								match(DOT);
 								setState(625);
 								match(ID);
-							}
-						}
 					}
+						}
+				}
 					setState(630);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input, 61, _ctx);
-				}
+			}
 			}
 		} catch (RecognitionException re) {
 			_localctx.exception = re;
@@ -2959,17 +2958,14 @@ public class JuliaParser extends Parser {
 		public int getRuleIndex() {
 			return RULE_unit;
 		}
-
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterUnit(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitUnit(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3007,17 +3003,14 @@ public class JuliaParser extends Parser {
 		public int getRuleIndex() {
 			return RULE_statement;
 		}
-
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterStatement(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitStatement(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3069,12 +3062,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInclude(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInclude(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3100,12 +3091,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterUsing(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitUsing(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3147,12 +3136,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterImportt(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitImportt(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3191,13 +3178,11 @@ public class JuliaParser extends Parser {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).enterBareModuleDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).exitBareModuleDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3223,12 +3208,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterImportAll(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitImportAll(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3266,12 +3249,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterExport(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitExport(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3309,12 +3290,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterModuleDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitModuleDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3354,12 +3333,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTt(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTt(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor) return ((JuliaParserVisitor<? extends T>) visitor).visitTt(this);
@@ -3380,12 +3357,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterOctal(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitOctal(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3411,12 +3386,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterSymbol(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitSymbol(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3438,12 +3411,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNan32(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNan32(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3477,12 +3448,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterConstant(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitConstant(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3516,12 +3485,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTernaryConditional(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTernaryConditional(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3571,12 +3538,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterApplyFunction(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitApplyFunction(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3606,12 +3571,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterBitwiseXorAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitBitwiseXorAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3637,12 +3600,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterReturnExp(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitReturnExp(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3672,12 +3633,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterLSRAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitLSRAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3723,12 +3682,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterCoeffient(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitCoeffient(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3758,12 +3715,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInvDivexpeAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInvDivexpeAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3785,12 +3740,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInt64(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInt64(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3812,12 +3765,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInt8(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInt8(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3839,12 +3790,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInt128(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInt128(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3874,12 +3823,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterDivexpeAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitDivexpeAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3909,12 +3856,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterBlock(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitBlock(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3936,12 +3881,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterHex(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitHex(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3963,12 +3906,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNan(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNan(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -3990,12 +3931,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterUint32(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitUint32(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4037,12 +3976,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterEnumeration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitEnumeration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4064,12 +4001,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterFfloat32(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitFfloat32(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4099,12 +4034,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterExponent(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitExponent(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4134,12 +4067,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterGreaterThan(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitGreaterThan(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4169,12 +4100,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterBitwiseAndAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitBitwiseAndAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4196,12 +4125,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterIdentifier(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitIdentifier(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4223,12 +4150,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInf32Type(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInf32Type(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4258,12 +4183,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterImplicitTuple(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitImplicitTuple(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4285,12 +4208,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterQualifiedName(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitQualifiedName(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4320,12 +4241,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNotEqual(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNotEqual(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4351,12 +4270,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTbc1(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTbc1(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4386,12 +4303,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterASRAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitASRAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4421,12 +4336,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterPlus(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitPlus(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4448,12 +4361,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInt16(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInt16(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4483,12 +4394,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterGreaterThanOrEqual(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitGreaterThanOrEqual(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4518,12 +4427,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterBitwiseOrAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitBitwiseOrAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4545,12 +4452,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterRegex(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitRegex(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4572,12 +4477,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterUint128(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitUint128(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4599,12 +4502,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterMinusInf32(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitMinusInf32(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4626,12 +4527,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterBinary(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitBinary(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4661,12 +4560,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterLessThanOrEqual(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitLessThanOrEqual(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4696,12 +4593,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterASLAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitASLAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4727,12 +4622,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterUnaryMinus(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitUnaryMinus(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4762,12 +4655,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterAddAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitAddAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4789,12 +4680,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterUint64(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitUint64(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4816,12 +4705,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNan16(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNan16(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4843,12 +4730,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterUint8(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitUint8(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4894,12 +4779,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterUnionType(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitUnionType(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4921,12 +4804,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterFf(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitFf(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor) return ((JuliaParserVisitor<? extends T>) visitor).visitFf(this);
@@ -4955,12 +4836,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterMinus(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitMinus(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -4982,12 +4861,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterCharaacter(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitCharaacter(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5009,12 +4886,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterBool(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitBool(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5036,12 +4911,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterString(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitString(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5071,12 +4944,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTimesAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTimesAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5106,12 +4977,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterRange(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitRange(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5133,12 +5002,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterFloat64(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitFloat64(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5168,12 +5035,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterMinusAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitMinusAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5203,12 +5068,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterRemainderAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitRemainderAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5230,12 +5093,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterFloat16(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitFloat16(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5269,12 +5130,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTuple(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTuple(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5300,12 +5159,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNot(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNot(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5335,12 +5192,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTimes(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTimes(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5370,12 +5225,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterSubtype(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitSubtype(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5405,12 +5258,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterAnd(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitAnd(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5440,12 +5291,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterLessThan(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitLessThan(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5467,12 +5316,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterEnd(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitEnd(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5502,12 +5349,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterDivide(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitDivide(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5537,12 +5382,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterPowerAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitPowerAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5564,12 +5407,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterUint16(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitUint16(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5591,12 +5432,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInf(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInf(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5650,12 +5489,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNaryConditional(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNaryConditional(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5685,12 +5522,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterChain(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitChain(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5720,12 +5555,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterOr(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitOr(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor) return ((JuliaParserVisitor<? extends T>) visitor).visitOr(this);
@@ -5770,12 +5603,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterParametricType(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitParametricType(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5797,12 +5628,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterFloat32(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitFloat32(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5824,12 +5653,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInf16Type(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInf16Type(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5851,12 +5678,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInt(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInt(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5886,12 +5711,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTypedExpression(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTypedExpression(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5921,12 +5744,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterPair(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitPair(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5956,12 +5777,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterFraction(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitFraction(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -5983,12 +5802,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterMinusInf16(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitMinusInf16(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6010,12 +5827,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInt32(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInt32(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6045,12 +5860,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterEquals(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitEquals(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6072,12 +5885,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterChar(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitChar(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6099,12 +5910,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterMinusInf(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitMinusInf(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6150,12 +5959,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterArrayIndex(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitArrayIndex(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6177,12 +5984,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterFfloat64(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitFfloat64(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6212,12 +6017,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterRemainder(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitRemainder(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6239,12 +6042,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterReturn(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitReturn(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6274,12 +6075,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterBracketed(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitBracketed(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6309,12 +6108,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterAssign(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitAssign(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6371,13 +6168,11 @@ public class JuliaParser extends Parser {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).enterCompactFunctionDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).exitCompactFunctionDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6424,13 +6219,11 @@ public class JuliaParser extends Parser {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).enterGeneralFunctionDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).exitGeneralFunctionDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6494,12 +6287,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterPparameters(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitPparameters(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6547,12 +6338,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNamedTypedParam(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNamedTypedParam(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6579,12 +6368,10 @@ public class JuliaParser extends Parser {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).enterAnonymousTypedParam(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitAnonymousTypedParam(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6606,12 +6393,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNamedParam(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNamedParam(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6680,13 +6465,11 @@ public class JuliaParser extends Parser {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).enterImmutableTypeDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).exitImmutableTypeDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6712,12 +6495,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterAbstractType(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitAbstractType(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6780,13 +6561,11 @@ public class JuliaParser extends Parser {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).enterImmutableSubTypeDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).exitImmutableSubTypeDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6824,12 +6603,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterBitsSubtype(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitBitsSubtype(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6879,12 +6656,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTypeDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTypeDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6918,12 +6693,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTypeAlias(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTypeAlias(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6953,12 +6726,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterBitsTtype(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitBitsTtype(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -6992,12 +6763,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterAbstractSubtype(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitAbstractSubtype(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7059,12 +6828,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterSubTypeDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitSubTypeDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7105,13 +6872,11 @@ public class JuliaParser extends Parser {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).enterUntypedFieldDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).exitUntypedFieldDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7142,13 +6907,11 @@ public class JuliaParser extends Parser {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).enterTypedFieldDeclaration(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener)
 				((JuliaParserListener) listener).exitTypedFieldDeclaration(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7208,12 +6971,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterTtypeParameters(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitTtypeParameters(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7257,12 +7018,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterInstance(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitInstance(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7284,12 +7043,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterExpression(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitExpression(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7319,12 +7076,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNamedSubtype(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNamedSubtype(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7392,12 +7147,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterForEq(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitForEq(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7451,12 +7204,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterForEqStep(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitForEqStep(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7502,12 +7253,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterForIn(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitForIn(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7545,17 +7294,14 @@ public class JuliaParser extends Parser {
 		public int getRuleIndex() {
 			return RULE_whileStatement;
 		}
-
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterWhileStatement(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitWhileStatement(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
@@ -7607,12 +7353,10 @@ public class JuliaParser extends Parser {
 		public void enterRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).enterNname(this);
 		}
-
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if (listener instanceof JuliaParserListener) ((JuliaParserListener) listener).exitNname(this);
 		}
-
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if (visitor instanceof JuliaParserVisitor)
