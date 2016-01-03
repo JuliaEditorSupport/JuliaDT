@@ -11,16 +11,18 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.*;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.text.formatter.IContentFormatter;
+import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.information.IInformationPresenter;
 import org.eclipse.jface.text.information.IInformationProvider;
 import org.eclipse.jface.text.information.InformationPresenter;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
+import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.ITextEditor;
 
 public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfiguration {
@@ -36,7 +38,7 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
     }
 
     public String[] getIndentPrefixes(ISourceViewer sourceViewer, String contentType) {
-        return new String[]{"\t", "        "};
+        return new String[]{"\t", "  "};
     }
 
     protected ContentAssistPreference getContentAssistPreference() {
@@ -86,10 +88,6 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
         assistant.setContentAssistProcessor(scriptProcessor, IDocument.DEFAULT_CONTENT_TYPE);
     }
 
-    public IAutoEditStrategy[] getAutoEditStrategies(final ISourceViewer sourceViewer, String contentType) {
-        return new IAutoEditStrategy[]{new JuliaAutoIndent()};
-    }
-
 
     public IInformationPresenter getHierarchyPresenter(
             ScriptSourceViewer sourceViewer, boolean doCodeResolve) {
@@ -116,14 +114,69 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
 
     private IInformationControlCreator getHierarchyPresenterControlCreator(
             ISourceViewer sourceViewer) {
-        return new IInformationControlCreator() {
-            public IInformationControl createInformationControl(Shell parent) {
-                int shellStyle = SWT.RESIZE;
-                int treeStyle = SWT.V_SCROLL | SWT.H_SCROLL;
-                return new JuliaHierarchyInformationControl(parent, shellStyle,
-                        treeStyle);
-            }
+        return parent -> {
+            int shellStyle = SWT.RESIZE;
+            int treeStyle = SWT.V_SCROLL | SWT.H_SCROLL;
+            return new JuliaHierarchyInformationControl(parent, shellStyle,
+                    treeStyle);
         };
+    }
+
+
+    public IAutoEditStrategy[] getAutoEditStrategies(final ISourceViewer sourceViewer, String contentType) {
+        return new IAutoEditStrategy[]{new JuliaAutoIndent()};
+    }
+
+    public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
+        return null;
+    }
+
+    public IAnnotationHover getOverviewRulerAnnotationHover(
+            ISourceViewer sourceViewer) {
+        return null;
+    }
+
+    public int[] getConfiguredTextHoverStateMasks(ISourceViewer sourceViewer,
+                                                  String contentType) {
+        return null;
+    }
+
+    public ITextHover getTextHover(ISourceViewer sourceViewer,
+                                   String contentType, int stateMask) {
+        return null;
+    }
+
+    public ITextHover getTextHover(ISourceViewer sourceViewer,
+                                   String contentType) {
+        return null;
+    }
+
+    public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
+        return null;
+    }
+
+    public IInformationControlCreator getInformationControlCreator(
+            ISourceViewer sourceViewer) {
+        return null;
+    }
+
+    public IInformationPresenter getInformationPresenter(
+            ISourceViewer sourceViewer) {
+        return null;
+    }
+
+    public IInformationPresenter getOutlinePresenter(
+            ISourceViewer sourceViewer, boolean doCodeResolve) {
+        return null;
+    }
+
+    public IInformationPresenter getHierarchyPresenter(
+            ISourceViewer sourceViewer, boolean doCodeResolve) {
+        return null;
+    }
+
+    public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
+        return null;
     }
 
 }

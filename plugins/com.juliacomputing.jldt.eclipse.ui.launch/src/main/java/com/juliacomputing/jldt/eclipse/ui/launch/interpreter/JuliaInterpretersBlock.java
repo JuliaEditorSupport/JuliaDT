@@ -13,8 +13,8 @@ public class JuliaInterpretersBlock extends InterpretersBlock {
     @Override
     protected IScriptInterpreterDialog createInterpreterDialog(IEnvironment environment, IInterpreterInstall standin) {
         AddJuliaInterpreterDialog dialog = new AddJuliaInterpreterDialog(
-                this, this.getShell(), ScriptRuntime
-                .getInterpreterInstallTypes(this.getCurrentNature()), environment,
+                this, getShell(), ScriptRuntime
+                .getInterpreterInstallTypes(getCurrentNature()), environment,
                 standin);
         dialog.setEnvironment(environment);
         return dialog;

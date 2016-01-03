@@ -9,12 +9,12 @@ public class JuliaEditorPreferencesPage extends AbstractConfigurationBlockPrefer
 
     @Override
     protected void setDescription() {
-        this.setDescription("Julia Editor preferences");
+        setDescription("Julia Editor preferences");
     }
 
     @Override
     protected void setPreferenceStore() {
-        this.setPreferenceStore(JuliaEditorPlugin.getDefault().getPreferenceStore());
+        setPreferenceStore(JuliaEditorPlugin.getDefault().getPreferenceStore());
     }
 
     @Override

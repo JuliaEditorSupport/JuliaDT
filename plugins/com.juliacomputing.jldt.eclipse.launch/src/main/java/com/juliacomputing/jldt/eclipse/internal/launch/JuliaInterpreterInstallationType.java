@@ -4,6 +4,7 @@ import com.juliacomputing.jldt.eclipse.core.JuliaNature;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.core.environment.IDeployment;
 import org.eclipse.dltk.core.environment.IFileHandle;
 import org.eclipse.dltk.internal.launching.AbstractInterpreterInstallType;
@@ -11,6 +12,7 @@ import org.eclipse.dltk.launching.EnvironmentVariable;
 import org.eclipse.dltk.launching.IInterpreterInstall;
 import org.eclipse.dltk.launching.LibraryLocation;
 
+import java.io.File;
 import java.io.IOException;
 
 public class JuliaInterpreterInstallationType extends AbstractInterpreterInstallType {
@@ -48,5 +50,11 @@ public class JuliaInterpreterInstallationType extends AbstractInterpreterInstall
 
     protected ILog getLog() {
         return JuliaLaunchPlugin.getDefault().getLog();
+    }
+
+    @Override
+    public synchronized LibraryLocation[] getDefaultLibraryLocations(IFileHandle installLocation) {
+        final File library = new File(Path.fromOSString(installLocation.getCanonicalPath()).toFile().getParentFile().getParentFile(), "share/julia");
+        return new LibraryLocation[]{new LibraryLocation(new Path(library.getPath()))};
     }
 }
