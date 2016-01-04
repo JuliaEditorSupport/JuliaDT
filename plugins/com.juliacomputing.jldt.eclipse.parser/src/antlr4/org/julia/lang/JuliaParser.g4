@@ -15,8 +15,7 @@ statement                   :   typeDefinition
                             | exp
                             ;
 
-moduleDirective             :   INCLUDE  LEFT_BRACKET STRING RIGHT_BRACKET                              #include
-                            |   USING ID                                                                #using
+moduleDirective             :   USING ID                                                                #using
                             |   IMPORT ID COLON ID ( COMMA ID)*                                         #importt
                             |   IMPORT_ALL ID                                                           #importAll
                             |   EXPORT ID ( COMMA ID)*                                                  #export
@@ -118,26 +117,26 @@ exp                         :   MINUS exp                                       
                             |   NAN                                                                     #nan
                             |   RETURN exp                                                              #returnExp //todo review only occurs in a function body
                             |   RETURN                                                                  #return
-                            |   exp COMMA exp                                                           #implicitTuple
+//                            |   exp COMMA exp                                                           #implicitTuple
 //                            |   exp EOL                                                                   #r1
 //                            |   AT name exp*                                                            #invokeMarco1 //todo revew - tuple handling as one arg
 //                            |   AT name LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET                    #invokeMarco2
 //                            |   exp exp                                                   #sequence
                             ;
-functionDeclaration         :   name typeParameters? parameters  EQ statement                           #compactFunctionDeclaration //todo review name usage definition vs reference
-                            |   FUNCTION name typeParameters? parameters statement+  END                #generalFunctionDeclaration
+functionDeclaration         :   name typeParameters? parameters  EQ statement                                                           #compactFunctionDeclaration //todo review name usage definition vs reference
+                            |   FUNCTION name typeParameters? parameters statement+  END                                                #generalFunctionDeclaration
                             ;
 
-parameters                  :   LEFT_BRACKET (parameter ( COMMA parameter)*)? ELLIPSE? RIGHT_BRACKET    #pparameters
+parameters                  :   LEFT_BRACKET (parameter ( COMMA parameter)*)? ELLIPSE? RIGHT_BRACKET                                    #pparameters
                             ;
 
-parameter                   :   ID INSTANCE_OF exp                                           #namedTypedParam
-                            |   INSTANCE_OF exp                                              #anonymousTypedParam
-                            |   ID                                                                      #namedParam
+parameter                   :   ID INSTANCE_OF exp                                                                                      #namedTypedParam
+                            |   INSTANCE_OF exp                                                                                         #anonymousTypedParam
+                            |   ID                                                                                                      #namedParam
                             ;
 
 
-typeDefinition              :   TYPE_ALIAS ID typeParameters? exp       #typeAlias
+typeDefinition              :   TYPE_ALIAS ID typeParameters? exp                                                                       #typeAlias
                             |   ABSTRACT ID SUB_TYPE ID                                                                                 #abstractSubtype
                             |   ABSTRACT ID                                                                                             #abstractType
                             |   BITS_TYPE SIZE ID SUB_TYPE ID                                                                           #bitsSubtype
@@ -148,27 +147,27 @@ typeDefinition              :   TYPE_ALIAS ID typeParameters? exp       #typeAli
                             |   IMMUTABLE ID typeParameters? SUB_TYPE ID typeParameters? fieldDeclaration* functionDeclaration* END     #immutableSubTypeDeclaration
                             ;
 
-fieldDeclaration            :   ID INSTANCE_OF exp                                           #typedFieldDeclaration
-                            |   ID                                                                      #untypedFieldDeclaration
+fieldDeclaration            :   ID INSTANCE_OF exp                                                                                      #typedFieldDeclaration
+                            |   ID                                                                                                      #untypedFieldDeclaration
                             ;
 
-typeParameters              :   LEFT_CURLY typeParameter (COMMA typeParameter)* RIGHT_CURLY             #ttypeParameters
+typeParameters              :   LEFT_CURLY typeParameter (COMMA typeParameter)* RIGHT_CURLY                                             #ttypeParameters
                             ;
 
-typeParameter               :   ID SUB_TYPE exp                                              #namedSubtype
-                            |   INSTANCE_OF exp                                              #instance
+typeParameter               :   ID SUB_TYPE exp                                                                                         #namedSubtype
+                            |   INSTANCE_OF exp                                                                                         #instance
 //                            |   typeExpression                                                          #tx
-                            |   exp                                                                     #expression //todo review
+                            |   exp                                                                                                     #expression //todo review
                             ;
 
 
-forStatement                :   FOR exp EQ exp COLON exp statement+ END                                 #forEq
-                            |   FOR exp EQ exp COLON exp COLON exp statement+ END                       #forEqStep
-                            |   FOR exp IN exp statement+ END                                           #forIn
+forStatement                :   FOR exp EQ exp COLON exp statement+ END                                                                 #forEq
+                            |   FOR exp EQ exp COLON exp COLON exp statement+ END                                                       #forEqStep
+                            |   FOR exp IN exp statement+ END                                                                           #forIn
                             ;
 
 whileStatement              :   WHILE exp statement+ END
                             ;
 
-name                        :   ID (DOT ID)*                                                            #nname
+name                        :   ID (DOT ID)*                                                                                            #nname
                             ;

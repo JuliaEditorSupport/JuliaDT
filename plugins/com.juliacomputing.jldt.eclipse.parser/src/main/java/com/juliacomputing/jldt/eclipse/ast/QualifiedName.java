@@ -1,19 +1,16 @@
 package com.juliacomputing.jldt.eclipse.ast;
 
 import org.eclipse.dltk.ast.ASTVisitor;
-import org.eclipse.dltk.ast.expressions.Expression;
+import org.eclipse.dltk.ast.references.SimpleReference;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class QualifiedName extends Expression {
-
-    private final List<String> entries;
+public class QualifiedName extends SimpleReference {
 
     public QualifiedName(List<String> entries, int start, int stop) {
-        super(start, stop);
-        this.entries = entries;
+        super(start, stop, entries.stream().collect(Collectors.joining(".")));
     }
 
 
@@ -27,9 +24,5 @@ public class QualifiedName extends Expression {
         if (visitor.visit(this)) {
             visitor.endvisit(this);
         }
-    }
-
-    public String getText() {
-        return entries.stream().collect(Collectors.joining("."));
     }
 }

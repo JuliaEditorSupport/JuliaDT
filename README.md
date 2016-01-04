@@ -31,7 +31,6 @@ Julia Development Toolkit for Eclipse
     
     url tbc
   
-  
 #To Do    
     
 1. Indentation

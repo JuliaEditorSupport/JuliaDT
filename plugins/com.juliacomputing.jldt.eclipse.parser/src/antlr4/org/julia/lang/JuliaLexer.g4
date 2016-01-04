@@ -33,7 +33,6 @@ ELSE_IF             : 'elseif';
 ELSE                : 'else';
 FOR                 : 'for';
 CONST               : 'const';
-INCLUDE             : 'include';
 USING               : 'using';
 IMPORT              : 'import';
 COLON               : ':';

@@ -1,7 +1,7 @@
 // Generated from /Users/snefru/JuliaDT/plugins/com.juliacomputing.jldt.eclipse.parser/src/antlr4/org/julia/lang/JuliaParser.g4 by ANTLR 4.5.1
 
 package org.julia.lang.parser;
-
+    
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -24,13 +24,6 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStatement(JuliaParser.StatementContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code include}
-	 * labeled alternative in {@link JuliaParser#moduleDirective}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInclude(JuliaParser.IncludeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code using}
 	 * labeled alternative in {@link JuliaParser#moduleDirective}.
@@ -262,13 +255,6 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitInf32Type(JuliaParser.Inf32TypeContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code implicitTuple}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitImplicitTuple(JuliaParser.ImplicitTupleContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code qualifiedName}
 	 * labeled alternative in {@link JuliaParser#exp}.

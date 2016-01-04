@@ -250,6 +250,12 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     }
 
     @Override
+    public ASTNode visitParametricType(ParametricTypeContext ctx) {
+        return new TypeReference(start(ctx), stop(ctx), ctx.getText());
+    }
+
+
+    @Override
     public ASTNode visitTypeAlias(TypeAliasContext ctx) {
         final Token alias = ctx.ID().getSymbol();
         final ASTNode type = visit(ctx.exp());
@@ -261,7 +267,7 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitCompactFunctionDeclaration(CompactFunctionDeclarationContext ctx) {
         final QualifiedName qualifiedName = (QualifiedName) visit(ctx.name());
-        final MethodDeclaration methodDeclaration = new MethodDeclaration(qualifiedName.getText(), start(qualifiedName), stop(qualifiedName), start(ctx), stop(ctx));
+        final MethodDeclaration methodDeclaration = new MethodDeclaration(qualifiedName.getName(), start(qualifiedName), stop(qualifiedName), start(ctx), stop(ctx));
         final ASTNode arguments = visit(ctx.parameters());
         methodDeclaration.acceptArguments(arguments.getChilds());
         return methodDeclaration;
@@ -271,7 +277,7 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitGeneralFunctionDeclaration(GeneralFunctionDeclarationContext ctx) {
         final QualifiedName qualifiedName = (QualifiedName) visit(ctx.name());
-        final MethodDeclaration methodDeclaration = new MethodDeclaration(qualifiedName.getText(), start(qualifiedName), stop(qualifiedName), start(ctx), stop(ctx));
+        final MethodDeclaration methodDeclaration = new MethodDeclaration(qualifiedName.getName(), start(qualifiedName), stop(qualifiedName), start(ctx), stop(ctx));
         final ASTNode arguments = visit(ctx.parameters());
         methodDeclaration.acceptArguments(arguments.getChilds());
         return methodDeclaration;
@@ -301,8 +307,9 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitNamedTypedParam(NamedTypedParamContext ctx) {
         final Token name = ctx.ID().getSymbol();
-        final SimpleReference reference = new SimpleReference(start(name), stop(name), name.getText());
-        return new Argument(reference, start(ctx), stop(ctx), null, Modifiers.AccPublic);
+        SimpleReference type = (SimpleReference) visit(ctx.exp());
+//        final SimpleReference reference = new SimpleReference(start(type), stop(type), type.toString());
+        return new Argument(type, start(ctx), stop(ctx), null, Modifiers.AccPublic);
     }
 
     //    todo reference type rather than name
@@ -315,7 +322,8 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitAnonymousTypedParam(AnonymousTypedParamContext ctx) {
-        return new Argument(new SimpleReference(start(ctx), stop(ctx), ctx.exp().getText()), start(ctx), stop(ctx), null, Modifiers.AccPublic);
+        SimpleReference type = (SimpleReference) visit(ctx.exp());
+        return new Argument(type, start(ctx), stop(ctx), null, Modifiers.AccPublic);
     }
 
 
