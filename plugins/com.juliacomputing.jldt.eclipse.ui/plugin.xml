@@ -26,7 +26,7 @@
         <wizard
                 category="com.juliacomputing.jldt.eclipse.ui"
                 class="com.juliacomputing.jldt.eclipse.internal.ui.wizard.JuliaNewFileWizard"
-                icon="icons/new-proj-wiz.png"
+                icon="icons/new-file-wiz.png"
                 id="com.juliacomputing.jldt.eclipse.newFileWizard"
                 name="Julia File"
                 preferredPerspectives="com.juliacomputing.jldt.eclipse.ui.JuliaPerspective"
@@ -63,6 +63,31 @@
                 icon="icons/perspective.png"
                 id="com.juliacomputing.jldt.eclipse.ui.JuliaPerspective"
                 name="Julia"/>
+    </extension>
+
+    <extension
+            point="org.eclipse.ui.actionSets">
+        <actionSet
+                id="com.juliacomputing.jldt.eclipse.actionSet"
+                label="Julia Action Set">
+            <action
+                    class="com.juliacomputing.jldt.eclipse.internal.ui.JuliaOpenTypeAction"
+                    icon="icons/open-type.gif"
+                    id="openType"
+                    label="Open type"
+                    menubarPath="navigate/open.ext2"
+                    toolbarPath="org.eclipse.search.searchActionSet/Search"
+                    tooltip="Open Type">
+            </action>
+        </actionSet>
+    </extension>
+
+    <extension point="org.eclipse.dltk.core.selectionEngine">
+        <selectionEngine
+                class="com.juliacomputing.jldt.eclipse.internal.ui.JuliaSelectionEngine"
+                nature="com.juliacomputing.jldt.eclipse.core.nature"
+                priority="0">
+        </selectionEngine>
     </extension>
 
 </plugin>

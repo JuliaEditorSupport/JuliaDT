@@ -15,12 +15,12 @@ public class JuliaPerspective implements IPerspectiveFactory {
     public static final String ID = "com.juliacomputing.jldt.eclipse.ui.JuliaPerspective"; //$NON-NLS-1$
 
     public void createInitialLayout(IPageLayout layout) {
-        this.addFolders(layout);
-        this.addActionSets(layout);
-        this.addViews(layout);
-        this.addShowViewShortcuts(layout);
-        this.addNewWizardShortcuts(layout);
-        this.addPerspectiveShotcuts(layout);
+        addFolders(layout);
+        addActionSets(layout);
+        addViews(layout);
+        addShowViewShortcuts(layout);
+        addNewWizardShortcuts(layout);
+        addPerspectiveShotcuts(layout);
     }
 
     protected void addFolders(IPageLayout layout) {
@@ -36,7 +36,6 @@ public class JuliaPerspective implements IPerspectiveFactory {
                         "bottom", IPageLayout.BOTTOM, (float) 0.75, layout.getEditorArea()); //$NON-NLS-1$
         bottomFolder.addView(IPageLayout.ID_PROBLEM_VIEW);
         bottomFolder.addView(IPageLayout.ID_TASK_LIST);
-//		bottomFolder.addView("org.eclipse.dltk.ruby.ui.RubyDocumentationView"); //$NON-NLS-1$
         bottomFolder.addView(IConsoleConstants.ID_CONSOLE_VIEW);
 
         bottomFolder.addPlaceholder("org.eclipse.dltk.callhierarchy.view"); //$NON-NLS-1$
@@ -46,7 +45,7 @@ public class JuliaPerspective implements IPerspectiveFactory {
 
     protected void addActionSets(IPageLayout layout) {
         layout.addActionSet(IPageLayout.ID_NAVIGATE_ACTION_SET);
-//		layout.addActionSet("org.eclipse.dltk.ruby.ui.RubyActionSet"); //$NON-NLS-1$
+		layout.addActionSet("com.juliacomputing.jldt.eclipse.actionSet"); //$NON-NLS-1$
         layout.addActionSet("org.eclipse.debug.ui.launchActionSet"); //$NON-NLS-1$
     }
 
@@ -63,8 +62,6 @@ public class JuliaPerspective implements IPerspectiveFactory {
         layout.addShowViewShortcut(IPageLayout.ID_TASK_LIST);
         layout.addShowViewShortcut(IProgressConstants.PROGRESS_VIEW_ID);
         layout.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW);
-//        layout.addShowViewShortcut("org.eclipse.dltk.ruby.ui.RubyDocumentationView"); //$NON-NLS-1$
-//		layout.addShowViewShortcut(NewSearchUI.SEARCH_VIEW_ID);
         layout.addShowViewShortcut("org.eclipse.dltk.ui.TypeHierarchy"); //$NON-NLS-1$
         layout.addShowViewShortcut("org.eclipse.dltk.callhierarchy.view"); //$NON-NLS-1$
     }
@@ -81,11 +78,8 @@ public class JuliaPerspective implements IPerspectiveFactory {
     }
 
     protected void addPerspectiveShotcuts(IPageLayout layout) {
-//        layout
-//                .addPerspectiveShortcut("org.eclipse.dltk.ruby.ui.RubyBrowsingPerspective"); //$NON-NLS-1$
         layout.addPerspectiveShortcut("org.eclipse.debug.ui.DebugPerspective"); //$NON-NLS-1$
         layout.addPerspectiveShortcut("org.eclipse.ui.resourcePerspective"); //$NON-NLS-1$
-        layout
-                .addPerspectiveShortcut("org.eclipse.team.ui.TeamSynchronizingPerspective"); //$NON-NLS-1$
+        layout.addPerspectiveShortcut("org.eclipse.team.ui.TeamSynchronizingPerspective"); //$NON-NLS-1$
     }
 }
