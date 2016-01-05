@@ -11,12 +11,11 @@ public class JuliaHeuristicScanner extends ScriptHeuristicScanner implements
         JuliaSymbols {
     private static final int[] BLOCK_BEGINNING_KEYWORDS = {TokenIF, TokenFOR,
             TokenFUNCTION, TokenCASE, TokenCATCH, TokenTYPE, TokenWHILE,
-            TokenBEGIN, TokenUNTIL, TokenUNLESS, TokenMODULE, TokenDO};
+            TokenBEGIN, TokenMODULE, TokenDO, TokenTRY, TokenIMMUTABLE};
 
     private static final int[] BLOCK_BEGINNING_SYMBOLS = {TokenLBRACE, TokenLBRACKET};
 
-    private static final int[] BLOCK_MIDDLES = {TokenELSE, TokenELSIF,
-            TokenENSURE, TokenRESCUE, TokenWHEN};
+    private static final int[] BLOCK_MIDDLES = {TokenELSE, TokenELSEIF};
 
     private static final int[] BLOCK_ENDINGS = {TokenEND, TokenRBRACE, TokenRBRACKET};
 
@@ -52,14 +51,14 @@ public class JuliaHeuristicScanner extends ScriptHeuristicScanner implements
                     return TokenFOR;
                 if ("and".equals(s)) //$NON-NLS-1$
                     return TokenAND;
+                if ("try".equals(s)) //$NON-NLS-1$
+                    return TokenTRY;
                 if ("end".equals(s)) { //$NON-NLS-1$
                     if (pos > 0 && getChar(pos - 1) == '=') {
                         return TokenRDOCEND;
                     }
                     return TokenEND;
                 }
-                if ("END".equals(s)) //$NON-NLS-1$
-                    return TokenEND;
                 if ("null".equals(s)) //$NON-NLS-1$
                     return TokenNULL;
                 if ("not".equals(s)) //$NON-NLS-1$
@@ -86,18 +85,14 @@ public class JuliaHeuristicScanner extends ScriptHeuristicScanner implements
                     }
                     return TokenBEGIN;
                 }
-                if ("elsif".equals(s)) //$NON-NLS-1$
-                    return TokenELSIF;
                 break;
             case 6:
                 if ("return".equals(s)) //$NON-NLS-1$
                     return TokenRETURN;
                 if ("module".equals(s)) //$NON-NLS-1$
                     return TokenMODULE;
-                break;
-            case 7:
-                if ("defined".equals(s)) //$NON-NLS-1$
-                    return TokenDEFINED;
+                if ("elseif".equals(s)) //$NON-NLS-1$
+                    return TokenELSEIF;
                 break;
             case 8:
                 if ("function".equals(s)) //$NON-NLS-1$

@@ -19,10 +19,8 @@ import java.util.Arrays;
 public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
 
     private static final int[] INDENT_TO_BLOCK_TOKENS = {
-            JuliaSymbols.TokenELSE, JuliaSymbols.TokenELSIF,
-            JuliaSymbols.TokenEND, JuliaSymbols.TokenENSURE,
-            JuliaSymbols.TokenRESCUE, JuliaSymbols.TokenWHEN,
-            JuliaSymbols.TokenRBRACE};
+            JuliaSymbols.TokenELSE, JuliaSymbols.TokenELSEIF,
+            JuliaSymbols.TokenEND, JuliaSymbols.TokenRBRACE};
     private static final int[] CONTINUATION_TOKENS = {
             JuliaSymbols.TokenBACKSLASH, JuliaSymbols.TokenCOMMA,
             JuliaSymbols.TokenSLASH, JuliaSymbols.TokenPLUS,
