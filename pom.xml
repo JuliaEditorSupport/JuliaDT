@@ -14,6 +14,7 @@
         <module>plugins/com.juliacomputing.jldt.eclipse.core</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.launch</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.ui</module>
+        <module>plugins/com.juliacomputing.jldt.eclipse.ui.formatter</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.ui.editor</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.ui.launch</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.parser</module>

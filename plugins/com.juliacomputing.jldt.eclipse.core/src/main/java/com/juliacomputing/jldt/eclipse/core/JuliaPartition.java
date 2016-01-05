@@ -1,4 +1,4 @@
-package com.juliacomputing.jldt.eclipse.ui.editor.internal;
+package com.juliacomputing.jldt.eclipse.core;
 
 public interface JuliaPartition {
 

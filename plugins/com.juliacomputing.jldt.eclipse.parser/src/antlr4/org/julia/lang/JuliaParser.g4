@@ -86,7 +86,7 @@ exp                         :   MINUS exp                                       
                             |   FLOAT32                                                                 #float32
                             |   FLOAT64                                                                 #float64
                             |   UNION LEFT_CURLY exp ( COMMA exp)* RIGHT_CURLY                          #unionType
-                            |   ID LEFT_CURLY exp ( COMMA exp)* RIGHT_CURLY                             #parametricType
+                            |   ID LEFT_CURLY (exp ( COMMA exp)*)? RIGHT_CURLY                          #parametricType
 
 
                             |   exp COLON exp                                                           #range

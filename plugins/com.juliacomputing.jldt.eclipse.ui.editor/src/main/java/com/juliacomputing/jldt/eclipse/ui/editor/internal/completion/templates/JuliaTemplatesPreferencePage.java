@@ -1,8 +1,8 @@
 package com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.templates;
 
+import com.juliacomputing.jldt.eclipse.core.JuliaPartition;
 import com.juliacomputing.jldt.eclipse.ui.editor.JuliaEditorPlugin;
 import com.juliacomputing.jldt.eclipse.ui.editor.JuliaSourceViewerConfiguration;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaPartition;
 import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaTextTools;
 import org.eclipse.dltk.ui.templates.ScriptTemplateAccess;
 import org.eclipse.dltk.ui.templates.ScriptTemplatePreferencePage;

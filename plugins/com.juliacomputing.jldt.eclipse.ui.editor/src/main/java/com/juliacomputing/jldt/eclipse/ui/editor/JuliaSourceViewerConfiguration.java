@@ -1,7 +1,12 @@
 package com.juliacomputing.jldt.eclipse.ui.editor;
 
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.*;
+import com.juliacomputing.jldt.eclipse.core.JuliaPartition;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaCodeScanner;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaColourConstants;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaContentAssistPreference;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaHierarchyInformationControl;
 import com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.JuliaScriptCompletionProcessor;
+import com.juliacomputing.jldt.eclipse.ui.formatter.JuliaAutoIndentStrategy;
 import org.eclipse.dltk.internal.ui.editor.EditorUtility;
 import org.eclipse.dltk.internal.ui.editor.ScriptSourceViewer;
 import org.eclipse.dltk.internal.ui.text.ScriptElementProvider;
@@ -122,10 +127,10 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
         };
     }
 
-
-    public IAutoEditStrategy[] getAutoEditStrategies(final ISourceViewer sourceViewer, String contentType) {
-        return new IAutoEditStrategy[]{new JuliaAutoIndent()};
+    public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
+        return new IAutoEditStrategy[]{new JuliaAutoIndentStrategy(getConfiguredDocumentPartitioning(sourceViewer))};
     }
+
 
     public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
         return null;

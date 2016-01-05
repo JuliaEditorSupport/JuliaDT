@@ -1,5 +1,6 @@
 package com.juliacomputing.jldt.eclipse.ui.editor.internal;
 
+import com.juliacomputing.jldt.eclipse.core.JuliaPartition;
 import com.juliacomputing.jldt.eclipse.ui.editor.JuliaSourceViewerConfiguration;
 import org.eclipse.dltk.ui.text.ScriptSourceViewerConfiguration;
 import org.eclipse.dltk.ui.text.ScriptTextTools;
