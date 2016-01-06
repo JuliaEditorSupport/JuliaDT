@@ -42,16 +42,30 @@ exp                         :   MINUS exp                                       
                             |   exp GREATER_THAN_OR_EQ exp                                              #greaterThanOrEqual
                             |   exp LESS_THAN_OR_EQ exp                                                 #lessThanOrEqual
                             |   exp EQUALS exp                                                          #equals
+
+                            |   exp ELM_FRACTION exp                                                        #elmFraction
+                            |   exp ELM_TIMES exp                                                           #elmTimes
+                            |   exp ELM_DIVIDE exp                                                          #elmDivide
+                            |   exp ELM_PLUS exp                                                            #elmPlus
+                            |   exp ELM_MINUS exp                                                           #elmMinus
+                            |   exp ELM_GREATER_THAN exp                                                    #elmGreaterThan
+                            |   exp ELM_LESS_THAN exp                                                       #elmLessThan
+                            |   exp ELM_GREATER_THAN_OR_EQ exp                                              #elmGreaterThanOrEqual
+                            |   exp ELM_LESS_THAN_OR_EQ exp                                                 #elmLessThanOrEqual
+                            |   exp ELM_EQUALS exp                                                          #elmEquals
+
                             |   exp SUB_TYPE exp                                                        #subtype
                             |   exp QUESTION_MARK exp COLON exp                                         #ternaryConditional
                             |   NOT exp                                                                 #not
                             |   exp AND exp                                                             #and
+                            |   exp BITWISE_AND exp                                                     #bitwiseAnd
                             |   exp OR exp                                                              #or
+                            |   exp BITWISE_OR exp                                                     #bitwisOr
                             |   END_LITERAL                                                             #endLiteral
                             |   IF exp statement* (ELSE_IF exp statement*)* (ELSE statement*)? END      #naryConditional
                             |   BEGIN exp END                                                           #block
                             |   LEFT_BRACKET exp RIGHT_BRACKET                                          #bracketed //todo review ambiguous tuple vs exp
-                            |   LEFT_BRACKET (exp ',')+ exp RIGHT_BRACKET                               #tuple //todo review ambiguous tuple vs exp
+                            |   LEFT_BRACKET (exp ',')* exp? RIGHT_BRACKET                               #tuple //todo review ambiguous tuple vs exp
                             |   exp NOT_EQUAL exp                                                       #notEqual
                             |   exp EQ exp                                                              #assign
                             |   exp ADD_ASGN exp                                                        #addAssign
@@ -70,6 +84,7 @@ exp                         :   MINUS exp                                       
                             |   exp DOUBLE_ARROW exp                                                    #pair
                             |   exp COLON exp                                                           #range
                             |   exp ELLIPSE                                                             #tbc1
+                            |   <assoc=right> exp ARROW exp                                             #lambda
 
 
                             |   AT name exp*                                                            #invokeMarco1 //todo revew - tuple handling as one arg
@@ -130,12 +145,12 @@ functionDeclaration         :   name typeParameters? parameters  EQ statement   
                             |   FUNCTION name typeParameters? parameters (statement)*  END                                              #generalFunctionDeclaration
                             ;
 
-parameters                  :   LEFT_BRACKET (parameter ( COMMA parameter)*)? ELLIPSE? RIGHT_BRACKET                                    #pparameters
+parameters                  :   LEFT_BRACKET (parameter ( (COMMA|SEMI_COLON) parameter)*)? ELLIPSE? RIGHT_BRACKET                                    #pparameters
                             ;
 
-parameter                   :   ID INSTANCE_OF exp                                                                                      #namedTypedParam
-                            |   INSTANCE_OF exp                                                                                         #anonymousTypedParam
-                            |   ID                                                                                                      #namedParam
+parameter                   :   ID INSTANCE_OF exp (EQ exp)?                                                                                      #namedTypedParam
+                            |   INSTANCE_OF exp (EQ exp)?                                                                                        #anonymousTypedParam
+                            |   ID (EQ exp)?                                                                                                     #namedParam
                             ;
 
 typeDefinition              :   TYPE_ALIAS ID typeParameters? exp                                                                       #typeAlias
@@ -143,14 +158,12 @@ typeDefinition              :   TYPE_ALIAS ID typeParameters? exp               
                             |   ABSTRACT ID                                                                                             #abstractType
                             |   BITS_TYPE SIZE ID SUB_TYPE ID                                                                           #bitsSubtype
                             |   BITS_TYPE SIZE ID                                                                                       #bitsTtype
-                            |   TYPE ID typeParameters? SUB_TYPE ID typeParameters? fieldDeclaration* functionDeclaration* END          #subTypeDeclaration
-                            |   TYPE ID typeParameters? fieldDeclaration* functionDeclaration* END                                      #typeDeclaration
-                            |   IMMUTABLE ID typeParameters? fieldDeclaration* functionDeclaration* END                                 #immutableTypeDeclaration
-                            |   IMMUTABLE ID typeParameters? SUB_TYPE ID typeParameters? fieldDeclaration* functionDeclaration* END     #immutableSubTypeDeclaration
+                            |   TYPE ID typeParameters? (SUB_TYPE ID)? fieldDeclaration* functionDeclaration* END                       #typeDeclaration
+                            |   IMMUTABLE ID typeParameters? (SUB_TYPE ID)? typeParameters? fieldDeclaration* functionDeclaration* END  #immutableTypeDeclaration
                             ;
 
-fieldDeclaration            :   ID INSTANCE_OF exp EOL                                                                                     #typedFieldDeclaration
-                            |   ID EOL                                                                                                     #untypedFieldDeclaration
+fieldDeclaration            :   ID INSTANCE_OF exp EOL                                                                                  #typedFieldDeclaration
+                            |   ID EOL                                                                                                  #untypedFieldDeclaration
                             ;
 
 typeParameters              :   LEFT_CURLY typeParameter (COMMA typeParameter)* RIGHT_CURLY                                             #ttypeParameters

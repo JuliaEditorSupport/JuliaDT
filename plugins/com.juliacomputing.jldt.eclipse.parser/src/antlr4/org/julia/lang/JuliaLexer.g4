@@ -6,10 +6,44 @@ package org.julia.lang.parser;
     int nesting = 0;
     int squareNesting = 0;
     }
+ARROW               : '->';
 AT                  : '@';
 DOT                 : '.';
 SEMI_COLON          : ';';
+
 EQUALS              : '==';
+NOT_EQUAL           : ('!='|'≠');
+GREATER_THAN        : '>';
+LESS_THAN           : '<';
+GREATER_THAN_OR_EQ  : '>=';
+LESS_THAN_OR_EQ     : '<='|'≤';
+
+
+MINUS               : '-';
+EXPONENT            : '^';
+FRACTION            : '//';
+TIMES               : '*';
+DIVIDE              : '/';
+PLUS                : '+';
+
+
+ELM_EQUALS              : '.==';
+ELM_NOT_EQUAL           : ('.!='|.'≠');
+ELM_GREATER_THAN        : '.>';
+ELM_LESS_THAN           : '.<';
+ELM_GREATER_THAN_OR_EQ  : '.>=';
+ELM_LESS_THAN_OR_EQ     : '.<='|'≤';
+
+
+ELM_MINUS               : '.-';
+ELM_EXPONENT            : '.^';
+ELM_FRACTION            : './/';
+ELM_TIMES               : '.*';
+ELM_DIVIDE              : './';
+ELM_PLUS                : '.+';
+
+
+
 EQ                  : '=';
 DOUBLE_ARROW        : '=>';
 ADD_ASGN            : '+=';
@@ -57,20 +91,12 @@ MINUS_INF           : '-Inf';
 NAN16               : 'NaN16';
 NAN32               : 'NaN32';
 NAN                 : 'NaN';
-MINUS               : '-';
-EXPONENT            : '^';
-FRACTION            : '//';
-TIMES               : '*';
-DIVIDE              : '/';
-PLUS                : '+';
-NOT_EQUAL           : ('!='|'≠');
-GREATER_THAN        : '>';
-LESS_THAN           : '<';
-GREATER_THAN_OR_EQ  : '>=';
-LESS_THAN_OR_EQ     : '<='|'≤';
+
 NOT                 : '!';
 AND                 : '&&';
+BITWISE_AND         : '&';
 OR                  : '||';
+BITWISE_OR         : '|';
 LEFT_BRACKET        : '('                                   {nesting++;};
 RIGHT_BRACKET       : ')'                                   {nesting--;};
 TRUE                : 'true';

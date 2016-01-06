@@ -104,10 +104,16 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     }
 
 
+
     @Override
     public ASTNode visitImmutableTypeDeclaration(ImmutableTypeDeclarationContext ctx) {
-        final Token type = ctx.ID().getSymbol();
+        final Token type = ctx.ID(0).getSymbol();
         final TypeDeclaration typeDeclaration = new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+        if (ctx.SUB_TYPE() != null) {
+            final Token superType = ctx.ID(1).getSymbol();
+            final TypeReference typeReference = new TypeReference(start(superType), stop(superType), superType.getText());
+            typeDeclaration.addSuperClass(typeReference);
+        }
         final Block block = new Block();
         final List<FieldDeclarationContext> fields = ctx.fieldDeclaration();
         for (FieldDeclarationContext field : fields) {
@@ -117,42 +123,16 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
         return typeDeclaration;
     }
 
-    @Override
-    public ASTNode visitImmutableSubTypeDeclaration(ImmutableSubTypeDeclarationContext ctx) {
-        final Token type = ctx.ID(0).getSymbol();
-        final TypeDeclaration typeDeclaration = new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
-        final Token superType = ctx.ID(1).getSymbol();
-        final TypeReference typeReference = new TypeReference(start(superType), stop(superType), superType.getText());
-        typeDeclaration.addSuperClass(typeReference);
-        final Block block = new Block();
-        final List<FieldDeclarationContext> fields = ctx.fieldDeclaration();
-        for (FieldDeclarationContext field : fields) {
-            block.addStatement(visit(field));
-        }
-        typeDeclaration.setBody(block);
-        return typeDeclaration;
-    }
-
-    @Override
-    public ASTNode visitSubTypeDeclaration(SubTypeDeclarationContext ctx) {
-        final Token type = ctx.ID(0).getSymbol();
-        final TypeDeclaration typeDeclaration = new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
-        final Token superType = ctx.ID(1).getSymbol();
-        final TypeReference typeReference = new TypeReference(start(superType), stop(superType), superType.getText());
-        typeDeclaration.addSuperClass(typeReference);
-        final Block block = new Block();
-        final List<FieldDeclarationContext> fields = ctx.fieldDeclaration();
-        for (FieldDeclarationContext field : fields) {
-            block.addStatement(visit(field));
-        }
-        typeDeclaration.setBody(block);
-        return typeDeclaration;
-    }
 
     @Override
     public ASTNode visitTypeDeclaration(TypeDeclarationContext ctx) {
-        final Token type = ctx.ID().getSymbol();
+        final Token type = ctx.ID(0).getSymbol();
         final TypeDeclaration typeDeclaration = new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+        if (ctx.SUB_TYPE() != null) {
+            final Token superType = ctx.ID(1).getSymbol();
+            final TypeReference typeReference = new TypeReference(start(superType), stop(superType), superType.getText());
+            typeDeclaration.addSuperClass(typeReference);
+        }
         final Block block = new Block();
         final List<FieldDeclarationContext> fields = ctx.fieldDeclaration();
         for (FieldDeclarationContext field : fields) {
@@ -312,7 +292,7 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitNamedTypedParam(NamedTypedParamContext ctx) {
         final Token name = ctx.ID().getSymbol();
-        SimpleReference type = (SimpleReference) visit(ctx.exp());
+        SimpleReference type = (SimpleReference) visit(ctx.exp(0));
 //        final SimpleReference reference = new SimpleReference(start(type), stop(type), type.toString());
         return new Argument(type, start(ctx), stop(ctx), null, Modifiers.AccPublic);
     }
@@ -327,7 +307,7 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitAnonymousTypedParam(AnonymousTypedParamContext ctx) {
-        SimpleReference type = (SimpleReference) visit(ctx.exp());
+        SimpleReference type = (SimpleReference) visit(ctx.exp(0));
         return new Argument(type, start(ctx), stop(ctx), null, Modifiers.AccPublic);
     }
 
