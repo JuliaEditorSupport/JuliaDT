@@ -11,7 +11,7 @@ public class JuliaHeuristicScanner extends ScriptHeuristicScanner implements
         JuliaSymbols {
     private static final int[] BLOCK_BEGINNING_KEYWORDS = {TokenIF, TokenFOR,
             TokenFUNCTION, TokenCASE, TokenCATCH, TokenTYPE, TokenWHILE,
-            TokenBEGIN, TokenMODULE, TokenDO, TokenTRY, TokenIMMUTABLE};
+            TokenBEGIN, TokenMODULE, TokenDO, TokenTRY, TokenIMMUTABLE, TokenQuote, TokenMacro};
 
     private static final int[] BLOCK_BEGINNING_SYMBOLS = {TokenLBRACE, TokenLBRACKET};
 
@@ -79,6 +79,10 @@ public class JuliaHeuristicScanner extends ScriptHeuristicScanner implements
                     return TokenCATCH;
                 if ("while".equals(s)) //$NON-NLS-1$
                     return TokenWHILE;
+                if ("quote".equals(s)) //$NON-NLS-1$
+                    return TokenQuote;
+                if ("macro".equals(s)) //$NON-NLS-1$
+                    return TokenMacro;
                 if ("begin".equals(s)) { //$NON-NLS-1$
                     if (pos > 0 && getChar(pos - 1) == '=') {
                         return TokenRDOCBEGIN;

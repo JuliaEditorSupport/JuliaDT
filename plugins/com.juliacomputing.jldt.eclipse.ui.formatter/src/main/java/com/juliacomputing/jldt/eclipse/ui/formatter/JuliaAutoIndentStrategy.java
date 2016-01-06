@@ -109,8 +109,8 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
         return fIsSmartMode;
     }
 
-    public void customizeDocumentCommand(IDocument d, DocumentCommand c) {
-        if (c.doit == false)
+    public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
+        if (command.doit == false)
             return;
 
 //        clearCachedValues();
@@ -120,18 +120,18 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
 //        }
 
         try {
-            if (c.length == 0 && c.text != null && isLineDelimiter(d, c.text))
-                smartIndentAfterNewLine(d, c);
-            else if (c.length == 0 && c.text != null && isSpace(c.text))
-                smartInsertEndOnSpace(d, c);
-            else if (isRepresentingTab(c.text))
-                smartTab(d, c);
-            else if (c.text.length() == 1)
-                smartIndentOnKeypress(d, c);
-            else if (c.text.length() > 1 && fPreferences.isSmartPaste())
-                smartPaste(d, c); // no smart backspace for paste
+            if (command.length == 0 && command.text != null && isLineDelimiter(document, command.text))
+                smartIndentAfterNewLine(document, command);
+            else if (command.length == 0 && command.text != null && isSpace(command.text))
+                smartInsertEndOnSpace(document, command);
+            else if (isRepresentingTab(command.text))
+                smartTab(document, command);
+            else if (command.text.length() == 1)
+                smartIndentOnKeypress(document, command);
+            else if (command.text.length() > 1 && fPreferences.isSmartPaste())
+                smartPaste(document, command); // no smart backspace for paste
             else
-                super.customizeDocumentCommand(d, c);
+                super.customizeDocumentCommand(document, command);
         } catch (BadLocationException e) {
             DLTKUIPlugin.log(e);
         }
@@ -377,50 +377,50 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
         return ""; //$NON-NLS-1$
     }
 
-    private void smartIndentAfterNewLine(IDocument d, DocumentCommand c)
+    private void smartIndentAfterNewLine(IDocument document, DocumentCommand command)
             throws BadLocationException {
-        IRegion line = d.getLineInformationOfOffset(c.offset);
+        IRegion line = document.getLineInformationOfOffset(command.offset);
         int lineEnd = line.getOffset() + line.getLength();
-        JuliaHeuristicScanner scanner = new JuliaHeuristicScanner(d);
+        JuliaHeuristicScanner scanner = new JuliaHeuristicScanner(document);
 
         // eat pending whitespace
-        int nonWsPos = scanner.findNonWhitespaceForwardInAnyPartition(c.offset,
+        int nonWsPos = scanner.findNonWhitespaceForwardInAnyPartition(command.offset,
                 lineEnd);
         if (nonWsPos != JuliaHeuristicScanner.NOT_FOUND) {
-            c.length = nonWsPos - c.offset;
+            command.length = nonWsPos - command.offset;
         }
 
         // if pending statement is end, else etc. then indent it to block
         // beginning
-        if (nextIsIdentToBlockToken(scanner, c.offset, lineEnd)) {
-            c.text += getBlockIndent(d, c.offset, scanner);
+        if (nextIsIdentToBlockToken(scanner, command.offset, lineEnd)) {
+            command.text += getBlockIndent(document, command.offset, scanner);
             return;
         }
 
         // else
-        String indent = getPreviousLineIndent(d, c.offset, scanner);
-        c.text += indent;
+        String indent = getPreviousLineIndent(document, command.offset, scanner);
+        command.text += indent;
 
-        if (previousIsBlockBeginning(d, scanner, c.offset)) {
+        if (previousIsBlockBeginning(document, scanner, command.offset)) {
             // if this line was beginning of the block
-            c.text += indentation();
+            command.text += indentation();
 
             // Auto close blocks
             if (fCloseBlocks
                     && scanner.isBlockBeginning(line.getOffset(), lineEnd)
-                    && !isBlockClosed(d, c.offset)) {
-                closeBlock(d, c, indent, d.get(c.offset, lineEnd - c.offset),
+                    && !isBlockClosed(document, command.offset)) {
+                closeBlock(document, command, indent, document.get(command.offset, lineEnd - command.offset),
                         scanner);
             }
-        } else if (previousIsFirstContinuation(d, scanner, c.offset, line
+        } else if (previousIsFirstContinuation(document, scanner, command.offset, line
                 .getOffset())) {
             // or if this line was the first line ending with one of
             // continuation symbols
-            c.text += indentation();
+            command.text += indentation();
 
-        } else if (hasUnclosedParen(scanner, c.offset, line.getOffset())) {
+        } else if (hasUnclosedParen(scanner, command.offset, line.getOffset())) {
             // or if this line contains unclosed paren
-            c.text += indentation();
+            command.text += indentation();
         }
     }
 

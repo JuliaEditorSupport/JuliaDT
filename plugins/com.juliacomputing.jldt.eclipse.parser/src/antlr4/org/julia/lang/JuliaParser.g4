@@ -5,28 +5,31 @@ options{
 @header {
 package org.julia.lang.parser;
     }
-unit                        :   (moduleDirective|statement)+
-                            ;
-
-statement                   :   typeDefinition
-                            |   forStatement
-                            |   whileStatement
-                            |   functionDeclaration
-                            | exp
+unit                        :   (statement)+ EOF
                             ;
 
 moduleDirective             :   USING ID                                                                #using
                             |   IMPORT ID COLON ID ( COMMA ID)*                                         #importt
                             |   IMPORT_ALL ID                                                           #importAll
                             |   EXPORT ID ( COMMA ID)*                                                  #export
-                            |   MODULE ID statement+ END                                                #moduleDeclaration
+                            |   MODULE ID (statement)+ END                                              #moduleDeclaration
                             |   BAREMODULE ID statement+ END                                            #bareModuleDeclaration
                             ;
 
+statement                   :   moduleDirective
+                            |   typeDefinition
+                            |   functionDeclaration
+                            |   forStatement
+                            |   whileStatement
+                            |   exp (EOL | SEMI_COLON)
+                            |   EOL
+                            ;
+
 exp                         :   MINUS exp                                                               #unaryMinus
+                            |   name (LEFT_SQUARE (exp ',')* exp? RIGHT_SQUARE)+                        #arrayIndex
+                            |   name typeParameters? LEFT_BRACKET ((exp  COMMA)* exp)? RIGHT_BRACKET    #applyFunction
                             |   (LEFT_SQUARE (exp ',')* exp? RIGHT_SQUARE)+                             #enumeration
                             |   (INT|FLOAT32|FLOAT64) (ID | LEFT_BRACKET exp RIGHT_BRACKET )            #coeffient //TODO(see The precedence of numeric literal coefficients is the same as that of unary operators such as negation. So 2^3x is parsed as 2^(3x), and 2x^3 is parsed as 2*(x^3)
-                            |   exp INSTANCE_OF exp                                          #typedExpression
                             |   <assoc=right> exp EXPONENT exp                                          #exponent
                             |   exp FRACTION exp                                                        #fraction
                             |   exp TIMES exp                                                           #times
@@ -44,11 +47,9 @@ exp                         :   MINUS exp                                       
                             |   NOT exp                                                                 #not
                             |   exp AND exp                                                             #and
                             |   exp OR exp                                                              #or
-                            |   END                                                                     #end
+                            |   END_LITERAL                                                             #endLiteral
                             |   IF exp statement* (ELSE_IF exp statement*)* (ELSE statement*)? END      #naryConditional
                             |   BEGIN exp END                                                           #block
-                            |   name typeParameters? LEFT_BRACKET ((exp  COMMA)* exp)? RIGHT_BRACKET    #applyFunction
-                            |   name (LEFT_SQUARE (exp ',')* exp? RIGHT_SQUARE)+                        #arrayIndex
                             |   LEFT_BRACKET exp RIGHT_BRACKET                                          #bracketed //todo review ambiguous tuple vs exp
                             |   LEFT_BRACKET (exp ',')+ exp RIGHT_BRACKET                               #tuple //todo review ambiguous tuple vs exp
                             |   exp NOT_EQUAL exp                                                       #notEqual
@@ -67,8 +68,12 @@ exp                         :   MINUS exp                                       
                             |   exp ASR_ASGN exp                                                        #aSRAssign
                             |   exp ASL_ASGN exp                                                        #aSLAssign
                             |   exp DOUBLE_ARROW exp                                                    #pair
+                            |   exp COLON exp                                                           #range
                             |   exp ELLIPSE                                                             #tbc1
 
+
+                            |   AT name exp*                                                            #invokeMarco1 //todo revew - tuple handling as one arg
+                            |   AT name LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET                    #invokeMarco2
 
                             |   INT8                                                                    #int8
                             |   UINT8                                                                   #uint8
@@ -85,12 +90,11 @@ exp                         :   MINUS exp                                       
                             |   FLOAT16                                                                 #float16
                             |   FLOAT32                                                                 #float32
                             |   FLOAT64                                                                 #float64
+
                             |   UNION LEFT_CURLY exp ( COMMA exp)* RIGHT_CURLY                          #unionType
                             |   ID LEFT_CURLY (exp ( COMMA exp)*)? RIGHT_CURLY                          #parametricType
 
 
-                            |   exp COLON exp                                                           #range
-                            |   <assoc=right> exp SEMI_COLON exp                                        #chain
                             |   name                                                                    #qualifiedName
                             |   ID                                                                      #identifier
                             |   REGEX                                                                   #regex
@@ -117,14 +121,13 @@ exp                         :   MINUS exp                                       
                             |   NAN                                                                     #nan
                             |   RETURN exp                                                              #returnExp //todo review only occurs in a function body
                             |   RETURN                                                                  #return
+                            |   exp INSTANCE_OF exp                                          #typedExpression
 //                            |   exp COMMA exp                                                           #implicitTuple
-//                            |   exp EOL                                                                   #r1
-//                            |   AT name exp*                                                            #invokeMarco1 //todo revew - tuple handling as one arg
-//                            |   AT name LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET                    #invokeMarco2
 //                            |   exp exp                                                   #sequence
                             ;
+
 functionDeclaration         :   name typeParameters? parameters  EQ statement                                                           #compactFunctionDeclaration //todo review name usage definition vs reference
-                            |   FUNCTION name typeParameters? parameters statement+  END                                                #generalFunctionDeclaration
+                            |   FUNCTION name typeParameters? parameters (statement)*  END                                              #generalFunctionDeclaration
                             ;
 
 parameters                  :   LEFT_BRACKET (parameter ( COMMA parameter)*)? ELLIPSE? RIGHT_BRACKET                                    #pparameters
@@ -134,7 +137,6 @@ parameter                   :   ID INSTANCE_OF exp                              
                             |   INSTANCE_OF exp                                                                                         #anonymousTypedParam
                             |   ID                                                                                                      #namedParam
                             ;
-
 
 typeDefinition              :   TYPE_ALIAS ID typeParameters? exp                                                                       #typeAlias
                             |   ABSTRACT ID SUB_TYPE ID                                                                                 #abstractSubtype
@@ -147,8 +149,8 @@ typeDefinition              :   TYPE_ALIAS ID typeParameters? exp               
                             |   IMMUTABLE ID typeParameters? SUB_TYPE ID typeParameters? fieldDeclaration* functionDeclaration* END     #immutableSubTypeDeclaration
                             ;
 
-fieldDeclaration            :   ID INSTANCE_OF exp                                                                                      #typedFieldDeclaration
-                            |   ID                                                                                                      #untypedFieldDeclaration
+fieldDeclaration            :   ID INSTANCE_OF exp EOL                                                                                     #typedFieldDeclaration
+                            |   ID EOL                                                                                                     #untypedFieldDeclaration
                             ;
 
 typeParameters              :   LEFT_CURLY typeParameter (COMMA typeParameter)* RIGHT_CURLY                                             #ttypeParameters

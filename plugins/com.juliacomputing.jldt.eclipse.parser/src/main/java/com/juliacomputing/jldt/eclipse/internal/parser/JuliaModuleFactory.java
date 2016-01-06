@@ -76,6 +76,11 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
         return new VariableReference(start(identifier), stop(identifier), identifier.getText());
     }
 
+    @Override
+    public ASTNode visitQualifiedName(QualifiedNameContext ctx) {
+        final QualifiedName qualifiedName = (QualifiedName) visit(ctx.name());
+        return new VariableReference(start(qualifiedName), stop(qualifiedName), qualifiedName.getName());
+    }
 
     @Override
     public ASTNode visitAbstractType(AbstractTypeContext ctx) {
@@ -88,14 +93,14 @@ public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitTypedFieldDeclaration(TypedFieldDeclarationContext ctx) {
-        final Token type = ctx.ID().getSymbol();
-        return new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+        final Token name = ctx.ID().getSymbol();
+        return new TypeDeclaration(name.getText(), start(name), stop(name), start(ctx), stop(ctx));
     }
 
     @Override
     public ASTNode visitUntypedFieldDeclaration(UntypedFieldDeclarationContext ctx) {
-        final Token type = ctx.ID().getSymbol();
-        return new TypeDeclaration(type.getText(), start(type), stop(type), start(ctx), stop(ctx));
+        final Token name = ctx.ID().getSymbol();
+        return new TypeDeclaration(name.getText(), start(name), stop(name), start(ctx), stop(ctx));
     }
 
 

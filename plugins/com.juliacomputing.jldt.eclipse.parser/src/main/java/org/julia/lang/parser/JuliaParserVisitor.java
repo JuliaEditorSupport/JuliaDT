@@ -19,12 +19,6 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnit(JuliaParser.UnitContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JuliaParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatement(JuliaParser.StatementContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code using}
 	 * labeled alternative in {@link JuliaParser#moduleDirective}.
 	 * @param ctx the parse tree
@@ -66,6 +60,13 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBareModuleDeclaration(JuliaParser.BareModuleDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatement(JuliaParser.StatementContext ctx);
+
 	/**
 	 * Visit a parse tree produced by the {@code tt}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -319,6 +320,14 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRegex(JuliaParser.RegexContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code invokeMarco1}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInvokeMarco1(JuliaParser.InvokeMarco1Context ctx);
+
+	/**
 	 * Visit a parse tree produced by the {@code uint128}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -374,6 +383,14 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitUint64(JuliaParser.Uint64Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code endLiteral}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEndLiteral(JuliaParser.EndLiteralContext ctx);
+
 	/**
 	 * Visit a parse tree produced by the {@code nan16}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -452,6 +469,14 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFloat64(JuliaParser.Float64Context ctx);
 	/**
+	 * Visit a parse tree produced by the {@code invokeMarco2}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInvokeMarco2(JuliaParser.InvokeMarco2Context ctx);
+
+	/**
 	 * Visit a parse tree produced by the {@code minusAssign}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -515,13 +540,6 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLessThan(JuliaParser.LessThanContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code end}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEnd(JuliaParser.EndContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code divide}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -556,13 +574,6 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNaryConditional(JuliaParser.NaryConditionalContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code chain}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitChain(JuliaParser.ChainContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code or}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -599,19 +610,19 @@ public interface JuliaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInt(JuliaParser.IntContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code typedExpression}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTypedExpression(JuliaParser.TypedExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code pair}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPair(JuliaParser.PairContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code typedExpression}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypedExpression(JuliaParser.TypedExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code fraction}
 	 * labeled alternative in {@link JuliaParser#exp}.

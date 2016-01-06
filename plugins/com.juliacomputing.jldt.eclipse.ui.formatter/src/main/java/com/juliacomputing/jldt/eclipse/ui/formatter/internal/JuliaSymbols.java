@@ -26,4 +26,6 @@ public interface JuliaSymbols extends ISymbols {
     int TokenRDOCBEGIN = TokenUserDefined + 33;
     int TokenRDOCEND = TokenUserDefined + 34;
     int TokenTRY = TokenUserDefined + 35;
+    int TokenMacro = TokenUserDefined + 36;
+    int TokenQuote = TokenUserDefined + 37;
 }

@@ -20,16 +20,6 @@ public interface JuliaParserListener extends ParseTreeListener {
 	 */
 	void exitUnit(JuliaParser.UnitContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JuliaParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterStatement(JuliaParser.StatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JuliaParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitStatement(JuliaParser.StatementContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code using}
 	 * labeled alternative in {@link JuliaParser#moduleDirective}.
 	 * @param ctx the parse tree
@@ -101,6 +91,19 @@ public interface JuliaParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBareModuleDeclaration(JuliaParser.BareModuleDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(JuliaParser.StatementContext ctx);
+
+	/**
+	 * Exit a parse tree produced by {@link JuliaParser#statement}.
+	 *
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(JuliaParser.StatementContext ctx);
+
 	/**
 	 * Enter a parse tree produced by the {@code tt}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -533,6 +536,22 @@ public interface JuliaParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRegex(JuliaParser.RegexContext ctx);
+
+	/**
+	 * Enter a parse tree produced by the {@code invokeMarco1}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 *
+	 * @param ctx the parse tree
+	 */
+	void enterInvokeMarco1(JuliaParser.InvokeMarco1Context ctx);
+
+	/**
+	 * Exit a parse tree produced by the {@code invokeMarco1}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 *
+	 * @param ctx the parse tree
+	 */
+	void exitInvokeMarco1(JuliaParser.InvokeMarco1Context ctx);
 	/**
 	 * Enter a parse tree produced by the {@code uint128}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -629,6 +648,22 @@ public interface JuliaParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUint64(JuliaParser.Uint64Context ctx);
+
+	/**
+	 * Enter a parse tree produced by the {@code endLiteral}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 *
+	 * @param ctx the parse tree
+	 */
+	void enterEndLiteral(JuliaParser.EndLiteralContext ctx);
+
+	/**
+	 * Exit a parse tree produced by the {@code endLiteral}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 *
+	 * @param ctx the parse tree
+	 */
+	void exitEndLiteral(JuliaParser.EndLiteralContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code nan16}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -761,6 +796,21 @@ public interface JuliaParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFloat64(JuliaParser.Float64Context ctx);
+
+	/**
+	 * Enter a parse tree produced by the {@code invokeMarco2}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 *
+	 * @param ctx the parse tree
+	 */
+	void enterInvokeMarco2(JuliaParser.InvokeMarco2Context ctx);
+
+	/**
+	 * Exit a parse tree produced by the {@code invokeMarco2}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvokeMarco2(JuliaParser.InvokeMarco2Context ctx);
 	/**
 	 * Enter a parse tree produced by the {@code minusAssign}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -870,18 +920,6 @@ public interface JuliaParserListener extends ParseTreeListener {
 	 */
 	void exitLessThan(JuliaParser.LessThanContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code end}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterEnd(JuliaParser.EndContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code end}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitEnd(JuliaParser.EndContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code divide}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -941,18 +979,6 @@ public interface JuliaParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNaryConditional(JuliaParser.NaryConditionalContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code chain}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterChain(JuliaParser.ChainContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code chain}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitChain(JuliaParser.ChainContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code or}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -1014,18 +1040,6 @@ public interface JuliaParserListener extends ParseTreeListener {
 	 */
 	void exitInt(JuliaParser.IntContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code typedExpression}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterTypedExpression(JuliaParser.TypedExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code typedExpression}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitTypedExpression(JuliaParser.TypedExpressionContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code pair}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -1037,6 +1051,18 @@ public interface JuliaParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPair(JuliaParser.PairContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code typedExpression}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypedExpression(JuliaParser.TypedExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typedExpression}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypedExpression(JuliaParser.TypedExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code fraction}
 	 * labeled alternative in {@link JuliaParser#exp}.

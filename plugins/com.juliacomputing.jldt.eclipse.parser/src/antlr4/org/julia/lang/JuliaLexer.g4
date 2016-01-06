@@ -2,6 +2,10 @@ lexer grammar JuliaLexer;
 @header {
 package org.julia.lang.parser;
     }
+@members {
+    int nesting = 0;
+    int squareNesting = 0;
+    }
 AT                  : '@';
 DOT                 : '.';
 SEMI_COLON          : ';';
@@ -35,12 +39,14 @@ FOR                 : 'for';
 CONST               : 'const';
 USING               : 'using';
 IMPORT              : 'import';
+INSTANCE_OF         : '::';
 COLON               : ':';
 COMMA               : ',';
 IMPORT_ALL          : 'importall';
 EXPORT              : 'export';
 MODULE              : 'module';
-END                 : 'end';
+END                 : 'end'                                 {squareNesting==0}?;
+END_LITERAL         : 'end'                                 {squareNesting>0}?;
 BAREMODULE          : 'baremodule';
 INF16               : 'Inf16';
 INF32               : 'Inf32';
@@ -52,7 +58,6 @@ NAN16               : 'NaN16';
 NAN32               : 'NaN32';
 NAN                 : 'NaN';
 MINUS               : '-';
-INSTANCE_OF         : '::';
 EXPONENT            : '^';
 FRACTION            : '//';
 TIMES               : '*';
@@ -66,8 +71,8 @@ LESS_THAN_OR_EQ     : '<='|'≤';
 NOT                 : '!';
 AND                 : '&&';
 OR                  : '||';
-LEFT_BRACKET        : '(';
-RIGHT_BRACKET       : ')';
+LEFT_BRACKET        : '('                                   {nesting++;};
+RIGHT_BRACKET       : ')'                                   {nesting--;};
 TRUE                : 'true';
 FALSE               : 'false';
 ABSTRACT            : 'abstract';
@@ -78,10 +83,10 @@ TYPE                : 'type';
 IMMUTABLE           : 'immutable';
 UNION               : 'Union';
 FUNCTION            : 'function';
-LEFT_CURLY          : '{';
-RIGHT_CURLY         : '}';
-LEFT_SQUARE         : '[';
-RIGHT_SQUARE        : ']';
+LEFT_CURLY          : '{'                                   {nesting++;};
+RIGHT_CURLY         : '}'                                   {nesting--;};
+LEFT_SQUARE         : '['                                   {nesting++;squareNesting++;};
+RIGHT_SQUARE        : ']'                                   {nesting--;squareNesting--;};
 INT8                : 'Int8';
 UINT8               : 'Uint8';
 INT16               : 'Int16';
@@ -118,10 +123,11 @@ ID                  :   ('_'|UNi) ('_'|UNi|DEC_DGT)* '!'?;
 CHARACTER_LITERAL   :   '\'' (~'\'') '\'' ;
 
 STRING              :   '"' ('""'|~'"')* '"' ; // quote-quote is an escaped quote
-//EOL                 :   '\r\n'|'\r'|'\n';
-//WS                  :   [ \t]+ ->skip;
+EOL                 :   ('\r'? '\n') {nesting==0}?;
+IGNORED_EOL         :   ('\r'? '\n') {nesting>0}?  ->skip;
+WS                  :   [ \t]+ ->skip;
 
-WS                  :   [ \r\t\n]+ ->skip;
+//WS                  :   [ \r\t\n]+ ->skip;
 //EOL                 :   '\r\n'|'\r'|'\n';
 
 COMMENT             :   '#=' .*? '=#' -> skip ;
