@@ -10,12 +10,12 @@ ARROW               : '->';
 AT                  : '@';
 DOT                 : '.';
 SEMI_COLON          : ';';
-
+IS                  : '===';
 EQUALS              : '==';
 NOT_EQUAL           : ('!='|'≠');
 GREATER_THAN        : '>';
 LESS_THAN           : '<';
-GREATER_THAN_OR_EQ  : '>=';
+GREATER_THAN_OR_EQ  : '>='|'≥';
 LESS_THAN_OR_EQ     : '<='|'≤';
 
 
@@ -43,7 +43,7 @@ ELM_DIVIDE              : './';
 ELM_PLUS                : '.+';
 
 
-
+RAPP                : '|>';
 EQ                  : '=';
 DOUBLE_ARROW        : '=>';
 ADD_ASGN            : '+=';
@@ -76,9 +76,11 @@ IMPORT              : 'import';
 INSTANCE_OF         : '::';
 COLON               : ':';
 COMMA               : ',';
+DO                  : 'do';
 IMPORT_ALL          : 'importall';
 EXPORT              : 'export';
 MODULE              : 'module';
+LET                 : 'let';
 END                 : 'end'                                 {squareNesting==0}?;
 END_LITERAL         : 'end'                                 {squareNesting>0}?;
 BAREMODULE          : 'baremodule';
@@ -143,26 +145,29 @@ FLOAT64_LITERAL     : DEC_DGT+ [\.] DEC_DGT* EXP64?
                     ;
 EXP64               : [e] [+\-]? DEC_DGT+;
 
+
+FQN                 :   (Identifier '\\.')+ ID;
 ID                  :   ('_'|UNi) ('_'|UNi|DEC_DGT)* '!'?;
 
 
-CHARACTER_LITERAL   :   '\'' (~'\'') '\'' ;
+CHARACTER_LITERAL   :   ('\'' (~'\'') '\'')|('\'' '\\'.'\'') ;
 
-STRING              :   '"' ('""'|~'"')* '"' ; // quote-quote is an escaped quote
-EOL                 :   ('\r'? '\n') {nesting==0}?;
-IGNORED_EOL         :   ('\r'? '\n') {nesting>0}?  ->skip;
-WS                  :   [ \t]+ ->skip;
+STRING              :   '"' ('\\"'|~'"')* '"' ; // quote-quote is an escaped quote
+//EOL                 :   ('\r'? '\n') {nesting==0}?;
+//IGNORED_EOL         :   ('\r'? '\n') {nesting>0}?  ->skip;
+//WS                  :   [ \t]+ ->skip;
 
-//WS                  :   [ \r\t\n]+ ->skip;
+WS                  :   [ \r\t\n]+ ->skip;
 //EOL                 :   '\r\n'|'\r'|'\n';
 
 COMMENT             :   '#=' .*? '=#' -> skip ;
 LINE_COMMENT        :   '#' ~[\r\n]* -> skip;
 
+fragment Identifier :   ('_'|UNi) ('_'|UNi|DEC_DGT)*;
 fragment DEC_DGT    :   [0-9];
 fragment BIN_DGT    :   [0-1];
 fragment OCT_DGT    :   [0-7];
-fragment HEX_DGT    :   [0-9a-z];
+fragment HEX_DGT    :   [0-9A-F];
 SIZE                :   '8'|'16'|'32'|'64'|'128'|'256'|'512';//... currently restricted to multiples of 8
 
 

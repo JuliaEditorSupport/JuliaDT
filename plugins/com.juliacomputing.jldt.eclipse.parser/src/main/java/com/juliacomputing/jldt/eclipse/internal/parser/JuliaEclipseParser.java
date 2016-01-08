@@ -15,6 +15,8 @@ public class JuliaEclipseParser extends AbstractSourceParser {
 
 
     public ModuleDeclaration parse(IModuleSource source, IProblemReporter reporter) {
+        System.out.println(source.getFileName());
+        System.out.println("--------------------");
         final String content = source.getSourceContents();
         final CharStream stream = new ANTLRInputStream(content);
         final JuliaLexer lexer = new JuliaLexer(stream);

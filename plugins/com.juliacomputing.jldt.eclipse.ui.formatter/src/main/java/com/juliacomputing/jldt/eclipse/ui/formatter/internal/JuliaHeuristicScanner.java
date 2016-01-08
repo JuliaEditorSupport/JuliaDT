@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class JuliaHeuristicScanner extends ScriptHeuristicScanner implements
         JuliaSymbols {
     private static final int[] BLOCK_BEGINNING_KEYWORDS = {TokenIF, TokenFOR,
-            TokenFUNCTION, TokenCASE, TokenCATCH, TokenTYPE, TokenWHILE,
+            TokenFUNCTION, TokenCASE, TokenCATCH, TokenTYPE, TokenWHILE, TokenLet,
             TokenBEGIN, TokenMODULE, TokenDO, TokenTRY, TokenIMMUTABLE, TokenQuote, TokenMacro};
 
     private static final int[] BLOCK_BEGINNING_SYMBOLS = {TokenLBRACE, TokenLBRACKET};
@@ -39,12 +39,12 @@ public class JuliaHeuristicScanner extends ScriptHeuristicScanner implements
             case 2:
                 if ("if".equals(s)) //$NON-NLS-1$
                     return TokenIF;
-                if ("do".equals(s)) //$NON-NLS-1$
-                    return TokenDO;
                 if ("in".equals(s)) //$NON-NLS-1$
                     return TokenIN;
                 if ("or".equals(s)) //$NON-NLS-1$
                     return TokenOR;
+                if ("do".equals(s)) //$NON-NLS-1$
+                    return TokenDO;
                 break;
             case 3:
                 if ("for".equals(s)) //$NON-NLS-1$
@@ -53,6 +53,8 @@ public class JuliaHeuristicScanner extends ScriptHeuristicScanner implements
                     return TokenAND;
                 if ("try".equals(s)) //$NON-NLS-1$
                     return TokenTRY;
+                if ("let".equals(s)) //$NON-NLS-1$
+                    return TokenLet;
                 if ("end".equals(s)) { //$NON-NLS-1$
                     if (pos > 0 && getChar(pos - 1) == '=') {
                         return TokenRDOCEND;
