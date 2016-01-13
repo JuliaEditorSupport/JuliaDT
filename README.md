@@ -43,5 +43,7 @@ Julia Development Toolkit for Eclipse
 1. [dltk](https://wiki.eclipse.org/DLTK)
 2. [dltk.ruby](https://github.com/eclipse/dltk.ruby)
 3. [dltk.javascrpt](https://github.com/eclipse/dltk.javascript)
+4. [tycho](https://eclipse.org/tycho/)
+
     
  
