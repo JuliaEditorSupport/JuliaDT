@@ -38,4 +38,10 @@ Julia Development Toolkit for Eclipse
 3. Syntax colouring extension (operators ...brackets?)
 
  
+# References
+
+1. [dltk](https://wiki.eclipse.org/DLTK)
+2. [dltk.ruby](https://github.com/eclipse/dltk.ruby)
+3. [dltk.javascrpt](https://github.com/eclipse/dltk.javascript)
+    
  
