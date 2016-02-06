@@ -28,6 +28,7 @@ import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.ITextEditor;
 
 public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfiguration {
@@ -96,7 +97,6 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
 
     public IInformationPresenter getHierarchyPresenter(
             ScriptSourceViewer sourceViewer, boolean doCodeResolve) {
-        // Do not create hierarchy presenter if there's no CU.
         if (getEditor() != null
                 && getEditor().getEditorInput() != null
                 && EditorUtility.getEditorInputModelElement(getEditor(), true) == null)
@@ -117,13 +117,15 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
     }
 
 
-    private IInformationControlCreator getHierarchyPresenterControlCreator(
-            ISourceViewer sourceViewer) {
-        return parent -> {
-            int shellStyle = SWT.RESIZE;
-            int treeStyle = SWT.V_SCROLL | SWT.H_SCROLL;
-            return new JuliaHierarchyInformationControl(parent, shellStyle,
-                    treeStyle);
+    private IInformationControlCreator getHierarchyPresenterControlCreator(ISourceViewer sourceViewer) {
+        final int shellStyle = SWT.RESIZE;
+        final int treeStyle = SWT.V_SCROLL | SWT.H_SCROLL;
+        return new IInformationControlCreator() {
+            @Override
+            public IInformationControl createInformationControl(final Shell shell) {
+                return new JuliaHierarchyInformationControl(shell, shellStyle,
+                        treeStyle);
+            }
         };
     }
 

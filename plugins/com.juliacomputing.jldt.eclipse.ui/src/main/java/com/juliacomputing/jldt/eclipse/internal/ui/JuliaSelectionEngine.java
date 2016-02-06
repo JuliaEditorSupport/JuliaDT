@@ -6,26 +6,26 @@ import org.eclipse.dltk.ast.declarations.ModuleDeclaration;
 import org.eclipse.dltk.ast.declarations.TypeDeclaration;
 import org.eclipse.dltk.codeassist.ScriptSelectionEngine;
 import org.eclipse.dltk.compiler.env.IModuleSource;
-import org.eclipse.dltk.core.DLTKCore;
-import org.eclipse.dltk.core.IModelElement;
-import org.eclipse.dltk.core.ModelException;
-import org.eclipse.dltk.core.SourceParserUtil;
+import org.eclipse.dltk.core.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //todo complete parsing
 public class JuliaSelectionEngine extends ScriptSelectionEngine {
-    private org.eclipse.dltk.core.ISourceModule sourceModule;
+    private ISourceModule sourceModule;
 
 
     private void findDeclaration(final String name, final List results) {
         try {
-            sourceModule.accept(element -> {
-                if (element.getElementName().equals(name)) {
-                    results.add(element);
+            sourceModule.accept(new IModelElementVisitor() {
+                @Override
+                public boolean visit(final IModelElement element) {
+                    if (element.getElementName().equals(name)) {
+                        results.add(element);
+                    }
+                    return true;
                 }
-                return true;
             });
         } catch (ModelException e) {
             if (DLTKCore.DEBUG) {
@@ -35,8 +35,8 @@ public class JuliaSelectionEngine extends ScriptSelectionEngine {
     }
 
     @Override
-    public IModelElement[] select(IModuleSource module, int offset, int i) {
-        sourceModule = (org.eclipse.dltk.core.ISourceModule) module.getModelElement();
+    public IModelElement[] select(IModuleSource module, final int offset, int i) {
+        sourceModule = (ISourceModule) module.getModelElement();
         ModuleDeclaration moduleDeclaration = SourceParserUtil
                 .getModuleDeclaration(sourceModule, null);
         final List results = new ArrayList();
