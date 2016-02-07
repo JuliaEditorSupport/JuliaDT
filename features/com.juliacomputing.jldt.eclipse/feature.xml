@@ -55,8 +55,6 @@
       <import plugin="org.eclipse.dltk.launching" version="5.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.dltk.ui" version="5.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.core"/>
-      <import plugin="org.eclipse.jdt.debug.ui"/>
-      <import plugin="org.eclipse.jdt.launching"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.search"/>
@@ -66,10 +64,13 @@
       <import plugin="org.eclipse.ui.workbench.texteditor"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="com.juliacomputing.jldt.eclipse.ui.formatter"/>
       <import plugin="org.antlr.antlr4-runtime-osgi" version="4.5.1" match="greaterOrEqual"/>
       <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
       <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
-      <import plugin="com.juliacomputing.jldt.eclipse.ui.formatter"/>
+      <import feature="org.eclipse.dltk.core" version="5.1.0" match="compatible"/>
+      <import plugin="org.eclipse.jdt.debug.ui"/>
+      <import plugin="org.eclipse.jdt.launching"/>
    </requires>
 
    <plugin
