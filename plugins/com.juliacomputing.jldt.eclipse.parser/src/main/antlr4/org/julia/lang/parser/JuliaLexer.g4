@@ -1,7 +1,4 @@
 lexer grammar JuliaLexer;
-@header {
-package org.julia.lang.parser;
-    }
 @members {
     int nesting = 0;
     int squareNesting = 0;

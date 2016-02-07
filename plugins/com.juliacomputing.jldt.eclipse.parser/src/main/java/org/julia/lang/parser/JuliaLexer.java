@@ -1,5 +1,4 @@
-// Generated from /Users/snefru/JuliaDT/plugins/com.juliacomputing.jldt.eclipse.parser/src/antlr4/org/julia/lang/JuliaLexer.g4 by ANTLR 4.5.1
-
+// Generated from org/julia/lang/parser/JuliaLexer.g4 by ANTLR 4.5.1
 package org.julia.lang.parser;
 
 import org.antlr.v4.runtime.*;

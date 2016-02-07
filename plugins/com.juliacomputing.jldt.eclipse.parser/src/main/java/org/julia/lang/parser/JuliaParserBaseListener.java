@@ -1,7 +1,5 @@
-// Generated from /Users/snefru/JuliaDT/plugins/com.juliacomputing.jldt.eclipse.parser/src/antlr4/org/julia/lang/JuliaParser.g4 by ANTLR 4.5.1
-
+// Generated from org/julia/lang/parser/JuliaParser.g4 by ANTLR 4.5.1
 package org.julia.lang.parser;
-    
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -320,6 +318,22 @@ public class JuliaParserBaseListener implements JuliaParserListener {
 	 */
 	@Override
 	public void exitLSRAssign(JuliaParser.LSRAssignContext ctx) {
+	}
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override
+	public void enterCoeffient(JuliaParser.CoeffientContext ctx) {
+	}
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override
+	public void exitCoeffient(JuliaParser.CoeffientContext ctx) {
 	}
 	/**
 	 * {@inheritDoc}
@@ -1785,145 +1799,129 @@ public class JuliaParserBaseListener implements JuliaParserListener {
 	@Override
 	public void enterChar(JuliaParser.CharContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void exitChar(JuliaParser.CharContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void enterFloat16(JuliaParser.Float16Context ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void exitFloat16(JuliaParser.Float16Context ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void enterFloat32(JuliaParser.Float32Context ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void exitFloat32(JuliaParser.Float32Context ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void enterFloat64(JuliaParser.Float64Context ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void exitFloat64(JuliaParser.Float64Context ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void enterUnionType(JuliaParser.UnionTypeContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void exitUnionType(JuliaParser.UnionTypeContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void enterReturnExp(JuliaParser.ReturnExpContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void exitReturnExp(JuliaParser.ReturnExpContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void enterReturn(JuliaParser.ReturnContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void exitReturn(JuliaParser.ReturnContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void enterParametricType(JuliaParser.ParametricTypeContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
 	public void exitParametricType(JuliaParser.ParametricTypeContext ctx) {
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
@@ -1932,7 +1930,7 @@ public class JuliaParserBaseListener implements JuliaParserListener {
 
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 * <p/>
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override
@@ -1941,7 +1939,7 @@ public class JuliaParserBaseListener implements JuliaParserListener {
 
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 * <p/>
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterCompactFunctionDeclaration(JuliaParser.CompactFunctionDeclarationContext ctx) { }
@@ -1992,49 +1990,43 @@ public class JuliaParserBaseListener implements JuliaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAnonymousTypedParam(JuliaParser.AnonymousTypedParamContext ctx) {
-	}
-
+	@Override
+	public void enterAnonymousTypedParam(JuliaParser.AnonymousTypedParamContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAnonymousTypedParam(JuliaParser.AnonymousTypedParamContext ctx) {
-	}
-
+	@Override
+	public void exitAnonymousTypedParam(JuliaParser.AnonymousTypedParamContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVararg(JuliaParser.VarargContext ctx) {
-	}
-
+	@Override
+	public void enterVararg(JuliaParser.VarargContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVararg(JuliaParser.VarargContext ctx) {
-	}
-
+	@Override
+	public void exitVararg(JuliaParser.VarargContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNamedParam(JuliaParser.NamedParamContext ctx) {
-	}
-
+	@Override
+	public void enterNamedParam(JuliaParser.NamedParamContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNamedParam(JuliaParser.NamedParamContext ctx) {
-	}
-
+	@Override
+	public void exitNamedParam(JuliaParser.NamedParamContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2076,17 +2068,15 @@ public class JuliaParserBaseListener implements JuliaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBitsTtype(JuliaParser.BitsTtypeContext ctx) {
-	}
-
+	@Override
+	public void enterBitsTtype(JuliaParser.BitsTtypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBitsTtype(JuliaParser.BitsTtypeContext ctx) {
-	}
-
+	@Override
+	public void exitBitsTtype(JuliaParser.BitsTtypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

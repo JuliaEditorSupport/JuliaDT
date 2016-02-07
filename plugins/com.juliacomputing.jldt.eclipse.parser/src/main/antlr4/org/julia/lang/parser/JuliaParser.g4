@@ -2,9 +2,6 @@ parser grammar JuliaParser;
 options{
     tokenVocab=JuliaLexer;
     }
-@header {
-package org.julia.lang.parser;
-    }
 unit                        :   (statement)+                             ;
 
 moduleDirective             :   USING ID                                                                #using
@@ -25,9 +22,9 @@ statement                   :   moduleDirective
 
 exp                         :   MINUS exp                                                               #unaryMinus
                             |   name typeParameters? LEFT_BRACKET ((exp  COMMA)* exp)? RIGHT_BRACKET    #applyFunction
-                            |   (LEFT_SQUARE (exp ',')* exp? RIGHT_SQUARE)+                             #enumeration
+                            |   (LEFT_SQUARE (exp COMMA)* exp? RIGHT_SQUARE)+                             #enumeration
                             |   LEFT_SQUARE exp FOR ID (EQ|IN) exp COLON exp RIGHT_SQUARE                     #comprehension
-//                            |   (INT|FLOAT32|FLOAT64) (ID | LEFT_BRACKET exp RIGHT_BRACKET )            #coeffient //TODO(see The precedence of numeric literal coefficients is the same as that of unary operators such as negation. So 2^3x is parsed as 2^(3x), and 2x^3 is parsed as 2*(x^3)
+                            |   (INT|FLOAT32|FLOAT64) (ID | LEFT_BRACKET exp RIGHT_BRACKET )            #coeffient //TODO(see The precedence of numeric literal coefficients is the same as that of unary operators such as negation. So 2^3x is parsed as 2^(3x), and 2x^3 is parsed as 2*(x^3)
                             |   <assoc=right> exp EXPONENT exp                                          #exponent
                             |   exp INSTANCE_OF typeExpression                                          #typedExpression
                             |   exp FRACTION exp                                                        #fraction
@@ -65,7 +62,7 @@ exp                         :   MINUS exp                                       
                             |   LET (ID EQ exp)* statement END                                          #let
                             |   BEGIN exp END                                                           #block
                             |   LEFT_BRACKET exp RIGHT_BRACKET                                          #bracketed //todo review ambiguous tuple vs exp
-                            |   LEFT_BRACKET (exp ',')* exp? RIGHT_BRACKET                               #tuple //todo review ambiguous tuple vs exp
+                            |   LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET                               #tuple //todo review ambiguous tuple vs exp
                             |   exp NOT_EQUAL exp                                                       #notEqual
                             |   exp EQ exp                                                              #assign
                             |   exp ADD_ASGN exp                                                        #addAssign
@@ -90,7 +87,7 @@ exp                         :   MINUS exp                                       
                             |   exp RAPP exp                                                            #applyPrecedng
                             |   <assoc=right> exp ARROW exp                                             #lambda
                             |   DO ((ID COMMA)* ID)? statement* END                                       #anonymousFunction
-                            |   name (LEFT_SQUARE (exp ',')* exp? RIGHT_SQUARE)+                        #arrayIndex
+                            |   name (LEFT_SQUARE (exp COMMA)* exp? RIGHT_SQUARE)+                        #arrayIndex
 
 
                             |   AT name exp*                                                            #invokeMarco1 //todo revew - tuple handling as one arg

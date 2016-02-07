@@ -1,7 +1,5 @@
-// Generated from /Users/snefru/JuliaDT/plugins/com.juliacomputing.jldt.eclipse.parser/src/antlr4/org/julia/lang/JuliaParser.g4 by ANTLR 4.5.1
-
+// Generated from org/julia/lang/parser/JuliaParser.g4 by ANTLR 4.5.1
 package org.julia.lang.parser;
-    
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -200,6 +198,16 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 */
 	@Override
 	public T visitLSRAssign(JuliaParser.LSRAssignContext ctx) {
+		return visitChildren(ctx);
+	}
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override
+	public T visitCoeffient(JuliaParser.CoeffientContext ctx) {
 		return visitChildren(ctx);
 	}
 	/**
@@ -1122,10 +1130,9 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	public T visitChar(JuliaParser.CharContext ctx) {
 		return visitChildren(ctx);
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
@@ -1133,10 +1140,9 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	public T visitFloat16(JuliaParser.Float16Context ctx) {
 		return visitChildren(ctx);
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
@@ -1144,10 +1150,9 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	public T visitFloat32(JuliaParser.Float32Context ctx) {
 		return visitChildren(ctx);
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
@@ -1155,10 +1160,9 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	public T visitFloat64(JuliaParser.Float64Context ctx) {
 		return visitChildren(ctx);
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
@@ -1166,10 +1170,9 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	public T visitUnionType(JuliaParser.UnionTypeContext ctx) {
 		return visitChildren(ctx);
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
@@ -1177,10 +1180,9 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	public T visitReturnExp(JuliaParser.ReturnExpContext ctx) {
 		return visitChildren(ctx);
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
@@ -1188,10 +1190,9 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	public T visitReturn(JuliaParser.ReturnContext ctx) {
 		return visitChildren(ctx);
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
@@ -1199,10 +1200,9 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	public T visitParametricType(JuliaParser.ParametricTypeContext ctx) {
 		return visitChildren(ctx);
 	}
-
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
@@ -1213,7 +1213,7 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 
 	/**
 	 * {@inheritDoc}
-	 * <p>
+	 * <p/>
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
@@ -1245,27 +1245,27 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAnonymousTypedParam(JuliaParser.AnonymousTypedParamContext ctx) { return visitChildren(ctx);
-	}
-
+	@Override
+	public T visitAnonymousTypedParam(JuliaParser.AnonymousTypedParamContext ctx) {
+		return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVararg(JuliaParser.VarargContext ctx) { return visitChildren(ctx);
-	}
-
+	@Override
+	public T visitVararg(JuliaParser.VarargContext ctx) {
+		return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNamedParam(JuliaParser.NamedParamContext ctx) { return visitChildren(ctx);
-	}
-
+	@Override
+	public T visitNamedParam(JuliaParser.NamedParamContext ctx) {
+		return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1293,9 +1293,9 @@ public class JuliaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBitsTtype(JuliaParser.BitsTtypeContext ctx) { return visitChildren(ctx);
-	}
-
+	@Override
+	public T visitBitsTtype(JuliaParser.BitsTtypeContext ctx) {
+		return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
