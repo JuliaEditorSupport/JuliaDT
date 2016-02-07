@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
+
 <product uid="jldt.product" id="org.eclipse.platform.ide" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
-   <configIni use="default"/>
+
+
+   <configIni use="default">
+   </configIni>
+
    <launcherArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
    </launcherArgs>
-   <windowImages/>
+
+   <windowImages i16="/com.juliacomputing.jldt.eclipse.ui.launch/icons/julia.png"/>
+
+
    <launcher>
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
-   <vm/>
+
+
+   <vm>
+   </vm>
+
    <license>
         <url>http://juliacomputing.com/</url>
         <text>
    Copyright (c) 2105, Julia Computing Inc. All rights reserved.
          </text>
    </license>
+
    <plugins>
    </plugins>
+
    <features>
       <feature id="com.juliacomputing.jldt.eclipse"/>
       <feature id="org.eclipse.emf.ecore"/>
@@ -43,13 +57,18 @@
       <feature id="org.eclipse.e4.rcp"/>
       <feature id="org.eclipse.jdt" version="3.11.1.v20150904-0015"/>
    </features>
+
    <configurations>
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
    </configurations>
+
    <preferencesInfo>
       <targetfile overwrite="false"/>
    </preferencesInfo>
-   <cssInfo/>
+
+   <cssInfo>
+   </cssInfo>
+
 </product>
