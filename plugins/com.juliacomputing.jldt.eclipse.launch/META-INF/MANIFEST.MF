@@ -14,5 +14,5 @@ Require-Bundle: com.juliacomputing.jldt.eclipse.core,
   org.eclipse.debug.core
 Eclipse-LazyStart: true
 Export-Package: com.juliacomputing.jldt.eclipse.launch
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

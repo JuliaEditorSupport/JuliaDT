@@ -16,5 +16,5 @@ Require-Bundle: com.juliacomputing.jldt.eclipse.core,
  org.eclipse.ui.ide,
  org.eclipse.dltk.formatter
 Export-Package: com.juliacomputing.jldt.eclipse.ui.formatter
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
