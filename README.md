@@ -4,7 +4,7 @@ Julia Development Toolkit for Eclipse
 
 #Requirements
 
-1. [Java8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+1. [Java 7+](http://www.oracle.com/technetwork/java/javase/overview/index.html)
 2. [Maven  3.3.3+](https://maven.apache.org/)
 3. [Julia](http://julialang.org/downloads/)
 
