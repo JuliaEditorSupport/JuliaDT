@@ -33,9 +33,10 @@ Julia Development Toolkit for Eclipse
   
 #To Do    
     
-1. Indentation
-2. Julia Project/Package wizard (.git source and test drectories)
-3. Syntax colouring extension (operators ...brackets?)
+1. Extend support for Navigation and Outline
+2. REPL support
+3. Plotting Support
+4. Incremental Execution
 
  
 # References
