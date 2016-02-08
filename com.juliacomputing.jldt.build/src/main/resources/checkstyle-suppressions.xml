@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.0//EN"
+        "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+
+<suppressions>
+    <suppress files="JuliaLexer.java" checks=".*"/>
+    <suppress files="JuliaParser.java" checks=".*"/>
+    <suppress files="JuliaParserBaseListener.java" checks=".*"/>
+    <suppress files="JuliaParserListener.java" checks=".*"/>
+    <suppress files="JuliaParserBaseVisitor.java" checks=".*"/>
+    <suppress files="JuliaParserVisitor.java" checks=".*"/>
+</suppressions>
