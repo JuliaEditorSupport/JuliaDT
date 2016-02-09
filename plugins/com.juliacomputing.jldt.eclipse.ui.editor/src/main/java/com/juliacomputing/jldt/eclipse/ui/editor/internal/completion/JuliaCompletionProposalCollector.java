@@ -1,7 +1,5 @@
 package com.juliacomputing.jldt.eclipse.ui.editor.internal.completion;
 
-import com.juliacomputing.jldt.eclipse.core.JuliaNature;
-
 import org.eclipse.dltk.core.IScriptProject;
 import org.eclipse.dltk.core.ISourceModule;
 import org.eclipse.dltk.ui.text.completion.ScriptCompletionProposal;
@@ -9,9 +7,11 @@ import org.eclipse.dltk.ui.text.completion.ScriptCompletionProposalCollector;
 import org.eclipse.dltk.ui.text.completion.ScriptOverrideCompletionProposal;
 import org.eclipse.swt.graphics.Image;
 
-public class JuliaCompletionProposalCollector extends ScriptCompletionProposalCollector {
+import com.juliacomputing.jldt.eclipse.core.JuliaNature;
 
-  protected final static char[] VAR_TRIGGER = { '\t', ' ', '=', ';', '.' };
+public final class JuliaCompletionProposalCollector extends ScriptCompletionProposalCollector {
+
+  private static final char[] VAR_TRIGGER = { '\t', ' ', '=', ';', '.' };
 
   public JuliaCompletionProposalCollector(ISourceModule module) {
     super(module);

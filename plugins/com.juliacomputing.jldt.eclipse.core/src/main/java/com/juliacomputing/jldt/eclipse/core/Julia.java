@@ -1,7 +1,7 @@
 package com.juliacomputing.jldt.eclipse.core;
 
 /**
- * Julia definitions todo extratct to a separate Declarative Service
+ * Julia definitions todo extract to a separate Declarative Service
  */
 public enum Julia {
   ;

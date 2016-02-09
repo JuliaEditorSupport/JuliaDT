@@ -1,0 +1,47 @@
+<FindBugsFilter>
+    <Match>
+        <Package name="org.julia.lang.parser.*"/>
+    </Match>
+    <Match>
+        <Class name="com.juliacomputing.jldt.eclipse.ui.formatter.internal.ScriptHeuristicScanner"/>
+    </Match>
+    <Match>
+        <Class name="com.juliacomputing.jldt.eclipse.core.Julia"/>
+    </Match>
+    <Match>
+        <Class name="com.juliacomputing.jldt.eclipse.ui.formatter.internal.ScriptHeuristicScanner$CharacterMatch"/>
+    </Match>
+    <Match>
+        <Class name="com.juliacomputing.jldt.eclipse.ui.formatter.internal.JuliaHeuristicScanner"/>
+    </Match>
+    <Match>
+        <Class name="~.*Plugin"/>
+        <Bug code="ST"/>
+    </Match>
+    <Match>
+        <Bug code="SIC"/>
+    </Match>
+
+    <Match>
+        <Class name="com.juliacomputing.jldt.kernel.DefaultKernel"/>
+        <Bug code="UwF"/>
+    </Match>
+    <Match>
+        <Class name="com.juliacomputing.jldt.kernel.KernelZMQProxy"/>
+        <Bug code="UwF"/>
+    </Match>
+
+    <!--side effect of eclipse API-->
+    <Match>
+        <Class name="com.juliacomputing.jldt.eclipse.core.JuliaLanguageToolkit"/>
+        <Bug code="UwF,Nm"/>
+    </Match>
+    <Match>
+        <Class name="com.juliacomputing.jldt.eclipse.ui.editor.JuliaSourceViewerConfiguration"/>
+        <Bug code="UwF,Nm"/>
+    </Match>
+    <Match>
+        <Class name="com.juliacomputing.jldt.eclipse.ui.launch.configuration.JuliaMainLaunchConfigurationTab"/>
+        <Bug code="Nm"/>
+    </Match>
+</FindBugsFilter>

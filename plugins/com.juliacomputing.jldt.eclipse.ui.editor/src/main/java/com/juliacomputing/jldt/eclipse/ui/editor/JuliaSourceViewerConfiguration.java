@@ -1,13 +1,5 @@
 package com.juliacomputing.jldt.eclipse.ui.editor;
 
-import com.juliacomputing.jldt.eclipse.core.JuliaPartition;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaCodeScanner;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaColourConstants;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaContentAssistPreference;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaHierarchyInformationControl;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.JuliaScriptCompletionProcessor;
-import com.juliacomputing.jldt.eclipse.ui.formatter.JuliaAutoIndentStrategy;
-
 import org.eclipse.dltk.internal.ui.editor.EditorUtility;
 import org.eclipse.dltk.internal.ui.editor.ScriptSourceViewer;
 import org.eclipse.dltk.internal.ui.text.ScriptElementProvider;
@@ -18,7 +10,6 @@ import org.eclipse.jface.text.*;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.formatter.IContentFormatter;
-import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.information.IInformationPresenter;
 import org.eclipse.jface.text.information.IInformationProvider;
 import org.eclipse.jface.text.information.InformationPresenter;
@@ -32,8 +23,17 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.ITextEditor;
 
+import com.juliacomputing.jldt.eclipse.core.JuliaPartition;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaCodeScanner;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaColourConstants;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaContentAssistPreference;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaHierarchyInformationControl;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.JuliaScriptCompletionProcessor;
+import com.juliacomputing.jldt.eclipse.ui.formatter.JuliaAutoIndentStrategy;
+
 public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfiguration {
 
+  private static final int[] EMPTY_INTS = new int[0];
   private AbstractScriptScanner codeScanner;
   private AbstractScriptScanner stringScanner;
   private AbstractScriptScanner commentScanner;
@@ -127,8 +127,8 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
   }
 
   public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
-    return new IAutoEditStrategy[] {
-        new JuliaAutoIndentStrategy(getConfiguredDocumentPartitioning(sourceViewer)) };
+    return new IAutoEditStrategy[] { new JuliaAutoIndentStrategy(
+        getConfiguredDocumentPartitioning(sourceViewer)) };
   }
 
   public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
@@ -140,7 +140,7 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
   }
 
   public int[] getConfiguredTextHoverStateMasks(ISourceViewer sourceViewer, String contentType) {
-    return null;
+    return EMPTY_INTS;
   }
 
   public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType, int stateMask) {
@@ -163,17 +163,7 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
     return null;
   }
 
-  public IInformationPresenter getOutlinePresenter(ISourceViewer sourceViewer,
-      boolean doCodeResolve) {
-    return null;
-  }
-
-  public IInformationPresenter getHierarchyPresenter(ISourceViewer sourceViewer,
-      boolean doCodeResolve) {
-    return null;
-  }
-
-  public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
+  public IInformationPresenter getOutlinePresenter(ISourceViewer sourceViewer, boolean doCodeResolve) {
     return null;
   }
 

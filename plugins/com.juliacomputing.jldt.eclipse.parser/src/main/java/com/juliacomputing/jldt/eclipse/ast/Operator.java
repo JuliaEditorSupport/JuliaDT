@@ -1,5 +1,7 @@
 package com.juliacomputing.jldt.eclipse.ast;
 
+import java.util.Arrays;
+
 import org.eclipse.dltk.ast.ASTVisitor;
 import org.eclipse.dltk.ast.expressions.Expression;
 
@@ -22,7 +24,7 @@ public class Operator extends Expression {
   @Override
   public void traverse(ASTVisitor visitor) throws Exception {
     if (visitor.visit(this)) {
-      for (Expression expression : this.operands) {
+      for (Expression expression : operands) {
         expression.traverse(visitor);
       }
       visitor.endvisit(this);
@@ -34,7 +36,7 @@ public class Operator extends Expression {
   }
 
   public Expression[] getOperands() {
-    return operands;
+    return Arrays.copyOf(operands, operands.length);
   }
 
 }

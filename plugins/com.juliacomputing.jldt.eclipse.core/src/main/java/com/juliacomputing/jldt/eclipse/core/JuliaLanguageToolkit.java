@@ -3,9 +3,9 @@ package com.juliacomputing.jldt.eclipse.core;
 import org.eclipse.dltk.core.AbstractLanguageToolkit;
 import org.eclipse.dltk.core.IDLTKLanguageToolkit;
 
-public class JuliaLanguageToolkit extends AbstractLanguageToolkit {
+public final class JuliaLanguageToolkit extends AbstractLanguageToolkit {
 
-  protected static JuliaLanguageToolkit instance = new JuliaLanguageToolkit();
+  private static JuliaLanguageToolkit instance = new JuliaLanguageToolkit();
 
   public JuliaLanguageToolkit() {
   }

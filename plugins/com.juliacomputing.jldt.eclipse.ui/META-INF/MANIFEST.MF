@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Julia Development Toolkit - UI
 Bundle-SymbolicName: com.juliacomputing.jldt.eclipse.ui;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Bundle-Activator: com.juliacomputing.jldt.eclipse.ui.JuliaUI
+Bundle-Activator: com.juliacomputing.jldt.eclipse.ui.JuliaUIPlugin
 Bundle-Vendor: Julia Computing Inc.
 Require-Bundle: com.juliacomputing.jldt.eclipse.core,
  com.juliacomputing.jldt.eclipse.ui.editor,

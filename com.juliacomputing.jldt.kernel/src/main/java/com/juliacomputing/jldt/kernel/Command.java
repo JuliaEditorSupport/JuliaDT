@@ -6,4 +6,7 @@ public abstract class Command {
 
   private final UUID uuid = UUID.randomUUID();
 
+  public UUID getUuid() {
+    return uuid;
+  }
 }

@@ -1,8 +1,8 @@
 package com.juliacomputing.jldt.eclipse.internal.ui.preferences;
 
-import com.juliacomputing.jldt.eclipse.ui.JuliaUI;
-
 import org.eclipse.dltk.ui.preferences.ScriptCorePreferencePage;
+
+import com.juliacomputing.jldt.eclipse.ui.JuliaUIPlugin;
 
 public class JuliaPreferences extends ScriptCorePreferencePage {
 
@@ -15,6 +15,6 @@ public class JuliaPreferences extends ScriptCorePreferencePage {
   }
 
   protected void setPreferenceStore() {
-    setPreferenceStore(JuliaUI.getDefault().getPreferenceStore());
+    setPreferenceStore(JuliaUIPlugin.getDefault().getPreferenceStore());
   }
 }

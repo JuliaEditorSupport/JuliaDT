@@ -48,6 +48,7 @@ Julia Development Toolkit for Eclipse
 5. [tycho](https://eclipse.org/tycho/)
 6. [Checkstyle](http://eclipse-cs.sourceforge.net/#!/)
 7. [Google Checkstyle Rules](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)
+8. [Eclipse Source](https://git.eclipse.org/c/)
 
     
  

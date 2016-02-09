@@ -3,16 +3,16 @@ package com.juliacomputing.jldt.eclipse.ui;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-public class JuliaUI extends AbstractUIPlugin {
+public class JuliaUIPlugin extends AbstractUIPlugin {
 
   public static final String ID = "com.juliacomputing.jldt.eclipse.ui"; //$NON-NLS-1$
 
-  private static JuliaUI instance;
+  private static JuliaUIPlugin instance;
 
-  public JuliaUI() {
+  public JuliaUIPlugin() {
   }
 
-  public static JuliaUI getDefault() {
+  public static JuliaUIPlugin getDefault() {
     return instance;
   }
 

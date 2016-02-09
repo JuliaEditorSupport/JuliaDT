@@ -1,9 +1,7 @@
 package com.juliacomputing.jldt.eclipse.ui.formatter;
 
-import com.juliacomputing.jldt.eclipse.ui.formatter.internal.ISymbols;
-import com.juliacomputing.jldt.eclipse.ui.formatter.internal.JuliaHeuristicScanner;
-import com.juliacomputing.jldt.eclipse.ui.formatter.internal.JuliaPreferenceInterpreter;
-import com.juliacomputing.jldt.eclipse.ui.formatter.internal.JuliaSymbols;
+import java.util.Arrays;
+
 import org.eclipse.dltk.core.IScriptProject;
 import org.eclipse.dltk.core.PreferencesLookupDelegate;
 import org.eclipse.dltk.ui.CodeFormatterConstants;
@@ -12,7 +10,10 @@ import org.eclipse.dltk.ui.text.util.AutoEditUtils;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.*;
 
-import java.util.Arrays;
+import com.juliacomputing.jldt.eclipse.ui.formatter.internal.ISymbols;
+import com.juliacomputing.jldt.eclipse.ui.formatter.internal.JuliaHeuristicScanner;
+import com.juliacomputing.jldt.eclipse.ui.formatter.internal.JuliaPreferenceInterpreter;
+import com.juliacomputing.jldt.eclipse.ui.formatter.internal.JuliaSymbols;
 
 //based on dltk.ruby
 public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
@@ -31,7 +32,7 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
     Arrays.sort(REMOVE_IDENTATION_TOKENS);
   }
 
-  private boolean smartMode;
+  // private boolean smartMode;
   private boolean closeBlocks = true;
   private JuliaPreferenceInterpreter preferences;
 
@@ -99,9 +100,9 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
     }
   }
 
-  private boolean isSmartMode() {
-    return smartMode;
-  }
+  // private boolean isSmartMode() {
+  // return smartMode;
+  // }
 
   public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
     if (command.doit == false)
@@ -152,13 +153,14 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
 
     int hasOffset = line.getOffset();
     int hasLength = (prevTokenOffset - line.getOffset());
-    boolean hasPrefixContent = ((hasLength > 0)
-        && (document.get(hasOffset, hasLength).trim().length() > 0));
+    boolean hasPrefixContent = ((hasLength > 0) && (document.get(hasOffset, hasLength).trim()
+        .length() > 0));
 
     hasOffset = (prevTokenOffset + previous.length() + 1);
     hasLength = (line.getLength() - (hasOffset - line.getOffset()));
-    boolean hasSuffixContent = ((hasLength > 0) && ((hasOffset + hasLength) <= document.getLength())
-        && (document.get(hasOffset, hasLength).trim().length() > 0));
+    boolean hasSuffixContent = ((hasLength > 0)
+        && ((hasOffset + hasLength) <= document.getLength()) && (document.get(hasOffset, hasLength)
+        .trim().length() > 0));
 
     if (!"case".equals(previous) && !"class".equals(previous) //$NON-NLS-1$ //$NON-NLS-2$
         && !"def".equals(previous) && !"do".equals(previous) //$NON-NLS-1$ //$NON-NLS-2$
@@ -181,7 +183,7 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
 
   /**
    * Tells whether the given inserted string represents hitting the Tab key.
-   *
+   * 
    * @param text
    *          the text to check
    * @return <code>true</code> if the text represents hitting the Tab key
@@ -206,13 +208,13 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
 
   /**
    * The preference setting that tells whether to insert spaces when pressing the Tab key.
-   *
+   * 
    * @return <code>true</code> if spaces are inserted when pressing the Tab key
    * @since 3.5
    */
   private boolean isInsertingSpacesForTab() {
-    return CodeFormatterConstants.SPACE
-        .equals(getOption(JuliaFormatterPlugin.ID, CodeFormatterConstants.FORMATTER_TAB_CHAR));
+    return CodeFormatterConstants.SPACE.equals(getOption(JuliaFormatterPlugin.ID,
+        CodeFormatterConstants.FORMATTER_TAB_CHAR));
   }
 
   private IScriptProject getProject() {
@@ -260,8 +262,7 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
     }
 
     if (linePrefix.trim().length() != 0
-        || (linePostfix.trim().length() != 0 && postfixIndent.length() == 0
-            && computeVisualLength(linePrefix) >= computeVisualLength(rightIndent))) {
+        || (linePostfix.trim().length() != 0 && postfixIndent.length() == 0 && computeVisualLength(linePrefix) >= computeVisualLength(rightIndent))) {
       c.text = indentation();
       return;
     }
@@ -418,8 +419,8 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
     }
 
     return previousIsContinuation(scanner, offset, bound)
-        && (previousLine == null || !previousIsContinuation(scanner,
-            previousLine.getOffset() + previousLine.getLength(), previousLine.getOffset()));
+        && (previousLine == null || !previousIsContinuation(scanner, previousLine.getOffset()
+            + previousLine.getLength(), previousLine.getOffset()));
 
   }
 
@@ -503,7 +504,7 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
   /**
    * Computes the length of a <code>CharacterSequence</code>, counting a tab character as the size
    * until the next tab stop and every other character as one.
-   *
+   * 
    * @param indent
    *          the string to measure
    * @return the visual length in characters
@@ -523,6 +524,9 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
         case ' ':
           length++;
           break;
+        default:
+          length++;
+          break;
       }
     }
     return length;
@@ -530,7 +534,7 @@ public class JuliaAutoIndentStrategy extends DefaultIndentLineAutoEditStrategy {
 
   /**
    * Computes the indentation at <code>offset</code>.
-   *
+   * 
    * @param scanner
    * @param offset
    *          the offset in the document
