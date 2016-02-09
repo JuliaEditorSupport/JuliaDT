@@ -9,11 +9,22 @@ Julia Development Toolkit for Eclipse
 3. [Julia](http://julialang.org/downloads/)
 
 
-#To Build
+#To Install as an Eclipse Plugin
+   
+Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/tag/v0.0.1) and follow installation instructions
+
+> Plugin was tested using [Eclipse - Mars release](https://eclipse.org/mars/)
+
+#Development
+
+    git clone https://github.com/JuliaComputing/JuliaDT.git
+
+##To Build
 
     mvn clean install
 
-#To Run 
+
+##To Run 
 
     cd <project home>/com.juliacomputing.jldt.eclipse.repository/target/products
     cp jldt.product-<platform>.zip <installation directory>
@@ -21,15 +32,6 @@ Julia Development Toolkit for Eclipse
     unzip jldt.product-<platform>.zip
     launch
 
-#To Install
-
-## As Eclipse plugin
-    
-    Update Site/Repository (url tbc)
-
-## As Standalone Application    
-    
-    url tbc
   
 #To Do    
     
