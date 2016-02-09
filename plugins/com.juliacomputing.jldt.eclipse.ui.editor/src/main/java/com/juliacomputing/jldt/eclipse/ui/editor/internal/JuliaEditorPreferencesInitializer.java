@@ -26,12 +26,12 @@ public class JuliaEditorPreferencesInitializer extends AbstractPreferenceInitial
     PreferenceConverter.setDefault(store, JuliaColourConstants.STRING, STRING_COLOUR);
 
     store.setDefault(JuliaColourConstants.COMMENT + PreferenceConstants.EDITOR_BOLD_SUFFIX, false);
-    store.setDefault(JuliaColourConstants.COMMENT + PreferenceConstants.EDITOR_ITALIC_SUFFIX,
-        false);
+    store
+        .setDefault(JuliaColourConstants.COMMENT + PreferenceConstants.EDITOR_ITALIC_SUFFIX, false);
 
     store.setDefault(JuliaColourConstants.KEYWORD + PreferenceConstants.EDITOR_BOLD_SUFFIX, true);
-    store.setDefault(JuliaColourConstants.KEYWORD + PreferenceConstants.EDITOR_ITALIC_SUFFIX,
-        false);
+    store
+        .setDefault(JuliaColourConstants.KEYWORD + PreferenceConstants.EDITOR_ITALIC_SUFFIX, false);
 
     store.setDefault(PreferenceConstants.EDITOR_TAB_WIDTH, 8);
     store.setDefault(PreferenceConstants.EDITOR_SYNC_OUTLINE_ON_CURSOR_MOVE, true);

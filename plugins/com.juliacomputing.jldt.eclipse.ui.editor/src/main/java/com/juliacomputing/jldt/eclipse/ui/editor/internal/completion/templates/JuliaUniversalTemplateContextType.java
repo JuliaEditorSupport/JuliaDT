@@ -20,8 +20,8 @@ public class JuliaUniversalTemplateContextType extends ScriptTemplateContextType
     super(id);
   }
 
-  public ScriptTemplateContext createContext(IDocument document, int completionPosition, int length,
-      ISourceModule sourceModule) {
+  public ScriptTemplateContext createContext(IDocument document, int completionPosition,
+      int length, ISourceModule sourceModule) {
     return new JuliaTemplateContext(this, document, completionPosition, length, sourceModule);
   }
 }

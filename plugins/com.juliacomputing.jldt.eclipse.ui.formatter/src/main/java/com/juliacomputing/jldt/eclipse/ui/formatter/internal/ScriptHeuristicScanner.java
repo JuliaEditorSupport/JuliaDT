@@ -63,7 +63,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
   private int fPos;
   /**
    * The most recently used partition.
-   *
+   * 
    * @since 3.2
    */
   private ITypedRegion fCachedPartition = new TypedRegion(-1, 0, "__no_partition_at_all"); //$NON-NLS-1$
@@ -87,7 +87,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
   /**
    * Returns the most recent internal scan position.
-   *
+   * 
    * @return the most recent internal scan position.
    */
   public int getPosition() {
@@ -96,7 +96,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
   /**
    * Sets the most recent internal scan position.
-   *
+   * 
    * @return the most recent internal scan position.
    */
   protected void setPosition(int pos) {
@@ -107,7 +107,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
   /**
    * Returns the scanned document
-   *
+   * 
    * @return the scanned document
    */
   public IDocument getDocument() {
@@ -116,7 +116,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
   /**
    * Returns the partition at <code>position</code>.
-   *
+   * 
    * @param position
    *          the position to get the partition for
    * @return the partition at <code>position</code> or a dummy zero-length partition if accessing
@@ -140,7 +140,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
   /**
    * Returns <code>true</code> if <code>region</code> contains <code>position</code>.
-   *
+   * 
    * @param region
    *          a region
    * @param position
@@ -155,7 +155,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
   /**
    * Checks whether <code>position</code> resides in a default partition of <code>fDocument</code>.
-   *
+   * 
    * @param position
    *          the position to be checked
    * @return <code>true</code> if <code>position</code> is in the default partition of
@@ -169,7 +169,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * Finds the lowest position <code>p</code> in <code>fDocument</code> such that <code>start</code>
    * &lt;= p &lt; <code>bound</code> and <code>condition.stop(fDocument.getChar(p), p)</code>
    * evaluates to <code>true</code>.
-   *
+   * 
    * @param start
    *          the first character position in <code>fDocument</code> to be considered
    * @param bound
@@ -208,7 +208,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * Finds the highest position <code>p</code> in <code>fDocument</code> such that
    * <code>bound</code> &lt; <code>p</code> &lt;= <code>start</code> and
    * <code>condition.stop(fDocument.getChar(p), p)</code> evaluates to <code>true</code>.
-   *
+   * 
    * @param start
    *          the first character position in <code>fDocument</code> to be considered
    * @param bound
@@ -247,7 +247,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * <code>position</code> and &lt; <code>bound</code> and
    * <code>Character.isWhitespace(fDocument.getChar(pos))</code> evaluates to <code>false</code> and
    * the position is in the default partition.
-   *
+   * 
    * @param position
    *          the first character position in <code>fDocument</code> to be considered
    * @param bound
@@ -265,7 +265,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * Finds the smallest position in <code>fDocument</code> such that the position is &gt;=
    * <code>position</code> and &lt; <code>bound</code> and
    * <code>Character.isWhitespace(fDocument.getChar(pos))</code> evaluates to <code>false</code>.
-   *
+   * 
    * @param position
    *          the first character position in <code>fDocument</code> to be considered
    * @param bound
@@ -283,7 +283,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * <code>position</code> and &gt; <code>bound</code> and
    * <code>Character.isWhitespace(fDocument.getChar(pos))</code> evaluates to <code>false</code> and
    * the position is in the default partition.
-   *
+   * 
    * @param position
    *          the first character position in <code>fDocument</code> to be considered
    * @param bound
@@ -301,7 +301,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * Finds the highest position in <code>fDocument</code> such that the position is &gt;=
    * <code>position</code> and &lt; <code>bound</code> and
    * <code>Character.isWhitespace(fDocument.getChar(pos))</code> evaluates to <code>false</code>.
-   *
+   * 
    * @param position
    *          the first character position in <code>fDocument</code> to be considered
    * @param bound
@@ -454,7 +454,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * Note that <code>start</code> must not point to the opening peer, but to the first character
    * being searched.
    * </p>
-   *
+   * 
    * @param start
    *          the start position
    * @param openingPeer
@@ -475,7 +475,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * Note that <code>start</code> must not point to the opening peer, but to the first character
    * being searched.
    * </p>
-   *
+   * 
    * @param start
    *          the start position
    * @param bound
@@ -521,7 +521,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * Note that <code>start</code> must not point to the closing peer, but to the first character
    * being searched.
    * </p>
-   *
+   * 
    * @param start
    *          the start position
    * @param openingPeer
@@ -542,7 +542,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
    * Note that <code>start</code> must not point to the closing peer, but to the first character
    * being searched.
    * </p>
-   *
+   * 
    * @param start
    *          the start position
    * @param bound
@@ -606,7 +606,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
   /**
    * Returns one of the keyword constants or <code>TokenIDENT</code> for a scanned identifier.
-   *
+   * 
    * @param s
    *          a scanned identifier
    * @return one of the constants defined in {@link ISymbols}
@@ -627,7 +627,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
   protected static abstract class StopCondition {
     /**
      * Instructs the scanner to return the current position.
-     *
+     * 
      * @param ch
      *          the char at the current position
      * @param position
@@ -641,7 +641,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
     /**
      * Asks the condition to return the next position to query. The default is to return the
      * next/previous position.
-     *
+     * 
      * @return the next position to scan
      */
     public int nextPosition(int position, boolean forward) {
@@ -660,7 +660,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
   /**
    * Stops upon a non-whitespace character in the default partition.
-   *
+   * 
    * @see JuliaHeuristicScanner.NonWhitespace
    */
   protected final class NonWhitespaceDefaultPartition extends NonWhitespace {
@@ -729,7 +729,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
     /**
      * Creates a new instance.
-     *
+     * 
      * @param ch
      *          the single character to match
      */
@@ -739,7 +739,7 @@ public abstract class ScriptHeuristicScanner implements ISymbols {
 
     /**
      * Creates a new instance.
-     *
+     * 
      * @param chars
      *          the chars to match.
      */

@@ -8,8 +8,8 @@ import org.eclipse.dltk.internal.debug.ui.launcher.AbstractScriptLaunchShortcut;
 
 public class JuliaLaunchShortcut extends AbstractScriptLaunchShortcut {
   protected ILaunchConfigurationType getConfigurationType() {
-    return getLaunchManager()
-        .getLaunchConfigurationType(JuliaLaunchConfigurationConstants.ID_JULIA_SCRIPT);
+    return getLaunchManager().getLaunchConfigurationType(
+        JuliaLaunchConfigurationConstants.ID_JULIA_SCRIPT);
   }
 
   protected String getNatureId() {
