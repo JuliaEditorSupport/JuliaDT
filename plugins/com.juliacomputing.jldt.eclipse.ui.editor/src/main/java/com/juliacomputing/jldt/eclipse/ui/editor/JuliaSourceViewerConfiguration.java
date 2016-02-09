@@ -7,6 +7,7 @@ import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaContentAssistPref
 import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaHierarchyInformationControl;
 import com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.JuliaScriptCompletionProcessor;
 import com.juliacomputing.jldt.eclipse.ui.formatter.JuliaAutoIndentStrategy;
+
 import org.eclipse.dltk.internal.ui.editor.EditorUtility;
 import org.eclipse.dltk.internal.ui.editor.ScriptSourceViewer;
 import org.eclipse.dltk.internal.ui.text.ScriptElementProvider;
@@ -33,157 +34,147 @@ import org.eclipse.ui.texteditor.ITextEditor;
 
 public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfiguration {
 
-    private AbstractScriptScanner codeScanner;
-    private AbstractScriptScanner stringScanner;
-    private AbstractScriptScanner commentScanner;
+  private AbstractScriptScanner codeScanner;
+  private AbstractScriptScanner stringScanner;
+  private AbstractScriptScanner commentScanner;
 
-    public JuliaSourceViewerConfiguration(IColorManager colorManager,
-                                          IPreferenceStore preferenceStore, ITextEditor editor,
-                                          String partitioning) {
-        super(colorManager, preferenceStore, editor, partitioning);
+  public JuliaSourceViewerConfiguration(IColorManager colorManager,
+      IPreferenceStore preferenceStore, ITextEditor editor, String partitioning) {
+    super(colorManager, preferenceStore, editor, partitioning);
+  }
+
+  public String[] getIndentPrefixes(ISourceViewer sourceViewer, String contentType) {
+    return new String[] { "\t", "  " };
+  }
+
+  protected ContentAssistPreference getContentAssistPreference() {
+    return JuliaContentAssistPreference.getDefault();
+  }
+
+  protected void initializeScanners() {
+    codeScanner = new JuliaCodeScanner(getColorManager(), fPreferenceStore);
+    stringScanner = new SingleTokenScriptScanner(getColorManager(), fPreferenceStore,
+        JuliaColourConstants.STRING);
+    commentScanner = new SingleTokenScriptScanner(getColorManager(), fPreferenceStore,
+        JuliaColourConstants.COMMENT);
+  }
+
+  public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
+    PresentationReconciler reconciler = new ScriptPresentationReconciler();
+    reconciler.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
+
+    DefaultDamagerRepairer dr = new DefaultDamagerRepairer(codeScanner);
+    reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
+    reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+
+    dr = new DefaultDamagerRepairer(stringScanner);
+    reconciler.setDamager(dr, JuliaPartition.STRING);
+    reconciler.setRepairer(dr, JuliaPartition.STRING);
+
+    dr = new DefaultDamagerRepairer(commentScanner);
+    reconciler.setDamager(dr, JuliaPartition.COMMENT);
+    reconciler.setRepairer(dr, JuliaPartition.COMMENT);
+
+    return reconciler;
+  }
+
+  public void handlePropertyChangeEvent(PropertyChangeEvent event) {
+    if (codeScanner.affectsBehavior(event)) {
+      codeScanner.adaptToPreferenceChange(event);
     }
-
-    public String[] getIndentPrefixes(ISourceViewer sourceViewer, String contentType) {
-        return new String[]{"\t", "  "};
+    if (stringScanner.affectsBehavior(event)) {
+      stringScanner.adaptToPreferenceChange(event);
     }
+  }
 
-    protected ContentAssistPreference getContentAssistPreference() {
-        return JuliaContentAssistPreference.getDefault();
-    }
+  public boolean affectsTextPresentation(PropertyChangeEvent event) {
+    return codeScanner.affectsBehavior(event) || stringScanner.affectsBehavior(event);
+  }
 
-    protected void initializeScanners() {
-        codeScanner = new JuliaCodeScanner(getColorManager(), fPreferenceStore);
-        stringScanner = new SingleTokenScriptScanner(getColorManager(), fPreferenceStore, JuliaColourConstants.STRING);
-        commentScanner = new SingleTokenScriptScanner(getColorManager(), fPreferenceStore, JuliaColourConstants.COMMENT);
-    }
+  protected void alterContentAssistant(ContentAssistant assistant) {
+    IContentAssistProcessor scriptProcessor = new JuliaScriptCompletionProcessor(getEditor(),
+        assistant, IDocument.DEFAULT_CONTENT_TYPE);
+    assistant.setContentAssistProcessor(scriptProcessor, IDocument.DEFAULT_CONTENT_TYPE);
+  }
 
-    public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
-        PresentationReconciler reconciler = new ScriptPresentationReconciler();
-        reconciler.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
+  public IInformationPresenter getHierarchyPresenter(ScriptSourceViewer sourceViewer,
+      boolean doCodeResolve) {
+    if (getEditor() != null && getEditor().getEditorInput() != null
+        && EditorUtility.getEditorInputModelElement(getEditor(), true) == null)
+      return null;
 
-        DefaultDamagerRepairer dr = new DefaultDamagerRepairer(codeScanner);
-        reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
-        reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+    InformationPresenter presenter = new InformationPresenter(
+        getHierarchyPresenterControlCreator(sourceViewer));
+    presenter.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
+    presenter.setAnchor(AbstractInformationControlManager.ANCHOR_GLOBAL);
+    IInformationProvider provider = new ScriptElementProvider(getEditor(), doCodeResolve);
+    presenter.setInformationProvider(provider, IDocument.DEFAULT_CONTENT_TYPE);
 
-        dr = new DefaultDamagerRepairer(stringScanner);
-        reconciler.setDamager(dr, JuliaPartition.STRING);
-        reconciler.setRepairer(dr, JuliaPartition.STRING);
+    presenter.setSizeConstraints(50, 20, true, false);
+    return presenter;
+  }
 
-        dr = new DefaultDamagerRepairer(commentScanner);
-        reconciler.setDamager(dr, JuliaPartition.COMMENT);
-        reconciler.setRepairer(dr, JuliaPartition.COMMENT);
+  private IInformationControlCreator getHierarchyPresenterControlCreator(
+      ISourceViewer sourceViewer) {
+    final int shellStyle = SWT.RESIZE;
+    final int treeStyle = SWT.V_SCROLL | SWT.H_SCROLL;
+    return new IInformationControlCreator() {
+      @Override
+      public IInformationControl createInformationControl(final Shell shell) {
+        return new JuliaHierarchyInformationControl(shell, shellStyle, treeStyle);
+      }
+    };
+  }
 
-        return reconciler;
-    }
+  public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
+    return new IAutoEditStrategy[] {
+        new JuliaAutoIndentStrategy(getConfiguredDocumentPartitioning(sourceViewer)) };
+  }
 
-    public void handlePropertyChangeEvent(PropertyChangeEvent event) {
-        if (codeScanner.affectsBehavior(event)) {
-            codeScanner.adaptToPreferenceChange(event);
-        }
-        if (stringScanner.affectsBehavior(event)) {
-            stringScanner.adaptToPreferenceChange(event);
-        }
-    }
+  public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
+    return null;
+  }
 
-    public boolean affectsTextPresentation(PropertyChangeEvent event) {
-        return codeScanner.affectsBehavior(event) || stringScanner.affectsBehavior(event);
-    }
+  public IAnnotationHover getOverviewRulerAnnotationHover(ISourceViewer sourceViewer) {
+    return null;
+  }
 
-    protected void alterContentAssistant(ContentAssistant assistant) {
-        IContentAssistProcessor scriptProcessor = new JuliaScriptCompletionProcessor(getEditor(), assistant, IDocument.DEFAULT_CONTENT_TYPE);
-        assistant.setContentAssistProcessor(scriptProcessor, IDocument.DEFAULT_CONTENT_TYPE);
-    }
+  public int[] getConfiguredTextHoverStateMasks(ISourceViewer sourceViewer, String contentType) {
+    return null;
+  }
 
+  public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType, int stateMask) {
+    return null;
+  }
 
-    public IInformationPresenter getHierarchyPresenter(
-            ScriptSourceViewer sourceViewer, boolean doCodeResolve) {
-        if (getEditor() != null
-                && getEditor().getEditorInput() != null
-                && EditorUtility.getEditorInputModelElement(getEditor(), true) == null)
-            return null;
+  public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
+    return null;
+  }
 
-        InformationPresenter presenter = new InformationPresenter(
-                getHierarchyPresenterControlCreator(sourceViewer));
-        presenter
-                .setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
-        presenter.setAnchor(AbstractInformationControlManager.ANCHOR_GLOBAL);
-        IInformationProvider provider = new ScriptElementProvider(getEditor(),
-                doCodeResolve);
-        presenter.setInformationProvider(provider,
-                IDocument.DEFAULT_CONTENT_TYPE);
+  public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
+    return null;
+  }
 
-        presenter.setSizeConstraints(50, 20, true, false);
-        return presenter;
-    }
+  public IInformationControlCreator getInformationControlCreator(ISourceViewer sourceViewer) {
+    return null;
+  }
 
+  public IInformationPresenter getInformationPresenter(ISourceViewer sourceViewer) {
+    return null;
+  }
 
-    private IInformationControlCreator getHierarchyPresenterControlCreator(ISourceViewer sourceViewer) {
-        final int shellStyle = SWT.RESIZE;
-        final int treeStyle = SWT.V_SCROLL | SWT.H_SCROLL;
-        return new IInformationControlCreator() {
-            @Override
-            public IInformationControl createInformationControl(final Shell shell) {
-                return new JuliaHierarchyInformationControl(shell, shellStyle,
-                        treeStyle);
-            }
-        };
-    }
+  public IInformationPresenter getOutlinePresenter(ISourceViewer sourceViewer,
+      boolean doCodeResolve) {
+    return null;
+  }
 
-    public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
-        return new IAutoEditStrategy[]{new JuliaAutoIndentStrategy(getConfiguredDocumentPartitioning(sourceViewer))};
-    }
+  public IInformationPresenter getHierarchyPresenter(ISourceViewer sourceViewer,
+      boolean doCodeResolve) {
+    return null;
+  }
 
-
-    public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
-        return null;
-    }
-
-    public IAnnotationHover getOverviewRulerAnnotationHover(
-            ISourceViewer sourceViewer) {
-        return null;
-    }
-
-    public int[] getConfiguredTextHoverStateMasks(ISourceViewer sourceViewer,
-                                                  String contentType) {
-        return null;
-    }
-
-    public ITextHover getTextHover(ISourceViewer sourceViewer,
-                                   String contentType, int stateMask) {
-        return null;
-    }
-
-    public ITextHover getTextHover(ISourceViewer sourceViewer,
-                                   String contentType) {
-        return null;
-    }
-
-    public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
-        return null;
-    }
-
-    public IInformationControlCreator getInformationControlCreator(
-            ISourceViewer sourceViewer) {
-        return null;
-    }
-
-    public IInformationPresenter getInformationPresenter(
-            ISourceViewer sourceViewer) {
-        return null;
-    }
-
-    public IInformationPresenter getOutlinePresenter(
-            ISourceViewer sourceViewer, boolean doCodeResolve) {
-        return null;
-    }
-
-    public IInformationPresenter getHierarchyPresenter(
-            ISourceViewer sourceViewer, boolean doCodeResolve) {
-        return null;
-    }
-
-    public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
-        return null;
-    }
+  public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
+    return null;
+  }
 
 }

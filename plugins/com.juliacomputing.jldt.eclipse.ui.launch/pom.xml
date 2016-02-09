@@ -4,12 +4,18 @@
          xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>julia.eclipse.parent</artifactId>
+        <artifactId>com.juliacomputing.jldt.parent</artifactId>
         <groupId>com.juliacomputing</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../../julia.eclipse.parent</relativePath>
+        <relativePath>../../com.juliacomputing.jldt.parent</relativePath>
     </parent>
     <version>0.0.1-SNAPSHOT</version>
     <artifactId>com.juliacomputing.jldt.eclipse.ui.launch</artifactId>
     <packaging>eclipse-plugin</packaging>
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
 </project>

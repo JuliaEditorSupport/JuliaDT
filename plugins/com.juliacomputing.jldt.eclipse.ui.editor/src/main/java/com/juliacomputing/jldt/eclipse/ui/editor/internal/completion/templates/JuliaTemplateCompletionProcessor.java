@@ -6,21 +6,21 @@ import org.eclipse.dltk.ui.text.completion.ScriptContentAssistInvocationContext;
 
 public class JuliaTemplateCompletionProcessor extends ScriptTemplateCompletionProcessor {
 
-    private static char[] IGNORE = new char[]{'.'};
+  private static char[] IGNORE = new char[] { '.' };
 
-    public JuliaTemplateCompletionProcessor(ScriptContentAssistInvocationContext context) {
-        super(context);
-    }
+  public JuliaTemplateCompletionProcessor(ScriptContentAssistInvocationContext context) {
+    super(context);
+  }
 
-    protected String getContextTypeId() {
-        return JuliaUniversalTemplateContextType.CONTEXT_TYPE_ID;
-    }
+  protected String getContextTypeId() {
+    return JuliaUniversalTemplateContextType.CONTEXT_TYPE_ID;
+  }
 
-    protected char[] getIgnore() {
-        return IGNORE;
-    }
+  protected char[] getIgnore() {
+    return IGNORE;
+  }
 
-    protected ScriptTemplateAccess getTemplateAccess() {
-        return JuliaTemplateAccess.getInstance();
-    }
+  protected ScriptTemplateAccess getTemplateAccess() {
+    return JuliaTemplateAccess.getInstance();
+  }
 }

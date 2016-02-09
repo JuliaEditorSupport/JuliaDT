@@ -5,8 +5,8 @@ import org.eclipse.dltk.compiler.SourceElementRequestVisitor;
 
 public class JuliaSourceElementRequestor extends SourceElementRequestVisitor {
 
-    public JuliaSourceElementRequestor(IElementRequestor requesor) {
-        super(requesor);
-    }
+  public JuliaSourceElementRequestor(IElementRequestor requesor) {
+    super(requesor);
+  }
 
 }

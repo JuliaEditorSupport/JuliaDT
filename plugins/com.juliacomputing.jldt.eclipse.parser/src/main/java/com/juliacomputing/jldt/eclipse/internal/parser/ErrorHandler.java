@@ -15,26 +15,21 @@ import org.eclipse.dltk.compiler.problem.ProblemSeverity;
  */
 public class ErrorHandler extends DefaultErrorStrategy {
 
-    private final IProblemReporter problemReporter;
+  private final IProblemReporter problemReporter;
 
-    public ErrorHandler(IProblemReporter problemReporter) {
-        this.problemReporter = problemReporter;
-    }
+  public ErrorHandler(IProblemReporter problemReporter) {
+    this.problemReporter = problemReporter;
+  }
 
+  @Override
+  protected void reportNoViableAlternative(Parser recognizer, NoViableAltException exception) {
+    super.reportNoViableAlternative(recognizer, exception);
+    final Token offendingToken = exception.getOffendingToken();
+    problemReporter.reportProblem(
+        new DefaultProblem(exception.getInputStream().getSourceName(), exception.getMessage(),
+            JuliaProblemIdentifier.SYNTAX_ERROR, new String[] { exception.getMessage() },
+            ProblemSeverity.DEFAULT, offendingToken.getStartIndex(), offendingToken.getStopIndex(),
+            offendingToken.getLine(), offendingToken.getCharPositionInLine()));
 
-    @Override
-    protected void reportNoViableAlternative(Parser recognizer, NoViableAltException e) {
-        super.reportNoViableAlternative(recognizer, e);
-        final Token offendingToken = e.getOffendingToken();
-        problemReporter.reportProblem(new DefaultProblem(e.getInputStream().getSourceName(),
-                e.getMessage(),
-                JuliaProblemIdentifier.SYNTAX_ERROR,
-                new String[]{e.getMessage()},
-                ProblemSeverity.DEFAULT,
-                offendingToken.getStartIndex(),
-                offendingToken.getStopIndex(),
-                offendingToken.getLine(),
-                offendingToken.getCharPositionInLine()));
-
-    }
+  }
 }

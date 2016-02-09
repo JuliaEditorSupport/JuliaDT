@@ -11,6 +11,12 @@
         <jackson.version>2.6.4</jackson.version>
     </properties>
     <packaging>bundle</packaging>
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
 
     <build>
         <plugins>

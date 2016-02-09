@@ -1,6 +1,7 @@
 package com.juliacomputing.jldt.kernel;
 
 import com.juliacomputing.jldt.kernel.api.Kernel;
+
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Deactivate;
@@ -10,36 +11,36 @@ import org.apache.felix.scr.annotations.Service;
 @Component
 public class DefaultKernel implements Kernel {
 
-    public static final int DEFAULT_PORT = 5555;
-    public static final String DEFAULT_HOST = "localhost";
+  public static final int DEFAULT_PORT = 5555;
+  public static final String DEFAULT_HOST = "localhost";
 
-    private KernelZMQProxy proxy;
+  private KernelZMQProxy proxy;
 
-    public static void main(String[] args) throws InterruptedException {
-        final DefaultKernel kernel = new DefaultKernel();
-        kernel.start();
-        for (int i = 0; i < 1000; i++) {
-            Thread.sleep(1000);
-            final String[] keywords = kernel.keywords();
-        }
-        kernel.stop();
+  public static void main(String[] args) throws InterruptedException {
+    final DefaultKernel kernel = new DefaultKernel();
+    kernel.start();
+    for (int i = 0; i < 1000; i++) {
+      Thread.sleep(1000);
+      final String[] keywords = kernel.keywords();
     }
+    kernel.stop();
+  }
 
-    @Activate
-    public void start() {
-        proxy = new KernelZMQProxy(DEFAULT_HOST, DEFAULT_PORT);
-        proxy.connect();
+  @Activate
+  public void start() {
+    proxy = new KernelZMQProxy(DEFAULT_HOST, DEFAULT_PORT);
+    proxy.connect();
 
-    }
+  }
 
-    @Deactivate
-    public void stop() {
-        proxy.disconnect();
-    }
+  @Deactivate
+  public void stop() {
+    proxy.disconnect();
+  }
 
-    @Override
-    public String[] keywords() {
-        proxy.send(new Keywords());
-        return proxy.receive(String[].class);
-    }
+  @Override
+  public String[] keywords() {
+    proxy.send(new Keywords());
+    return proxy.receive(String[].class);
+  }
 }

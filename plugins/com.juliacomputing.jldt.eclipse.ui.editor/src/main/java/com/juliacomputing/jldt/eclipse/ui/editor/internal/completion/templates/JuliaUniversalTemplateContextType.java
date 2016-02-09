@@ -7,21 +7,21 @@ import org.eclipse.jface.text.IDocument;
 
 public class JuliaUniversalTemplateContextType extends ScriptTemplateContextType {
 
-    public static final String CONTEXT_TYPE_ID = "juliaUniversalTemplateContextType";
+  public static final String CONTEXT_TYPE_ID = "juliaUniversalTemplateContextType";
 
-    public JuliaUniversalTemplateContextType() {
-    }
+  public JuliaUniversalTemplateContextType() {
+  }
 
-    public JuliaUniversalTemplateContextType(String id, String name) {
-        super(id, name);
-    }
+  public JuliaUniversalTemplateContextType(String id, String name) {
+    super(id, name);
+  }
 
-    public JuliaUniversalTemplateContextType(String id) {
-        super(id);
-    }
+  public JuliaUniversalTemplateContextType(String id) {
+    super(id);
+  }
 
-    public ScriptTemplateContext createContext(IDocument document,
-                                               int completionPosition, int length, ISourceModule sourceModule) {
-        return new JuliaTemplateContext(this, document, completionPosition, length, sourceModule);
-    }
+  public ScriptTemplateContext createContext(IDocument document, int completionPosition, int length,
+      ISourceModule sourceModule) {
+    return new JuliaTemplateContext(this, document, completionPosition, length, sourceModule);
+  }
 }

@@ -5,7 +5,7 @@ import org.eclipse.dltk.internal.debug.ui.interpreters.ScriptInterpreterPreferen
 
 public class JuliaInterpreterPreferencePage extends ScriptInterpreterPreferencePage {
 
-    public InterpretersBlock createInterpretersBlock() {
-        return new JuliaInterpretersBlock();
-    }
+  public InterpretersBlock createInterpretersBlock() {
+    return new JuliaInterpretersBlock();
+  }
 }

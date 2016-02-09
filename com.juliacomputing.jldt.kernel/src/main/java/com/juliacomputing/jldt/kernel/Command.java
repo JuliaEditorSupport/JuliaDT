@@ -4,6 +4,6 @@ import java.util.UUID;
 
 public abstract class Command {
 
-    private final UUID uuid = UUID.randomUUID();
+  private final UUID uuid = UUID.randomUUID();
 
 }

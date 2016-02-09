@@ -2,6 +2,7 @@ package com.juliacomputing.jldt.eclipse.ui.editor.internal;
 
 import com.juliacomputing.jldt.eclipse.core.JuliaPartition;
 import com.juliacomputing.jldt.eclipse.ui.editor.JuliaSourceViewerConfiguration;
+
 import org.eclipse.dltk.ui.text.ScriptSourceViewerConfiguration;
 import org.eclipse.dltk.ui.text.ScriptTextTools;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -10,26 +11,23 @@ import org.eclipse.ui.texteditor.ITextEditor;
 
 public class JuliaTextTools extends ScriptTextTools {
 
-    private static final String[] LEGAL_CONTENT_TYPES = {
-            JuliaPartition.STRING,
-            JuliaPartition.COMMENT};
+  private static final String[] LEGAL_CONTENT_TYPES = { JuliaPartition.STRING,
+      JuliaPartition.COMMENT };
 
-    private final IPartitionTokenScanner partitionScanner;
+  private final IPartitionTokenScanner partitionScanner;
 
-    public JuliaTextTools(boolean autoDisposeOnDisplayDispose) {
-        super(JuliaPartition.JULIA_PARTITIONING,
-                LEGAL_CONTENT_TYPES, autoDisposeOnDisplayDispose);
-        partitionScanner = new JuliaPartitionScanner();
-    }
+  public JuliaTextTools(boolean autoDisposeOnDisplayDispose) {
+    super(JuliaPartition.JULIA_PARTITIONING, LEGAL_CONTENT_TYPES, autoDisposeOnDisplayDispose);
+    partitionScanner = new JuliaPartitionScanner();
+  }
 
-    public ScriptSourceViewerConfiguration createSourceViewerConfiguraton(
-            IPreferenceStore preferenceStore, ITextEditor editor,
-            String partitioning) {
-        return new JuliaSourceViewerConfiguration(getColorManager(),
-                preferenceStore, editor, partitioning);
-    }
+  public ScriptSourceViewerConfiguration createSourceViewerConfiguraton(
+      IPreferenceStore preferenceStore, ITextEditor editor, String partitioning) {
+    return new JuliaSourceViewerConfiguration(getColorManager(), preferenceStore, editor,
+        partitioning);
+  }
 
-    public IPartitionTokenScanner getPartitionScanner() {
-        return partitionScanner;
-    }
+  public IPartitionTokenScanner getPartitionScanner() {
+    return partitionScanner;
+  }
 }

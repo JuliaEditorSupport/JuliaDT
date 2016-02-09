@@ -2,54 +2,28 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <parent>
-        <artifactId>julia.eclipse.parent</artifactId>
+        <artifactId>com.juliacomputing.jldt.parent</artifactId>
         <groupId>com.juliacomputing</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../../julia.eclipse.parent</relativePath>
+        <relativePath>../../com.juliacomputing.jldt.parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.juliacomputing.jldt.eclipse.features</groupId>
     <artifactId>com.juliacomputing.jldt.eclipse</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>eclipse-feature</packaging>
-
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>target-platform-configuration</artifactId>
-                <configuration>
-                    <pomDependencies>consider</pomDependencies>
-                    <environments>
-                        <environment>
-                            <os>linux</os>
-                            <ws>gtk</ws>
-                            <arch>x86</arch>
-                        </environment>
-                        <environment>
-                            <os>linux</os>
-                            <ws>gtk</ws>
-                            <arch>x86_64</arch>
-                        </environment>
-                        <environment>
-                            <os>win32</os>
-                            <ws>win32</ws>
-                            <arch>x86</arch>
-                        </environment>
-                        <environment>
-                            <os>win32</os>
-                            <ws>win32</ws>
-                            <arch>x86_64</arch>
-                        </environment>
-                        <environment>
-                            <os>macosx</os>
-                            <ws>cocoa</ws>
-                            <arch>x86_64</arch>
-                        </environment>
-                    </environments>
-                </configuration>
             </plugin>
         </plugins>
     </build>

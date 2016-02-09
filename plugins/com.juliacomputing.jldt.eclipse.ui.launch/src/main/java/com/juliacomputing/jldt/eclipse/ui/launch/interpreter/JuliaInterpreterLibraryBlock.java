@@ -7,11 +7,11 @@ import org.eclipse.jface.viewers.IBaseLabelProvider;
 
 public class JuliaInterpreterLibraryBlock extends AbstractInterpreterLibraryBlock {
 
-    public JuliaInterpreterLibraryBlock(AddScriptInterpreterDialog dialog) {
-        super(dialog);
-    }
+  public JuliaInterpreterLibraryBlock(AddScriptInterpreterDialog dialog) {
+    super(dialog);
+  }
 
-    protected IBaseLabelProvider getLabelProvider() {
-        return new LibraryLabelProvider();
-    }
+  protected IBaseLabelProvider getLabelProvider() {
+    return new LibraryLabelProvider();
+  }
 }

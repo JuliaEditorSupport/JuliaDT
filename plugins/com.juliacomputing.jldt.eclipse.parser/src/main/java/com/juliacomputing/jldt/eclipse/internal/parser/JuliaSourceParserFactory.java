@@ -5,8 +5,8 @@ import org.eclipse.dltk.ast.parser.ISourceParserFactory;
 
 public class JuliaSourceParserFactory implements ISourceParserFactory {
 
-    public ISourceParser createSourceParser() {
-        return new JuliaEclipseParser();
-    }
+  public ISourceParser createSourceParser() {
+    return new JuliaEclipseParser();
+  }
 
 }

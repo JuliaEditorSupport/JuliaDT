@@ -44,7 +44,10 @@ Julia Development Toolkit for Eclipse
 1. [dltk](https://wiki.eclipse.org/DLTK)
 2. [dltk.ruby](https://github.com/eclipse/dltk.ruby)
 3. [dltk.javascrpt](https://github.com/eclipse/dltk.javascript)
-4. [tycho](https://eclipse.org/tycho/)
+4. [ANTLR](http://www.ANTLR.org)
+5. [tycho](https://eclipse.org/tycho/)
+6. [Checkstyle](http://eclipse-cs.sourceforge.net/#!/)
+7. [Google Checkstyle Rules](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)
 
     
  

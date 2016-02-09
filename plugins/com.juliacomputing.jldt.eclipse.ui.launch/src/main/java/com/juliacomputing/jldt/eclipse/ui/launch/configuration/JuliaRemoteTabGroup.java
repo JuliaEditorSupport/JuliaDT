@@ -7,11 +7,11 @@ import org.eclipse.debug.ui.ILaunchConfigurationTab;
 
 public class JuliaRemoteTabGroup extends AbstractLaunchConfigurationTabGroup {
 
-    public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
+  public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 
-        this.setTabs(new ILaunchConfigurationTab[]{
-                new JuliaRemoteLaunchConfigurationTab(mode), new CommonTab()});
+    this.setTabs(new ILaunchConfigurationTab[] { new JuliaRemoteLaunchConfigurationTab(mode),
+        new CommonTab() });
 
-    }
+  }
 
 }

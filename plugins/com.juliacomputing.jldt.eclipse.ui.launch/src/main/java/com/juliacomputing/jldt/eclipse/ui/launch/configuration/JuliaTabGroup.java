@@ -5,16 +5,11 @@ import org.eclipse.dltk.debug.ui.launchConfigurations.InterpreterTab;
 import org.eclipse.dltk.debug.ui.launchConfigurations.ScriptArgumentsTab;
 
 public class JuliaTabGroup extends AbstractLaunchConfigurationTabGroup {
-    public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-        JuliaMainLaunchConfigurationTab main = new JuliaMainLaunchConfigurationTab(mode);
-        ILaunchConfigurationTab[] tabs = {
-                main,
-                new ScriptArgumentsTab(),
-                new InterpreterTab(main),
-                new EnvironmentTab(),
-                new CommonTab()
-        };
+  public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
+    JuliaMainLaunchConfigurationTab main = new JuliaMainLaunchConfigurationTab(mode);
+    ILaunchConfigurationTab[] tabs = { main, new ScriptArgumentsTab(), new InterpreterTab(main),
+        new EnvironmentTab(), new CommonTab() };
 
-        this.setTabs(tabs);
-    }
+    this.setTabs(tabs);
+  }
 }

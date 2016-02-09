@@ -13,21 +13,21 @@ import org.julia.lang.parser.JuliaParser.UnitContext;
 
 public class JuliaEclipseParser extends AbstractSourceParser {
 
-
-    public ModuleDeclaration parse(IModuleSource source, IProblemReporter reporter) {
-        System.out.println(source.getFileName());
-        System.out.println("--------------------");
-        final String content = source.getSourceContents();
-        final CharStream stream = new ANTLRInputStream(content);
-        final JuliaLexer lexer = new JuliaLexer(stream);
-        final CommonTokenStream tokens = new CommonTokenStream(lexer);
-        final JuliaParser parser = new JuliaParser(tokens);
-        parser.setErrorHandler(new ErrorHandler(reporter));
-        final UnitContext unit = parser.unit();
-        final JuliaModuleFactory factory = new JuliaModuleFactory();
-//        reporter.reportProblem(new DefaultProblem("a","message",JuliaProblemIdentifier.SYNTAX_ERROR,new String[0], ProblemSeverity.ERROR,0,10,1,1));
-        return factory.create(unit);
-    }
-
+  public ModuleDeclaration parse(IModuleSource source, IProblemReporter reporter) {
+    System.out.println(source.getFileName());
+    System.out.println("--------------------");
+    final String content = source.getSourceContents();
+    final CharStream stream = new ANTLRInputStream(content);
+    final JuliaLexer lexer = new JuliaLexer(stream);
+    final CommonTokenStream tokens = new CommonTokenStream(lexer);
+    final JuliaParser parser = new JuliaParser(tokens);
+    parser.setErrorHandler(new ErrorHandler(reporter));
+    final UnitContext unit = parser.unit();
+    final JuliaModuleFactory factory = new JuliaModuleFactory();
+    // reporter.reportProblem(new
+    // DefaultProblem("a","message",JuliaProblemIdentifier.SYNTAX_ERROR,new String[0],
+    // ProblemSeverity.ERROR,0,10,1,1));
+    return factory.create(unit);
+  }
 
 }
