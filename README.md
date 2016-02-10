@@ -51,6 +51,7 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 6. [Checkstyle](http://eclipse-cs.sourceforge.net/#!/)
 7. [Google Checkstyle Rules](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml)
 8. [Eclipse Source](https://git.eclipse.org/c/)
+9. [dltk parent pom](https://git.eclipse.org/c/dltk/org.eclipse.dltk.releng.git/tree/build/pom.xml)
 
     
  

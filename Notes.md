@@ -20,19 +20,4 @@
 1. [DLTK wiki](https://wiki.eclipse.org/DLTK)
 2. [declarative services](http://www.vogella.com/tutorials/OSGiServices/article.html#tutorial_ds)
 
-#TODOs
-
-
-
-
-##
-julia workspace
-
-~/julia
-pkg_path
-load_path
-
-
-Pkg.generate(<pkg name>)
-generates skeleton inside julia (~ dir)
 
