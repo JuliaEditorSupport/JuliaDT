@@ -21,13 +21,33 @@
         <maven-compiler-plugin.source>1.7</maven-compiler-plugin.source>
         <maven-compiler-plugin.target>1.7</maven-compiler-plugin.target>
         <findbugs-maven-plugin.version>3.0.3</findbugs-maven-plugin.version>
+        <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
     </properties>
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <fail>true</fail>
+                    <rules>
+                        <dependencyConvergence/>
+                    </rules>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.3</version>
+                <version>${findbugs-maven-plugin.version}</version>
                 <configuration>
                     <effort>Max</effort>
                     <threshold>Low</threshold>
@@ -188,7 +208,6 @@
                     <!--<includeAllDependencies>true</includeAllDependencies>-->
                     <!--</configuration>-->
                 </plugin>
-
                 <!--https://www.eclipse.org/m2e/documentation/m2e-execution-not-covered.html-->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -243,7 +262,6 @@
             </plugins>
         </pluginManagement>
     </build>
-
     <reporting>
         <plugins>
             <plugin>
