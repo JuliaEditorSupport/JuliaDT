@@ -1,4 +1,4 @@
-# JuliaDT
+# JuliaDT [![Build Status](https://travis-ci.org/JuliaComputing/JuliaDT.svg?branch=master)](https://travis-ci.org/JuliaComputing/JuliaDT)
 
 Julia Development Toolkit for Eclipse
 
