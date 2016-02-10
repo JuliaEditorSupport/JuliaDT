@@ -9,8 +9,8 @@
         <relativePath>../../com.juliacomputing.jldt.parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>0.0.1-SNAPSHOT</version>
     <artifactId>com.juliacomputing.jldt.eclipse.core</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>eclipse-plugin</packaging>
     <licenses>
         <license>

@@ -14,10 +14,10 @@
         </license>
     </licenses>
     <modules>
-        <module>com.juliacomputing.jldt.build</module>
-        <module>com.juliacomputing.jldt.parent</module>
         <module>com.juliacomputing.jldt.kernel</module>
         <module>com.juliacomputing.jldt.kernel.api</module>
+        <module>com.juliacomputing.jldt.build</module>
+        <module>com.juliacomputing.jldt.parent</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.core</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.launch</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.ui</module>
