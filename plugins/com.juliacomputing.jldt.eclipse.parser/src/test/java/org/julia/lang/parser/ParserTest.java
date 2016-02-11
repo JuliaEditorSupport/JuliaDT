@@ -2,7 +2,6 @@ package org.julia.lang.parser;
 
 import com.google.common.base.Predicate;
 import com.google.common.io.Files;
-
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -15,7 +14,11 @@ import org.junit.runners.Parameterized.Parameters;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(Parameterized.class)
 public class ParserTest {
@@ -28,13 +31,15 @@ public class ParserTest {
   private final File file;
 
   public ParserTest(final File file) {
+
     this.file = file;
+    System.out.println(file.getName());
   }
 
   @Parameters
   public static Collection<File> data() {
     return Files.fileTreeTraverser()
-            .preOrderTraversal(new File(ParserTest.class.getResource("/supported").getFile()))
+            .preOrderTraversal(new File(ParserTest.class.getResource("/base").getFile()))
             .filter(FILE).toList();
   }
 
@@ -46,6 +51,9 @@ public class ParserTest {
     final JuliaParser parser = new JuliaParser(tokens);
     parser.setErrorHandler(new BailErrorStrategy());
     final ParseTree tree = parser.unit();
-    System.out.println(tree.toStringTree(parser));
+    final String expression = tree.toStringTree(parser);
+    final String expected = Files.toString(new File(file.getCanonicalPath() + ".txt"), Charset.forName("UTF-8"));
+    assertNotNull(tree);
+    assertEquals(expected, expression);
   }
 }

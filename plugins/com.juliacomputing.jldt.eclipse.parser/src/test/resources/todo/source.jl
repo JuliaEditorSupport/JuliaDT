@@ -2,7 +2,8 @@
 y = fld(100b+h,36525); c = b + z - 365y - fld(y,4); m = div(5c+456,153);1
 
 
-monthwrap(m1,m2) = (v = mod1(m1+m2,12); return v < 0 ? 12 + v : v)
+f-1
+
 
 
 #macros

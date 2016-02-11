@@ -16,6 +16,7 @@ GREATER_THAN_OR_EQ  : '>='|'≥';
 LESS_THAN_OR_EQ     : '<='|'≤';
 
 
+
 MINUS               : '-';
 EXPONENT            : '^';
 FRACTION            : '//';
@@ -54,6 +55,7 @@ POWER_ASGN          : '^=';
 BITWISE_AND_ASGN    : '&=';
 BITWISE_OR_ASGN     : '|=';
 BITWISE_XOR_ASGN    : '$=';
+DOLLAR              : '$';
 LSR_ASGN            : '>>>=';
 ASR_ASGN            : '>>=';
 ELLIPSE             : '...';
@@ -95,9 +97,9 @@ NOT                 : '!';
 AND                 : '&&';
 BITWISE_AND         : '&';
 OR                  : '||';
-BITWISE_OR         : '|';
-LEFT_BRACKET        : '('                                   {nesting++;};
-RIGHT_BRACKET       : ')'                                   {nesting--;};
+BITWISE_OR          : '|';
+LEFT_PARENTHESIS    : '('                                   {nesting++;};
+RIGHT_PARENTHESIS   : ')'                                   {nesting--;};
 TRUE                : 'true';
 FALSE               : 'false';
 ABSTRACT            : 'abstract';
@@ -108,10 +110,10 @@ TYPE                : 'type';
 IMMUTABLE           : 'immutable';
 UNION               : 'Union';
 FUNCTION            : 'function';
-LEFT_CURLY          : '{'                                   {nesting++;};
-RIGHT_CURLY         : '}'                                   {nesting--;};
-LEFT_SQUARE         : '['                                   {nesting++;squareNesting++;};
-RIGHT_SQUARE        : ']'                                   {nesting--;squareNesting--;};
+LEFT_BRACE          : '{'                                   {nesting++;};
+RIGHT_BRACE         : '}'                                   {nesting--;};
+LEFT_BRACKET        : '['                                   {nesting++;squareNesting++;};
+RIGHT_BRACKET       : ']'                                   {nesting--;squareNesting--;};
 INT8                : 'Int8';
 UINT8               : 'Uint8';
 INT16               : 'Int16';
@@ -135,19 +137,21 @@ HEX                 : '0x'HEX_DGT+;
 FLOAT32_LITERAL     : DEC_DGT+ [\.] DEC_DGT* EXP32?
                     | '.' DEC_DGT* EXP32?
                     ;
+fragment
 EXP32               : [f] [+\-]? DEC_DGT+;
 
 FLOAT64_LITERAL     : DEC_DGT+ [\.] DEC_DGT* EXP64?
                     | '.' DEC_DGT* EXP64?
                     ;
+fragment
 EXP64               : [e] [+\-]? DEC_DGT+;
 
 
-FQN                 :   (Identifier '\\.')+ ID;
-ID                  :   ('_'|UNi) ('_'|UNi|DEC_DGT)* '!'?;
+FQN                 : (Identifier '\\.')+ ID;
+ID                  : Identifier (Identifier|DEC_DGT)* '!'?;
 
 
-CHARACTER_LITERAL   :   ('\'' (~'\'') '\'')|('\'' '\\'.'\'') ;
+CHARACTER_LITERAL   :('\'' (~'\'') '\'')|('\'' '\\'.'\'') ;
 
 STRING              :   '"' ('\\"'|~'"')* '"' ; // quote-quote is an escaped quote
 //EOL                 :   ('\r'? '\n') {nesting==0}?;
@@ -167,8 +171,6 @@ fragment OCT_DGT    :   [0-7];
 fragment HEX_DGT    :   [0-9A-F];
 SIZE                :   '8'|'16'|'32'|'64'|'128'|'256'|'512';//... currently restricted to multiples of 8
 
-
-//http://www.youtube.com/watch?v=MijmeoH9LT4
 //人人生而自由
 fragment UNi        :   'A'..'Z'
                     |   'a'..'z'

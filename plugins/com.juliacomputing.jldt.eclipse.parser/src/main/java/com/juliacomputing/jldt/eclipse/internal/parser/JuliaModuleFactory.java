@@ -23,7 +23,6 @@ import org.julia.lang.parser.JuliaParserBaseVisitor;
 import java.util.ArrayList;
 import java.util.List;
 
-//todo review start/stop indices
 
 public class JuliaModuleFactory extends JuliaParserBaseVisitor<ASTNode> {
 

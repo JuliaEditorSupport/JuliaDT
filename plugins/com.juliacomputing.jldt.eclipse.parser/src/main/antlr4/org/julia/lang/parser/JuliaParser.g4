@@ -2,7 +2,7 @@ parser grammar JuliaParser;
 options{
     tokenVocab=JuliaLexer;
     }
-unit                        :   (statement)+                             ;
+unit                        :   (statement)+;
 
 moduleDirective             :   USING ID                                                                #using
                             |   IMPORT ID COLON ID ( COMMA ID)*                                         #importt
@@ -21,10 +21,12 @@ statement                   :   moduleDirective
                             ;
 
 exp                         :   MINUS exp                                                               #unaryMinus
-                            |   name typeParameters? LEFT_BRACKET ((exp  COMMA)* exp)? RIGHT_BRACKET    #applyFunction
-                            |   (LEFT_SQUARE (exp COMMA)* exp? RIGHT_SQUARE)+                             #enumeration
-                            |   LEFT_SQUARE exp FOR ID (EQ|IN) exp COLON exp RIGHT_SQUARE                     #comprehension
-                            |   (INT|FLOAT32|FLOAT64) (ID | LEFT_BRACKET exp RIGHT_BRACKET )            #coeffient //TODO(see The precedence of numeric literal coefficients is the same as that of unary operators such as negation. So 2^3x is parsed as 2^(3x), and 2x^3 is parsed as 2*(x^3)
+                            |   PLUS exp                                                                #unaryPlus
+                            |   exp QUESTION_MARK exp COLON exp                                         #ternaryConditional
+                            |   name typeParameters? LEFT_PARENTHESIS ((exp  COMMA)* exp)? RIGHT_PARENTHESIS    #applyFunction
+                            |   (LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET)+                             #enumeration
+                            |   LEFT_BRACKET exp FOR ID (EQ|IN) exp (COLON exp)? RIGHT_BRACKET                     #comprehension
+                            |   (INT|FLOAT32|FLOAT64) (ID | LEFT_PARENTHESIS exp RIGHT_PARENTHESIS )            #coeffient //TODO(see The precedence of numeric literal coefficients is the same as that of unary operators such as negation. So 2^3x is parsed as 2^(3x), and 2x^3 is parsed as 2*(x^3)
                             |   <assoc=right> exp EXPONENT exp                                          #exponent
                             |   exp INSTANCE_OF typeExpression                                          #typedExpression
                             |   exp FRACTION exp                                                        #fraction
@@ -51,7 +53,6 @@ exp                         :   MINUS exp                                       
                             |   exp ELM_EQUALS exp                                                          #elmEquals
 
                             |   exp SUB_TYPE exp                                                        #subtype
-                            |   exp QUESTION_MARK exp COLON exp                                         #ternaryConditional
                             |   NOT exp                                                                 #not
                             |   exp AND exp                                                             #and
                             |   exp BITWISE_AND exp                                                     #bitwiseAnd
@@ -61,8 +62,8 @@ exp                         :   MINUS exp                                       
                             |   IF exp statement* (ELSE_IF exp statement*)* (ELSE statement*)? END      #naryConditional
                             |   LET (ID EQ exp)* statement END                                          #let
                             |   BEGIN exp END                                                           #block
-                            |   LEFT_BRACKET exp RIGHT_BRACKET                                          #bracketed //todo review ambiguous tuple vs exp
-                            |   LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET                               #tuple //todo review ambiguous tuple vs exp
+                            |   LEFT_PARENTHESIS exp RIGHT_PARENTHESIS                                          #bracketed //todo review ambiguous tuple vs exp
+                            |   LEFT_PARENTHESIS (exp COMMA)* exp? RIGHT_PARENTHESIS                               #tuple //todo review ambiguous tuple vs exp
                             |   exp NOT_EQUAL exp                                                       #notEqual
                             |   exp EQ exp                                                              #assign
                             |   exp ADD_ASGN exp                                                        #addAssign
@@ -84,14 +85,16 @@ exp                         :   MINUS exp                                       
                             |   exp IS exp                                                              #is
                             |   exp SEMI_COLON exp                                                      #chained
                             |   exp ELLIPSE                                                             #tbc1
+                            |   COLON exp                                                               #tbc2
+                            |   DOLLAR exp                                                              #tbc3
                             |   exp RAPP exp                                                            #applyPrecedng
                             |   <assoc=right> exp ARROW exp                                             #lambda
-                            |   DO ((ID COMMA)* ID)? statement* END                                       #anonymousFunction
-                            |   name (LEFT_SQUARE (exp COMMA)* exp? RIGHT_SQUARE)+                        #arrayIndex
+                            |   DO ((ID COMMA)* ID)? statement* END                                     #anonymousFunction
+                            |   exp (LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET)+                     #arrayIndex
 
 
                             |   AT name exp*                                                            #invokeMarco1 //todo revew - tuple handling as one arg
-                            |   AT name LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET                    #invokeMarco2
+                            |   AT name LEFT_PARENTHESIS (exp COMMA)* exp? RIGHT_PARENTHESIS                    #invokeMarco2
 
                             | exp DOT exp                                                               #project
 //                            |   name                                                                    #qualifiedName
@@ -119,11 +122,14 @@ exp                         :   MINUS exp                                       
                             |   NAN32                                                                   #nan32
                             |   NAN                                                                     #nan
                             |   exp COMMA exp                                                           #implicitTuple
+                            |   RETURN exp                                                              #returnExp //todo review only occurs in a function body
+                            |   RETURN                                                                  #return
+
 //                            |   exp exp                                                   #sequence
                             |   typeExpression                                                          #ttypeExpression
                             ;
 
-//reference                   :   ID (LEFT_SQUARE exp RIGHT_SQUARE)+
+//reference                   :   ID (LEFT_BRACKET exp RIGHT_BRACKET)+
 //                            |   ID
 //                            |   reference DOT reference
 //                            |   reference COMMA reference
@@ -144,10 +150,8 @@ typeExpression              :   INT8                                            
                             |   FLOAT16                                                                 #float16
                             |   FLOAT32                                                                 #float32
                             |   FLOAT64                                                                 #float64
-                            |   UNION LEFT_CURLY typeExpression ( COMMA typeExpression)* RIGHT_CURLY    #unionType
-                            |   RETURN exp                                                              #returnExp //todo review only occurs in a function body
-                            |   RETURN                                                                  #return
-                            |   ID LEFT_CURLY (exp ( COMMA exp)*)? RIGHT_CURLY                          #parametricType
+                            |   UNION LEFT_BRACE typeExpression ( COMMA typeExpression)* RIGHT_BRACE    #unionType
+                            |   ID LEFT_BRACE (exp ( COMMA exp)*)? RIGHT_BRACE                          #parametricType
                             |   ID                                                                      #userDefinedType
                             ;
 
@@ -160,13 +164,13 @@ functionDeclaration         :   name typeParameters? parameters EQ exp          
                             |   FUNCTION name typeParameters? parameters (statement)*  END                                              #generalFunctionDeclaration
                             ;
 
-parameters                  :   LEFT_BRACKET (parameter ((COMMA|SEMI_COLON) parameter)*)? RIGHT_BRACKET                                 #pparameters
+parameters                  :   LEFT_PARENTHESIS (parameter ((COMMA|SEMI_COLON) parameter)*)? RIGHT_PARENTHESIS                                 #pparameters
                             ;
 
 parameter                   :   ID INSTANCE_OF typeExpression (EQ exp)?                                                                 #namedTypedParam
                             |   INSTANCE_OF typeExpression (EQ exp)?                                                                    #anonymousTypedParam
-                            |   ID ELLIPSE                                                                                              #vararg
                             |   ID (EQ exp)?                                                                                            #namedParam
+                            |   parameter ELLIPSE                                                                                       #vararg
                             ;
 
 typeDeclaration             :   TYPE_ALIAS ID typeParameters? exp                                                                       #typeAlias
@@ -181,7 +185,7 @@ fieldDeclaration            :   ID INSTANCE_OF typeExpression                   
                             |   ID                                                                                                      #untypedFieldDeclaration
                             ;
 
-typeParameters              :   LEFT_CURLY typeParameter (COMMA typeParameter)* RIGHT_CURLY                                             #ttypeParameters
+typeParameters              :   LEFT_BRACE typeParameter (COMMA typeParameter)* RIGHT_BRACE                                             #ttypeParameters
                             ;
 
 typeParameter               :   ID SUB_TYPE typeExpression                                                                              #namedSubtype
@@ -190,8 +194,7 @@ typeParameter               :   ID SUB_TYPE typeExpression                      
                             ;
 
 
-forStatement                :   FOR exp EQ exp COLON exp statement* END                                                                 #forEq
-                            |   FOR exp EQ exp COLON exp COLON exp statement* END                                                       #forEqStep
+forStatement                :   FOR exp EQ exp (COLON exp)? (COLON exp)? statement* END                                                 #forEq
                             |   FOR exp IN exp statement* END                                                                           #forIn
                             ;
 
