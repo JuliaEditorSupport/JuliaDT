@@ -62,3 +62,13 @@ function !(A::StridedArray{Bool})
 end
 .^(X::AbstractArray, y::Number      ) =
     reshape([ x ^ y for x in X ], size(X))
+
+
+@inline wheel_index(n) = ( (d, r) = divrem(n - 1, 30); return 8d + wheel_indices[r+1] )
+
+
+import Base.in
+precompile(Base.LineEdit.edit_move_up, (Base.LineEdit.MIState,))
+precompile(Base.LineEdit.edit_move_up, (IOBuffer,))
+
+byteenv = ByteString[cstr(string(k)*"="*strin

@@ -49,7 +49,7 @@ public class ParserTest {
     final JuliaLexer lexer = new JuliaLexer(input);
     final CommonTokenStream tokens = new CommonTokenStream(lexer);
     final JuliaParser parser = new JuliaParser(tokens);
-    parser.setErrorHandler(new BailErrorStrategy());
+//    parser.setErrorHandler(new BailErrorStrategy());
     final ParseTree tree = parser.unit();
     final String expression = tree.toStringTree(parser);
     final String expected = Files.toString(new File(file.getCanonicalPath() + ".txt"), Charset.forName("UTF-8"));

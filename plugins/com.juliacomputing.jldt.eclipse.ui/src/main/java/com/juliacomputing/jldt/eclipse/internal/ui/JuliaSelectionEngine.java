@@ -1,21 +1,21 @@
 package com.juliacomputing.jldt.eclipse.internal.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.dltk.ast.ASTVisitor;
-import org.eclipse.dltk.ast.declarations.MethodDeclaration;
 import org.eclipse.dltk.ast.declarations.ModuleDeclaration;
-import org.eclipse.dltk.ast.declarations.TypeDeclaration;
+import org.eclipse.dltk.ast.expressions.CallExpression;
+import org.eclipse.dltk.ast.expressions.Expression;
+import org.eclipse.dltk.ast.references.SimpleReference;
 import org.eclipse.dltk.codeassist.ScriptSelectionEngine;
 import org.eclipse.dltk.compiler.env.IModuleSource;
 import org.eclipse.dltk.core.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //todo complete parsing
 public class JuliaSelectionEngine extends ScriptSelectionEngine {
 
-  private void findDeclaration(final ISourceModule sourceModule, final String name,
-      final List results) {
+  private void findDeclaration(final ISourceModule sourceModule, final String name, final List results) {
     try {
       sourceModule.accept(new IModelElementVisitor() {
         @Override
@@ -26,8 +26,7 @@ public class JuliaSelectionEngine extends ScriptSelectionEngine {
           return true;
         }
       });
-    }
-    catch (ModelException e) {
+    } catch (ModelException e) {
       if (DLTKCore.DEBUG) {
         e.printStackTrace();
       }
@@ -35,34 +34,33 @@ public class JuliaSelectionEngine extends ScriptSelectionEngine {
   }
 
   @Override
-  public IModelElement[] select(IModuleSource module, final int offset, int i) {
+  public IModelElement[] select(IModuleSource module, final int selectionStart, int selectionEnd) {
     final ISourceModule sourceModule = (ISourceModule) module.getModelElement();
     ModuleDeclaration moduleDeclaration = SourceParserUtil.getModuleDeclaration(sourceModule, null);
-    final List results = new ArrayList();
+    final List<IModelElement> results = new ArrayList<>();
     try {
       moduleDeclaration.traverse(new ASTVisitor() {
-
-        public boolean visit(MethodDeclaration s) throws Exception {
-          if (s.getNameStart() <= offset && offset <= s.getNameEnd()) {
-            findDeclaration(sourceModule, s.getName(), results);
+        public boolean visit(Expression expression) throws Exception {
+          if (expression.start() <= selectionStart && selectionStart <= expression.end()) {
+            if (expression instanceof SimpleReference) {
+              final SimpleReference reference = (SimpleReference) expression;
+              findDeclaration(sourceModule, reference.getName(), results);
+              return super.visit(expression);
+            }
+            if (expression instanceof CallExpression) {
+              final CallExpression callExpression = (CallExpression) expression;
+              findDeclaration(sourceModule, callExpression.getName(), results);
+              return super.visit(expression);
+            }
           }
-          return super.visit(s);
+          return super.visit(expression);
         }
-
-        public boolean visit(TypeDeclaration s) throws Exception {
-          if (s.getNameStart() <= offset && offset <= s.getNameEnd()) {
-            findDeclaration(sourceModule, s.getName(), results);
-          }
-          return super.visit(s);
-        }
-
       });
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       if (DLTKCore.DEBUG) {
         e.printStackTrace();
       }
     }
-    return (IModelElement[]) results.toArray(new IModelElement[results.size()]);
+    return results.toArray(new IModelElement[results.size()]);
   }
 }
