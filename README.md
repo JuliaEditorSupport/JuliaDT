@@ -53,6 +53,7 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 8. [Eclipse Source](https://git.eclipse.org/c/)
 9. [dltk parent pom](https://git.eclipse.org/c/dltk/org.eclipse.dltk.releng.git/tree/build/pom.xml)
 10. [Eclipse Common Build Infrastructure (CBI)](http://www.eclipse.org/community/eclipse_newsletter/2013/august/article3.php)
+11. [Julia Parser](https://github.com/JuliaLang/JuliaParser.jl)
 
     
  
