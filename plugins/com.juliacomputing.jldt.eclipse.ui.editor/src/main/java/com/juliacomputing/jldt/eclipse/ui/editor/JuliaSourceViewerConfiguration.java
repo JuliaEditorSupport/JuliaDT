@@ -1,5 +1,13 @@
 package com.juliacomputing.jldt.eclipse.ui.editor;
 
+import com.juliacomputing.jldt.eclipse.core.JuliaPartition;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaCodeScanner;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaColourConstants;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaContentAssistPreference;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaHierarchyInformationControl;
+import com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.JuliaScriptCompletionProcessor;
+import com.juliacomputing.jldt.eclipse.ui.formatter.JuliaAutoIndentStrategy;
+
 import org.eclipse.dltk.internal.ui.editor.EditorUtility;
 import org.eclipse.dltk.internal.ui.editor.ScriptSourceViewer;
 import org.eclipse.dltk.internal.ui.text.ScriptElementProvider;
@@ -22,14 +30,6 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.ITextEditor;
-
-import com.juliacomputing.jldt.eclipse.core.JuliaPartition;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaCodeScanner;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaColourConstants;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaContentAssistPreference;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.JuliaHierarchyInformationControl;
-import com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.JuliaScriptCompletionProcessor;
-import com.juliacomputing.jldt.eclipse.ui.formatter.JuliaAutoIndentStrategy;
 
 public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfiguration {
 
@@ -114,8 +114,7 @@ public class JuliaSourceViewerConfiguration extends ScriptSourceViewerConfigurat
     return presenter;
   }
 
-  private IInformationControlCreator getHierarchyPresenterControlCreator(
-      ISourceViewer sourceViewer) {
+  private IInformationControlCreator getHierarchyPresenterControlCreator(ISourceViewer sourceViewer) {
     final int shellStyle = SWT.RESIZE;
     final int treeStyle = SWT.V_SCROLL | SWT.H_SCROLL;
     return new IInformationControlCreator() {

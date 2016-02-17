@@ -1,9 +1,9 @@
 package com.juliacomputing.jldt.eclipse.ui.editor.internal;
 
+import com.juliacomputing.jldt.eclipse.ui.editor.JuliaEditorPlugin;
+
 import org.eclipse.dltk.ui.text.ScriptTextTools;
 import org.eclipse.dltk.ui.text.completion.ContentAssistPreference;
-
-import com.juliacomputing.jldt.eclipse.ui.editor.JuliaEditorPlugin;
 
 public class JuliaContentAssistPreference extends ContentAssistPreference {
 

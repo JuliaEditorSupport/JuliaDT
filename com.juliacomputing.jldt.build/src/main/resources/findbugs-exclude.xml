@@ -15,6 +15,10 @@
         <Class name="com.juliacomputing.jldt.eclipse.ui.formatter.internal.JuliaHeuristicScanner"/>
     </Match>
     <Match>
+        <Class name="com.juliacomputing.jldt.eclipse.ui.console.JuliaConsoleInterpreter"/>
+        <Bug code="NP"/>
+    </Match>
+    <Match>
         <Class name="~.*Plugin"/>
         <Bug code="ST"/>
     </Match>

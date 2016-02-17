@@ -28,13 +28,11 @@ public class JuliaLaunchPlugin extends Plugin {
   }
 
   public static void log(String message) {
-    log(new Status(IStatus.ERROR, getUniqueIdentifier(),
-            IStatus.ERROR, message, null));
+    log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, message, null));
   }
 
   public static void log(Throwable e) {
-    log(new Status(IStatus.ERROR, getUniqueIdentifier(),
-            IStatus.ERROR, e.getMessage(), e));
+    log(new Status(IStatus.ERROR, getUniqueIdentifier(), IStatus.ERROR, e.getMessage(), e));
   }
 
   @Override

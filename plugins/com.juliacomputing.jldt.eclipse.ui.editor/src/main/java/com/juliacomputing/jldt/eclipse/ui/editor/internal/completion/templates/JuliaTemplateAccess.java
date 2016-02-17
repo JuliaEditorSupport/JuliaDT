@@ -1,9 +1,9 @@
 package com.juliacomputing.jldt.eclipse.ui.editor.internal.completion.templates;
 
+import com.juliacomputing.jldt.eclipse.ui.editor.JuliaEditorPlugin;
+
 import org.eclipse.dltk.ui.templates.ScriptTemplateAccess;
 import org.eclipse.jface.preference.IPreferenceStore;
-
-import com.juliacomputing.jldt.eclipse.ui.editor.JuliaEditorPlugin;
 
 public class JuliaTemplateAccess extends ScriptTemplateAccess {
 

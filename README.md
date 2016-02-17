@@ -23,6 +23,7 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 
     mvn clean install
 
+    mvn clean install -P strict
 
 ##To Run 
 

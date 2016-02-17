@@ -8,7 +8,6 @@ import org.eclipse.dltk.console.ScriptExecResult;
 import java.io.*;
 import java.util.List;
 
-
 public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   private static final String EOM = "\"<eom>\"";
@@ -20,19 +19,20 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   public JuliaConsoleInterpreter() {
 
     try {
-      ProcessBuilder builder = new ProcessBuilder("/Applications/Julia-0.4.1.app/Contents/Resources/julia/bin/julia");
+      ProcessBuilder builder = new ProcessBuilder(
+          "/Applications/Julia-0.4.1.app/Contents/Resources/julia/bin/julia");
       builder.redirectErrorStream(true);
       process = builder.start();
       final OutputStream outputStream = process.getOutputStream();
-      writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+      writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF8"));
       final InputStream inputStream = process.getInputStream();
-      reader = new BufferedReader(new InputStreamReader(inputStream));
-    } catch (IOException e) {
+      reader = new BufferedReader(new InputStreamReader(inputStream, "UTF8"));
+    }
+    catch (IOException e) {
       e.printStackTrace();
       throw new RuntimeException(e);
     }
   }
-
 
   @Override
   public void addInitialListenerOperation(Runnable runnable) {
@@ -61,12 +61,14 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     writer.newLine();
     writer.flush();
     final StringBuilder response = new StringBuilder();
-    String line;
-    while (!(line = reader.readLine()).contains(EOM)) {
+    String line = reader.readLine();
+    while (line != null && !line.contains(EOM)) {
       response.append(line);
       response.append("\n");
+      line = reader.readLine();
     }
-    response.append(line.replace(EOM, ""));
+    if (line != null)
+      response.append(line.replace(EOM, ""));
     return new ScriptExecResult(response.toString());
   }
 

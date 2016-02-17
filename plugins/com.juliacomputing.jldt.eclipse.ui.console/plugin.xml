@@ -3,6 +3,6 @@
 <plugin>
 
     <!--<extension point="org.eclipse.dltk.console.ui.scriptConsole">-->
-        <!--<scriptConsole class="com.juliacomputing.jldt.eclipse.ui.console.JuliaConsoleFactory"/>-->
+    <!--<scriptConsole class="com.juliacomputing.jldt.eclipse.ui.console.JuliaConsoleFactory"/>-->
     <!--</extension>-->
 </plugin>
