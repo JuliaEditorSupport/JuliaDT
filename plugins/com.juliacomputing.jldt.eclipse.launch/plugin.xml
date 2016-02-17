@@ -14,11 +14,17 @@
         <launchConfigurationType
                 delegate="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate"
                 id="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationType"
-                modes="run,debug"
+                modes="run"
                 name="Julia"
                 public="true"
                 sourceLocatorId="juliaSourceLocator"
                 sourcePathComputerId="juliaSourcePathComputer"/>
+        <launchConfigurationType
+                delegate="com.juliacomputing.jldt.eclipse.ui.console.JuliaREPLLaunchConfigurationDelegate"
+                id="com.juliacomputing.jldt.eclipse.ui.console.juliaREPLConfigurationType"
+                modes="run, interactive"
+                name="Julia REPL"
+                public="false"/>
     </extension>
 
     <extension
@@ -35,5 +41,10 @@
                 class="org.eclipse.dltk.launching.sourcelookup.ScriptSourcePathComputer"
                 id="juliaSourcePathComputer"/>
     </extension>
+
+
+
+
+
 
 </plugin>

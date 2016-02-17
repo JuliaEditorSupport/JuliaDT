@@ -25,6 +25,7 @@
         <module>plugins/com.juliacomputing.jldt.eclipse.ui.editor</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.ui.launch</module>
         <module>plugins/com.juliacomputing.jldt.eclipse.parser</module>
+        <module>plugins/com.juliacomputing.jldt.eclipse.ui.console</module>
         <module>features/com.juliacomputing.jldt.eclipse</module>
         <module>com.juliacomputing.jldt.eclipse.repository</module>
     </modules>

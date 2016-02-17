@@ -12,37 +12,39 @@ public class JuliaLaunchPlugin extends Plugin {
   private static JuliaLaunchPlugin plugin;
 
   public JuliaLaunchPlugin() {
-    JuliaLaunchPlugin.plugin = this;
+    plugin = this;
   }
 
   public static JuliaLaunchPlugin getDefault() {
-    return JuliaLaunchPlugin.plugin;
+    return plugin;
   }
 
   public static String getUniqueIdentifier() {
-    return JuliaLaunchPlugin.ID;
+    return ID;
   }
 
   public static void log(IStatus status) {
-    JuliaLaunchPlugin.getDefault().getLog().log(status);
+    getDefault().getLog().log(status);
   }
 
   public static void log(String message) {
-    JuliaLaunchPlugin.log(new Status(IStatus.ERROR, JuliaLaunchPlugin.getUniqueIdentifier(),
-        IStatus.ERROR, message, null));
+    log(new Status(IStatus.ERROR, getUniqueIdentifier(),
+            IStatus.ERROR, message, null));
   }
 
   public static void log(Throwable e) {
-    JuliaLaunchPlugin.log(new Status(IStatus.ERROR, JuliaLaunchPlugin.getUniqueIdentifier(),
-        IStatus.ERROR, e.getMessage(), e));
+    log(new Status(IStatus.ERROR, getUniqueIdentifier(),
+            IStatus.ERROR, e.getMessage(), e));
   }
 
+  @Override
   public void start(BundleContext context) throws Exception {
     super.start(context);
   }
 
+  @Override
   public void stop(BundleContext context) throws Exception {
-    JuliaLaunchPlugin.plugin = null;
+    plugin = null;
     super.stop(context);
   }
 }

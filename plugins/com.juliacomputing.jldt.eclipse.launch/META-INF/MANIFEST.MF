@@ -7,6 +7,7 @@ Bundle-Activator: com.juliacomputing.jldt.eclipse.launch.JuliaLaunchPlugin
 Bundle-Vendor: %pluginProvider
 Bundle-Localization: plugin
 Require-Bundle: com.juliacomputing.jldt.eclipse.core,
+  com.juliacomputing.jldt.eclipse.ui.console,
   org.eclipse.core.runtime,
   org.eclipse.dltk.core,
   org.eclipse.dltk.debug,

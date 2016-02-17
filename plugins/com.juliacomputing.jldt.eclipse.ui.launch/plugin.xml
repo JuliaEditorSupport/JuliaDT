@@ -15,17 +15,44 @@
                                       configTypeID="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationType"
                                       id="com.juliacomputing.jldt.eclipse.ui.launch.launchConfigurationTypeImage">
         </launchConfigurationTypeImage>
+        <launchConfigurationTypeImage icon="icons/julia.png"
+                                      configTypeID="com.juliacomputing.jldt.eclipse.ui.console.interactiveConsoleConfigurationType"
+                                      id="com.juliacomputing.jldt.eclipse.ui.console.interactiveConsoleConfigurationTypeImage">
+        </launchConfigurationTypeImage>
     </extension>
-
+¡
     <extension
             point="org.eclipse.debug.ui.launchConfigurationTabGroups">
         <launchConfigurationTabGroup
                 class="com.juliacomputing.jldt.eclipse.ui.launch.configuration.JuliaTabGroup"
                 id="com.juliacomputing.jldt.eclipse.ui.launch.JuliaTabGroup"
                 type="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationType">
-            <!--type="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate">-->
+        </launchConfigurationTabGroup>
+        <launchConfigurationTabGroup
+                class="com.juliacomputing.jldt.eclipse.ui.launch.configuration.JuliaTabGroup"
+                id="com.juliacomputing.jldt.eclipse.ui.launch.JuliaREPLTabGroup"
+                type="com.juliacomputing.jldt.eclipse.ui.console.interactiveConsoleConfigurationType">
         </launchConfigurationTabGroup>
     </extension>
+
+    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+        <launchConfigurationType
+                delegate="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationDelegate"
+                id="com.juliacomputing.jldt.eclipse.launch.JuliaLaunchConfigurationType"
+                modes="run"
+                name="Julia run"
+                public="false">
+        </launchConfigurationType>
+        <launchConfigurationType
+                delegate="com.juliacomputing.jldt.eclipse.ui.console.JuliaREPLLaunchConfigurationDelegate"
+                id="com.juliacomputing.jldt.eclipse.ui.console.interactiveConsoleConfigurationType"
+                modes="run, interactive"
+                name="Julia Interactive"
+                public="true">
+            <!--temporary - set to false-->
+        </launchConfigurationType>
+    </extension>
+
 
     <extension point="org.eclipse.debug.ui.launchShortcuts">
         <shortcut
@@ -56,10 +83,18 @@
                 <contextLabel label="%JuliaLaunchShortcut.runName"
                               mode="run">
                 </contextLabel>
-                <contextLabel label="%JuliaLaunchShortcut.debugName"
-                              mode="debug">
-                </contextLabel>
+                <!--<contextLabel label="%JuliaLaunchShortcut.debugName"-->
+                              <!--mode="debug">-->
+                <!--</contextLabel>-->
             </contextualLaunch>
         </shortcut>
+    </extension>
+
+
+    <extension point="org.eclipse.ui.console.consoleFactories">
+        <consoleFactory
+                class="com.juliacomputing.jldt.eclipse.ui.console.JuliaConsoleFactory"
+                icon="icons/julia.png"
+                label="Julia Console" />
     </extension>
 </plugin>
