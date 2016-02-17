@@ -1,6 +1,6 @@
 # JuliaDT [![Build Status](https://travis-ci.org/JuliaComputing/JuliaDT.svg?branch=master)](https://travis-ci.org/JuliaComputing/JuliaDT)
 
-Julia Development Toolkit for Eclipse
+[Julia Development Toolkit for Eclipse](http://juliacomputing.com/blog/2016/02/06/Eclipse-JuliaDT.html)
 
 #Requirements
 
