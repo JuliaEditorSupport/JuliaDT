@@ -97,6 +97,13 @@
             unpack="false"/>
 
     <plugin
+            id="com.juliacomputing.jldt.eclipse.ui.console"
+            download-size="0"
+            install-size="0"
+            version="0.0.0"
+            unpack="false"/>
+
+    <plugin
             id="org.eclipse.equinox.ds"
             download-size="0"
             install-size="0"
