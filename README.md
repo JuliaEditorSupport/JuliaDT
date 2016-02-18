@@ -21,9 +21,11 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 
 ##To Build
 
-    mvn clean install
-
-    mvn clean install -P strict
+|Profile|Command|Usage|Plugins|
+|:----|:-------|:-----------|:-------|
+|default|`mvn clean install`|local/dev|formatter|
+|strict|`mvn clean install -P strict`|travis <br/> dev (pre-commit)|checkstyle<br/> enforcer <br/>findbugs <br/>formatter|
+    
 
 ##To Run 
 
