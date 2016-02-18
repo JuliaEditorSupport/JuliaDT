@@ -23,8 +23,8 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 
 |Profile|Command|Usage|Plugins|
 |:----|:-------|:-----------|:-------|
-|default|`mvn clean install`|local/dev|formatter|
-|strict|`mvn clean install -P strict`|travis <br/> dev (pre-commit)|checkstyle<br/> enforcer <br/>findbugs <br/>formatter|
+|default|`mvn clean install`|local/dev|[formatter](https://maven-java-formatter-plugin.googlecode.com/svn/site/0.3.1/usage.html)|
+|strict|`mvn clean install -P strict`|[travis](https://travis-ci.org/JuliaComputing/JuliaDT) <br/> dev (pre-commit)|[checkstyle](https://maven.apache.org/plugins/maven-checkstyle-plugin/), [enforcer](http://maven.apache.org/enforcer/maven-enforcer-plugin/), [findbugs](http://findbugs.sourceforge.net/), [formatter](https://maven-java-formatter-plugin.googlecode.com/svn/site/0.3.1/usage.html)|
     
 
 ##To Run 
