@@ -24,7 +24,9 @@
                 id="com.juliacomputing.jldt.eclipse.ui.console.juliaREPLConfigurationType"
                 modes="run, interactive"
                 name="Julia REPL"
-                public="false"/>
+                public="false"
+                sourceLocatorId="juliaSourceLocator"
+                sourcePathComputerId="juliaSourcePathComputer"/>
     </extension>
 
     <extension
@@ -41,10 +43,5 @@
                 class="org.eclipse.dltk.launching.sourcelookup.ScriptSourcePathComputer"
                 id="juliaSourcePathComputer"/>
     </extension>
-
-
-
-
-
 
 </plugin>

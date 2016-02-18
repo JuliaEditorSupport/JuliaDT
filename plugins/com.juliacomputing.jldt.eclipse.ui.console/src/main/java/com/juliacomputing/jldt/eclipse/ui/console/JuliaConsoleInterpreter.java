@@ -11,20 +11,20 @@ import java.util.List;
 public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   private static final String EOM = "\"<eom>\"";
+  private static final String ENCODING = "UTF8";
 
   private final Process process;
   private final BufferedWriter writer;
   private final BufferedReader reader;
 
-  public JuliaConsoleInterpreter() {
+  public JuliaConsoleInterpreter(final String path) {
 
     try {
-      ProcessBuilder builder = new ProcessBuilder(
-          "/Applications/Julia-0.4.1.app/Contents/Resources/julia/bin/julia");
+      ProcessBuilder builder = new ProcessBuilder(path);
       builder.redirectErrorStream(true);
       process = builder.start();
       final OutputStream outputStream = process.getOutputStream();
-      writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF8"));
+      writer = new BufferedWriter(new OutputStreamWriter(outputStream, ENCODING));
       final InputStream inputStream = process.getInputStream();
       reader = new BufferedReader(new InputStreamReader(inputStream, "UTF8"));
     }
@@ -32,6 +32,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
       e.printStackTrace();
       throw new RuntimeException(e);
     }
+
   }
 
   @Override
@@ -78,7 +79,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   }
 
   @Override
-  public List getCompletions(String s, int i) throws IOException {
+  public List<?> getCompletions(String s, int i) throws IOException {
     return null;
   }
 

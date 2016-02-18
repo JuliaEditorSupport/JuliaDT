@@ -9,16 +9,6 @@ import org.eclipse.dltk.launching.IInterpreterRunner;
 
 public class JuliaInterpreterInstall extends AbstractInterpreterInstall {
 
-  /**
-   * Constructs a new interpreter install.
-   *
-   * @param type
-   *          The type of this interpreter install. Must not be <code>null</code>
-   * @param id
-   *          The unique identifier of this interpreter instance Must not be <code>null</code>.
-   * @throws IllegalArgumentException
-   *           if any of the required parameters are <code>null</code>.
-   */
   public JuliaInterpreterInstall(IInterpreterInstallType type, String id) {
     super(type, id);
   }
