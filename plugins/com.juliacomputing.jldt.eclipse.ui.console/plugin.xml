@@ -2,7 +2,16 @@
 <?eclipse version="3.4"?>
 <plugin>
 
-    <!--<extension point="org.eclipse.dltk.console.ui.scriptConsole">-->
-    <!--<scriptConsole class="com.juliacomputing.jldt.eclipse.ui.console.JuliaConsoleFactory"/>-->
-    <!--</extension>-->
+    <extension point="org.eclipse.dltk.console.ui.scriptConsole">
+        <scriptConsole
+                class="com.juliacomputing.jldt.eclipse.ui.console.JuliaConsoleFactory"
+                natureID="com.juliacomputing.jldt.eclipse.core.nature"/>
+    </extension>
+
+    <extension point="org.eclipse.ui.console.consoleFactories">
+        <consoleFactory
+                class="com.juliacomputing.jldt.eclipse.ui.console.JuliaConsoleFactory"
+                icon="icons/julia.png"
+                label="Julia REPL"/>
+    </extension>
 </plugin>

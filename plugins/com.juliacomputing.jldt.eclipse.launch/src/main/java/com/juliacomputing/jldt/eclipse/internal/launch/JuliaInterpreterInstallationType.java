@@ -15,59 +15,45 @@ import org.eclipse.dltk.launching.LibraryLocation;
 import java.io.IOException;
 
 public class JuliaInterpreterInstallationType extends AbstractInterpreterInstallType {
-
-  private static final String[] EXECUTABLES = { "julia" };
-  private static final String JULIA_BASE = "share/julia/base";
-  private static final String NAME = "Generic Julia Installation";
+  public static final String BASE_LIBRARY = "share/julia/base"; //$NON-NLS-1$
+  public static final String NAME = "Generic Julia Installation"; //$NON-NLS-1$
+  private static final String[] EXECUTABLES = { "julia" }; //$NON-NLS-1$
 
   public String getNatureId() {
     return JuliaNature.ID;
   }
 
   public String getName() {
-    return NAME; //$NON-NLS-1$
+    return NAME;
   }
 
-  @Override
   public LibraryLocation[] getDefaultLibraryLocations(IFileHandle installLocation,
       EnvironmentVariable[] variables, IProgressMonitor monitor) {
-    return getLibraryLocations(installLocation);
+    return getDefaultLibraryLocations(installLocation);
   }
 
-  @Override
   protected String getPluginId() {
     return JuliaLaunchPlugin.ID;
   }
 
-  @Override
   protected String[] getPossibleInterpreterNames() {
     return EXECUTABLES;
   }
 
-  @Override
   protected IInterpreterInstall doCreateInterpreterInstall(String id) {
     return new JuliaInterpreterInstall(this, id);
   }
 
-  @Override
   protected IPath createPathFile(IDeployment deployment) throws IOException {
     throw new UnsupportedOperationException();
   }
 
-  @Override
   protected ILog getLog() {
     return JuliaLaunchPlugin.getDefault().getLog();
   }
 
   @Override
   public synchronized LibraryLocation[] getDefaultLibraryLocations(IFileHandle installLocation) {
-    return getLibraryLocations(installLocation);
-  }
-
-  private LibraryLocation[] getLibraryLocations(IFileHandle installLocation) {
     return new LibraryLocation[0];
-    // final File library = new File(Path.fromOSString(installLocation.getCanonicalPath()).toFile()
-    // .getParentFile().getParentFile(), JULIA_BASE);
-    // return new LibraryLocation[] { new LibraryLocation(new Path(library.getPath())) };
   }
 }

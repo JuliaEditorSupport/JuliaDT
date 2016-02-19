@@ -20,7 +20,7 @@
                                       id="com.juliacomputing.jldt.eclipse.ui.console.interactiveConsoleConfigurationTypeImage">
         </launchConfigurationTypeImage>
     </extension>
-¡
+    ¡
     <extension
             point="org.eclipse.debug.ui.launchConfigurationTabGroups">
         <launchConfigurationTabGroup
@@ -48,7 +48,7 @@
                 id="com.juliacomputing.jldt.eclipse.ui.console.interactiveConsoleConfigurationType"
                 modes="run, interactive"
                 name="Julia Interactive"
-                public="true">
+                public="false">
             <!--temporary - set to false-->
         </launchConfigurationType>
     </extension>
@@ -84,17 +84,35 @@
                               mode="run">
                 </contextLabel>
                 <!--<contextLabel label="%JuliaLaunchShortcut.debugName"-->
-                              <!--mode="debug">-->
+                <!--mode="debug">-->
                 <!--</contextLabel>-->
+            </contextualLaunch>
+        </shortcut>
+        <shortcut
+                class="com.juliacomputing.jldt.eclipse.ui.launch.launcher.JuliaREPLLaunchShortcut"
+                description="%JuliaREPLLaunchShortcut.description"
+                icon="icons/repl.png"
+                id="com.juliacomputing.jldt.eclipse.ui.launch.replLaunchShortcut"
+                label="%JuliaLaunchShortcut.name" modes="run, interactive">
+            <description
+                    description="%JuliaREPLLaunchShortcut.runDescription" mode="run">
+            </description>
+            <contextualLaunch>
+                <enablement>
+                    <with variable="selection">
+                        <count value="1"/>
+                        <iterate>
+                            <or>
+                                <test
+                                        args="com.juliacomputing.jldt.eclipse.core.nature"
+                                        property="org.eclipse.dltk.launching.hasProjectNature"/>
+                            </or>
+                        </iterate>
+                    </with>
+                </enablement>
+                <contextLabel label="%JuliaREPLLaunchShortcut.runName" mode="run"/>
             </contextualLaunch>
         </shortcut>
     </extension>
 
-
-    <extension point="org.eclipse.ui.console.consoleFactories">
-        <consoleFactory
-                class="com.juliacomputing.jldt.eclipse.ui.console.JuliaConsoleFactory"
-                icon="icons/julia.png"
-                label="Julia Console" />
-    </extension>
 </plugin>
