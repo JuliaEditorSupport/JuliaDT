@@ -4,19 +4,32 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
+import org.eclipse.dltk.launching.AbstractScriptLaunchConfigurationDelegate;
 import org.eclipse.swt.widgets.Display;
 
-public class JuliaREPLLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
+import java.io.File;
+
+public class JuliaREPLLaunchConfigurationDelegate extends AbstractScriptLaunchConfigurationDelegate {
 
   public void launch(final ILaunchConfiguration configuration, String mode, ILaunch launch,
       IProgressMonitor monitor) throws CoreException {
+    System.out.println(getDefaultWorkingDirectory(configuration));
+    System.out.println("-----" + getSourceModule(configuration).getResource().getFullPath());
     monitor.setCanceled(true);
+    final String workingDirectory = getProjectLocation(configuration);
+    final String source = getSourceModule(configuration).getElementName();
+    final String script = new File(workingDirectory, source).getAbsolutePath();
     Display.getDefault().asyncExec(new Runnable() {
       public void run() {
         final JuliaConsoleFactory consoleFactory = new JuliaConsoleFactory();
-        consoleFactory.openConsole();
+        final JuliaScriptConsole console = consoleFactory.newConsole();
+        console.executeCommand("include(\""+script+"\")");
       }
     });
+  }
+
+  @Override
+  public String getLanguageId() {
+    return "com.juliacomputing.jldt.eclipse.core.nature";
   }
 }
