@@ -220,6 +220,18 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCharacter(JuliaParser.CharacterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCharacter(JuliaParser.CharacterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLambda(JuliaParser.LambdaContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -556,18 +568,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCharaacter(JuliaParser.CharaacterContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCharaacter(JuliaParser.CharaacterContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterString(JuliaParser.StringContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -827,6 +827,18 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRelational(JuliaParser.RelationalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTranspose(JuliaParser.TransposeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTranspose(JuliaParser.TransposeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

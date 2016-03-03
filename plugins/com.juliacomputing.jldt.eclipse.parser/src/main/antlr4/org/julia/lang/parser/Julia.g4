@@ -74,6 +74,7 @@ exp                         :   MINUS exp                                       
                             |   CCALL LEFT_PARENTHESIS exp COMMA exp COMMA exp RIGHT_PARENTHESIS          #ccall
                             |   exp 'in' exp                                                              #in
                             |   exp ELLIPSE                                                               #tbc1
+                            |   exp '\''                                                                  #transpose
                             |   AT name exp+ NL*                                                        #macroInvoke
                             |   TRY NL* block NL* (CATCH NL* block NL*)? (FINALLY NL* block NL*)?  END                                                 #tryCatch
                             |   LEFT_PARENTHESIS RIGHT_PARENTHESIS                                        #emptyTuple
@@ -93,11 +94,11 @@ exp                         :   MINUS exp                                       
 //                            |   name                                                                    #nname
 
                             |   exp SEMI_COLON exp                                                        #sequence
+                            |   ID                                                                        #identifier
                             |   typeExpression                                                            #ttypeExpression
 
                             |   operator                                                                  #operatorSymbol
 
-                            |   ID                                                                        #identifier
                             |   REGEX                                                                     #regex
                             |   'true'                                                                    #tt
                             |   'false'                                                                   #ff
@@ -108,7 +109,7 @@ exp                         :   MINUS exp                                       
                             |   FLOAT32_LITERAL                                                           #ffloat32
                             |   FLOAT64_LITERAL                                                           #ffloat64
                             |   HEX_FLOAT                                                                 #hexFloat
-                            |   CHARACTER_LITERAL                                                         #charaacter
+                            |   CHARACTER_LITERAL                                                         #character
                             |   STRING                                                                    #string
                             |   COLON ID                                                                  #symbol
                             |   CONST ID EQ exp                                                           #constant

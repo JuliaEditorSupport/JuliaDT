@@ -126,6 +126,13 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCoeffient(JuliaParser.CoeffientContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code character}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCharacter(JuliaParser.CharacterContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code lambda}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -322,13 +329,6 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMinus(JuliaParser.MinusContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code charaacter}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCharaacter(JuliaParser.CharaacterContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code string}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -482,6 +482,13 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRelational(JuliaParser.RelationalContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code transpose}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTranspose(JuliaParser.TransposeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code arrayIndex}
 	 * labeled alternative in {@link JuliaParser#exp}.

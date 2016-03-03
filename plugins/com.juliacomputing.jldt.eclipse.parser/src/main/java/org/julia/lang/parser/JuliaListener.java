@@ -204,6 +204,18 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitCoeffient(JuliaParser.CoeffientContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code character}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharacter(JuliaParser.CharacterContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code character}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharacter(JuliaParser.CharacterContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code lambda}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -540,18 +552,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitMinus(JuliaParser.MinusContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code charaacter}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterCharaacter(JuliaParser.CharaacterContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code charaacter}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitCharaacter(JuliaParser.CharaacterContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code string}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -815,6 +815,18 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRelational(JuliaParser.RelationalContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code transpose}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterTranspose(JuliaParser.TransposeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code transpose}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitTranspose(JuliaParser.TransposeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arrayIndex}
 	 * labeled alternative in {@link JuliaParser#exp}.
