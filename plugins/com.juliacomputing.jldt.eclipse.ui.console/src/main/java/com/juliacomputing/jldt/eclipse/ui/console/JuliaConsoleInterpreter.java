@@ -56,14 +56,14 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   @Override
   public IScriptExecResult exec(String command) throws IOException {
-	  System.out.println(command);
-    if (command == null || command.isEmpty())
-      return null;
-    writer.write(command);
-    writer.newLine();
-    writer.flush();
+    System.out.println(command);
+    if (command != null && !command.isEmpty()) {
+      writer.write(command);
+      writer.newLine();
+      writer.flush();
+    }
     final StringBuilder response = new StringBuilder();
-    while (reader.ready()){
+    while (reader.ready()) {
       final String line = reader.readLine();
       response.append(line);
       response.append("\n");
