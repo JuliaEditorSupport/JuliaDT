@@ -4,28 +4,38 @@ grammar Julia;
    int bracketNesting = 0;
 }
 
-unit                        :   block;
+unit                        :   NL* block NL*;
 
-block                       :   (statement)*;
-
-statement                   :   USING ID
-                            |   IMPORT name COLON ID (COMMA ID)*
-                            |   IMPORT name
-                            |   IMPORT_ALL name
-                            |   EXPORT ID (COMMA ID)*
-                            |   moduleDeclaration
-                            |   typeDeclaration
-                            |   functionDeclaration
-                            |   macroDeclaration
-                            |   exp
-                            |   EOL
+block                       :   (statement (NL+))*
+                            |   statement (SEMI_COLON NL* statement)*
                             ;
 
-moduleDeclaration           :   MODULE ID block END                                                       #module
-                            |   BARE_MODULE ID block END                                                  #bareModule
+statement                   :   NL* USING NL* ID
+                            |   NL* IMPORT NL* name COLON NL* ID NL* (NL* COMMA NL* ID)*
+                            |   NL* IMPORT NL* name
+                            |   NL* IMPORT_ALL  NL* name
+                            |   NL* EXPORT NL* ID (NL* COMMA NL* ID)*
+                            |   NL* moduleDeclaration
+                            |   NL* typeDeclaration
+                            |   NL* functionDeclaration
+                            |   NL* macroDeclaration
+
+                            |   NL* RETURN exp
+                            |   NL* RETURN
+                            |   NL* FOR NL* exp EQ NL* exp (COLON exp)? (COLON exp)? NL* block NL* END
+                            |   NL* FOR NL* exp NL* 'in' NL* exp NL* block NL* END
+                            |   NL* WHILE NL* exp NL* block NL* END
+                            |   NL* BREAK
+                            |   NL* QUOTE NL* block NL* END
+
+                            |   NL* exp
                             ;
 
-macroDeclaration            :   MACRO ID parameters block END;
+moduleDeclaration           :   NL* MODULE NL* ID NL* block NL*  END                                                       #module
+                            |   NL* BARE_MODULE NL* ID NL* block NL* END                                                  #bareModule
+                            ;
+
+macroDeclaration            :   NL* MACRO NL* ID parameters  NL* block NL* END;
 
 exp                         :   MINUS exp                                                                 #unaryMinus
                             |   PLUS exp                                                                  #unaryPlus
@@ -47,47 +57,45 @@ exp                         :   MINUS exp                                       
                             |   exp COLON exp                                                             #range
                             |   exp PIPE_OPERATOR exp                                                     #applyPrecedng
                             |   exp RELATIONAL_OPERATOR exp                                               #relational
-                            |   exp AND exp                                                               #lazyAnd
-                            |   exp OR exp                                                                #lazyOr
+                            |   exp AND statement                                                         #lazyAnd
+                            |   exp OR statement                                                          #lazyOr
                             |   exp ARROW_OPERATOR exp                                                    #arrow
                             |   exp CONDITIONAL_OPERATOR exp COLON exp                                    #ternaryConditional
                             |   exp EQ exp                                                                #simpleAssignment
                             |   exp ASSIGNMENT_OPERATOR exp                                               #assignment
                             |   <assoc=right> exp ARROW exp                                               #lambda
                             |   GLOBAL exp (COMMA exp)*                                                   #global
+                            |   LOCAL exp EQ exp                                                          #local
                             |   END_LITERAL                                                               #endLiteral
-                            |   IF exp block (ELSE_IF exp block)* (ELSE block)? END                       #naryConditional
-                            |   LET (ID EQ exp)* statement END                                            #let
+                            |   IF NL* exp NL* block NL* (ELSE_IF NL* exp NL* block NL* )* (ELSE NL* block)? END                       #naryConditional
+                            |   LET (ID EQ NL* exp NL*)* statement NL* END                                            #let
                             |   BEGIN exp END                                                             #primitiveBlock
                             |   DO ((ID COMMA)* ID)? block END                                            #anonymousFunction
-                            |   AT name LEFT_PARENTHESIS (exp COMMA)* exp? RIGHT_PARENTHESIS              #invokeMacro
-                            |   AT name (exp)*                                                            #invokeMacro
                             |   CCALL LEFT_PARENTHESIS exp COMMA exp COMMA exp RIGHT_PARENTHESIS          #ccall
                             |   exp 'in' exp                                                              #in
                             |   exp ELLIPSE                                                               #tbc1
-
-                            |   TRY block CATCH block END                                                 #tryCatch
-                            |   FOR exp EQ exp (COLON exp)? (COLON exp)? block END                        #forEq
-                            |   FOR exp 'in' exp block END                                                #forIn
-                            |   WHILE exp block END                                                       #while
-                            |   BREAK                                                                     #break
-                            |   QUOTE block END                                                           #quote
+                            |   AT name exp+ NL*                                                        #macroInvoke
+                            |   TRY NL* block NL* (CATCH NL* block NL*)? (FINALLY NL* block NL*)?  END                                                 #tryCatch
                             |   LEFT_PARENTHESIS RIGHT_PARENTHESIS                                        #emptyTuple
                             |   LEFT_PARENTHESIS (exp COMMA)+ exp? RIGHT_PARENTHESIS                      #tuple //todo review ambiguous tuple vs exp
                             |   LEFT_PARENTHESIS exp RIGHT_PARENTHESIS                                    #parenthesised  //todo review ambiguous tuple vs exp
 
 
                             |   name typeParameters? LEFT_PARENTHESIS ((exp  COMMA)* exp)? RIGHT_PARENTHESIS    #applyFunction
+                            |   operator typeParameters? LEFT_PARENTHESIS ((exp  COMMA)* exp)? RIGHT_PARENTHESIS    #applyOperator
 
                             |   (LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET)+                           #enumeration
                             |   LEFT_BRACKET exp FOR exp ('='|'in') exp (COLON exp)? RIGHT_BRACKET        #comprehension
-//                            |   (INT_LITERAL|FLOAT32_LITERAL|FLOAT64_LITERAL) (ID | LEFT_PARENTHESIS exp RIGHT_PARENTHESIS )        #coeffient //TODO(see The precedence of numeric literal coefficients is the same as that of unary operators such as negation. So 2^3x is parsed as 2^(3x), and 2x^3 is parsed as 2*(x^3)
+                            |   (INT_LITERAL|FLOAT32_LITERAL|FLOAT64_LITERAL) (ID | LEFT_PARENTHESIS exp RIGHT_PARENTHESIS )        #coeffient //TODO(see The precedence of numeric literal coefficients is the same as that of unary operators such as negation. So 2^3x is parsed as 2^(3x), and 2x^3 is parsed as 2*(x^3)
 
 
                             |   exp (LEFT_BRACKET (exp COMMA)* exp? RIGHT_BRACKET)+                       #arrayIndex
 //                            |   name                                                                    #nname
 
                             |   exp SEMI_COLON exp                                                        #sequence
+                            |   typeExpression                                                            #ttypeExpression
+
+                            |   operator                                                                  #operatorSymbol
 
                             |   ID                                                                        #identifier
                             |   REGEX                                                                     #regex
@@ -99,26 +107,15 @@ exp                         :   MINUS exp                                       
                             |   HEX                                                                       #hex
                             |   FLOAT32_LITERAL                                                           #ffloat32
                             |   FLOAT64_LITERAL                                                           #ffloat64
+                            |   HEX_FLOAT                                                                 #hexFloat
                             |   CHARACTER_LITERAL                                                         #charaacter
                             |   STRING                                                                    #string
                             |   COLON ID                                                                  #symbol
                             |   CONST ID EQ exp                                                           #constant
-                            |   INF16                                                                     #inf16Type
-                            |   INF32                                                                     #inf32Type
-                            |   INF                                                                       #inf
-                            |   MINUS_INF16                                                               #minusInf16
-                            |   MINUS_INF32                                                               #minusInf32
-                            |   MINUS_INF                                                                 #minusInf
-                            |   NAN16                                                                     #nan16
-                            |   NAN32                                                                     #nan32
-                            |   NAN                                                                       #nan
 
                             |   exp COMMA exp                                                             #implicitTuple
-                            |   RETURN exp                                                                #returnExp //todo review only occurs in a function body
-                            |   RETURN                                                                    #return
 
 //                            |   exp exp                                                                 #apply
-                            |   typeExpression                                                            #ttypeExpression
                             ;
 
 typeExpression              :   'Union' LEFT_BRACE typeExpression ( COMMA typeExpression)* RIGHT_BRACE    #unionType
@@ -126,8 +123,8 @@ typeExpression              :   'Union' LEFT_BRACE typeExpression ( COMMA typeEx
                             |   ID                                                                        #predefinedType
                             ;
 
-functionDeclaration         :   name typeParameters? parameters EQ exp                                    #compactFunctionDeclaration //todo review name usage definition vs reference
-                            |   FUNCTION name typeParameters? parameters block END                        #generalFunctionDeclaration
+functionDeclaration         :   fnID typeParameters? parameters EQ NL* exp                                    #compactFunctionDeclaration //todo review name usage definition vs reference
+                            |   FUNCTION NL* fnID NL* typeParameters? parameters NL* block NL* END                        #generalFunctionDeclaration
                             ;
 
 parameters                  :   LEFT_PARENTHESIS (parameter ((COMMA|SEMI_COLON) parameter)*)? RIGHT_PARENTHESIS                        #pparameters
@@ -139,15 +136,15 @@ parameter                   :   ID INSTANCE_OF typeExpression (EQ exp)?         
                             |   parameter ELLIPSE                                                         #vararg
                             ;
 
-typeDeclaration             :   TYPE_ALIAS ID typeParameters? typeExpression                              #typeAlias
-                            |   ABSTRACT ID typeParameters? (SUB_TYPE ID typeParameters?)?                #abstractType
-                            |   BITS_TYPE SIZE ID SUB_TYPE ID                                             #bitsSubtype
-                            |   BITS_TYPE SIZE ID                                                         #bitsTtype
-                            |   TYPE ID typeParameters? (SUB_TYPE ID)? fieldDeclaration* functionDeclaration* END                       #mutableTypeDeclaration
-                            |   IMMUTABLE ID typeParameters? (SUB_TYPE ID typeParameters?)? fieldDeclaration* functionDeclaration* END  #immutableTypeDeclaration
+typeDeclaration             :   TYPE_ALIAS NL* ID NL* typeParameters? NL* typeExpression                              #typeAlias
+                            |   ABSTRACT NL* ID typeParameters? NL* (SUB_TYPE NL* ID  NL* typeParameters?)?                #abstractType
+                            |   BITS_TYPE NL* SIZE NL* ID SUB_TYPE NL* ID                                             #bitsSubtype
+                            |   BITS_TYPE NL* SIZE ID                                                         #bitsTtype
+                            |   TYPE NL* ID NL*  typeParameters? (SUB_TYPE ID typeParameters?)?  (NL* fieldDeclaration NL*)* (functionDeclaration NL*)* END                       #mutableTypeDeclaration
+                            |   IMMUTABLE NL* ID NL* typeParameters? (SUB_TYPE ID typeParameters?)? NL* (fieldDeclaration NL*)* (NL*  functionDeclaration NL)* NL*  END  #immutableTypeDeclaration
                             ;
 
-fieldDeclaration            :   ID INSTANCE_OF typeExpression                                             #typedFieldDeclaration
+fieldDeclaration            :   ID NL*  INSTANCE_OF NL*  typeExpression                                             #typedFieldDeclaration
                             |   ID                                                                        #untypedFieldDeclaration
                             ;
 
@@ -158,6 +155,29 @@ typeParameter               :   ID SUB_TYPE typeExpression                      
                             |   INSTANCE_OF typeExpression                                                #anonymousType
                             |   exp                                                                       #expressionType
                             ;
+
+
+fnID                        :   name                                                                      #functionName
+                            |   operator                                                                  #functionSymbol
+                            |   LEFT_PARENTHESIS fnID RIGHT_PARENTHESIS                                   #parenthesisedFnID
+                            ;
+
+operator                    :   RELATIONAL_OPERATOR
+                            |   ADDITIVE_OPERATOR
+                            |   MULTIPLICATIVE_OPERATOR
+                            |   PLUS
+                            |   TIMES
+                            |   OR
+                            |   AND
+                            |   MINUS
+                            |   NOT
+                            |   BITWISE_NOT
+                            |   COLON
+                            |   ASSIGNMENT_OPERATOR
+                            |   INSTANCE_OF
+                            |   'in' //todo review
+                            ;
+
 
 name                        :   ID (DOT ID)*
                             ;
@@ -173,7 +193,7 @@ MINUS                       : '-';
 NOT                         : '!';
 BITWISE_NOT                 : '~';
 SUB_TYPE                    : '<:';
-AMPERSAND                   : '&';
+//AMPERSAND                   : '&';
 
 //todo :(¬),:(>:), :(√), :(∛), :(∜)])
 
@@ -311,7 +331,7 @@ USING                       : 'using' ;
 EXPORT                      : 'export' ;
 DO                          : 'do';
 CATCH                       : 'catch';
-
+FINALLY                     : 'finally';
 
 ARROW                       : '->';
 AT                          : '@';
@@ -323,18 +343,9 @@ ELSE_IF                     : 'elseif';
 ELSE                        : 'else';
 COMMA                       : ',';
 
-END                         : 'end'                                 {bracketNesting==0}?;
-END_LITERAL                 : 'end'                                 {bracketNesting>0}?;
+END                         : {bracketNesting==0}? 'end';
+END_LITERAL                 : {bracketNesting>0}? 'end';
 
-INF16                       : 'Inf16';
-INF32                       : 'Inf32';
-INF                         : 'Inf';
-MINUS_INF16                 : '-Inf16';
-MINUS_INF32                 : '-Inf32';
-MINUS_INF                   : '-Inf';
-NAN16                       : 'NaN16';
-NAN32                       : 'NaN32';
-NAN                         : 'NaN';
 
 LEFT_PARENTHESIS            : '('                                   {nesting++;};
 RIGHT_PARENTHESIS           : ')'                                   {nesting--;};
@@ -352,6 +363,9 @@ HEX                         : '0x'HEX_DGT+;
 FLOAT32_LITERAL             : DEC_DGT+ [\.] DEC_DGT* EXP32?
                             | '.' DEC_DGT* EXP32?
                             ;
+
+HEX_FLOAT                   : '0x' HEX_DGT? ('.' HEX_DGT*)? ( 'p' | 'P' ) ( '+' | '-' )? DEC_DGT+;
+
 fragment
 EXP32                       : [f] [+\-]? DEC_DGT+;
 
@@ -360,11 +374,6 @@ FLOAT64_LITERAL             : DEC_DGT+ [\.] DEC_DGT* EXP64?
                             ;
 fragment
 EXP64                       : [e] [+\-]? DEC_DGT+;
-
-
-FQN                         : (Identifier '\\.')+ ID;
-ID                          : Identifier (Identifier|DEC_DGT)* '!'?;
-
 
 CHARACTER_LITERAL           : ('\'' (~'\'') '\'')|('\'' '\\'.'\'') ;
 
@@ -378,19 +387,20 @@ SPACES                      : [ \t]+;
 
 WS                          :   SPACES ->skip;
 
-//EOL                         :   (('\r'? '\n') SPACES?)+ {nesting==0}?;
-//IGNORED_EOL                 :   (('\r'? '\n') SPACES?)+ {nesting>0 || ( super.getCharPositionInLine() == 0 && super.getLine() == 1)}?  ->skip;
+NL                          :   (('\r'? '\n') SPACES?)+ {nesting==0}?;
+IGNORED_EOL                 :   (('\r'? '\n') SPACES?)+ {nesting>0}? ->skip;
 
-EOL                       :   ('\r'? '\n') -> skip ;
+
+//EOL                         :   ('\r'? '\n');
 
 COMMENT                     :   '#=' .*? '=#' -> skip ; //todo nesting
 LINE_COMMENT                :   '#' ~[\r\n]* -> skip;
 
-fragment Identifier         :   ('_'|UNi) ('_'|UNi|DEC_DGT)*;
-fragment DEC_DGT            :   [0-9];
-fragment BIN_DGT            :   [0-1];
-fragment OCT_DGT            :   [0-7];
-fragment HEX_DGT            :   [0-9A-F];
+ID                          :   ('_'|UNi) ('_'|UNi|DEC_DGT)* '!'?;
+fragment DEC_DGT            :   [0-9_];
+fragment BIN_DGT            :   [0-1_];
+fragment OCT_DGT            :   [0-7_];
+fragment HEX_DGT            :   [0-9A-Fa-f_];
 SIZE                        :   '8'|'16'|'32'|'64'|'128'|'256'|'512';//... currently restricted to multiples of 8
 
 fragment UNi                :   'A'..'Z'

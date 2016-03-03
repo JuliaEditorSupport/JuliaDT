@@ -70,26 +70,12 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOctal(JuliaParser.OctalContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code nan32}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNan32(JuliaParser.Nan32Context ctx);
-	/**
 	 * Visit a parse tree produced by the {@code constant}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitConstant(JuliaParser.ConstantContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code forEq}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForEq(JuliaParser.ForEqContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code arrow}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -112,26 +98,12 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMultiplicative(JuliaParser.MultiplicativeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code while}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhile(JuliaParser.WhileContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code applyFunction}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitApplyFunction(JuliaParser.ApplyFunctionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code returnExp}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitReturnExp(JuliaParser.ReturnExpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code primitiveBlock}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -147,19 +119,19 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBitwiseNot(JuliaParser.BitwiseNotContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code coeffient}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCoeffient(JuliaParser.CoeffientContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code lambda}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitLambda(JuliaParser.LambdaContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code quote}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitQuote(JuliaParser.QuoteContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code dollarExp}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -182,13 +154,6 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitHex(JuliaParser.HexContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code nan}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNan(JuliaParser.NanContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code enumeration}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -202,13 +167,6 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFfloat32(JuliaParser.Ffloat32Context ctx);
-	/**
-	 * Visit a parse tree produced by the {@code forIn}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForIn(JuliaParser.ForInContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exponent}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -224,19 +182,19 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIdentifier(JuliaParser.IdentifierContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code hexFloat}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHexFloat(JuliaParser.HexFloatContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code bitShift}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBitShift(JuliaParser.BitShiftContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code inf32Type}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInf32Type(JuliaParser.Inf32TypeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code implicitTuple}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -301,12 +259,12 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRegex(JuliaParser.RegexContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code minusInf32}
+	 * Visit a parse tree produced by the {@code operatorSymbol}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMinusInf32(JuliaParser.MinusInf32Context ctx);
+	T visitOperatorSymbol(JuliaParser.OperatorSymbolContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code binary}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -335,20 +293,6 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitEndLiteral(JuliaParser.EndLiteralContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code nan16}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNan16(JuliaParser.Nan16Context ctx);
-	/**
-	 * Visit a parse tree produced by the {@code invokeMacro}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInvokeMacro(JuliaParser.InvokeMacroContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code parenthesised}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -420,6 +364,13 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGlobal(JuliaParser.GlobalContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code local}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocal(JuliaParser.LocalContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code tuple}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -469,26 +420,12 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCcall(JuliaParser.CcallContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code inf}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInf(JuliaParser.InfContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code naryConditional}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitNaryConditional(JuliaParser.NaryConditionalContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code break}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBreak(JuliaParser.BreakContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code applyPrecedng}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -503,13 +440,6 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAssignment(JuliaParser.AssignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code inf16Type}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInf16Type(JuliaParser.Inf16TypeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code int}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -532,13 +462,6 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSimpleAssignment(JuliaParser.SimpleAssignmentContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code minusInf16}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMinusInf16(JuliaParser.MinusInf16Context ctx);
-	/**
 	 * Visit a parse tree produced by the {@code unaryPlus}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -546,12 +469,12 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnaryPlus(JuliaParser.UnaryPlusContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code minusInf}
+	 * Visit a parse tree produced by the {@code applyOperator}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMinusInf(JuliaParser.MinusInfContext ctx);
+	T visitApplyOperator(JuliaParser.ApplyOperatorContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code relational}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -574,12 +497,12 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFfloat64(JuliaParser.Ffloat64Context ctx);
 	/**
-	 * Visit a parse tree produced by the {@code return}
+	 * Visit a parse tree produced by the {@code macroInvoke}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitReturn(JuliaParser.ReturnContext ctx);
+	T visitMacroInvoke(JuliaParser.MacroInvokeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ttypeExpression}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -741,6 +664,33 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpressionType(JuliaParser.ExpressionTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code functionName}
+	 * labeled alternative in {@link JuliaParser#fnID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionName(JuliaParser.FunctionNameContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code functionSymbol}
+	 * labeled alternative in {@link JuliaParser#fnID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionSymbol(JuliaParser.FunctionSymbolContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code parenthesisedFnID}
+	 * labeled alternative in {@link JuliaParser#fnID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenthesisedFnID(JuliaParser.ParenthesisedFnIDContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JuliaParser#operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOperator(JuliaParser.OperatorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JuliaParser#name}.
 	 * @param ctx the parse tree

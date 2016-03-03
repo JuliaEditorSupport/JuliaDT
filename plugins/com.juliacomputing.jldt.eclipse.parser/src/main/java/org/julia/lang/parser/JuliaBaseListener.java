@@ -124,18 +124,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNan32(JuliaParser.Nan32Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNan32(JuliaParser.Nan32Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterConstant(JuliaParser.ConstantContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -143,18 +131,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitConstant(JuliaParser.ConstantContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterForEq(JuliaParser.ForEqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitForEq(JuliaParser.ForEqContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -196,18 +172,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWhile(JuliaParser.WhileContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitWhile(JuliaParser.WhileContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterApplyFunction(JuliaParser.ApplyFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -215,18 +179,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitApplyFunction(JuliaParser.ApplyFunctionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterReturnExp(JuliaParser.ReturnExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitReturnExp(JuliaParser.ReturnExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -256,6 +208,18 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCoeffient(JuliaParser.CoeffientContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCoeffient(JuliaParser.CoeffientContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLambda(JuliaParser.LambdaContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -263,18 +227,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLambda(JuliaParser.LambdaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterQuote(JuliaParser.QuoteContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitQuote(JuliaParser.QuoteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -316,18 +268,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNan(JuliaParser.NanContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNan(JuliaParser.NanContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterEnumeration(JuliaParser.EnumerationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -347,18 +287,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFfloat32(JuliaParser.Ffloat32Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterForIn(JuliaParser.ForInContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitForIn(JuliaParser.ForInContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -388,6 +316,18 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterHexFloat(JuliaParser.HexFloatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHexFloat(JuliaParser.HexFloatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBitShift(JuliaParser.BitShiftContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -395,18 +335,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBitShift(JuliaParser.BitShiftContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInf32Type(JuliaParser.Inf32TypeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInf32Type(JuliaParser.Inf32TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -520,13 +448,13 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMinusInf32(JuliaParser.MinusInf32Context ctx) { }
+	@Override public void enterOperatorSymbol(JuliaParser.OperatorSymbolContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMinusInf32(JuliaParser.MinusInf32Context ctx) { }
+	@Override public void exitOperatorSymbol(JuliaParser.OperatorSymbolContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -575,30 +503,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitEndLiteral(JuliaParser.EndLiteralContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNan16(JuliaParser.Nan16Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNan16(JuliaParser.Nan16Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInvokeMacro(JuliaParser.InvokeMacroContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInvokeMacro(JuliaParser.InvokeMacroContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -724,6 +628,18 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLocal(JuliaParser.LocalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLocal(JuliaParser.LocalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTuple(JuliaParser.TupleContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -808,18 +724,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInf(JuliaParser.InfContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInf(JuliaParser.InfContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterNaryConditional(JuliaParser.NaryConditionalContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -827,18 +731,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNaryConditional(JuliaParser.NaryConditionalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBreak(JuliaParser.BreakContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBreak(JuliaParser.BreakContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -863,18 +755,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAssignment(JuliaParser.AssignmentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInf16Type(JuliaParser.Inf16TypeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInf16Type(JuliaParser.Inf16TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -916,18 +796,6 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMinusInf16(JuliaParser.MinusInf16Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMinusInf16(JuliaParser.MinusInf16Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterUnaryPlus(JuliaParser.UnaryPlusContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -940,13 +808,13 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMinusInf(JuliaParser.MinusInfContext ctx) { }
+	@Override public void enterApplyOperator(JuliaParser.ApplyOperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMinusInf(JuliaParser.MinusInfContext ctx) { }
+	@Override public void exitApplyOperator(JuliaParser.ApplyOperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -988,13 +856,13 @@ public class JuliaBaseListener implements JuliaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterReturn(JuliaParser.ReturnContext ctx) { }
+	@Override public void enterMacroInvoke(JuliaParser.MacroInvokeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitReturn(JuliaParser.ReturnContext ctx) { }
+	@Override public void exitMacroInvoke(JuliaParser.MacroInvokeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1271,6 +1139,54 @@ public class JuliaBaseListener implements JuliaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpressionType(JuliaParser.ExpressionTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionName(JuliaParser.FunctionNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionName(JuliaParser.FunctionNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionSymbol(JuliaParser.FunctionSymbolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionSymbol(JuliaParser.FunctionSymbolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParenthesisedFnID(JuliaParser.ParenthesisedFnIDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParenthesisedFnID(JuliaParser.ParenthesisedFnIDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOperator(JuliaParser.OperatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOperator(JuliaParser.OperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

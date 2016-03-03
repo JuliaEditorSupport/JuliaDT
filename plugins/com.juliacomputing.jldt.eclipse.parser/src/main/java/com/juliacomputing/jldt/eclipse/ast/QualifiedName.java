@@ -9,6 +9,10 @@ public class QualifiedName extends SimpleReference {
 
   public static final String UNDEFINED = "undefined";
 
+  public QualifiedName(String value, int start, int stop) {
+    super(start, stop, value);
+  }
+
   public QualifiedName(List<String> entries, int start, int stop) {
     super(start, stop, join(entries));
   }

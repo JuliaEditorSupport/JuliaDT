@@ -108,18 +108,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitOctal(JuliaParser.OctalContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code nan32}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterNan32(JuliaParser.Nan32Context ctx);
-	/**
-	 * Exit a parse tree produced by the {@code nan32}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitNan32(JuliaParser.Nan32Context ctx);
-	/**
 	 * Enter a parse tree produced by the {@code constant}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -131,18 +119,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConstant(JuliaParser.ConstantContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code forEq}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterForEq(JuliaParser.ForEqContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code forEq}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitForEq(JuliaParser.ForEqContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arrow}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -180,18 +156,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitMultiplicative(JuliaParser.MultiplicativeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code while}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterWhile(JuliaParser.WhileContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code while}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitWhile(JuliaParser.WhileContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code applyFunction}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -203,18 +167,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitApplyFunction(JuliaParser.ApplyFunctionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code returnExp}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterReturnExp(JuliaParser.ReturnExpContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code returnExp}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitReturnExp(JuliaParser.ReturnExpContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code primitiveBlock}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -240,6 +192,18 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitBitwiseNot(JuliaParser.BitwiseNotContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code coeffient}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterCoeffient(JuliaParser.CoeffientContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code coeffient}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitCoeffient(JuliaParser.CoeffientContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code lambda}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -251,18 +215,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLambda(JuliaParser.LambdaContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code quote}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterQuote(JuliaParser.QuoteContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code quote}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitQuote(JuliaParser.QuoteContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code dollarExp}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -300,18 +252,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitHex(JuliaParser.HexContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code nan}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterNan(JuliaParser.NanContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code nan}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitNan(JuliaParser.NanContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code enumeration}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -335,18 +275,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFfloat32(JuliaParser.Ffloat32Context ctx);
-	/**
-	 * Enter a parse tree produced by the {@code forIn}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterForIn(JuliaParser.ForInContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code forIn}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitForIn(JuliaParser.ForInContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code exponent}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -372,6 +300,18 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitIdentifier(JuliaParser.IdentifierContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code hexFloat}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterHexFloat(JuliaParser.HexFloatContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code hexFloat}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitHexFloat(JuliaParser.HexFloatContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code bitShift}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -383,18 +323,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBitShift(JuliaParser.BitShiftContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code inf32Type}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterInf32Type(JuliaParser.Inf32TypeContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code inf32Type}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitInf32Type(JuliaParser.Inf32TypeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code implicitTuple}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -504,17 +432,17 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitRegex(JuliaParser.RegexContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code minusInf32}
+	 * Enter a parse tree produced by the {@code operatorSymbol}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void enterMinusInf32(JuliaParser.MinusInf32Context ctx);
+	void enterOperatorSymbol(JuliaParser.OperatorSymbolContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code minusInf32}
+	 * Exit a parse tree produced by the {@code operatorSymbol}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void exitMinusInf32(JuliaParser.MinusInf32Context ctx);
+	void exitOperatorSymbol(JuliaParser.OperatorSymbolContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code binary}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -563,30 +491,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEndLiteral(JuliaParser.EndLiteralContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code nan16}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterNan16(JuliaParser.Nan16Context ctx);
-	/**
-	 * Exit a parse tree produced by the {@code nan16}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitNan16(JuliaParser.Nan16Context ctx);
-	/**
-	 * Enter a parse tree produced by the {@code invokeMacro}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterInvokeMacro(JuliaParser.InvokeMacroContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code invokeMacro}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitInvokeMacro(JuliaParser.InvokeMacroContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code parenthesised}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -708,6 +612,18 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitGlobal(JuliaParser.GlobalContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code local}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocal(JuliaParser.LocalContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code local}
+	 * labeled alternative in {@link JuliaParser#exp}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocal(JuliaParser.LocalContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code tuple}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -792,18 +708,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitCcall(JuliaParser.CcallContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code inf}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterInf(JuliaParser.InfContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code inf}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitInf(JuliaParser.InfContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code naryConditional}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -815,18 +719,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNaryConditional(JuliaParser.NaryConditionalContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code break}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterBreak(JuliaParser.BreakContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code break}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitBreak(JuliaParser.BreakContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code applyPrecedng}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -851,18 +743,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignment(JuliaParser.AssignmentContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code inf16Type}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterInf16Type(JuliaParser.Inf16TypeContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code inf16Type}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitInf16Type(JuliaParser.Inf16TypeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code int}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -900,18 +780,6 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitSimpleAssignment(JuliaParser.SimpleAssignmentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code minusInf16}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void enterMinusInf16(JuliaParser.MinusInf16Context ctx);
-	/**
-	 * Exit a parse tree produced by the {@code minusInf16}
-	 * labeled alternative in {@link JuliaParser#exp}.
-	 * @param ctx the parse tree
-	 */
-	void exitMinusInf16(JuliaParser.MinusInf16Context ctx);
-	/**
 	 * Enter a parse tree produced by the {@code unaryPlus}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
@@ -924,17 +792,17 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitUnaryPlus(JuliaParser.UnaryPlusContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code minusInf}
+	 * Enter a parse tree produced by the {@code applyOperator}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void enterMinusInf(JuliaParser.MinusInfContext ctx);
+	void enterApplyOperator(JuliaParser.ApplyOperatorContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code minusInf}
+	 * Exit a parse tree produced by the {@code applyOperator}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void exitMinusInf(JuliaParser.MinusInfContext ctx);
+	void exitApplyOperator(JuliaParser.ApplyOperatorContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code relational}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -972,17 +840,17 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitFfloat64(JuliaParser.Ffloat64Context ctx);
 	/**
-	 * Enter a parse tree produced by the {@code return}
+	 * Enter a parse tree produced by the {@code macroInvoke}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void enterReturn(JuliaParser.ReturnContext ctx);
+	void enterMacroInvoke(JuliaParser.MacroInvokeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code return}
+	 * Exit a parse tree produced by the {@code macroInvoke}
 	 * labeled alternative in {@link JuliaParser#exp}.
 	 * @param ctx the parse tree
 	 */
-	void exitReturn(JuliaParser.ReturnContext ctx);
+	void exitMacroInvoke(JuliaParser.MacroInvokeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ttypeExpression}
 	 * labeled alternative in {@link JuliaParser#exp}.
@@ -1259,6 +1127,52 @@ public interface JuliaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpressionType(JuliaParser.ExpressionTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code functionName}
+	 * labeled alternative in {@link JuliaParser#fnID}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionName(JuliaParser.FunctionNameContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code functionName}
+	 * labeled alternative in {@link JuliaParser#fnID}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionName(JuliaParser.FunctionNameContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code functionSymbol}
+	 * labeled alternative in {@link JuliaParser#fnID}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionSymbol(JuliaParser.FunctionSymbolContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code functionSymbol}
+	 * labeled alternative in {@link JuliaParser#fnID}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionSymbol(JuliaParser.FunctionSymbolContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code parenthesisedFnID}
+	 * labeled alternative in {@link JuliaParser#fnID}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenthesisedFnID(JuliaParser.ParenthesisedFnIDContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code parenthesisedFnID}
+	 * labeled alternative in {@link JuliaParser#fnID}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenthesisedFnID(JuliaParser.ParenthesisedFnIDContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JuliaParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperator(JuliaParser.OperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JuliaParser#operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperator(JuliaParser.OperatorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JuliaParser#name}.
 	 * @param ctx the parse tree

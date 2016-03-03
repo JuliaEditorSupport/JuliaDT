@@ -1,5 +1,28 @@
+using ...Types, ...Query, ..VersionWeights
+
+
+0x932e0143e51d0171
+
 #sequence
 y = fld(100b+h,36525); c = b + z - 365y - fld(y,4); m = div(5c+456,153);1
+
+
+
+import Base.in
+function in{T<:TimeType}(x::T, r::StepRange{T})
+    n = len(first(r),x,step(r)) + 1
+    n >= 1 && n <= length(r) && r[n] == x
+end
+
+
+.+{T<:TimeType}(x::Period, r::Range{T}) = (x+first(r)):step(r):(x+last(r))
+.+{T<:TimeType}(r::Range{T},x::Period) = x .+ r
++{T<:TimeType}(r::Range{T},x::Period) = x .+ r
++{T<:TimeType}(x::Period,r::Range{T}) = x .+ r
+.-{T<:TimeType}(r::Range{T},x::Period) = (first(r)-x):step(r):(last(r)-x)
+-{T<:TimeType}(r::Range{T},x::Period) = r .- x
+
+@eval _units(x::$p) = $(" " * lowercase(string(p))) * (abs(value(x)) == 1 ? "" : "s")
 
 
 f-1
