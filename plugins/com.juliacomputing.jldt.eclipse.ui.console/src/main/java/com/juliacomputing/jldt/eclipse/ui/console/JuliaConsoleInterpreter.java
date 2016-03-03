@@ -56,6 +56,8 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   @Override
   public IScriptExecResult exec(String command) throws IOException {
+    if (command == null || command.isEmpty())
+      return null;
     writer.write(command);
     writer.newLine();
     writer.write(EOM);
