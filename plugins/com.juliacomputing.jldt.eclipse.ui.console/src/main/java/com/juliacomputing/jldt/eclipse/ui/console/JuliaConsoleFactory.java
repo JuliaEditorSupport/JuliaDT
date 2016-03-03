@@ -11,6 +11,8 @@ public class JuliaConsoleFactory extends ScriptConsoleFactoryBase {
 
   private static final String CONSOLE_NAME = "Julia REPL";
   private static final String JULIA_INSTALLATION_TYPE = "org.eclipse.dltk.internal.debug.ui.launcher.JuliaInterpreterInstallationType";
+  private static final String PROMPT = "julia>";
+  private static final String APPEND_COMMAND = "[";
 
   public JuliaScriptConsole createConsoleInstance() {
     final IInterpreterInstallType installType = ScriptRuntime
@@ -19,7 +21,7 @@ public class JuliaConsoleFactory extends ScriptConsoleFactoryBase {
     final IFileHandle location = interpreterInstalls[0].getInstallLocation();
     final JuliaScriptConsole console = new JuliaScriptConsole(CONSOLE_NAME, "interactive");
     console.setInterpreter(new JuliaConsoleInterpreter(location.getCanonicalPath()));
-    console.setPrompt(new ScriptConsolePrompt("julia>", "/"));
+    console.setPrompt(new ScriptConsolePrompt(PROMPT, APPEND_COMMAND));
     return console;
   }
 

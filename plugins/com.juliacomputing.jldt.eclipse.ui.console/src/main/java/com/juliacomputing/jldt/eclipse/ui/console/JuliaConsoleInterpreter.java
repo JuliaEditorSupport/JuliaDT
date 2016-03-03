@@ -1,21 +1,18 @@
 package com.juliacomputing.jldt.eclipse.ui.console;
 
-import org.eclipse.dltk.console.IScriptConsoleIO;
-import org.eclipse.dltk.console.IScriptExecResult;
-import org.eclipse.dltk.console.IScriptInterpreter;
-import org.eclipse.dltk.console.ScriptExecResult;
+import org.eclipse.dltk.console.*;
 
 import java.io.*;
 import java.util.List;
 
 public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
-  private static final String EOM = "\"<eom>\"";
   private static final String ENCODING = "UTF8";
 
   private final Process process;
   private final BufferedWriter writer;
   private final BufferedReader reader;
+  private String response;
 
   public JuliaConsoleInterpreter(final String path) {
 
@@ -56,24 +53,25 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   @Override
   public IScriptExecResult exec(String command) throws IOException {
-    System.out.println(command);
     if (command != null && !command.isEmpty()) {
       writer.write(command);
       writer.newLine();
       writer.flush();
     }
-    final StringBuilder response = new StringBuilder();
+    final StringBuilder responseBuilder = new StringBuilder();
     while (reader.ready()) {
       final String line = reader.readLine();
-      response.append(line);
-      response.append("\n");
+      responseBuilder.append(line);
+      responseBuilder.append("\n");
     }
-    return new ScriptExecResult(response.toString());
+    response = responseBuilder.toString();
+    return new ScriptExecResult(response);
   }
 
   @Override
   public int getState() {
-    return 0;
+    return response == null || response.trim().isEmpty() ? IScriptConsoleInterpreter.WAIT_CONTINUE_COMMAND
+        : IScriptConsoleInterpreter.WAIT_NEW_COMMAND;
   }
 
   @Override
