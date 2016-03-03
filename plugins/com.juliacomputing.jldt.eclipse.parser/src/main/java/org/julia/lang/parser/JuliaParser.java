@@ -1802,8 +1802,8 @@ public class JuliaParser extends Parser {
 	}
 	public static class PrimitiveBlockContext extends ExpContext {
 		public TerminalNode BEGIN() { return getToken(JuliaParser.BEGIN, 0); }
-		public ExpContext exp() {
-			return getRuleContext(ExpContext.class,0);
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
 		}
 		public TerminalNode END() { return getToken(JuliaParser.END, 0); }
 		public PrimitiveBlockContext(ExpContext ctx) { copyFrom(ctx); }
@@ -3524,7 +3524,7 @@ public class JuliaParser extends Parser {
 				setState(605);
 				match(BEGIN);
 				setState(606);
-				exp(0);
+				block();
 				setState(607);
 				match(END);
 				}
@@ -7076,7 +7076,7 @@ public class JuliaParser extends Parser {
 		"\2\2\u0256\u025a\5\6\4\2\u0257\u0259\7W\2\2\u0258\u0257\3\2\2\2\u0259"+
 		"\u025c\3\2\2\2\u025a\u0258\3\2\2\2\u025a\u025b\3\2\2\2\u025b\u025d\3\2"+
 		"\2\2\u025c\u025a\3\2\2\2\u025d\u025e\7D\2\2\u025e\u0325\3\2\2\2\u025f"+
-		"\u0260\7\36\2\2\u0260\u0261\5\f\7\2\u0261\u0262\7D\2\2\u0262\u0325\3\2"+
+		"\u0260\7\36\2\2\u0260\u0261\5\4\3\2\u0261\u0262\7D\2\2\u0262\u0325\3\2"+
 		"\2\2\u0263\u026c\7:\2\2\u0264\u0265\7[\2\2\u0265\u0267\7C\2\2\u0266\u0264"+
 		"\3\2\2\2\u0267\u026a\3\2\2\2\u0268\u0266\3\2\2\2\u0268\u0269\3\2\2\2\u0269"+
 		"\u026b\3\2\2\2\u026a\u0268\3\2\2\2\u026b\u026d\7[\2\2\u026c\u0268\3\2"+

@@ -69,7 +69,7 @@ exp                         :   MINUS exp                                       
                             |   END_LITERAL                                                               #endLiteral
                             |   IF NL* exp NL* block NL* (ELSE_IF NL* exp NL* block NL* )* (ELSE NL* block)? END                       #naryConditional
                             |   LET (ID EQ NL* exp NL*)* statement NL* END                                            #let
-                            |   BEGIN exp END                                                             #primitiveBlock
+                            |   BEGIN block END                                                             #primitiveBlock
                             |   DO ((ID COMMA)* ID)? block END                                            #anonymousFunction
                             |   CCALL LEFT_PARENTHESIS exp COMMA exp COMMA exp RIGHT_PARENTHESIS          #ccall
                             |   exp 'in' exp                                                              #in
