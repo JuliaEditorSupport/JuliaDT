@@ -56,22 +56,18 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   @Override
   public IScriptExecResult exec(String command) throws IOException {
+	  System.out.println(command);
     if (command == null || command.isEmpty())
       return null;
     writer.write(command);
     writer.newLine();
-    writer.write(EOM);
-    writer.newLine();
     writer.flush();
     final StringBuilder response = new StringBuilder();
-    String line = reader.readLine();
-    while (line != null && !line.contains(EOM)) {
+    while (reader.ready()){
+      final String line = reader.readLine();
       response.append(line);
       response.append("\n");
-      line = reader.readLine();
     }
-    if (line != null)
-      response.append(line.replace(EOM, ""));
     return new ScriptExecResult(response.toString());
   }
 
