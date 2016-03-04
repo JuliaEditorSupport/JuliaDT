@@ -12,10 +12,10 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   private final Process process;
   private final BufferedWriter writer;
   private final BufferedReader reader;
-  private String response;
+  private StringBuilder block = new StringBuilder();
+  private int state = IScriptConsoleInterpreter.WAIT_NEW_COMMAND;
 
   public JuliaConsoleInterpreter(final String path) {
-
     try {
       ProcessBuilder builder = new ProcessBuilder(path);
       builder.redirectErrorStream(true);
@@ -53,25 +53,42 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   @Override
   public IScriptExecResult exec(String command) throws IOException {
-    if (command != null && !command.isEmpty()) {
-      writer.write(command);
-      writer.newLine();
-      writer.flush();
+    block.append(command);
+    block.append("\n");
+    if(isIncomplete(block.toString())){
+      state = IScriptConsoleInterpreter.WAIT_USER_INPUT;
+      return null;
     }
-    final StringBuilder responseBuilder = new StringBuilder();
-    while (reader.ready()) {
-      final String line = reader.readLine();
-      responseBuilder.append(line);
-      responseBuilder.append("\n");
-    }
-    response = responseBuilder.toString();
+    final String response = execute(block.toString());
+    block = new StringBuilder();
+    state = IScriptConsoleInterpreter.WAIT_NEW_COMMAND;
     return new ScriptExecResult(response);
   }
 
+  private boolean isIncomplete(final String block) throws IOException {
+    final String parseCommand = String.format("parse(\"%s\",1; greedy=true, raise=false)", block);
+    final String response = execute(parseCommand);
+    return response.contains("incomplete");
+  }
+
+  private String execute(String statement) throws IOException {
+    writer.write(statement);
+    writer.newLine();
+    writer.flush();
+    final StringBuilder response = new StringBuilder();
+    response.append(reader.readLine());
+    response.append("\n");
+    while (reader.ready()) {
+      response.append(reader.readLine());
+      response.append("\n");
+    }
+    return response.toString();
+  }
+
+
   @Override
   public int getState() {
-    return response == null || response.trim().isEmpty() ? IScriptConsoleInterpreter.WAIT_CONTINUE_COMMAND
-        : IScriptConsoleInterpreter.WAIT_NEW_COMMAND;
+    return state;
   }
 
   @Override
