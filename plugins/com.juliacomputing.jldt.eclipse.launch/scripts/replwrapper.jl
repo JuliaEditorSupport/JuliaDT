@@ -1,7 +1,7 @@
 function execute(statement)
-  expression = parse(statement,1; greedy=true, raise=false)
-  if isa(expression[1],Expr)
-    state = expression[1].head
+  ast = parse(statement,1; greedy=true, raise=false)
+  if isa(ast[1],Expr)
+    state = ast[1].head
   else
     state = nothing
   end
