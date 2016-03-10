@@ -24,7 +24,7 @@ public class JuliaREPLLaunchConfigurationDelegate extends AbstractScriptLaunchCo
       public void run() {
         final JuliaConsoleFactory consoleFactory = new JuliaConsoleFactory();
         final JuliaScriptConsole console = consoleFactory.newConsole();
-        console.executeCommand("include(\"" + script + "\")");
+        console.executeCommand(String.format("include(\\\"%s\\\")",script));
       }
     });
   }
