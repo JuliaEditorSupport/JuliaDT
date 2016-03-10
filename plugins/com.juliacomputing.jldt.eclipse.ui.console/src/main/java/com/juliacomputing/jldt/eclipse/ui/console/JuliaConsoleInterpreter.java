@@ -1,5 +1,7 @@
 package com.juliacomputing.jldt.eclipse.ui.console;
 
+import com.juliacomputing.jldt.eclipse.ui.console.Result.Status;
+
 import org.eclipse.dltk.console.*;
 
 import java.io.*;
@@ -8,6 +10,28 @@ import java.util.List;
 public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   private static final String ENCODING = "UTF8";
+  private static final String REPL_WRAPPER = "module EclipseREPL \n" +
+          "  function execute(statement)\n" +
+          "    expression = parse(statement,1; greedy=true, raise=false)\n" +
+          "    if isa(expression[1],Expr) \n" +
+          "      state = expression[1].head\n" +
+          "    else\n" +
+          "      state = nothing\n" +
+          "    end      \n" +
+          "    status = state==:incomplete ? \"incomplete\" : state==:error ? \"error\" : \"complete\"\n" +
+          "    println(status)\n" +
+          "    try \n" +
+          "      if(status==\"complete\")\n" +
+          "        result=include_string(statement)\n" +
+          "        if result!=nothing\n" +
+          "          println(result)\n" +
+          "        end\n" +
+          "      end\n" +
+          "    finally  \n" +
+          "      println(\"<<eox>>\")\n" +
+          "    end  \n" +
+          "  end\n" +
+          "end\n";
 
   private final Process process;
   private final BufferedWriter writer;
@@ -24,6 +48,11 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
       writer = new BufferedWriter(new OutputStreamWriter(outputStream, ENCODING));
       final InputStream inputStream = process.getInputStream();
       reader = new BufferedReader(new InputStreamReader(inputStream, "UTF8"));
+      writer.write(REPL_WRAPPER);
+      writer.newLine();
+      writer.flush();
+      reader.readLine();
+
     }
     catch (IOException e) {
       e.printStackTrace();
@@ -55,36 +84,34 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   public IScriptExecResult exec(String command) throws IOException {
     block.append(command);
     block.append("\n");
-    if(isIncomplete(block.toString())){
-      state = IScriptConsoleInterpreter.WAIT_USER_INPUT;
-      return null;
-    }
-    final String response = execute(block.toString());
-    block = new StringBuilder();
-    state = IScriptConsoleInterpreter.WAIT_NEW_COMMAND;
-    return new ScriptExecResult(response);
+    final String message = String.format("EclipseREPL.execute(\"%s\")", block);
+    final Result result = execute(message);
+    return new ScriptExecResult(result.getValue());
   }
 
-  private boolean isIncomplete(final String block) throws IOException {
-    final String parseCommand = String.format("parse(\"%s\",1; greedy=true, raise=false)", block);
-    final String response = execute(parseCommand);
-    return response.contains("incomplete");
-  }
-
-  private String execute(String statement) throws IOException {
+  private Result execute(String statement) throws IOException {
     writer.write(statement);
     writer.newLine();
     writer.flush();
     final StringBuilder response = new StringBuilder();
-    response.append(reader.readLine());
-    response.append("\n");
-    while (reader.ready()) {
-      response.append(reader.readLine());
+    final String statusLine = reader.readLine().trim();
+    final Status status = Status.valueOf(statusLine);
+    String line = reader.readLine().trim();
+    while (!line.equals("<<eox>>")) {
+      response.append(line);
       response.append("\n");
+      line = reader.readLine().trim();
     }
-    return response.toString();
+    switch (status) {
+      case incomplete:
+        state = IScriptConsoleInterpreter.WAIT_USER_INPUT;
+        return null;
+      default:
+        state = IScriptConsoleInterpreter.WAIT_NEW_COMMAND;
+        block = new StringBuilder();
+        return new Result(status, response.toString());
+    }
   }
-
 
   @Override
   public int getState() {

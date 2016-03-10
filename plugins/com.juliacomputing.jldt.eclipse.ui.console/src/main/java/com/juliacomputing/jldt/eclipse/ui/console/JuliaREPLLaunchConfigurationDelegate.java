@@ -13,17 +13,18 @@ public class JuliaREPLLaunchConfigurationDelegate extends AbstractScriptLaunchCo
 
   public void launch(final ILaunchConfiguration configuration, String mode, ILaunch launch,
       IProgressMonitor monitor) throws CoreException {
-    System.out.println(getDefaultWorkingDirectory(configuration));
-    System.out.println("-----" + getSourceModule(configuration).getResource().getFullPath());
+
     monitor.setCanceled(true);
+
     final String workingDirectory = getProjectLocation(configuration);
     final String source = getSourceModule(configuration).getElementName();
     final String script = new File(workingDirectory, source).getAbsolutePath();
+
     Display.getDefault().asyncExec(new Runnable() {
       public void run() {
         final JuliaConsoleFactory consoleFactory = new JuliaConsoleFactory();
         final JuliaScriptConsole console = consoleFactory.newConsole();
-        console.executeCommand("include(\""+script+"\")");
+        console.executeCommand("include(\"" + script + "\")");
       }
     });
   }
