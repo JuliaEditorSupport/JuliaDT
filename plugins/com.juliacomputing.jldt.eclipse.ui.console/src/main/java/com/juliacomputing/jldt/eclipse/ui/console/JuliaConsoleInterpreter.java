@@ -88,7 +88,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   @Override
   public IScriptExecResult exec(String command) throws IOException {
-    block.append(command);
+    block.append(command.replace("\"", "\\\""));
     block.append("\n");
     final String message = String.format("EclipseREPL.execute(\"%s\")", block);
     final Result result = execute(message);
