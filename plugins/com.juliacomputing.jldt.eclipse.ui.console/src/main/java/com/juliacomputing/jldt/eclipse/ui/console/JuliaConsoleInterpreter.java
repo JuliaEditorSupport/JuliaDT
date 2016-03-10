@@ -12,22 +12,28 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   private static final String ENCODING = "UTF8";
   private static final String REPL_WRAPPER = "module EclipseREPL \n" +
           "  function execute(statement)\n" +
-          "    expression = parse(statement,1; greedy=true, raise=false)\n" +
-          "    if isa(expression[1],Expr) \n" +
-          "      state = expression[1].head\n" +
-          "    else\n" +
-          "      state = nothing\n" +
-          "    end      \n" +
-          "    status = state==:incomplete ? \"incomplete\" : state==:error ? \"error\" : \"complete\"\n" +
-          "    println(status)\n" +
+          "    status=\"complete\" \n" +
           "    try \n" +
+          "      expression = parse(statement,1; greedy=true, raise=false)\n" +
+          "      if isa(expression[1],Expr) \n" +
+          "        state = expression[1].head\n" +
+          "      else\n" +
+          "        state = nothing\n" +
+          "      end      \n" +
+          "      status = state==:incomplete ? \"incomplete\" : state==:error ? \"error\" : \"complete\"\n" +
+          "      result=nothing\n" +
           "      if(status==\"complete\")\n" +
           "        result=include_string(statement)\n" +
           "        if result!=nothing\n" +
           "          println(result)\n" +
           "        end\n" +
           "      end\n" +
+          "    catch e\n" +
+          "        showerror(STDOUT, e); println()\n " +
+          "        status = \"error\"\n" +
           "    finally  \n" +
+          "      flush(STDOUT)\n" +
+          "      println(\"<<$status>>\")\n" +
           "      println(\"<<eox>>\")\n" +
           "    end  \n" +
           "  end\n" +
@@ -94,13 +100,24 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     writer.newLine();
     writer.flush();
     final StringBuilder response = new StringBuilder();
-    final String statusLine = reader.readLine().trim();
-    final Status status = Status.valueOf(statusLine);
+    //final String statusLine = reader.readLine().trim();
+   
     String line = reader.readLine().trim();
+    System.out.println("*****"+line);
+    while (!line.contains("<<")){
+    	response.append(line);
+    	response.append("\n");
+    	line = reader.readLine().trim();
+    	System.out.println("*****"+line);
+    }
+    final Status status = Status.valueOf(line.substring(2, line.length()-2));
+    line = reader.readLine().trim();
+    System.out.println("*****"+line);
     while (!line.equals("<<eox>>")) {
       response.append(line);
       response.append("\n");
       line = reader.readLine().trim();
+      System.out.println("*****"+line);
     }
     switch (status) {
       case incomplete:
