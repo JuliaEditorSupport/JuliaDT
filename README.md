@@ -26,6 +26,12 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 |default|`mvn clean install`|local/dev|[formatter](https://maven-java-formatter-plugin.googlecode.com/svn/site/0.3.1/usage.html)|
 |strict|`mvn clean install -P strict`|[travis](https://travis-ci.org/JuliaComputing/JuliaDT) <br/> dev (pre-commit)|[checkstyle](https://maven.apache.org/plugins/maven-checkstyle-plugin/), [enforcer](http://maven.apache.org/enforcer/maven-enforcer-plugin/), [findbugs](http://findbugs.sourceforge.net/), [formatter](https://maven-java-formatter-plugin.googlecode.com/svn/site/0.3.1/usage.html)|
     
+##Eclipse
+
+1. Install the Dynamic Languages Toolkit - Core Frameworks 
+>For the Mars release this is available of the update site http://download.eclipse.org/releases/mars
+2. Add the [Antlr Runtime Plugin](http://central.maven.org/maven2/org/antlr/antlr4-runtime/4.5.2-1/antlr4-runtime-4.5.2-1.jar) to the Eclipse/dropins directory
+ 
 
 ##To Run 
 
