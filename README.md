@@ -27,11 +27,12 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 |strict|`mvn clean install -P strict`|[travis](https://travis-ci.org/JuliaComputing/JuliaDT) <br/> dev (pre-commit)|[checkstyle](https://maven.apache.org/plugins/maven-checkstyle-plugin/), [enforcer](http://maven.apache.org/enforcer/maven-enforcer-plugin/), [findbugs](http://findbugs.sourceforge.net/), [formatter](https://maven-java-formatter-plugin.googlecode.com/svn/site/0.3.1/usage.html)|
     
 ##Eclipse
-
-1. Install the Dynamic Languages Toolkit - Core Frameworks (for the Mars release this is available on the update site http://download.eclipse.org/releases/mars)
-2. Add the [Antlr Runtime Plugin](http://central.maven.org/maven2/org/antlr/antlr4-runtime/4.5.2-1/antlr4-runtime-4.5.2-1.jar) to the **Eclipse/dropins** directory
-3. Import as Maven project
-4. Run as an Eclipse Application 
+1. Install [Eclipse PDE](https://www.eclipse.org/pde/)
+2. Install the Dynamic Languages Toolkit - Core Frameworks (for the Mars release this is available on the update site http://download.eclipse.org/releases/mars)
+3. Install Eclipse Maven Plugin (M2Eclipse - http://download.eclipse.org/technology/m2e/releases)
+4. Add the [Antlr Runtime Plugin](http://central.maven.org/maven2/org/antlr/antlr4-runtime/4.5.2-1/antlr4-runtime-4.5.2-1.jar) to the **Eclipse/dropins** directory
+5. Import as a Maven project
+6. Run as an Eclipse Application 
 
 ##To Run 
 
