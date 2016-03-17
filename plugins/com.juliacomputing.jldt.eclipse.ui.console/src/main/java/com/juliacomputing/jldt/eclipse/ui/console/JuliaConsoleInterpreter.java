@@ -6,6 +6,7 @@ import org.eclipse.dltk.console.*;
 
 import java.io.*;
 import java.util.List;
+import java.util.Locale;
 
 public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
@@ -67,6 +68,91 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   }
 
+  private static String escapedString(String str, boolean escapeSingleQuote) throws IOException {
+    final StringWriter out = new StringWriter();
+    if (out == null) {
+      throw new IllegalArgumentException("The Writer must not be null");
+    }
+    if (str == null) {
+      return str;
+    }
+
+    int sz;
+    sz = str.length();
+    for (int i = 0; i < sz; i++) {
+      char ch = str.charAt(i);
+
+      // handle unicode
+      if (ch > 0xfff) {
+        out.write("\\u" + hex(ch));
+      }
+      else if (ch > 0xff) {
+        out.write("\\u0" + hex(ch));
+      }
+      else if (ch > 0x7f) {
+        out.write("\\u00" + hex(ch));
+      }
+      else if (ch < 32) {
+        switch (ch) {
+          case '\b':
+            out.write('\\');
+            out.write('b');
+            break;
+          case '\n':
+            out.write('\\');
+            out.write('n');
+            break;
+          case '\t':
+            out.write('\\');
+            out.write('t');
+            break;
+          case '\f':
+            out.write('\\');
+            out.write('f');
+            break;
+          case '\r':
+            out.write('\\');
+            out.write('r');
+            break;
+          default:
+            if (ch > 0xf) {
+              out.write("\\u00" + hex(ch));
+            }
+            else {
+              out.write("\\u000" + hex(ch));
+            }
+            break;
+        }
+      }
+      else {
+        switch (ch) {
+          case '\'':
+            if (escapeSingleQuote) {
+              out.write('\\');
+            }
+            out.write('\'');
+            break;
+          case '"':
+            out.write('\\');
+            out.write('"');
+            break;
+          case '\\':
+            out.write('\\');
+            out.write('\\');
+            break;
+          default:
+            out.write(ch);
+            break;
+        }
+      }
+    }
+    return out.toString();
+  }
+
+  private static String hex(char ch) {
+    return Integer.toHexString(ch).toUpperCase(Locale.getDefault());
+  }
+
   @Override
   public void addInitialListenerOperation(Runnable runnable) {
 
@@ -88,9 +174,10 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   @Override
   public IScriptExecResult exec(String command) throws IOException {
-    block.append(command.replace("\"", "\\\""));
+    block.append(command);
     block.append(System.lineSeparator());
-    final String message = String.format("EclipseREPL.execute(\"%s\")", block);
+    final String message = String.format("EclipseREPL.execute(\"%s\")",
+        escapedString(block.toString(), false));
     final Result result = execute(message);
     return new ScriptExecResult(result.getValue());
   }
@@ -101,7 +188,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     writer.flush();
     final StringBuilder response = new StringBuilder();
     //final String statusLine = reader.readLine().trim();
-   
+
     String line = reader.readLine().trim();
     System.out.println("*****"+line);
     while (!line.contains("<<")){
