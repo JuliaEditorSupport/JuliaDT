@@ -19,7 +19,7 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 
     git clone https://github.com/JuliaComputing/JuliaDT.git
 
-##To Build
+##Maven
 
 |Profile|Command|Usage|Plugins|
 |:----|:-------|:-----------|:-------|
@@ -30,7 +30,8 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 
 1. Install the Dynamic Languages Toolkit - Core Frameworks (for the Mars release this is available on the update site http://download.eclipse.org/releases/mars)
 2. Add the [Antlr Runtime Plugin](http://central.maven.org/maven2/org/antlr/antlr4-runtime/4.5.2-1/antlr4-runtime-4.5.2-1.jar) to the **Eclipse/dropins** directory
- 
+3. Import as Maven project
+4. Run as an Eclipse Application 
 
 ##To Run 
 
