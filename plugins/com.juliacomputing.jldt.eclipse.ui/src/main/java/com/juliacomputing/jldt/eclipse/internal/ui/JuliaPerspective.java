@@ -2,6 +2,7 @@ package com.juliacomputing.jldt.eclipse.internal.ui;
 
 import com.juliacomputing.jldt.eclipse.internal.ui.wizard.JuliaNewFileWizard;
 import com.juliacomputing.jldt.eclipse.internal.ui.wizard.JuliaNewProjectWizard;
+import com.juliacomputing.jldt.eclipse.ui.console.JuliaPlot;
 
 import org.eclipse.dltk.ui.DLTKUIPlugin;
 import org.eclipse.search.ui.NewSearchUI;
@@ -51,6 +52,8 @@ public class JuliaPerspective implements IPerspectiveFactory {
 
   protected void addViews(IPageLayout layout) {
     layout.addView(IPageLayout.ID_OUTLINE, IPageLayout.RIGHT, (float) 0.75, layout.getEditorArea());
+    layout.addView(JuliaPlot.ID, IPageLayout.BOTTOM, (float) 0.75, layout.getEditorArea());
+
   }
 
   protected void addShowViewShortcuts(IPageLayout layout) {

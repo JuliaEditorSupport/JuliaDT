@@ -22,7 +22,9 @@ Require-Bundle: com.juliacomputing.jldt.eclipse.core,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
  org.eclipse.ui.workbench.texteditor,
- org.eclipse.ui.console
+ org.eclipse.ui.console,
+ org.eclipse.e4.core.services,
+ org.eclipse.osgi.services
 Export-Package: com.juliacomputing.jldt.eclipse.ui.console
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

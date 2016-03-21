@@ -14,4 +14,14 @@
                 icon="icons/julia.png"
                 label="Julia REPL"/>
     </extension>
+
+    <extension point="org.eclipse.ui.views">
+        <category id="com.juliacomputing.jldt.eclipse.ui" name="Julia"/>
+        <view
+                category="com.juliacomputing.jldt.eclipse.ui"
+                class="com.juliacomputing.jldt.eclipse.ui.console.JuliaPlot"
+                icon="icons/julia.png"
+                id="JuliaPlot"
+                name="Julia Plot"/>
+    </extension>
 </plugin>

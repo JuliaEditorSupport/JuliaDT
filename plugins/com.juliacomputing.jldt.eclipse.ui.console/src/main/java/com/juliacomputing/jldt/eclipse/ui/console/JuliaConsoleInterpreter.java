@@ -3,42 +3,40 @@ package com.juliacomputing.jldt.eclipse.ui.console;
 import com.juliacomputing.jldt.eclipse.ui.console.Result.Status;
 
 import org.eclipse.dltk.console.*;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
+import org.osgi.service.event.Event;
+import org.osgi.service.event.EventAdmin;
 
 import java.io.*;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   private static final String ENCODING = "UTF8";
-  private static final String REPL_WRAPPER = "module EclipseREPL %n" +
-          "  function execute(statement)%n" +
-          "    status=\"complete\" %n" +
-          "    try %n" +
-          "      expression = parse(statement,1; greedy=true, raise=false)%n" +
-          "      if isa(expression[1],Expr) %n" +
-          "        state = expression[1].head%n" +
-          "      else%n" +
-          "        state = nothing%n" +
-          "      end      %n" +
-          "      status = state==:incomplete ? \"incomplete\" : state==:error ? \"error\" : \"complete\"%n" +
-          "      result=nothing%n" +
-          "      if(status==\"complete\")%n" +
-          "        result=include_string(statement)%n" +
-          "        if result!=nothing%n" +
-          "          println(result)%n" +
-          "        end%n" +
-          "      end%n" +
-          "    catch e%n" +
-          "        showerror(STDOUT, e); println()%n " +
-          "        status = \"error\"%n" +
-          "    finally  %n" +
-          "      flush(STDOUT)%n" +
-          "      println(\"<<$status>>\")%n" +
-          "      println(\"<<eox>>\")%n" +
-          "    end  %n" +
-          "  end%n" +
-          "end%n";
+
+  private static final String REPL_WRAPPER = "module EclipseREPL %n"
+      + "  function execute(statement)%n"
+      + "    status=\"complete\" %n"
+      + "    try %n"
+      + "      expression = parse(statement,1; greedy=true, raise=false)%n"
+      + "      if isa(expression[1],Expr) %n"
+      + "        state = expression[1].head%n"
+      + "      else%n"
+      + "        state = nothing%n"
+      + "      end      %n"
+      + "      status = state==:incomplete ? \"incomplete\" : state==:error ? \"error\" : \"complete\"%n"
+      + "      result=nothing%n" + "      if(status==\"complete\")%n"
+      + "        result=include_string(statement)%n" + "        if result!=nothing%n"
+      + "          println(result)%n" + "        end%n" + "      end%n" + "    catch e%n"
+      + "        showerror(STDOUT, e); println()%n " + "        status = \"error\"%n"
+      + "    finally  %n" + "      flush(STDOUT)%n" + "      println(\"<<$status>>\")%n"
+      + "      println(\"<<eox>>\")%n" + "    end  %n" + "  end%n" + "end%n";
 
   private final Process process;
   private final BufferedWriter writer;
@@ -49,7 +47,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   public JuliaConsoleInterpreter(final String path) {
     try {
       ProcessBuilder builder = new ProcessBuilder(path);
-//      builder.redirectErrorStream(true);
+      // builder.redirectErrorStream(true);
       process = builder.start();
       final OutputStream outputStream = process.getOutputStream();
       writer = new BufferedWriter(new OutputStreamWriter(outputStream, ENCODING));
@@ -153,6 +151,22 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     return Integer.toHexString(ch).toUpperCase(Locale.getDefault());
   }
 
+  private static final String sample() {
+    final URL sample = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getEntry(
+        "samples/sample.xml");
+    try (InputStream stream = sample.openStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"))) {
+      final StringBuilder builder = new StringBuilder();
+      String line;
+      while ((line = reader.readLine()) != null)
+        builder.append(line);
+      return builder.toString();
+    }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   @Override
   public void addInitialListenerOperation(Runnable runnable) {
 
@@ -183,28 +197,29 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   }
 
   private Result execute(String statement) throws IOException {
+    publish(sample());
     writer.write(statement);
     writer.newLine();
     writer.flush();
     final StringBuilder response = new StringBuilder();
-    //final String statusLine = reader.readLine().trim();
+    // final String statusLine = reader.readLine().trim();
 
     String line = reader.readLine().trim();
-    System.out.println("*****"+line);
-    while (!line.contains("<<")){
-    	response.append(line);
-    	response.append(System.lineSeparator());
-    	line = reader.readLine().trim();
-    	System.out.println("*****"+line);
+    System.out.println("*****" + line);
+    while (!line.contains("<<")) {
+      response.append(line);
+      response.append(System.lineSeparator());
+      line = reader.readLine().trim();
+      System.out.println("*****" + line);
     }
-    final Status status = Status.valueOf(line.substring(2, line.length()-2));
+    final Status status = Status.valueOf(line.substring(2, line.length() - 2));
     line = reader.readLine().trim();
-    System.out.println("*****"+line);
+    System.out.println("*****" + line);
     while (!line.equals("<<eox>>")) {
       response.append(line);
       response.append(System.lineSeparator());
       line = reader.readLine().trim();
-      System.out.println("*****"+line);
+      System.out.println("*****" + line);
     }
     switch (status) {
       case incomplete:
@@ -240,5 +255,17 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   @Override
   public void close() throws IOException {
     process.destroy();
+  }
+
+  private void publish(final String plot) {
+    BundleContext ctx = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getBundleContext();
+    ServiceReference<EventAdmin> ref = ctx.getServiceReference(EventAdmin.class);
+    EventAdmin eventAdmin = ctx.getService(ref);
+    Map<String, Object> properties = new HashMap<>();
+    properties.put("plot", plot);
+    Event event = new Event("julia/plot", properties);
+    eventAdmin.sendEvent(event);
+    event = new Event("julia/plot", properties);
+    eventAdmin.postEvent(event);
   }
 }
