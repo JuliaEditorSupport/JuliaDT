@@ -17,17 +17,145 @@ public interface JuliaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnit(JuliaParser.UnitContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JuliaParser#block}.
+	 * Visit a parse tree produced by the {@code statementList}
+	 * labeled alternative in {@link JuliaParser#block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBlock(JuliaParser.BlockContext ctx);
+	T visitStatementList(JuliaParser.StatementListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JuliaParser#statement}.
+	 * Visit a parse tree produced by the {@code statementSequence}
+	 * labeled alternative in {@link JuliaParser#block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatement(JuliaParser.StatementContext ctx);
+	T visitStatementSequence(JuliaParser.StatementSequenceContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code usingDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUsingDirective(JuliaParser.UsingDirectiveContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code importDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImportDirective(JuliaParser.ImportDirectiveContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code simpleImportDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSimpleImportDirective(JuliaParser.SimpleImportDirectiveContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code importAllDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImportAllDirective(JuliaParser.ImportAllDirectiveContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exportDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExportDirective(JuliaParser.ExportDirectiveContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code mmoduleDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMmoduleDeclaration(JuliaParser.MmoduleDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ttypeDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTtypeDeclaration(JuliaParser.TtypeDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ffunctionDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFfunctionDeclaration(JuliaParser.FfunctionDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code mmacroDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMmacroDeclaration(JuliaParser.MmacroDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code returnExpression}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnExpression(JuliaParser.ReturnExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code voidReturn}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVoidReturn(JuliaParser.VoidReturnContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code forStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForStatement(JuliaParser.ForStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code forInStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForInStatement(JuliaParser.ForInStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code whileStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhileStatement(JuliaParser.WhileStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code breakStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBreakStatement(JuliaParser.BreakStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code continueStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitContinueStatement(JuliaParser.ContinueStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code quoteStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuoteStatement(JuliaParser.QuoteStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expression}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression(JuliaParser.ExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code module}
 	 * labeled alternative in {@link JuliaParser#moduleDeclaration}.

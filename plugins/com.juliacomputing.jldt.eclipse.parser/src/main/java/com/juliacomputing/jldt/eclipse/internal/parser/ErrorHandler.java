@@ -25,11 +25,11 @@ public class ErrorHandler extends DefaultErrorStrategy {
   protected void reportNoViableAlternative(Parser recognizer, NoViableAltException exception) {
     super.reportNoViableAlternative(recognizer, exception);
     final Token offendingToken = exception.getOffendingToken();
-    problemReporter.reportProblem(
-        new DefaultProblem(exception.getInputStream().getSourceName(), exception.getMessage(),
-            JuliaProblemIdentifier.SYNTAX_ERROR, new String[] { exception.getMessage() },
-            ProblemSeverity.DEFAULT, offendingToken.getStartIndex(), offendingToken.getStopIndex(),
-            offendingToken.getLine(), offendingToken.getCharPositionInLine()));
+    problemReporter.reportProblem(new DefaultProblem(exception.getInputStream().getSourceName(),
+        exception.getMessage(), JuliaProblemIdentifier.SYNTAX_ERROR, new String[] { exception
+            .getMessage() }, ProblemSeverity.DEFAULT, offendingToken.getStartIndex(),
+        offendingToken.getStopIndex(), offendingToken.getLine(), offendingToken
+            .getCharPositionInLine()));
 
   }
 }

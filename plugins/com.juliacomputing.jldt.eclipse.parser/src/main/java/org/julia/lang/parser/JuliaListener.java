@@ -18,25 +18,245 @@ public interface JuliaListener extends ParseTreeListener {
 	 */
 	void exitUnit(JuliaParser.UnitContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JuliaParser#block}.
+	 * Enter a parse tree produced by the {@code statementList}
+	 * labeled alternative in {@link JuliaParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void enterBlock(JuliaParser.BlockContext ctx);
+	void enterStatementList(JuliaParser.StatementListContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JuliaParser#block}.
+	 * Exit a parse tree produced by the {@code statementList}
+	 * labeled alternative in {@link JuliaParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void exitBlock(JuliaParser.BlockContext ctx);
+	void exitStatementList(JuliaParser.StatementListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JuliaParser#statement}.
+	 * Enter a parse tree produced by the {@code statementSequence}
+	 * labeled alternative in {@link JuliaParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void enterStatement(JuliaParser.StatementContext ctx);
+	void enterStatementSequence(JuliaParser.StatementSequenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JuliaParser#statement}.
+	 * Exit a parse tree produced by the {@code statementSequence}
+	 * labeled alternative in {@link JuliaParser#block}.
 	 * @param ctx the parse tree
 	 */
-	void exitStatement(JuliaParser.StatementContext ctx);
+	void exitStatementSequence(JuliaParser.StatementSequenceContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code usingDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterUsingDirective(JuliaParser.UsingDirectiveContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code usingDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitUsingDirective(JuliaParser.UsingDirectiveContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code importDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterImportDirective(JuliaParser.ImportDirectiveContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code importDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitImportDirective(JuliaParser.ImportDirectiveContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code simpleImportDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSimpleImportDirective(JuliaParser.SimpleImportDirectiveContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code simpleImportDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSimpleImportDirective(JuliaParser.SimpleImportDirectiveContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code importAllDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterImportAllDirective(JuliaParser.ImportAllDirectiveContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code importAllDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitImportAllDirective(JuliaParser.ImportAllDirectiveContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code exportDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterExportDirective(JuliaParser.ExportDirectiveContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exportDirective}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitExportDirective(JuliaParser.ExportDirectiveContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code mmoduleDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterMmoduleDeclaration(JuliaParser.MmoduleDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code mmoduleDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitMmoduleDeclaration(JuliaParser.MmoduleDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ttypeDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterTtypeDeclaration(JuliaParser.TtypeDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ttypeDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitTtypeDeclaration(JuliaParser.TtypeDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ffunctionDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterFfunctionDeclaration(JuliaParser.FfunctionDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ffunctionDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitFfunctionDeclaration(JuliaParser.FfunctionDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code mmacroDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterMmacroDeclaration(JuliaParser.MmacroDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code mmacroDeclaration}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitMmacroDeclaration(JuliaParser.MmacroDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code returnExpression}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnExpression(JuliaParser.ReturnExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code returnExpression}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnExpression(JuliaParser.ReturnExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code voidReturn}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterVoidReturn(JuliaParser.VoidReturnContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code voidReturn}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitVoidReturn(JuliaParser.VoidReturnContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code forStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterForStatement(JuliaParser.ForStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code forStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitForStatement(JuliaParser.ForStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code forInStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterForInStatement(JuliaParser.ForInStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code forInStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitForInStatement(JuliaParser.ForInStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code whileStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhileStatement(JuliaParser.WhileStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code whileStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhileStatement(JuliaParser.WhileStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code breakStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterBreakStatement(JuliaParser.BreakStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code breakStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitBreakStatement(JuliaParser.BreakStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code continueStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterContinueStatement(JuliaParser.ContinueStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code continueStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitContinueStatement(JuliaParser.ContinueStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code quoteStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuoteStatement(JuliaParser.QuoteStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code quoteStatement}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuoteStatement(JuliaParser.QuoteStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expression}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(JuliaParser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expression}
+	 * labeled alternative in {@link JuliaParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(JuliaParser.ExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code module}
 	 * labeled alternative in {@link JuliaParser#moduleDeclaration}.

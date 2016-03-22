@@ -205,6 +205,47 @@ public class JuliaParser extends Parser {
 	}
 
 	public static class BlockContext extends ParserRuleContext {
+		public BlockContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_block; }
+	 
+		public BlockContext() { }
+		public void copyFrom(BlockContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class StatementSequenceContext extends BlockContext {
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
+		}
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
+		}
+		public List<TerminalNode> SEMI_COLON() { return getTokens(JuliaParser.SEMI_COLON); }
+		public TerminalNode SEMI_COLON(int i) {
+			return getToken(JuliaParser.SEMI_COLON, i);
+		}
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public StatementSequenceContext(BlockContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterStatementSequence(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitStatementSequence(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitStatementSequence(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class StatementListContext extends BlockContext {
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
@@ -215,25 +256,18 @@ public class JuliaParser extends Parser {
 		public TerminalNode NL(int i) {
 			return getToken(JuliaParser.NL, i);
 		}
-		public List<TerminalNode> SEMI_COLON() { return getTokens(JuliaParser.SEMI_COLON); }
-		public TerminalNode SEMI_COLON(int i) {
-			return getToken(JuliaParser.SEMI_COLON, i);
-		}
-		public BlockContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_block; }
+		public StatementListContext(BlockContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterBlock(this);
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterStatementList(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitBlock(this);
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitStatementList(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitBlock(this);
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitStatementList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -247,6 +281,7 @@ public class JuliaParser extends Parser {
 			setState(72);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
+				_localctx = new StatementListContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(55);
@@ -290,6 +325,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new StatementSequenceContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(58);
@@ -342,7 +378,190 @@ public class JuliaParser extends Parser {
 	}
 
 	public static class StatementContext extends ParserRuleContext {
-		public TerminalNode USING() { return getToken(JuliaParser.USING, 0); }
+		public StatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_statement; }
+	 
+		public StatementContext() { }
+		public void copyFrom(StatementContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class MmoduleDeclarationContext extends StatementContext {
+		public ModuleDeclarationContext moduleDeclaration() {
+			return getRuleContext(ModuleDeclarationContext.class,0);
+		}
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public MmoduleDeclarationContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterMmoduleDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitMmoduleDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitMmoduleDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class QuoteStatementContext extends StatementContext {
+		public TerminalNode QUOTE() { return getToken(JuliaParser.QUOTE, 0); }
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public TerminalNode END() { return getToken(JuliaParser.END, 0); }
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public QuoteStatementContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterQuoteStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitQuoteStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitQuoteStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ExpressionContext extends StatementContext {
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public ExpressionContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FfunctionDeclarationContext extends StatementContext {
+		public FunctionDeclarationContext functionDeclaration() {
+			return getRuleContext(FunctionDeclarationContext.class,0);
+		}
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public FfunctionDeclarationContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterFfunctionDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitFfunctionDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitFfunctionDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class VoidReturnContext extends StatementContext {
+		public TerminalNode RETURN() { return getToken(JuliaParser.RETURN, 0); }
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public VoidReturnContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterVoidReturn(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitVoidReturn(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitVoidReturn(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ForStatementContext extends StatementContext {
+		public TerminalNode FOR() { return getToken(JuliaParser.FOR, 0); }
+		public List<ExpContext> exp() {
+			return getRuleContexts(ExpContext.class);
+		}
+		public ExpContext exp(int i) {
+			return getRuleContext(ExpContext.class,i);
+		}
+		public TerminalNode EQ() { return getToken(JuliaParser.EQ, 0); }
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public TerminalNode END() { return getToken(JuliaParser.END, 0); }
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public List<TerminalNode> COLON() { return getTokens(JuliaParser.COLON); }
+		public TerminalNode COLON(int i) {
+			return getToken(JuliaParser.COLON, i);
+		}
+		public ForStatementContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterForStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitForStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitForStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BreakStatementContext extends StatementContext {
+		public TerminalNode BREAK() { return getToken(JuliaParser.BREAK, 0); }
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public BreakStatementContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterBreakStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitBreakStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitBreakStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ExportDirectiveContext extends StatementContext {
+		public TerminalNode EXPORT() { return getToken(JuliaParser.EXPORT, 0); }
 		public List<TerminalNode> ID() { return getTokens(JuliaParser.ID); }
 		public TerminalNode ID(int i) {
 			return getToken(JuliaParser.ID, i);
@@ -351,64 +570,275 @@ public class JuliaParser extends Parser {
 		public TerminalNode NL(int i) {
 			return getToken(JuliaParser.NL, i);
 		}
-		public TerminalNode IMPORT() { return getToken(JuliaParser.IMPORT, 0); }
-		public NameContext name() {
-			return getRuleContext(NameContext.class,0);
-		}
-		public List<TerminalNode> COLON() { return getTokens(JuliaParser.COLON); }
-		public TerminalNode COLON(int i) {
-			return getToken(JuliaParser.COLON, i);
-		}
 		public List<TerminalNode> COMMA() { return getTokens(JuliaParser.COMMA); }
 		public TerminalNode COMMA(int i) {
 			return getToken(JuliaParser.COMMA, i);
 		}
-		public TerminalNode IMPORT_ALL() { return getToken(JuliaParser.IMPORT_ALL, 0); }
-		public TerminalNode EXPORT() { return getToken(JuliaParser.EXPORT, 0); }
-		public ModuleDeclarationContext moduleDeclaration() {
-			return getRuleContext(ModuleDeclarationContext.class,0);
+		public ExportDirectiveContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterExportDirective(this);
 		}
-		public TypeDeclarationContext typeDeclaration() {
-			return getRuleContext(TypeDeclarationContext.class,0);
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitExportDirective(this);
 		}
-		public FunctionDeclarationContext functionDeclaration() {
-			return getRuleContext(FunctionDeclarationContext.class,0);
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitExportDirective(this);
+			else return visitor.visitChildren(this);
 		}
+	}
+	public static class MmacroDeclarationContext extends StatementContext {
 		public MacroDeclarationContext macroDeclaration() {
 			return getRuleContext(MacroDeclarationContext.class,0);
 		}
-		public TerminalNode RETURN() { return getToken(JuliaParser.RETURN, 0); }
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public MmacroDeclarationContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterMmacroDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitMmacroDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitMmacroDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class SimpleImportDirectiveContext extends StatementContext {
+		public TerminalNode IMPORT() { return getToken(JuliaParser.IMPORT, 0); }
+		public NameContext name() {
+			return getRuleContext(NameContext.class,0);
+		}
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public SimpleImportDirectiveContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterSimpleImportDirective(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitSimpleImportDirective(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitSimpleImportDirective(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class TtypeDeclarationContext extends StatementContext {
+		public TypeDeclarationContext typeDeclaration() {
+			return getRuleContext(TypeDeclarationContext.class,0);
+		}
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public TtypeDeclarationContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterTtypeDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitTtypeDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitTtypeDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class WhileStatementContext extends StatementContext {
+		public TerminalNode WHILE() { return getToken(JuliaParser.WHILE, 0); }
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public TerminalNode END() { return getToken(JuliaParser.END, 0); }
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public WhileStatementContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterWhileStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitWhileStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitWhileStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class UsingDirectiveContext extends StatementContext {
+		public TerminalNode USING() { return getToken(JuliaParser.USING, 0); }
+		public TerminalNode ID() { return getToken(JuliaParser.ID, 0); }
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public UsingDirectiveContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterUsingDirective(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitUsingDirective(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitUsingDirective(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ImportAllDirectiveContext extends StatementContext {
+		public TerminalNode IMPORT_ALL() { return getToken(JuliaParser.IMPORT_ALL, 0); }
+		public NameContext name() {
+			return getRuleContext(NameContext.class,0);
+		}
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public ImportAllDirectiveContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterImportAllDirective(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitImportAllDirective(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitImportAllDirective(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ForInStatementContext extends StatementContext {
+		public TerminalNode FOR() { return getToken(JuliaParser.FOR, 0); }
 		public List<ExpContext> exp() {
 			return getRuleContexts(ExpContext.class);
 		}
 		public ExpContext exp(int i) {
 			return getRuleContext(ExpContext.class,i);
 		}
-		public TerminalNode FOR() { return getToken(JuliaParser.FOR, 0); }
-		public TerminalNode EQ() { return getToken(JuliaParser.EQ, 0); }
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
 		public TerminalNode END() { return getToken(JuliaParser.END, 0); }
-		public TerminalNode WHILE() { return getToken(JuliaParser.WHILE, 0); }
-		public TerminalNode BREAK() { return getToken(JuliaParser.BREAK, 0); }
-		public TerminalNode CONTINUE() { return getToken(JuliaParser.CONTINUE, 0); }
-		public TerminalNode QUOTE() { return getToken(JuliaParser.QUOTE, 0); }
-		public StatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
 		}
-		@Override public int getRuleIndex() { return RULE_statement; }
+		public ForInStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterStatement(this);
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterForInStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitStatement(this);
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitForInStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitStatement(this);
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitForInStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ContinueStatementContext extends StatementContext {
+		public TerminalNode CONTINUE() { return getToken(JuliaParser.CONTINUE, 0); }
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public ContinueStatementContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterContinueStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitContinueStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitContinueStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ReturnExpressionContext extends StatementContext {
+		public TerminalNode RETURN() { return getToken(JuliaParser.RETURN, 0); }
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public ReturnExpressionContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterReturnExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitReturnExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitReturnExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ImportDirectiveContext extends StatementContext {
+		public TerminalNode IMPORT() { return getToken(JuliaParser.IMPORT, 0); }
+		public NameContext name() {
+			return getRuleContext(NameContext.class,0);
+		}
+		public TerminalNode COLON() { return getToken(JuliaParser.COLON, 0); }
+		public List<TerminalNode> ID() { return getTokens(JuliaParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(JuliaParser.ID, i);
+		}
+		public List<TerminalNode> NL() { return getTokens(JuliaParser.NL); }
+		public TerminalNode NL(int i) {
+			return getToken(JuliaParser.NL, i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(JuliaParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(JuliaParser.COMMA, i);
+		}
+		public ImportDirectiveContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).enterImportDirective(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JuliaListener ) ((JuliaListener)listener).exitImportDirective(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JuliaVisitor ) return ((JuliaVisitor<? extends T>)visitor).visitImportDirective(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -422,6 +852,7 @@ public class JuliaParser extends Parser {
 			setState(399);
 			switch ( getInterpreter().adaptivePredict(_input,54,_ctx) ) {
 			case 1:
+				_localctx = new UsingDirectiveContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(77);
@@ -459,6 +890,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new ImportDirectiveContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(91);
@@ -576,6 +1008,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 3:
+				_localctx = new SimpleImportDirectiveContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(138);
@@ -613,6 +1046,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 4:
+				_localctx = new ImportAllDirectiveContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(152);
@@ -650,6 +1084,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 5:
+				_localctx = new ExportDirectiveContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(166);
@@ -733,6 +1168,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 6:
+				_localctx = new MmoduleDeclarationContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(199);
@@ -756,6 +1192,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 7:
+				_localctx = new TtypeDeclarationContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(206);
@@ -777,6 +1214,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 8:
+				_localctx = new FfunctionDeclarationContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(213);
@@ -798,6 +1236,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 9:
+				_localctx = new MmacroDeclarationContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
 				setState(220);
@@ -821,6 +1260,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 10:
+				_localctx = new ReturnExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 10);
 				{
 				setState(227);
@@ -844,6 +1284,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 11:
+				_localctx = new VoidReturnContext(_localctx);
 				enterOuterAlt(_localctx, 11);
 				{
 				setState(235);
@@ -865,6 +1306,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 12:
+				_localctx = new ForStatementContext(_localctx);
 				enterOuterAlt(_localctx, 12);
 				{
 				setState(242);
@@ -976,6 +1418,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 13:
+				_localctx = new ForInStatementContext(_localctx);
 				enterOuterAlt(_localctx, 13);
 				{
 				setState(287);
@@ -1079,6 +1522,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 14:
+				_localctx = new WhileStatementContext(_localctx);
 				enterOuterAlt(_localctx, 14);
 				{
 				setState(330);
@@ -1150,6 +1594,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 15:
+				_localctx = new BreakStatementContext(_localctx);
 				enterOuterAlt(_localctx, 15);
 				{
 				setState(359);
@@ -1171,6 +1616,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 16:
+				_localctx = new ContinueStatementContext(_localctx);
 				enterOuterAlt(_localctx, 16);
 				{
 				setState(366);
@@ -1192,6 +1638,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 17:
+				_localctx = new QuoteStatementContext(_localctx);
 				enterOuterAlt(_localctx, 17);
 				{
 				setState(373);
@@ -1247,6 +1694,7 @@ public class JuliaParser extends Parser {
 				}
 				break;
 			case 18:
+				_localctx = new ExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 18);
 				{
 				setState(395);

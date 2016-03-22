@@ -1,9 +1,9 @@
 package com.juliacomputing.jldt.eclipse.ast;
 
-import java.util.Arrays;
-
 import org.eclipse.dltk.ast.ASTVisitor;
 import org.eclipse.dltk.ast.expressions.Expression;
+
+import java.util.Arrays;
 
 public class Operator extends Expression {
 

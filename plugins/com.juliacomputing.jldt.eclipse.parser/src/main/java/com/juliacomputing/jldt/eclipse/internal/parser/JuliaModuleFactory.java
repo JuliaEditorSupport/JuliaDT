@@ -33,21 +33,41 @@ public class JuliaModuleFactory extends JuliaBaseVisitor<ASTNode> {
   }
 
   @Override
-  public ModuleDeclaration visitUnit(UnitContext ctx) {
-    final ModuleDeclaration moduleDeclaration = new ModuleDeclaration(ctx.getText().length());
-    final List<StatementContext> statementContexts = ctx.block().statement();
+  public ASTNode visitStatementList(StatementListContext ctx) {
+    return toStatements(ctx.statement());
+  }
+
+  @Override
+  public ASTNode visitStatementSequence(StatementSequenceContext ctx) {
+    return toStatements(ctx.statement());
+  }
+
+  private ASTNode toStatements(List<StatementContext> statementContexts) {
+    final ASTListNode statements = new ASTListNode();
     for (StatementContext statementContext : statementContexts) {
       final ASTNode statement = visit(statementContext);
       if (statement == null)
         continue;
-      moduleDeclaration.addStatement(statement);
+      statements.addNode(statement);
     }
+    return statements;
+  }
+
+  @Override
+  public ModuleDeclaration visitUnit(UnitContext ctx) {
+    final ModuleDeclaration moduleDeclaration = new ModuleDeclaration(ctx.getText().length());
+    final ASTNode statements = visit(ctx.block());
+    if (statements != null)
+      moduleDeclaration.setStatements(statements.getChilds());
     return moduleDeclaration;
   }
 
   @Override
   public ASTNode visitModule(ModuleContext ctx) {
-    return visit(ctx.block());
+    final ModuleDeclaration moduleDeclaration = new ModuleDeclaration(ctx.getText().length());
+    final ASTNode statements = visit(ctx.block());
+    moduleDeclaration.setStatements(statements.getChilds());
+    return moduleDeclaration;
   }
 
   @Override
@@ -307,8 +327,8 @@ public class JuliaModuleFactory extends JuliaBaseVisitor<ASTNode> {
 
   @Override
   public ASTNode visitHex(HexContext ctx) {
-    return new BigNumericLiteral(start(ctx), stop(ctx),
-        ctx.getText().substring(2).replace("_", "").trim(), 16);
+    return new BigNumericLiteral(start(ctx), stop(ctx), ctx.getText().substring(2).replace("_", "")
+        .trim(), 16);
   }
 
   @Override

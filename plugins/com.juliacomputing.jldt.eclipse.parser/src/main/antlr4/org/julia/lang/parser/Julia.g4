@@ -6,33 +6,32 @@ grammar Julia;
 
 unit                        :   NL* block NL*;
 
-block                       :   (statement (NL+))*
-                            |   statement (SEMI_COLON NL* statement)*
+block                       :   (statement (NL+))*                                                      #statementList
+                            |   statement (SEMI_COLON NL* statement)*                                   #statementSequence
                             ;
 
-statement                   :   NL* USING NL* ID
-                            |   NL* IMPORT NL* name COLON NL* ID NL* (NL* COMMA NL* ID)*
-                            |   NL* IMPORT NL* name
-                            |   NL* IMPORT_ALL  NL* name
-                            |   NL* EXPORT NL* ID (NL* COMMA NL* ID)*
-                            |   NL* moduleDeclaration
-                            |   NL* typeDeclaration
-                            |   NL* functionDeclaration
-                            |   NL* macroDeclaration
+statement                   :   NL* USING NL* ID                                                        #usingDirective
+                            |   NL* IMPORT NL* name COLON NL* ID NL* (NL* COMMA NL* ID)*                #importDirective
+                            |   NL* IMPORT NL* name                                                     #simpleImportDirective
+                            |   NL* IMPORT_ALL  NL* name                                                #importAllDirective
+                            |   NL* EXPORT NL* ID (NL* COMMA NL* ID)*                                   #exportDirective
+                            |   NL* moduleDeclaration                                                   #mmoduleDeclaration
+                            |   NL* typeDeclaration                                                     #ttypeDeclaration
+                            |   NL* functionDeclaration                                                 #ffunctionDeclaration
+                            |   NL* macroDeclaration                                                    #mmacroDeclaration
+                            |   NL* RETURN exp                                                          #returnExpression
+                            |   NL* RETURN                                                              #voidReturn
+                            |   NL* FOR NL* exp EQ NL* exp (COLON exp)? (COLON exp)? NL* block NL* END  #forStatement
+                            |   NL* FOR NL* exp NL* 'in' NL* exp NL* block NL* END                      #forInStatement
+                            |   NL* WHILE NL* exp NL* block NL* END                                     #whileStatement
+                            |   NL* BREAK                                                               #breakStatement
+                            |   NL* CONTINUE                                                            #continueStatement
+                            |   NL* QUOTE NL* block NL* END                                             #quoteStatement
 
-                            |   NL* RETURN exp
-                            |   NL* RETURN
-                            |   NL* FOR NL* exp EQ NL* exp (COLON exp)? (COLON exp)? NL* block NL* END
-                            |   NL* FOR NL* exp NL* 'in' NL* exp NL* block NL* END
-                            |   NL* WHILE NL* exp NL* block NL* END
-                            |   NL* BREAK
-                            |   NL* CONTINUE
-                            |   NL* QUOTE NL* block NL* END
-
-                            |   NL* exp
+                            |   NL* exp                                                                 #expression
                             ;
 
-moduleDeclaration           :   NL* MODULE NL* ID NL* block NL*  END                                                       #module
+moduleDeclaration           :   NL* MODULE NL* ID NL* block NL*  END                                                      #module
                             |   NL* BARE_MODULE NL* ID NL* block NL* END                                                  #bareModule
                             ;
 
