@@ -117,9 +117,6 @@ public class Util {
     eventAdmin.sendEvent(event);
   }
 
-  static final String sample() {
-    return read("script/sample.xml");
-  }
 
   static String read(String path) {
     URL url = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getEntry(path);
