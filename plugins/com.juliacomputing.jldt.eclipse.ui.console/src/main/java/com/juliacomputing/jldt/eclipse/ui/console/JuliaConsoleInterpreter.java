@@ -31,7 +31,6 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
       writer.newLine();
       writer.flush();
       reader.readLine();
-
     }
     catch (IOException e) {
       e.printStackTrace();
@@ -70,30 +69,38 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   }
 
   private Result execute(String statement) throws IOException {
-    Util.publish(Util.sample(), "julia/plot");
     writer.write(statement);
     writer.newLine();
     writer.flush();
-    final StringBuilder response = new StringBuilder();
-    // final String statusLine = reader.readLine().trim();
-
-    String line = reader.readLine().trim();
-    System.out.println("*****" + line);
-    while (!line.contains("<<")) {
+    StringBuilder response = new StringBuilder();
+    String line = reader.readLine();
+    while (line!=null && !line.contains("<<<<")) {
       response.append(line);
+      System.out.println(line);
       response.append(System.lineSeparator());
-      line = reader.readLine().trim();
-      System.out.println("*****" + line);
+      line = reader.readLine();
     }
-    final Status status = Status.valueOf(line.substring(2, line.length() - 2));
+    System.out.println("-----");
+    System.out.println(line);
+    final Status status = Status.valueOf(line.substring(4, line.length() - 4));
+    line = reader.readLine();
+    System.out.println("-----");
+    System.out.println(line);
+    final String mimeType =line.substring(4, line.length() - 4);
+    if(mimeType.equals("text/html")) {
+      Util.publish(response.toString(), "julia/plot");
+      response = new StringBuilder();
+      response.append("<gadfly plot>");
+      response.append(System.lineSeparator());
+    }
     line = reader.readLine().trim();
-    System.out.println("*****" + line);
-    while (!line.equals("<<eox>>")) {
+    while (!line.equals("<<<<eox>>>>")) {
       response.append(line);
+      System.out.println(line);
       response.append(System.lineSeparator());
       line = reader.readLine().trim();
-      System.out.println("*****" + line);
     }
+    System.out.println("-----");
     switch (status) {
       case incomplete:
         state = IScriptConsoleInterpreter.WAIT_USER_INPUT;

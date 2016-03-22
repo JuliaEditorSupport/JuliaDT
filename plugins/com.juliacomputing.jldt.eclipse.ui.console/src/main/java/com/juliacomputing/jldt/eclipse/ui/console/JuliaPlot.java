@@ -56,7 +56,7 @@ public class JuliaPlot extends ViewPart {
     Composite comp = new Composite(parent, SWT.NONE);
     comp.setLayout(new GridLayout(1, true));
     try {
-      browser = new Browser(comp, SWT.BORDER); // MOZILLA);
+      browser = new Browser(comp, SWT.NONE);
     }
     catch (SWTError e) {
       JuliaConsolePlugin.showErrorMessage(getViewSite().getShell(), "Error creating browser:" + e);

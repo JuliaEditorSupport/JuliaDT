@@ -6,6 +6,9 @@
         <Class name="com.juliacomputing.jldt.eclipse.ui.formatter.internal.ScriptHeuristicScanner"/>
     </Match>
     <Match>
+        <Class name="com.juliacomputing.jldt.eclipse.ui.console.Util"/>
+    </Match>
+    <Match>
         <Class name="com.juliacomputing.jldt.eclipse.core.Julia"/>
     </Match>
     <Match>
