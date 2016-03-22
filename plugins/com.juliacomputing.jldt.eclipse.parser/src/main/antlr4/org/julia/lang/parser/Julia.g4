@@ -26,6 +26,7 @@ statement                   :   NL* USING NL* ID
                             |   NL* FOR NL* exp NL* 'in' NL* exp NL* block NL* END
                             |   NL* WHILE NL* exp NL* block NL* END
                             |   NL* BREAK
+                            |   NL* CONTINUE
                             |   NL* QUOTE NL* block NL* END
 
                             |   NL* exp
