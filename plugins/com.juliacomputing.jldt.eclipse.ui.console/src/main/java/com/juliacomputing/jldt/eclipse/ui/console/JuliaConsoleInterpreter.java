@@ -74,7 +74,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     writer.flush();
     StringBuilder response = new StringBuilder();
     String line = reader.readLine();
-    while (line!=null && !line.contains("<<<<")) {
+    while (line != null && !line.contains("<<<<")) {
       response.append(line);
       System.out.println(line);
       response.append(System.lineSeparator());
@@ -86,11 +86,11 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     line = reader.readLine();
     System.out.println("-----");
     System.out.println(line);
-    final String mimeType =line.substring(4, line.length() - 4);
-    if(mimeType.equals("text/html")) {
+    final String mimeType = line.substring(4, line.length() - 4);
+    if (mimeType.equals("text/html") && status != Status.error) {
       Util.publish(response.toString(), "julia/plot");
       response = new StringBuilder();
-      response.append("<gadfly plot>");
+      response.append("<plot>");
       response.append(System.lineSeparator());
     }
     line = reader.readLine().trim();
