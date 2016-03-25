@@ -34,20 +34,8 @@ function execute(statement)
   end
 end
 function flush_all()
-#    Libc.flush_cstdio()
+    Libc.flush_cstdio()
     flush(STDOUT)
-#    flush(STDERR)
+    flush(STDERR)
 end
-#import Base.flush
-#const StdioPipe = Base.PipeEndpoint
-#function flush(io::StdioPipe)
-#    invoke(flush, (supertype(StdioPipe),), io)
-#    if io == STDOUT
-#        oslibuv_flush()
-#        send_stream("stdout")
-#    elseif io == STDERR
-#        oslibuv_flush()
-#        send_stream("stderr")
-#    end
-#end
 end;
