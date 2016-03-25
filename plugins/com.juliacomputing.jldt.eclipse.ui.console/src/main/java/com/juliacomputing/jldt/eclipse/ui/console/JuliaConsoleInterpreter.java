@@ -19,8 +19,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
   public JuliaConsoleInterpreter(final String path) {
     try {
-      ProcessBuilder builder = new ProcessBuilder(path);
-      // builder.redirectErrorStream(true);
+      final ProcessBuilder builder = new ProcessBuilder(path);
       process = builder.start();
       final OutputStream outputStream = process.getOutputStream();
       writer = new BufferedWriter(new OutputStreamWriter(outputStream, ENCODING));

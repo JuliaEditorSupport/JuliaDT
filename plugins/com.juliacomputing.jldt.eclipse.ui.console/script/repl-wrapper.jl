@@ -1,5 +1,4 @@
 module EclipseREPL
-import Gadfly
 function execute(statement)
   status="complete"
   mimeType="text/plain"
@@ -15,7 +14,7 @@ function execute(statement)
     if(status=="complete")
       result=include_string(statement)
       if result!=nothing
-        if typeof(result)==Gadfly.Plot
+        if string(typeof(result))=="Gadfly.Plot"
            mimeType = "text/html"
            println(stringmime(mimeType,result))
         else
