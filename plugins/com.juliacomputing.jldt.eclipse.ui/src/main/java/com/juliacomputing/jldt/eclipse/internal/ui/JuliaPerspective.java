@@ -2,8 +2,7 @@ package com.juliacomputing.jldt.eclipse.internal.ui;
 
 import com.juliacomputing.jldt.eclipse.internal.ui.wizard.JuliaNewFileWizard;
 import com.juliacomputing.jldt.eclipse.internal.ui.wizard.JuliaNewProjectWizard;
-import com.juliacomputing.jldt.eclipse.ui.console.JuliaPlot;
-
+import com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas;
 import org.eclipse.dltk.ui.DLTKUIPlugin;
 import org.eclipse.search.ui.NewSearchUI;
 import org.eclipse.ui.IFolderLayout;
@@ -38,6 +37,7 @@ public class JuliaPerspective implements IPerspectiveFactory {
     bottomFolder.addView(IPageLayout.ID_PROBLEM_VIEW);
     bottomFolder.addView(IPageLayout.ID_TASK_LIST);
     bottomFolder.addView(IConsoleConstants.ID_CONSOLE_VIEW);
+    bottomFolder.addView(JuliaCanvas.ID);
 
     bottomFolder.addPlaceholder("org.eclipse.dltk.callhierarchy.view"); //$NON-NLS-1$
     bottomFolder.addPlaceholder(NewSearchUI.SEARCH_VIEW_ID);
@@ -52,7 +52,6 @@ public class JuliaPerspective implements IPerspectiveFactory {
 
   protected void addViews(IPageLayout layout) {
     layout.addView(IPageLayout.ID_OUTLINE, IPageLayout.RIGHT, (float) 0.75, layout.getEditorArea());
-    layout.addView(JuliaPlot.ID, IPageLayout.BOTTOM, (float) 0.75, layout.getEditorArea());
 
   }
 

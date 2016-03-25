@@ -19,9 +19,9 @@
         <category id="com.juliacomputing.jldt.eclipse.ui" name="Julia"/>
         <view
                 category="com.juliacomputing.jldt.eclipse.ui"
-                class="com.juliacomputing.jldt.eclipse.ui.console.JuliaPlot"
+                class="com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas"
                 icon="icons/julia.png"
-                id="JuliaPlot"
+                id="com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas"
                 name="Julia Plot"/>
     </extension>
 </plugin>

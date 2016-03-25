@@ -19,8 +19,8 @@ import org.osgi.service.event.EventHandler;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class JuliaPlot extends ViewPart {
-  public static final String ID = JuliaPlot.class.getName();
+public class JuliaCanvas extends ViewPart {
+  public static final String ID = JuliaCanvas.class.getName();
   private Browser browser;
   private IStatusLineManager statusLine;
 
