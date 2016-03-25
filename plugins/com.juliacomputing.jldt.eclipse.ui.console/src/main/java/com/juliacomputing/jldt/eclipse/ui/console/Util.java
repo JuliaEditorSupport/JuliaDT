@@ -117,7 +117,6 @@ public class Util {
     eventAdmin.sendEvent(event);
   }
 
-
   static String read(String path) {
     URL url = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getEntry(path);
     try (InputStream stream = url.openStream();
@@ -134,5 +133,4 @@ public class Util {
       throw new RuntimeException(e);
     }
   }
-
 }

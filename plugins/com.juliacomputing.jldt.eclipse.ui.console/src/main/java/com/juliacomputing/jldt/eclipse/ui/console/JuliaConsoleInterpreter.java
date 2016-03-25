@@ -9,7 +9,8 @@ import java.util.List;
 
 public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
-  private static final String ENCODING = "UTF8";
+  public static final String REPL_WRAPPER = "script/repl-wrapper.jl";
+  public static final String ENCODING = "UTF8";
 
   private final Process process;
   private final BufferedWriter writer;
@@ -24,8 +25,8 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
       final OutputStream outputStream = process.getOutputStream();
       writer = new BufferedWriter(new OutputStreamWriter(outputStream, ENCODING));
       final InputStream inputStream = process.getInputStream();
-      reader = new BufferedReader(new InputStreamReader(inputStream, "UTF8"));
-      final String script = Util.read("script/repl-wrapper.jl");
+      reader = new BufferedReader(new InputStreamReader(inputStream, ENCODING));
+      final String script = Util.read(REPL_WRAPPER);
       writer.write(script);
       writer.newLine();
       writer.flush();
