@@ -2,6 +2,7 @@ package com.juliacomputing.jldt.eclipse.ui.console;
 
 import com.juliacomputing.jldt.eclipse.ui.console.Result.Status;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.dltk.console.*;
 
 import java.io.*;
@@ -33,7 +34,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
       reader.readLine();
     }
     catch (IOException e) {
-      e.printStackTrace();
+      JuliaConsolePlugin.getDefault().log(e);
       throw new RuntimeException(e);
     }
 
@@ -76,17 +77,18 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     String line = reader.readLine();
     while (line != null && !line.contains("<<<<")) {
       response.append(line);
-      System.out.println(line);
       response.append(System.lineSeparator());
       line = reader.readLine();
     }
-    System.out.println("-----");
-    System.out.println(line);
     final Status status = Status.valueOf(line.substring(4, line.length() - 4));
+    JuliaConsolePlugin.getDefault()
+        .log(
+            new org.eclipse.core.runtime.Status(IStatus.INFO, JuliaConsolePlugin.ID, status
+                .toString()));
     line = reader.readLine();
-    System.out.println("-----");
-    System.out.println(line);
     final String mimeType = line.substring(4, line.length() - 4);
+    JuliaConsolePlugin.getDefault().log(
+        new org.eclipse.core.runtime.Status(IStatus.INFO, JuliaConsolePlugin.ID, mimeType));
     if (mimeType.equals("text/html") && status != Status.error) {
       Util.publish(response.toString(), "julia/plot");
       response = new StringBuilder();
@@ -96,11 +98,9 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     line = reader.readLine().trim();
     while (!line.equals("<<<<eox>>>>")) {
       response.append(line);
-      System.out.println(line);
       response.append(System.lineSeparator());
       line = reader.readLine().trim();
     }
-    System.out.println("-----");
     switch (status) {
       case incomplete:
         state = IScriptConsoleInterpreter.WAIT_USER_INPUT;

@@ -22,6 +22,6 @@
                 class="com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas"
                 icon="icons/julia.png"
                 id="com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas"
-                name="Julia Plot"/>
+                name="Plot"/>
     </extension>
 </plugin>

@@ -1,5 +1,7 @@
 package com.juliacomputing.jldt.eclipse.internal.ui;
 
+import com.juliacomputing.jldt.eclipse.ui.JuliaUIPlugin;
+
 import org.eclipse.dltk.ast.ASTVisitor;
 import org.eclipse.dltk.ast.declarations.ModuleDeclaration;
 import org.eclipse.dltk.ast.expressions.CallExpression;
@@ -15,7 +17,8 @@ import java.util.List;
 //todo complete parsing
 public class JuliaSelectionEngine extends ScriptSelectionEngine {
 
-  private void findDeclaration(final ISourceModule sourceModule, final String name, final List results) {
+  private void findDeclaration(final ISourceModule sourceModule, final String name,
+      final List results) {
     try {
       sourceModule.accept(new IModelElementVisitor() {
         @Override
@@ -26,9 +29,10 @@ public class JuliaSelectionEngine extends ScriptSelectionEngine {
           return true;
         }
       });
-    } catch (ModelException e) {
+    }
+    catch (ModelException e) {
       if (DLTKCore.DEBUG) {
-        e.printStackTrace();
+        JuliaUIPlugin.getDefault().log(e);
       }
     }
   }
@@ -56,9 +60,10 @@ public class JuliaSelectionEngine extends ScriptSelectionEngine {
           return super.visit(expression);
         }
       });
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       if (DLTKCore.DEBUG) {
-        e.printStackTrace();
+        JuliaUIPlugin.getDefault().log(e);
       }
     }
     return results.toArray(new IModelElement[results.size()]);

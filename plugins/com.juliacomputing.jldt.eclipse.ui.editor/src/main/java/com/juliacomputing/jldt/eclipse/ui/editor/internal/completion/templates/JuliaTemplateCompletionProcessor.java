@@ -6,7 +6,7 @@ import org.eclipse.dltk.ui.text.completion.ScriptContentAssistInvocationContext;
 
 public class JuliaTemplateCompletionProcessor extends ScriptTemplateCompletionProcessor {
 
-  private static char[] IGNORE = new char[] { '.' };
+  private static char[] IGNORED_CHARACTERS = new char[] { '.' };
 
   public JuliaTemplateCompletionProcessor(ScriptContentAssistInvocationContext context) {
     super(context);
@@ -17,7 +17,7 @@ public class JuliaTemplateCompletionProcessor extends ScriptTemplateCompletionPr
   }
 
   protected char[] getIgnore() {
-    return IGNORE;
+    return IGNORED_CHARACTERS;
   }
 
   protected ScriptTemplateAccess getTemplateAccess() {

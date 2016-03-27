@@ -1,5 +1,7 @@
 package com.juliacomputing.jldt.eclipse.ui.console;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Shell;
@@ -52,13 +54,18 @@ public class JuliaConsolePlugin extends AbstractUIPlugin {
     catch (MissingResourceException e) {
       return key;
     }
-    catch (NullPointerException e) {
-      return "!" + key + "!";
-    }
   }
 
   public static void showErrorMessage(Shell shell, String message) {
     MessageDialog.openError(shell, getString("err.dialog.title"), message);
+  }
+
+  public static void log(IStatus status) {
+    getDefault().getLog().log(status);
+  }
+
+  public static void log(Throwable e) {
+    log(new Status(4, JuliaConsolePlugin.class.getName(), e.getMessage()));
   }
 
   public void start(BundleContext context) throws Exception {
