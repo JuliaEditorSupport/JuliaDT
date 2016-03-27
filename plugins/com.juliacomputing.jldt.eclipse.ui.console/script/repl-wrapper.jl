@@ -18,7 +18,8 @@ function execute(statement)
            mimeType = "text/html"
            println(stringmime(mimeType,result))
         else
-          println(result)
+          writemime(STDOUT, MIME("text/plain"),result)
+          println()
         end
       end
     end
