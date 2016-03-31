@@ -42,15 +42,9 @@ public class JuliaCanvas extends ViewPart {
       }
 
       private boolean show(String plot) {
-        return browser.setText(String.format("<!DOCTYPE html>" +
-                "<html>" +
-                "<head>" +
-                "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=9\"/>" +
-                "</head>"+
-                "<body>"+
-                "%s" +
-                "</body>"+
-                "</html>", plot));
+        return browser.setText(String.format("<!DOCTYPE html>" + "<html>" + "<head>"
+            + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=9\"/>" + "</head>" + "<body>"
+            + "%s" + "</body>" + "</html>", plot));
       }
     };
 

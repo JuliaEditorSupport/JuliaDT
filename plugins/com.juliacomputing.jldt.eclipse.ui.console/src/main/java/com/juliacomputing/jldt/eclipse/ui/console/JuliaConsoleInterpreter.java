@@ -4,6 +4,9 @@ import com.juliacomputing.jldt.eclipse.ui.console.Result.Status;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.dltk.console.*;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
 import java.io.*;
 import java.util.List;
@@ -90,6 +93,18 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     JuliaConsolePlugin.getDefault().log(
         new org.eclipse.core.runtime.Status(IStatus.INFO, JuliaConsolePlugin.ID, mimeType));
     if (mimeType.equals("text/html") && status != Status.error) {
+      Display.getDefault().syncExec(new Runnable() {
+        @Override
+        public void run() {
+          try {
+            PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+                .showView(JuliaCanvas.ID);
+          }
+          catch (PartInitException e) {
+            throw new RuntimeException(e);
+          }
+        }
+      });
       Util.publish(response.toString(), "julia/plot");
       response = new StringBuilder();
       response.append("<plot>");
