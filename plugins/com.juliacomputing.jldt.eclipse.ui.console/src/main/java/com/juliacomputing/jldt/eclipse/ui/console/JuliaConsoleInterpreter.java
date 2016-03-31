@@ -101,6 +101,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
       response.append(System.lineSeparator());
       line = reader.readLine().trim();
     }
+    response.append(System.lineSeparator());
     switch (status) {
       case incomplete:
         state = IScriptConsoleInterpreter.WAIT_USER_INPUT;
