@@ -2,20 +2,19 @@ package com.juliacomputing.jldt.eclipse.ui.console;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.service.event.EventConstants;
+import org.osgi.service.event.EventHandler;
 
 import java.text.MessageFormat;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class JuliaConsolePlugin extends AbstractUIPlugin {
 
   public static final String ID = "com.juliacomputing.jldt.eclipse.ui.console.JuliaConsolePlugin";
+  public static final String JULIA_PLOT_TOPIC = "julia/plot";
 
   private static JuliaConsolePlugin instance;
 
@@ -23,20 +22,9 @@ public class JuliaConsolePlugin extends AbstractUIPlugin {
     return instance;
   }
 
-  /**
-   * Returns an image descriptor for the image file at the given plug-in relative path
-   * 
-   * @param path
-   *          the path
-   * @return the image descriptor
-   */
-  public static ImageDescriptor getImageDescriptor(String path) {
-    return imageDescriptorFromPlugin(ID, path);
-  }
-
   private static String retrieveMessage(String property, String bundle) {
-    ResourceBundle res = ResourceBundle.getBundle(bundle, Locale.getDefault());
-    return (String) res.getObject(property);
+    final ResourceBundle resourceBundle = ResourceBundle.getBundle(bundle, Locale.getDefault());
+    return (String) resourceBundle.getObject(property);
   }
 
   static public String getString(String key) {
@@ -56,8 +44,8 @@ public class JuliaConsolePlugin extends AbstractUIPlugin {
     }
   }
 
-  public static void showErrorMessage(Shell shell, String message) {
-    MessageDialog.openError(shell, getString("err.dialog.title"), message);
+  public static void log(final String message) {
+   log(new Status(Status.INFO, ID, message));
   }
 
   public static void log(IStatus status) {
@@ -71,10 +59,19 @@ public class JuliaConsolePlugin extends AbstractUIPlugin {
   public void start(BundleContext context) throws Exception {
     super.start(context);
     instance = this;
+    registerEventHadnlers();
   }
 
   public void stop(BundleContext context) throws Exception {
     super.stop(context);
     instance = null;
   }
+
+  private void registerEventHadnlers() {
+    BundleContext ctx = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getBundleContext();
+    final Dictionary<String, String> properties = new Hashtable<>();
+    properties.put(EventConstants.EVENT_TOPIC, JULIA_PLOT_TOPIC);
+    ctx.registerService(EventHandler.class, new DefaultEventHandler(), properties);
+  }
+
 }

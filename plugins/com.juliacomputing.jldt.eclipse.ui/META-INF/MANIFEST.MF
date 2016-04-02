@@ -7,7 +7,6 @@ Bundle-Activator: com.juliacomputing.jldt.eclipse.ui.JuliaUIPlugin
 Bundle-Vendor: Julia Computing Inc.
 Require-Bundle: com.juliacomputing.jldt.eclipse.core,
  com.juliacomputing.jldt.eclipse.ui.editor,
- com.juliacomputing.jldt.eclipse.ui.console,
  org.eclipse.compare,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,

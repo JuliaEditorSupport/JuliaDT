@@ -1,18 +1,13 @@
 package com.juliacomputing.jldt.eclipse.ui.console;
 
-import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.browser.ProgressEvent;
-import org.eclipse.swt.browser.ProgressListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
-import org.osgi.service.event.Event;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
 
@@ -22,59 +17,14 @@ import java.util.Hashtable;
 public class JuliaCanvas extends ViewPart {
   public static final String ID = JuliaCanvas.class.getName();
   private Browser browser;
-  private IStatusLineManager statusLine;
 
-  private void register(final Composite parent, final Browser browser) {
-    BundleContext ctx = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getBundleContext();
-    EventHandler handler = new EventHandler() {
-      public void handleEvent(final Event event) {
-        final String plot = (String) event.getProperty("plot");
-        if (parent.getDisplay().getThread() == Thread.currentThread()) {
-          show(plot);
-        }
-        else {
-          parent.getDisplay().syncExec(new Runnable() {
-            public void run() {
-              show(plot);
-            }
-          });
-        }
-      }
-
-      private boolean show(String plot) {
-        return browser.setText(String.format("<!DOCTYPE html>" + "<html>" + "<head>"
-            + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=9\"/>" + "</head>" + "<body>"
-            + "%s" + "</body>" + "</html>", plot));
-      }
-    };
-
-    final Dictionary<String, String> properties = new Hashtable<>();
-    properties.put(EventConstants.EVENT_TOPIC, "julia/plot");
-    ctx.registerService(EventHandler.class, handler, properties);
-  }
 
   @Override
   public void createPartControl(Composite parent) {
-    Composite comp = new Composite(parent, SWT.NONE);
-    comp.setLayout(new GridLayout(1, true));
-    try {
-      browser = new Browser(comp, SWT.NONE);
-    }
-    catch (SWTError e) {
-      JuliaConsolePlugin.showErrorMessage(getViewSite().getShell(), "Error creating browser:" + e);
-      return;
-    }
+    final Composite composite = new Composite(parent, SWT.NONE);
+    composite.setLayout(new GridLayout(1, true));
+    browser = new Browser(composite, SWT.NONE);
     browser.setLayoutData(new GridData(GridData.FILL_BOTH));
-    browser.addProgressListener(new ProgressListener() {
-      public void changed(ProgressEvent event) {
-        onProgress(event);
-      }
-
-      public void completed(ProgressEvent event) {
-      }
-    });
-    statusLine = getViewSite().getActionBars().getStatusLineManager();
-    register(parent, browser);
   }
 
   @Override
@@ -83,13 +33,9 @@ public class JuliaCanvas extends ViewPart {
       browser.setFocus();
   }
 
-  private void onProgress(ProgressEvent event) {
-    if (event.total == 0)
-      return;
-    int ratio = event.current * 100 / event.total;
-    if (statusLine != null)
-      statusLine.getProgressMonitor().worked(ratio);
-
+  public boolean display(final String plot) {
+    return browser.setText(String.format("<!DOCTYPE html>" + "<html>" + "<head>"
+        + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=9\"/>" + "</head>" + "<body>"
+        + "%s" + "</body>" + "</html>", plot));
   }
-
 }

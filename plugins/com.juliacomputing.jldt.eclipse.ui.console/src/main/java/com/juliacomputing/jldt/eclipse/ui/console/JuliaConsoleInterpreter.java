@@ -2,19 +2,17 @@ package com.juliacomputing.jldt.eclipse.ui.console;
 
 import com.juliacomputing.jldt.eclipse.ui.console.Result.Status;
 
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.dltk.console.*;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 
 import java.io.*;
 import java.util.List;
 
 public class JuliaConsoleInterpreter implements IScriptInterpreter {
 
-  public static final String REPL_WRAPPER = "script/repl-wrapper.jl";
-  public static final String ENCODING = "UTF8";
+  private static final String REPL_WRAPPER = "script/repl-wrapper.jl";
+  private static final String ENCODING = "UTF8";
+  private static final String PLOT_PLACEHOLDER = "<plot>";
+  private static final String EOX = "<<<<eox>>>>";
 
   private final Process process;
   private final BufferedWriter writer;
@@ -84,34 +82,18 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
       line = reader.readLine();
     }
     final Status status = Status.valueOf(line.substring(4, line.length() - 4));
-    JuliaConsolePlugin.getDefault()
-        .log(
-            new org.eclipse.core.runtime.Status(IStatus.INFO, JuliaConsolePlugin.ID, status
-                .toString()));
+    JuliaConsolePlugin.getDefault().log(status.toString());
     line = reader.readLine();
     final String mimeType = line.substring(4, line.length() - 4);
-    JuliaConsolePlugin.getDefault().log(
-        new org.eclipse.core.runtime.Status(IStatus.INFO, JuliaConsolePlugin.ID, mimeType));
+    JuliaConsolePlugin.getDefault().log(mimeType);
     if (mimeType.equals("text/html") && status != Status.error) {
-      Display.getDefault().syncExec(new Runnable() {
-        @Override
-        public void run() {
-          try {
-            PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-                .showView(JuliaCanvas.ID);
-          }
-          catch (PartInitException e) {
-            throw new RuntimeException(e);
-          }
-        }
-      });
-      Util.publish(response.toString(), "julia/plot");
+      Util.publish(response.toString(), JuliaConsolePlugin.JULIA_PLOT_TOPIC);
       response = new StringBuilder();
-      response.append("<plot>");
+      response.append(PLOT_PLACEHOLDER);
       response.append(System.lineSeparator());
     }
     line = reader.readLine().trim();
-    while (!line.equals("<<<<eox>>>>")) {
+    while (!line.equals(EOX)) {
       response.append(line);
       response.append(System.lineSeparator());
       line = reader.readLine().trim();

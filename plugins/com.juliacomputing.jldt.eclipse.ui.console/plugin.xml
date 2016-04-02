@@ -24,4 +24,16 @@
                 id="com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas"
                 name="Plot"/>
     </extension>
+
+    <extension point="org.eclipse.ui.perspectiveExtensions">
+        <perspectiveExtension targetID="com.juliacomputing.jldt.eclipse.ui.JuliaPerspective">
+            <view
+                  closeable="false"
+                  id="com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas"
+                  relationship="bottom"
+                  relative="com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas"
+                  visible="true"/>
+        </perspectiveExtension>
+    </extension>
+
 </plugin>

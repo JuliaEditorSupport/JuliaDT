@@ -108,12 +108,12 @@ public class Util {
   }
 
   static void publish(final String plot, String topic) {
-    BundleContext ctx = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getBundleContext();
-    ServiceReference<EventAdmin> ref = ctx.getServiceReference(EventAdmin.class);
-    EventAdmin eventAdmin = ctx.getService(ref);
-    Map<String, Object> properties = new HashMap<>();
+    final BundleContext ctx = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getBundleContext();
+    final ServiceReference<EventAdmin> ref = ctx.getServiceReference(EventAdmin.class);
+    final EventAdmin eventAdmin = ctx.getService(ref);
+    final Map<String, Object> properties = new HashMap<>();
     properties.put("plot", plot);
-    Event event = new Event(topic, properties);
+    final Event event = new Event(topic, properties);
     eventAdmin.sendEvent(event);
   }
 
