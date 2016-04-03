@@ -30,7 +30,7 @@
             <view
                   closeable="false"
                   id="com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas"
-                  relationship="bottom"
+                  relationship="right"
                   relative="com.juliacomputing.jldt.eclipse.ui.console.JuliaCanvas"
                   visible="true"/>
         </perspectiveExtension>
