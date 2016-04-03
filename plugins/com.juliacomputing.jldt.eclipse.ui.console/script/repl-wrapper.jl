@@ -50,4 +50,20 @@ function flush_all()
     flush(STDOUT)
     flush(STDERR)
 end
-end;
+using Base
+function Base.workspace()
+    last = Core.Main
+    b = last.Base
+    e = EclipseREPL
+    ccall(:jl_new_main_module, Any, ())
+    m = Core.Main
+    ccall(:jl_add_standard_imports, Void, (Any,), m)
+    eval(m,
+         Expr(:toplevel,
+              :(const Base = $(Expr(:quote, b))),
+              :(const LastMain = $(Expr(:quote, last))),
+              :(const EclipseREPL = $(Expr(:quote, e)))))
+    empty!(Base.package_locks)
+    nothing
+end
+end
