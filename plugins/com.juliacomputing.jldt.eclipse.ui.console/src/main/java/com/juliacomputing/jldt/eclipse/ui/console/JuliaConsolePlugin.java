@@ -28,7 +28,7 @@ public class JuliaConsolePlugin extends AbstractUIPlugin {
   }
 
   static public String getString(String key) {
-    return retrieveMessage(key, JuliaConsolePlugin.class.getName()); // BUNDLE_NAME);
+    return retrieveMessage(key, JuliaConsolePlugin.class.getName());
   }
 
   /**

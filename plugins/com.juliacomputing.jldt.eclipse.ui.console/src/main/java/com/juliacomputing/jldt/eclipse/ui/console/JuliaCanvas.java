@@ -6,18 +6,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.service.event.EventConstants;
-import org.osgi.service.event.EventHandler;
-
-import java.util.Dictionary;
-import java.util.Hashtable;
 
 public class JuliaCanvas extends ViewPart {
   public static final String ID = JuliaCanvas.class.getName();
   private Browser browser;
-
 
   @Override
   public void createPartControl(Composite parent) {

@@ -11,17 +11,28 @@ function execute(statement)
     end
     status = state==:incomplete ? "incomplete" : state==:error ? "error" : "complete"
     result=nothing
-    if(status=="complete")
-      result=include_string(statement)
-      if result!=nothing
-        if string(typeof(result))=="Gadfly.Plot"
-           mimeType = "text/html"
-           println(stringmime(mimeType,result))
-        else
-          writemime(STDOUT, MIME("text/plain"),result)
-          println()
-        end
-      end
+    if(status!="complete")
+      return
+    end
+    result=include_string(statement)
+    if result==nothing
+      return
+    end
+    #status=="complete" and result!=nothing
+    response=stringmime("text/plain",result)
+    resultType = string(typeof(result))
+    if resultType=="Gadfly.Plot"
+      mimeType = "text/html"
+      writemime(STDOUT, mimeType,result)
+    elseif contains(response,"matplotlib")
+      mimeType = "text/html"
+      pkg = symbol("PyPlot")
+      eval(:($(Expr(:using, pkg))))
+      figure = PyPlot.gcf()
+      pygui(false) # after the fact - review
+      writemime(STDOUT,"image/svg+xml",figure)
+    else
+      println(response)
     end
   catch e
     showerror(STDOUT, e); println()

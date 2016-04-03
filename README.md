@@ -65,6 +65,7 @@ Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/
 10. [Eclipse Common Build Infrastructure (CBI)](http://www.eclipse.org/community/eclipse_newsletter/2013/august/article3.php)
 11. [Julia Parser](https://github.com/JuliaLang/JuliaParser.jl)
 12. [PyDev](https://github.com/aptana/Pydev)
-
+13. [PyPlot](https://github.com/stevengj/PyPlot.jl)
+14. [IJulia](https://github.com/JuliaLang/IJulia.jl)
     
  

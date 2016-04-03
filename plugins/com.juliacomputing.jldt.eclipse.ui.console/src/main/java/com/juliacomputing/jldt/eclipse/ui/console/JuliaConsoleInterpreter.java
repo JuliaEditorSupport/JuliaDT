@@ -67,7 +67,9 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     final String message = String.format("EclipseREPL.execute(\"%s\")",
         Util.escapedString(block.toString(), false));
     final Result result = execute(message);
-    return new ScriptExecResult(result.getValue());
+    if(result==null)
+    	return new ScriptExecResult("undefined",true);
+    return new ScriptExecResult(result.getValue(),result.getStatus()==Status.error);
   }
 
   private Result execute(String statement) throws IOException {
