@@ -12,9 +12,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * Created by snefru on 22/03/2016.
- */
 public class Util {
 
   private static final String ENCODING = "UTF-8";
@@ -24,13 +21,9 @@ public class Util {
 
   static String escapedString(String str, boolean escapeSingleQuote) throws IOException {
     final StringWriter out = new StringWriter();
-    if (out == null) {
-      throw new IllegalArgumentException("The Writer must not be null");
-    }
     if (str == null) {
       return str;
     }
-
     int sz;
     sz = str.length();
     for (int i = 0; i < sz; i++) {
