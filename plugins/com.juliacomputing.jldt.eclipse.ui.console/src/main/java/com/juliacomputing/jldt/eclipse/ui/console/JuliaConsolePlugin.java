@@ -45,7 +45,7 @@ public class JuliaConsolePlugin extends AbstractUIPlugin {
   }
 
   public static void log(final String message) {
-   log(new Status(Status.INFO, ID, message));
+    log(new Status(Status.INFO, ID, message));
   }
 
   public static void log(IStatus status) {
@@ -68,7 +68,7 @@ public class JuliaConsolePlugin extends AbstractUIPlugin {
   }
 
   private void registerEventHadnlers() {
-    BundleContext ctx = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getBundleContext();
+    final BundleContext ctx = FrameworkUtil.getBundle(JuliaConsolePlugin.class).getBundleContext();
     final Dictionary<String, String> properties = new Hashtable<>();
     properties.put(EventConstants.EVENT_TOPIC, JULIA_PLOT_TOPIC);
     ctx.registerService(EventHandler.class, new DefaultEventHandler(), properties);
