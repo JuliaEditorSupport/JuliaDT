@@ -23,14 +23,13 @@ function execute(statement)
     resultType = string(typeof(result))
     if resultType=="Gadfly.Plot"
       mimeType = "text/html"
-      writemime(STDOUT, mimeType,result)
+      println(stringmime(mimeType,result))
     elseif contains(response,"matplotlib")
       mimeType = "text/html"
-      pkg = symbol("PyPlot")
-      eval(:($(Expr(:using, pkg))))
+      eval(:($(Expr(:using, symbol("PyPlot")))))
       figure = PyPlot.gcf()
       pygui(false) # after the fact - review
-      writemime(STDOUT,"image/svg+xml",figure)
+      println(stringmime("image/svg+xml",figure))
     else
       println(response)
     end
