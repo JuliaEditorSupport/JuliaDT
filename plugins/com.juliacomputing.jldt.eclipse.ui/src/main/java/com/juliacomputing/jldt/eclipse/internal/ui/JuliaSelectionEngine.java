@@ -32,7 +32,7 @@ public class JuliaSelectionEngine extends ScriptSelectionEngine {
     }
     catch (ModelException e) {
       if (DLTKCore.DEBUG) {
-        JuliaUIPlugin.getDefault().log(e);
+        JuliaUIPlugin.log(e);
       }
     }
   }
@@ -63,7 +63,7 @@ public class JuliaSelectionEngine extends ScriptSelectionEngine {
     }
     catch (Exception e) {
       if (DLTKCore.DEBUG) {
-        JuliaUIPlugin.getDefault().log(e);
+        JuliaUIPlugin.log(e);
       }
     }
     return results.toArray(new IModelElement[results.size()]);
