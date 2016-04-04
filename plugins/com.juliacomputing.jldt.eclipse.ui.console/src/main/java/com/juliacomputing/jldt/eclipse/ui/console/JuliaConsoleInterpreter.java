@@ -35,7 +35,7 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
       reader.readLine();
     }
     catch (IOException e) {
-      JuliaConsolePlugin.getDefault().log(e);
+      JuliaConsolePlugin.log(e);
       throw new RuntimeException(e);
     }
 
@@ -67,9 +67,9 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
     final String message = String.format("EclipseREPL.execute(\"%s\")",
         Util.escapedString(block.toString(), false));
     final Result result = execute(message);
-    if(result==null)
-    	return new ScriptExecResult("undefined",true);
-    return new ScriptExecResult(result.getValue(),result.getStatus()==Status.error);
+    if (result == null)
+      return new ScriptExecResult("undefined", true);
+    return new ScriptExecResult(result.getValue(), result.getStatus() == Status.error);
   }
 
   private Result execute(String statement) throws IOException {
@@ -84,10 +84,10 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
       line = reader.readLine();
     }
     final Status status = Status.valueOf(line.substring(4, line.length() - 4));
-    JuliaConsolePlugin.getDefault().log(status.toString());
+    JuliaConsolePlugin.log(status.toString());
     line = reader.readLine();
     final String mimeType = line.substring(4, line.length() - 4);
-    JuliaConsolePlugin.getDefault().log(mimeType);
+    JuliaConsolePlugin.log(mimeType);
     if (mimeType.equals("text/html") && status != Status.error) {
       Util.publish(response.toString(), JuliaConsolePlugin.JULIA_PLOT_TOPIC);
       response = new StringBuilder();
