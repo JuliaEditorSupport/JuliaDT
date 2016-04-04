@@ -33,11 +33,11 @@ public class JuliaEditorPreferencesInitializer extends AbstractPreferenceInitial
     store
         .setDefault(JuliaColourConstants.KEYWORD + PreferenceConstants.EDITOR_ITALIC_SUFFIX, false);
 
-    store.setDefault(PreferenceConstants.EDITOR_TAB_WIDTH, 8);
+    store.setDefault(PreferenceConstants.EDITOR_TAB_WIDTH, 4);
     store.setDefault(PreferenceConstants.EDITOR_SYNC_OUTLINE_ON_CURSOR_MOVE, true);
 
     store.setDefault(CodeFormatterConstants.FORMATTER_TAB_CHAR, CodeFormatterConstants.TAB);
-    store.setDefault(CodeFormatterConstants.FORMATTER_TAB_SIZE, "8");
-    store.setDefault(CodeFormatterConstants.FORMATTER_INDENTATION_SIZE, "8");
+    store.setDefault(CodeFormatterConstants.FORMATTER_TAB_SIZE, "4");
+    store.setDefault(CodeFormatterConstants.FORMATTER_INDENTATION_SIZE, "4");
   }
 }
