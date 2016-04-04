@@ -20,9 +20,11 @@ public class JuliaConsoleInterpreter implements IScriptInterpreter {
   private StringBuilder block = new StringBuilder();
   private int state = IScriptConsoleInterpreter.WAIT_NEW_COMMAND;
 
-  public JuliaConsoleInterpreter(final String path) {
+  public JuliaConsoleInterpreter(final String path, String workingDirectory) {
     try {
       final ProcessBuilder builder = new ProcessBuilder(path);
+      if (workingDirectory != null)
+        builder.directory(new File(workingDirectory));
       process = builder.start();
       final OutputStream outputStream = process.getOutputStream();
       writer = new BufferedWriter(new OutputStreamWriter(outputStream, ENCODING));

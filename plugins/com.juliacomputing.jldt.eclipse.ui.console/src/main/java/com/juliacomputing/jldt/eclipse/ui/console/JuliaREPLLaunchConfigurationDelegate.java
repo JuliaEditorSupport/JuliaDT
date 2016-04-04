@@ -12,7 +12,7 @@ import java.io.File;
 public class JuliaREPLLaunchConfigurationDelegate extends AbstractScriptLaunchConfigurationDelegate {
 
   public void launch(final ILaunchConfiguration configuration, String mode, ILaunch launch,
-                     IProgressMonitor monitor) throws CoreException {
+      IProgressMonitor monitor) throws CoreException {
 
     monitor.setCanceled(true);
 
@@ -22,9 +22,9 @@ public class JuliaREPLLaunchConfigurationDelegate extends AbstractScriptLaunchCo
 
     Display.getDefault().asyncExec(new Runnable() {
       public void run() {
-        final JuliaConsoleFactory consoleFactory = new JuliaConsoleFactory();
+        final JuliaConsoleFactory consoleFactory = new JuliaConsoleFactory(workingDirectory);
         final JuliaScriptConsole console = consoleFactory.newConsole();
-        console.executeCommand(String.format("include(\"%s\")",script.replace("\\","\\\\")));
+        console.executeCommand(String.format("include(\"%s\")", script.replace("\\", "\\\\")));
       }
     });
   }
