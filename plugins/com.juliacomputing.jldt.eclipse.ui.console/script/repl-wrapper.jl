@@ -31,7 +31,9 @@ function execute(statement)
       pygui(false) # after the fact - review
       println(stringmime("image/svg+xml",figure))
     else
-      println(response)
+      if rstrip(statement)[end]!=';'
+        println(response)
+      end
     end
   catch e
     showerror(STDOUT, e); println()
