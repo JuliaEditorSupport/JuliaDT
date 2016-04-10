@@ -1,39 +1,48 @@
 module EclipseREPL
-function execute(statement)
-  status="complete"
+function equivalent(command)
+  if(strip(command)=="?")
+    return (:complete,helpcode("?"))
+  end
+  hcode = replace(command, r"^\s*\?", "")
+  if hcode != command
+    return (:complete,helpcode(hcode))
+  end
+  expression = parse(command,1; greedy=true, raise=false)
+  if isa(expression[1],Expr)
+    return (expression[1].head,command)
+  end
+  return (:complete,command)
+end
+function execute(command)
+  status = "complete"
   mimeType="text/plain"
   try
-    expression = parse(statement,1; greedy=true, raise=false)
-    if isa(expression[1],Expr)
-      state = expression[1].head
-    else
-      state = nothing
-    end
-    status = state==:incomplete ? "incomplete" : state==:error ? "error" : "complete"
-    result=nothing
-    if(status!="complete")
+    state,statement = equivalent(command)
+    if(state in [:error,:incomplete])
+      status=string(state)
       return
     end
     result=include_string(statement)
     if result==nothing
       return
     end
-    #status=="complete" and result!=nothing
     response=stringmime("text/plain",result)
     resultType = string(typeof(result))
     if resultType=="Gadfly.Plot"
       mimeType = "text/html"
       println(stringmime(mimeType,result))
-    elseif contains(response,"matplotlib")
+      return
+    end
+    if contains(response,"matplotlib")
       mimeType = "text/html"
       eval(:($(Expr(:using, symbol("PyPlot")))))
       figure = PyPlot.gcf()
       pygui(false) # after the fact - review
       println(stringmime("image/svg+xml",figure))
-    else
-      if rstrip(statement)[end]!=';'
+      return
+    end
+    if rstrip(statement)[end]!=';'
         println(response)
-      end
     end
   catch e
     showerror(STDOUT, e); println()
@@ -66,5 +75,18 @@ function Base.workspace()
               :(const EclipseREPL = $(Expr(:quote, e)))))
     empty!(Base.package_locks)
     nothing
+end
+function helpcode(code::AbstractString)
+    if VERSION < v"0.4.0-dev+2891" # old Base.@help macro
+        return "Base.@help " * code
+    else # new Base.Docs.@repl macro from julia@08663d4bb05c5b8805a57f46f4feacb07c7f2564
+        code_ = strip(code)
+        # as in base/REPL.jl, special-case keywords so that they parse
+        if(haskey(Docs.keywords, symbol(code_)))
+          return "eval(:(Base.Docs.@repl \$(symbol(\"$code_\"))))"
+        else
+          return "Base.Docs.@repl $code_"
+        end
+    end
 end
 end
