@@ -1,27 +1,41 @@
 module EclipseREPL
 function equivalent(command)
   if(strip(command)=="?")
-    return (:complete,helpcode("?"))
+    return helpcode("?")
   end
   hcode = replace(command, r"^\s*\?", "")
   if hcode != command
-    return (:complete,helpcode(hcode))
+    return helpcode(hcode)
   end
-  expression = parse(command,1; greedy=true, raise=false)
-  if isa(expression[1],Expr)
-    return (expression[1].head,command)
+  return command
+end
+function validate(statement)
+  expression = parse(statement,1; greedy=true, raise=false)
+  if !isa(expression[1],Expr)
+    return (:complete,statement)
   end
-  return (:complete,command)
+  if expression[1].head==:error
+    return (expression[1].head, expression[1].args[1])
+  end
+  return (expression[1].head,nothing)
 end
 function execute(command)
-  status = "complete"
-  mimeType="text/plain"
+  status = nothing
+  mimeType=nothing
   try
-    state,statement = equivalent(command)
-    if(state in [:error,:incomplete])
-      status=string(state)
+    statement = equivalent(command)
+    state,message = validate(statement)
+    status=string(state)
+    if(state==:error)
+      status="error"
+      println(message)
       return
     end
+    if(state==:incomplete)
+      status="incomplete"
+      return
+    end
+    status="complete"
     result=include_string(statement)
     if result==nothing
       return
@@ -42,6 +56,7 @@ function execute(command)
       return
     end
     if rstrip(statement)[end]!=';'
+       mimeType="text/plain"
         println(response)
     end
   catch e
@@ -90,3 +105,4 @@ function helpcode(code::AbstractString)
     end
 end
 end
+
