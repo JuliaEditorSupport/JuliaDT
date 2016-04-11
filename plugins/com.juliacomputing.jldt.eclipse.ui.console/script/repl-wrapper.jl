@@ -25,7 +25,6 @@ function execute(command)
   try
     statement = equivalent(command)
     state,message = validate(statement)
-    status=string(state)
     if(state==:error)
       status="error"
       println(message)
