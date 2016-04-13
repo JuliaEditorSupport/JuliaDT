@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Julia Development Toolkit - Console
 Bundle-SymbolicName: com.juliacomputing.jldt.eclipse.ui.console;singleton:=true
-Bundle-Version: 0.0.1.qualifier
+Bundle-Version: 0.0.2.qualifier
 Bundle-Activator: com.juliacomputing.jldt.eclipse.ui.console.JuliaConsolePlugin
 Bundle-Vendor: Julia Computing Inc.
 Require-Bundle: com.juliacomputing.jldt.eclipse.core,

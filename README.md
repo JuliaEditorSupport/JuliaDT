@@ -11,7 +11,7 @@
 
 #To Install as an Eclipse Plugin
    
-Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/tag/v0.0.1) and follow installation instructions
+Download the [alpha release](https://github.com/JuliaComputing/JuliaDT/releases/tag/v0.0.2) and follow installation instructions
 
 > Plugin was tested using [Eclipse - Mars release](https://eclipse.org/mars/)
 

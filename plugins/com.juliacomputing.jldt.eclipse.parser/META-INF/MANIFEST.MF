@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Julia Development Toolkit - Parser
 Bundle-SymbolicName: com.juliacomputing.jldt.eclipse.parser;singleton:=true
-Bundle-Version: 0.0.1.qualifier
+Bundle-Version: 0.0.2.qualifier
 Bundle-Activator: com.juliacomputing.jldt.eclipse.parser.JuliaParserPlugin
 Bundle-Vendor: Julia Computing Inc.
 Require-Bundle:  org.eclipse.core.runtime,

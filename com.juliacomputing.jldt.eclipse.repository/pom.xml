@@ -11,7 +11,7 @@
         <relativePath>../com.juliacomputing.jldt.parent</relativePath>
     </parent>
     <artifactId>com.juliacomputing.jldt.eclipse.repository</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>eclipse-repository</packaging>
     <build>
         <plugins>
