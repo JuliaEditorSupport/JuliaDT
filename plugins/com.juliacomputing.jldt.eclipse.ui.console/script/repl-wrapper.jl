@@ -64,6 +64,7 @@ function execute(command)
     println()
   finally
     flush_all()
+    println()
     println("<<<<$status>>>>")
     println("<<<<$mimeType>>>>")
     println("<<<<eox>>>>")
