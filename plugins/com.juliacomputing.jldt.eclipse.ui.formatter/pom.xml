@@ -9,7 +9,7 @@
         <relativePath>../../com.juliacomputing.jldt.parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <artifactId>com.juliacomputing.jldt.eclipse.ui.formatter</artifactId>
     <packaging>eclipse-plugin</packaging>
     <licenses>
