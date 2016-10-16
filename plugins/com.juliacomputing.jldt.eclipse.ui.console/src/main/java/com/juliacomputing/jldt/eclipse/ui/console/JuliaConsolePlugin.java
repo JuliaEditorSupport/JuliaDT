@@ -73,5 +73,4 @@ public class JuliaConsolePlugin extends AbstractUIPlugin {
     properties.put(EventConstants.EVENT_TOPIC, JULIA_PLOT_TOPIC);
     ctx.registerService(EventHandler.class, new DefaultEventHandler(), properties);
   }
-
 }
