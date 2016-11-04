@@ -6,4 +6,4 @@
 
 <a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=3130435" class="drag" title="Drag to your running Eclipse workspace to install JuliaDT"><img class="img-responsive" src="https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.png" alt="Drag to your running Eclipse workspace to install JuliaDT" /></a>
 
-> Refer to the [wiki](https://github.com/JuliaComputing/JuliaDT/wiki) for more details
+Refer to the [wiki](https://github.com/JuliaComputing/JuliaDT/wiki) for more details
